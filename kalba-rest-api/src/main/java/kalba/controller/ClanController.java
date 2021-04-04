@@ -87,13 +87,13 @@ public class ClanController {
     }
 
     @ResponseBody
-    @PostMapping("clan_info")
+    @PostMapping("info")
     public Map<Object, Object> clanInfo(@RequestParam(value = "id") String id) {
         return getClanInfo(id);
     }
 
     @ResponseBody
-    @PostMapping("member_donation_rank")
+    @PostMapping("/donations/rank")
     public List<ClanMember> memberDonationRank(@RequestParam(value = "id") String id) {
         List<ClanMember> clanMemberList=getClanMemberList(id);
         Collections.sort(clanMemberList);
