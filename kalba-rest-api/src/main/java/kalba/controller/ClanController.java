@@ -1,6 +1,7 @@
 package kalba.controller;
 
 import kalba.model.ClanMember;
+import kalba.model.League;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.*;
@@ -65,6 +66,17 @@ public class ClanController {
                 clanMember.setPreviousClanRank((int) memberInfo.get("previousClanRank"));
                 clanMember.setDonations((int) memberInfo.get("donations"));
                 clanMember.setDonationsReceived((int) memberInfo.get("donationsReceived"));
+                League league=new League();
+                if(memberInfo.get("league")!=null){
+                    LinkedHashMap<Object, Object> leagueInfo=(LinkedHashMap<Object, Object>)memberInfo.get("league");
+                    league.setId((Integer) leagueInfo.get("id"));
+                    league.setName((String) leagueInfo.get("name"));
+                    LinkedHashMap<Object, Object> iconInfo=(LinkedHashMap<Object, Object>)leagueInfo.get("iconUrls");
+                    league.setIconTiny((String)iconInfo.get("tiny"));
+                    league.setIconSmall((String)iconInfo.get("small"));
+                    league.setIconMedium((String)iconInfo.get("medium"));
+                }
+                clanMember.setLeague(league);
                 clanMemberList.add(clanMember);
             }
         } catch (Exception e) {
