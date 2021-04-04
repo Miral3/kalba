@@ -3,6 +3,7 @@ package kalba.controller;
 import kalba.model.ClanMember;
 import kalba.model.League;
 import kalba.model.YonghaScore;
+import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class ClanController {
         Map<Object, Object> result = new HashMap<>();
         try {
             HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-            factory.setConnectTimeout(5000); //타임아웃 설정 5초
-            factory.setReadTimeout(5000);//타임아웃 설정 5초
+            factory.setConnectTimeout(5000);
+            factory.setReadTimeout(5000);
             RestTemplate restTemplate = new RestTemplate(factory);
             HttpHeaders header = new HttpHeaders();
             header.setBearerAuth(token);
@@ -108,49 +109,25 @@ public class ClanController {
     public List<YonghaScore> memberYonghaScoreRank(@RequestParam(value = "id") String id) {
         List<ClanMember> clanMemberList = getClanMemberList(id);
         List<YonghaScore> yonghaScoreList = new LinkedList<>();
+        ArrayList<Thread> threads=new ArrayList<>();
         for (ClanMember clanMember : clanMemberList) {
-            yonghaScoreList.add(new YonghaScore(clanMember.getName(), calYonghaScore(clanMember.getTag())));
+            Thread thread=new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), yonghaScoreList);
+            thread.start();
+            threads.add(thread);
+        }
+        for(Thread thread:threads) {
+            try {
+                thread.join();
+            }catch(Exception e) {
+                e.printStackTrace();
+                new LinkedList<>();
+            }
         }
         Collections.sort(yonghaScoreList);
         return yonghaScoreList;
     }
 
-    @SuppressWarnings("unchecked")
-    private double calYonghaScore(String userTag) {
-        double score = 0;
-        try {
-            HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-            factory.setConnectTimeout(5000); //타임아웃 설정 5초
-            factory.setReadTimeout(5000);//타임아웃 설정 5초
-            RestTemplate restTemplate = new RestTemplate(factory);
-            HttpHeaders header = new HttpHeaders();
-            header.setBearerAuth(token);
-            header.add("Accept", "*/*");
-            header.setContentType(MediaType.APPLICATION_JSON);
-            URI url = URI.create("https://api.clashofclans.com/v1/players/" + encodeUTF8(userTag));
-            ResponseEntity<Object> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(header), Object.class);
-            Map<Object, Object> body = (Map<Object, Object>) res.getBody();
-            if (body == null) {
-                return -1;
-            }
-            if (body.get("troops") != null) {
-                List<LinkedHashMap<Object, Object>> troopList = (List<LinkedHashMap<Object, Object>>) body.get("troops");
-                score += calListScore(troopList);
-            }
-            if (body.get("heroes") != null) {
-                List<LinkedHashMap<Object, Object>> heroList = (List<LinkedHashMap<Object, Object>>) body.get("heroes");
-                score += calListScore(heroList);
-            }
-            if (body.get("spells") != null) {
-                List<LinkedHashMap<Object, Object>> spellList = (List<LinkedHashMap<Object, Object>>) body.get("spells");
-                score += calListScore(spellList);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-        return score;
-    }
+
 
     private double calListScore(List<LinkedHashMap<Object, Object>> list) {
         double score = 0;
@@ -210,5 +187,53 @@ public class ClanController {
 
     private String encodeUTF8(String userTag) {
         return URLEncoder.encode(userTag, StandardCharsets.UTF_8);
+    }
+
+    @AllArgsConstructor
+    private class YonghaScoreThread extends Thread {
+        String name;
+        String userTag;
+        List<YonghaScore> yonghaScoreList;
+
+        public void run(){
+            yonghaScoreList.add(new YonghaScore(name, calYonghaScore(userTag)));
+        }
+
+        @SuppressWarnings("unchecked")
+        private double calYonghaScore(String userTag) {
+            double score = 0;
+            try {
+                HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+                factory.setConnectTimeout(5000);
+                factory.setReadTimeout(5000);
+                RestTemplate restTemplate = new RestTemplate(factory);
+                HttpHeaders header = new HttpHeaders();
+                header.setBearerAuth(token);
+                header.add("Accept", "*/*");
+                header.setContentType(MediaType.APPLICATION_JSON);
+                URI url = URI.create("https://api.clashofclans.com/v1/players/" + encodeUTF8(userTag));
+                ResponseEntity<Object> res = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(header), Object.class);
+                Map<Object, Object> body = (Map<Object, Object>) res.getBody();
+                if (body == null) {
+                    return -1;
+                }
+                if (body.get("troops") != null) {
+                    List<LinkedHashMap<Object, Object>> troopList = (List<LinkedHashMap<Object, Object>>) body.get("troops");
+                    score += calListScore(troopList);
+                }
+                if (body.get("heroes") != null) {
+                    List<LinkedHashMap<Object, Object>> heroList = (List<LinkedHashMap<Object, Object>>) body.get("heroes");
+                    score += calListScore(heroList);
+                }
+                if (body.get("spells") != null) {
+                    List<LinkedHashMap<Object, Object>> spellList = (List<LinkedHashMap<Object, Object>>) body.get("spells");
+                    score += calListScore(spellList);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+            return score;
+        }
     }
 }
