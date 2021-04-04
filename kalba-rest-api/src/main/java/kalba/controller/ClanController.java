@@ -111,7 +111,7 @@ public class ClanController {
         List<YonghaScore> yonghaScoreList = new LinkedList<>();
         ArrayList<Thread> threads=new ArrayList<>();
         for (ClanMember clanMember : clanMemberList) {
-            Thread thread=new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), yonghaScoreList);
+            Thread thread=new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), clanMember.getTrophies(), yonghaScoreList);
             thread.start();
             threads.add(thread);
         }
@@ -126,8 +126,6 @@ public class ClanController {
         Collections.sort(yonghaScoreList);
         return yonghaScoreList;
     }
-
-
 
     private double calListScore(List<LinkedHashMap<Object, Object>> list) {
         double score = 0;
@@ -165,14 +163,14 @@ public class ClanController {
                     case "Lightning Spell" -> score += level * 2.2222;
                     case "Healing Spell" -> score += level * 3.75;
                     case "Rage Spell" -> score += level * 5;
-                    case "Jump Spell" -> score += level * 4;
+                    case "Jump Spell" -> score += level * 7.5;
                     case "Freeze Spell" -> score += level * 4.2857;
                     case "Poison Spell" -> score += level * 4.2857;
                     case "Earthquake Spell" -> score += level * 5;
                     case "Haste Spell" -> score += level * 5;
                     case "Clone Spell" -> score += level * 2.5;
                     case "Skeleton Spell" -> score += level * 1.4286;
-                    case "Bat Spell" -> score += level * 5;
+                    case "Bat Spell" -> score += level * 4;
                     case "Invisibility Spell" -> score += level * 6.25;
                     // heroes
                     case "Barbarian King" -> score += level * 0.6667;
@@ -193,10 +191,11 @@ public class ClanController {
     private class YonghaScoreThread extends Thread {
         String name;
         String userTag;
+        int trophies;
         List<YonghaScore> yonghaScoreList;
 
         public void run(){
-            yonghaScoreList.add(new YonghaScore(name, calYonghaScore(userTag)));
+            yonghaScoreList.add(new YonghaScore(name, (int)Math.round(calYonghaScore(userTag)), trophies));
         }
 
         @SuppressWarnings("unchecked")

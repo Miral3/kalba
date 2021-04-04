@@ -7,10 +7,21 @@ import lombok.Data;
 @Data
 public class YonghaScore implements Comparable<YonghaScore> {
     private String name;
-    private double score;
+    private int score;
+    private int trophies;
 
     @Override
     public int compareTo(YonghaScore o) {
-        return Double.compare(o.getScore(), this.score);
+        int result=Integer.compare(o.getScore(), this.score);
+        if(result==0){
+            result= Integer.compare(o.getTrophies(), this.trophies);
+            if(result==0){
+                return this.name.compareTo(o.getName());
+            } else {
+                return result;
+            }
+        } else {
+            return result;
+        }
     }
 }
