@@ -108,7 +108,7 @@ public class ClanController {
     @PostMapping("/score/rank")
     public List<YonghaScore> memberYonghaScoreRank(@RequestParam(value = "id") String id) {
         List<ClanMember> clanMemberList = getClanMemberList(id);
-        List<YonghaScore> yonghaScoreList = new LinkedList<>();
+        List<YonghaScore> yonghaScoreList = Collections.synchronizedList(new LinkedList<>());
         ArrayList<Thread> threads=new ArrayList<>();
         for (ClanMember clanMember : clanMemberList) {
             Thread thread=new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), clanMember.getTrophies(), yonghaScoreList);
