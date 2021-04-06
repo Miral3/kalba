@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import UserInfo from './UserInfo';
+import axios from 'axios';
 
 const UserListBlock = styled.div`
   width: 100%;
@@ -42,6 +43,35 @@ const sampleInfo = {
 };
 
 const UserList = ({ type }) => {
+  const [apData, setApData] = useState(null);
+  const [donationData, setDonationData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "/coc/clan/donations/rank", {
+          id: "%232Y2Y9YCUU"
+        });
+        console.log(response);
+        setDonationData(response);
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <UserListBlock>대기 중...</UserListBlock>
+  }
+  if (!donationData) {
+    return null;
+  }
+
   return (
     <UserListBlock>
       <div className="block">
