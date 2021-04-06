@@ -3,7 +3,6 @@ package kalba.controller;
 import kalba.model.ClanId;
 import kalba.model.ClanMember;
 import kalba.model.League;
-import kalba.model.YonghaScore;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -20,9 +19,9 @@ import java.util.*;
 @RestController
 @RequestMapping("/coc/clan")
 public class ClanController {
-//            String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRkMWY1NzVlLWI4ZmUtNDI2YS05M2E1LWUxMGM3MmU5MWVhNCIsImlhdCI6MTYxNzUxNTAyMiwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjExMC4zNS41MC43MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.o-FyYhqCW4xGzk86rS-E3WCTiw8JEaPDPBNjtvcmoulO82NSRJvHIXrdD1GtLaOGAbqVaFy2doxZqH59VSq7Aw";
+    static String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRkMWY1NzVlLWI4ZmUtNDI2YS05M2E1LWUxMGM3MmU5MWVhNCIsImlhdCI6MTYxNzUxNTAyMiwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjExMC4zNS41MC43MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.o-FyYhqCW4xGzk86rS-E3WCTiw8JEaPDPBNjtvcmoulO82NSRJvHIXrdD1GtLaOGAbqVaFy2doxZqH59VSq7Aw";
     // Neverland server
-    static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImRiYzY1MjY2LTQ1MDItNDdhYS1hOTVmLWJiMWE2MTI5Yzc1YSIsImlhdCI6MTYxNzYyOTgzMywic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjM0LjY0LjIzNy4xNyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Yo-QMJuhPro85ZMu_nueuO5cs09ST4smYoQv4zAa_FUViBY6ZTwGD9rbqegnwKszcfnpnjpK_QMMTT_5R0RuyA";
+//    static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImRiYzY1MjY2LTQ1MDItNDdhYS1hOTVmLWJiMWE2MTI5Yzc1YSIsImlhdCI6MTYxNzYyOTgzMywic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjM0LjY0LjIzNy4xNyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Yo-QMJuhPro85ZMu_nueuO5cs09ST4smYoQv4zAa_FUViBY6ZTwGD9rbqegnwKszcfnpnjpK_QMMTT_5R0RuyA";
 
     @SuppressWarnings("unchecked")
     private Map<Object, Object> getClanInfo(String id) {
@@ -59,7 +58,7 @@ public class ClanController {
             return new LinkedList<>();
         }
         List<LinkedHashMap<Object, Object>> memberList = (ArrayList<LinkedHashMap<Object, Object>>) memberListObj;
-        List<ClanMember> clanMemberList = new LinkedList<>();
+        List<ClanMember> clanMemberList = Collections.synchronizedList(new LinkedList<>());
         try {
             for (LinkedHashMap<Object, Object> memberInfo : memberList) {
                 ClanMember clanMember = new ClanMember();
@@ -109,12 +108,11 @@ public class ClanController {
 
     @ResponseBody
     @PostMapping("/score/rank")
-    public List<YonghaScore> memberYonghaScoreRank(@RequestBody ClanId id) {
+    public List<ClanMember> memberYonghaScoreRank(@RequestBody ClanId id) {
         List<ClanMember> clanMemberList = getClanMemberList(id.getId());
-        List<YonghaScore> yonghaScoreList = Collections.synchronizedList(new LinkedList<>());
         ArrayList<Thread> threads = new ArrayList<>();
         for (ClanMember clanMember : clanMemberList) {
-            Thread thread = new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), clanMember.getTrophies(), yonghaScoreList);
+            Thread thread = new YonghaScoreThread(clanMember);
             thread.start();
             threads.add(thread);
         }
@@ -126,8 +124,21 @@ public class ClanController {
                 new LinkedList<>();
             }
         }
-        Collections.sort(yonghaScoreList);
-        return yonghaScoreList;
+        Comparator<ClanMember> yonghaScoreComparator = (o1, o2) -> {
+            int result=Integer.compare(o2.getYonghaScore(), o1.getYonghaScore());
+            if(result==0){
+                result= Integer.compare(o2.getTrophies(), o1.getTrophies());
+                if(result==0){
+                    return o1.getName().compareTo(o2.getName());
+                } else {
+                    return result;
+                }
+            } else {
+                return result;
+            }
+        };
+        clanMemberList.sort(yonghaScoreComparator);
+        return clanMemberList;
     }
 
     private double calListScore(List<LinkedHashMap<Object, Object>> list) {
@@ -192,13 +203,10 @@ public class ClanController {
 
     @AllArgsConstructor
     private class YonghaScoreThread extends Thread {
-        String name;
-        String userTag;
-        int trophies;
-        List<YonghaScore> yonghaScoreList;
+        ClanMember clanMember;
 
         public void run() {
-            yonghaScoreList.add(new YonghaScore(name, (int) Math.round(calYonghaScore(userTag)), trophies));
+            clanMember.setYonghaScore((int) Math.round(calYonghaScore(clanMember.getTag())));
         }
 
         @SuppressWarnings("unchecked")
