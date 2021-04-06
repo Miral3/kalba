@@ -1,5 +1,6 @@
 package kalba.controller;
 
+import kalba.model.ClanId;
 import kalba.model.ClanMember;
 import kalba.model.League;
 import kalba.model.YonghaScore;
@@ -19,7 +20,9 @@ import java.util.*;
 @RestController
 @RequestMapping("/coc/clan")
 public class ClanController {
-    static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRkMWY1NzVlLWI4ZmUtNDI2YS05M2E1LWUxMGM3MmU5MWVhNCIsImlhdCI6MTYxNzUxNTAyMiwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjExMC4zNS41MC43MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.o-FyYhqCW4xGzk86rS-E3WCTiw8JEaPDPBNjtvcmoulO82NSRJvHIXrdD1GtLaOGAbqVaFy2doxZqH59VSq7Aw";
+//            String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRkMWY1NzVlLWI4ZmUtNDI2YS05M2E1LWUxMGM3MmU5MWVhNCIsImlhdCI6MTYxNzUxNTAyMiwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjExMC4zNS41MC43MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.o-FyYhqCW4xGzk86rS-E3WCTiw8JEaPDPBNjtvcmoulO82NSRJvHIXrdD1GtLaOGAbqVaFy2doxZqH59VSq7Aw";
+    // Neverland server
+    static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImRiYzY1MjY2LTQ1MDItNDdhYS1hOTVmLWJiMWE2MTI5Yzc1YSIsImlhdCI6MTYxNzYyOTgzMywic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjM0LjY0LjIzNy4xNyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Yo-QMJuhPro85ZMu_nueuO5cs09ST4smYoQv4zAa_FUViBY6ZTwGD9rbqegnwKszcfnpnjpK_QMMTT_5R0RuyA";
 
     @SuppressWarnings("unchecked")
     private Map<Object, Object> getClanInfo(String id) {
@@ -92,33 +95,33 @@ public class ClanController {
 
     @ResponseBody
     @PostMapping("info")
-    public Map<Object, Object> clanInfo(@RequestParam(value = "id") String id) {
-        return getClanInfo(id);
+    public Map<Object, Object> clanInfo(@RequestBody ClanId id) {
+        return getClanInfo(id.getId());
     }
 
     @ResponseBody
     @PostMapping("/donations/rank")
-    public List<ClanMember> memberDonationRank(@RequestParam(value = "id") String id) {
-        List<ClanMember> clanMemberList = getClanMemberList(id);
+    public List<ClanMember> memberDonationRank(@RequestBody ClanId id) {
+        List<ClanMember> clanMemberList = getClanMemberList(id.getId());
         Collections.sort(clanMemberList);
         return clanMemberList;
     }
 
     @ResponseBody
     @PostMapping("/score/rank")
-    public List<YonghaScore> memberYonghaScoreRank(@RequestParam(value = "id") String id) {
-        List<ClanMember> clanMemberList = getClanMemberList(id);
+    public List<YonghaScore> memberYonghaScoreRank(@RequestBody ClanId id) {
+        List<ClanMember> clanMemberList = getClanMemberList(id.getId());
         List<YonghaScore> yonghaScoreList = Collections.synchronizedList(new LinkedList<>());
-        ArrayList<Thread> threads=new ArrayList<>();
+        ArrayList<Thread> threads = new ArrayList<>();
         for (ClanMember clanMember : clanMemberList) {
-            Thread thread=new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), clanMember.getTrophies(), yonghaScoreList);
+            Thread thread = new YonghaScoreThread(clanMember.getName(), clanMember.getTag(), clanMember.getTrophies(), yonghaScoreList);
             thread.start();
             threads.add(thread);
         }
-        for(Thread thread:threads) {
+        for (Thread thread : threads) {
             try {
                 thread.join();
-            }catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 new LinkedList<>();
             }
@@ -194,8 +197,8 @@ public class ClanController {
         int trophies;
         List<YonghaScore> yonghaScoreList;
 
-        public void run(){
-            yonghaScoreList.add(new YonghaScore(name, (int)Math.round(calYonghaScore(userTag)), trophies));
+        public void run() {
+            yonghaScoreList.add(new YonghaScore(name, (int) Math.round(calYonghaScore(userTag)), trophies));
         }
 
         @SuppressWarnings("unchecked")

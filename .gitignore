@@ -30,3 +30,6 @@ MANIFEST.MF
 
 # MacOS file
 .DS_Store
+
+# potion
+fe/*
