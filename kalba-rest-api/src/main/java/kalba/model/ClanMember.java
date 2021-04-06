@@ -16,6 +16,7 @@ public class ClanMember implements Comparable<ClanMember>{
     private int donationsReceived;
     private League league;
     private int yonghaScore;
+    private int townHallLevel;
 
     @Override
     public int compareTo(ClanMember o) {

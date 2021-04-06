@@ -85,6 +85,20 @@ public class ClanController {
                 clanMember.setLeague(league);
                 clanMemberList.add(clanMember);
             }
+            ArrayList<Thread> threads = new ArrayList<>();
+            for (ClanMember clanMember : clanMemberList) {
+                Thread thread = new YonghaScoreThread(clanMember);
+                thread.start();
+                threads.add(thread);
+            }
+            for (Thread thread : threads) {
+                try {
+                    thread.join();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    new LinkedList<>();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new LinkedList<>();
@@ -110,25 +124,11 @@ public class ClanController {
     @PostMapping("/score/rank")
     public List<ClanMember> memberYonghaScoreRank(@RequestBody ClanId id) {
         List<ClanMember> clanMemberList = getClanMemberList(id.getId());
-        ArrayList<Thread> threads = new ArrayList<>();
-        for (ClanMember clanMember : clanMemberList) {
-            Thread thread = new YonghaScoreThread(clanMember);
-            thread.start();
-            threads.add(thread);
-        }
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (Exception e) {
-                e.printStackTrace();
-                new LinkedList<>();
-            }
-        }
         Comparator<ClanMember> yonghaScoreComparator = (o1, o2) -> {
-            int result=Integer.compare(o2.getYonghaScore(), o1.getYonghaScore());
-            if(result==0){
-                result= Integer.compare(o2.getTrophies(), o1.getTrophies());
-                if(result==0){
+            int result = Integer.compare(o2.getYonghaScore(), o1.getYonghaScore());
+            if (result == 0) {
+                result = Integer.compare(o2.getTrophies(), o1.getTrophies());
+                if (result == 0) {
                     return o1.getName().compareTo(o2.getName());
                 } else {
                     return result;
@@ -238,6 +238,9 @@ public class ClanController {
                 if (body.get("spells") != null) {
                     List<LinkedHashMap<Object, Object>> spellList = (List<LinkedHashMap<Object, Object>>) body.get("spells");
                     score += calListScore(spellList);
+                }
+                if (body.get("townHallLevel") != null) {
+                    clanMember.setTownHallLevel((int) body.get("townHallLevel"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
