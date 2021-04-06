@@ -8,31 +8,44 @@ const UserInfoBlock = styled.div`
   border: 1px solid #e6e6e6;
   background-color: #fff;
   font-size: 15px;
-
+  align-items: center;
+  .rank {
+    width:15px;
+  }
+  .nickname {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    .name {
+      font-size: 12px;
+    }
+  }
   .icon {
     width: 25px;
     height: 25px;
   }
-  .name {
-    
+  .nickname .name {
+    text-decoration: none;
+    color: black;
   }
 `;
 
-const UserInfo = ({ info }) => {
-  const { idx, leagueIcon, name, townHallLevel, donations, attackPower } = info;
+const UserInfo = ({ idx, info }) => {
+  const { league, name, townHallLevel, donations, yonghaScore } = info;
+
   return (
     <UserInfoBlock>
       <span className="rank">{idx}</span>
-      <span className="name">
-        {leagueIcon && (
+      <span className="nickname">
+        {league && (
           // eslint-disable-next-line
-          <img className="icon" src={leagueIcon} />
+          <img className="icon" src={league.iconTiny} />
         )}
-        <a href="/">{name}</a>
+        <a className="name" href="/">{name}</a>
       </span>
       <span className="townHallLevel">{townHallLevel}</span>
       <span className="donations">{donations}</span>
-      <span className="attackPower">{attackPower}</span>
+      <span className="attackPower">{yonghaScore}</span>
     </UserInfoBlock>
   );
 };

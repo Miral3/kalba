@@ -50,7 +50,7 @@ const UserListBlock = styled.div`
   }
 `;
 
-const UserList = ({ type }) => {
+const UserList2 = ({ type }) => {
   const [donationData, setDonationData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +59,7 @@ const UserList = ({ type }) => {
       setLoading(true);
       try {
         const response = await axios.post(
-          "/coc/clan/donations/rank", {
+          "/coc/clan/score/rank", {
           id: "%232Y2Y9YCUU"
         }, {
           headers: {
@@ -107,4 +107,4 @@ const UserList = ({ type }) => {
   );
 };
 
-export default UserList;
+export default UserList2;

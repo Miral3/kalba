@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { MdSearch } from 'react-icons/md';
 import styled from 'styled-components';
-import Home from '../../pages/Home/Home';
+
+import UserSearch from '../../UserSearch';
+// page
+import Home from '../../pages/Main';
 import LeaderBoards from '../../pages/LeaderBoards';
 import Attackpowercalc from '../../pages/Attackpowercalc';
 import Standardtable from '../../pages/Standardtable';
+import Profile from '../../pages/Profile';
 
 const KalbaHeader = styled.div`
 background-color: #383E4C;
@@ -75,59 +78,6 @@ height: 140px;
   vertical-align: bottom;
 }
 
-.kalba__logo__insert .insert {
-  float: right;
-  /* width: 100%; */
-  margin-top: 5px;
-  margin-left:10px;
-  @media (min-width: 768px) {
-    width: auto;
-    margin-right: 20px;
-  }
-}
-
-.kalba__logo__insert .insert .nicknameInsert {
-  position: relative;
-  width: 100%;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  background-color: #ffffff;
-  margin-right: 0;
-  @media (min-width: 475px) {
-    width: 274px;
-  }
-  @media (min-width: 768px) {
-    width: 274px;
-    margin: 7px 0 0;
-  }
-}
-
-.kalba__logo__insert .insert .nicknameInsert input {
-  background-color: #ffffff;
-  font-size: 12px;
-  border: 0;
-  padding: 5px 7px;
-  line-height: 20px;
-  margin-left: 5px;
-  width: auto;
-  &:focus {
-    outline: none;
-  }
-}
-.kalba__logo__insert .insert .nicknameInsert button {
-  position: absolute;
-  top: 8px;
-  right: 5px;
-  border: none;
-  font-size: 18px;
-  text-align: center;
-  color: #ff4500;
-  background-color: #ffffff;
-  outline: none;
-  padding: 0;
-  cursor: pointer;
-}
-
 .category {
   height: 50px;
   background-color: rgba(0,0,0,.3);
@@ -168,6 +118,28 @@ height: 140px;
 `;
 
 const Header = () => {
+  const [nickname, setNickname] = useState([
+    {
+      id: 1,
+      text: 'Miral',
+      AP: 1111,
+    },
+  ]);
+
+  const nextId = useRef(2);
+
+  const onInsert = useCallback(
+    text => {
+      const name = {
+        id: nextId.current,
+        text,
+        AP: 1234,
+      };
+      setNickname(nickname.concat(name));
+      nextId.current += 1;
+    },
+    [nickname],
+  );
   return (
     <KalbaHeader>
       <div className="kalba__logo__insert">
@@ -175,14 +147,7 @@ const Header = () => {
           <h1>Kalba</h1>
           <p>칼없는 바바리안</p>
         </Link>
-        <div className="insert">
-          <form className="nicknameInsert">
-            <input placeholder="닉네임"></input>
-            <button type="submit">
-              <MdSearch />
-            </button>
-          </form>
-        </div>
+        <UserSearch onInsert={onInsert} />
       </div>
       <div className="category">
         <div className="container">
@@ -203,6 +168,7 @@ const Header = () => {
       <Route path="/leaderboards" component={LeaderBoards} />
       <Route path="/standardtable" component={Standardtable} />
       <Route path="/attackpowercalc" component={Attackpowercalc} />
+      <Route path="/profile" component={Profile} />
     </KalbaHeader>
   );
 };

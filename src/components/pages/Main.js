@@ -1,5 +1,6 @@
 import React from 'react';
-import UserList from '../../UserList';
+import UserList from '../UserList';
+import UserList2 from '../UserList2';
 import styled from 'styled-components';
 
 const MainPage = styled.div`
@@ -33,7 +34,7 @@ const Home = () => {
   return (
     <MainPage>
       <UserList type="지원 TOP 10" />
-      <UserList type="공격력 TOP 10" />
+      <UserList2 type="공격력 TOP 10" />
     </MainPage>
   );
 };
