@@ -1,8 +1,13 @@
 import React from 'react';
+import { Link, Route } from 'react-router-dom';
 import { MdSearch } from 'react-icons/md';
 import styled from 'styled-components';
+import Home from '../../pages/Home/Home';
+import LeaderBoards from '../../pages/LeaderBoards';
+import Attackpowercalc from '../../pages/Attackpowercalc';
+import Standardtable from '../../pages/Standardtable';
 
-const Kalba__header = styled.div`
+const KalbaHeader = styled.div`
 background-color: #383E4C;
 height: 140px;
 @media (min-width: 768px) {
@@ -48,7 +53,7 @@ height: 140px;
 }
 
 .kalba__logo__insert .logo h1 {
-  color: black;
+  color: white;
   max-width: 140px;
   font-size: 50px;
   @media (min-width: 768px) {
@@ -72,7 +77,7 @@ height: 140px;
 
 .kalba__logo__insert .insert {
   float: right;
-  width: 100%;
+  /* width: 100%; */
   margin-top: 5px;
   margin-left:10px;
   @media (min-width: 768px) {
@@ -164,12 +169,12 @@ height: 140px;
 
 const Header = () => {
   return (
-    <Kalba__header>
+    <KalbaHeader>
       <div className="kalba__logo__insert">
-        <a href="/" className="logo">
+        <Link to="/" className="logo">
           <h1>Kalba</h1>
           <p>칼없는 바바리안</p>
-        </a>
+        </Link>
         <div className="insert">
           <form className="nicknameInsert">
             <input placeholder="닉네임"></input>
@@ -183,18 +188,22 @@ const Header = () => {
         <div className="container">
           <ul>
             <li>
-              <span>순위표</span>
+              <Link to="/leaderboards"><span>순위표</span></Link>
             </li>
             <li>
-              <span>기준표</span>
+              <Link to="/standardtable"><span>기준표</span></Link>
             </li>
             <li>
-              <span>공격력 계산기</span>
+              <Link to="/attackpowercalc"><span>공격력 계산기</span></Link>
             </li>
           </ul>
         </div>
       </div>
-    </Kalba__header>
+      <Route path="/" component={Home} exact />
+      <Route path="/leaderboards" component={LeaderBoards} />
+      <Route path="/standardtable" component={Standardtable} />
+      <Route path="/attackpowercalc" component={Attackpowercalc} />
+    </KalbaHeader>
   );
 };
 
