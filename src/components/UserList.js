@@ -33,19 +33,19 @@ const UserListBlock = styled.div`
     padding: 12px 16px;
     font-size: 14px;
     .rank {
-      width:15px;
+      width:5%;
     }
     .name {
-      width: 100px;
+      width: 50%;
     }
     .townHallLevel {
-
+      width: 15%
     }
     .donations{
-
+      width: 15%
     }
     .attackPower{
-
+      width: 15%
     }
   }
 `;

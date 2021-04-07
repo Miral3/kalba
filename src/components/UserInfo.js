@@ -2,31 +2,39 @@ import React from 'react';
 import styled from 'styled-components';
 
 const UserInfoBlock = styled.div`
-  display:flex; 
-  justify-content:space-around;
+  display:flex;
   padding: 8px 8px;
   border: 1px solid #e6e6e6;
   background-color: #fff;
   font-size: 15px;
   align-items: center;
   .rank {
-    width:15px;
+    width:5%;
+    padding-left:10px;
   }
   .nickname {
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 50%;
+    .icon {
+      width: 25px;
+      height: 25px;
+      padding-right:5px;
+    }
     .name {
       font-size: 12px;
+      text-decoration: none;
+      color: black;
     }
   }
-  .icon {
-    width: 25px;
-    height: 25px;
+  .townHallLevel  {
+    width: 15%
   }
-  .nickname .name {
-    text-decoration: none;
-    color: black;
+  .donations {
+    width: 15%
+  }
+  .attackPower{
+    width: 15%
   }
 `;
 
