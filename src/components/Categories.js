@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const categories = [
   {
-    name: 'attackpower',
+    name: 'score',
     text: '공격력'
   },
   {
@@ -38,6 +38,7 @@ const Category = styled.div`
   cursor: pointer;
   text-decoration: none;
   padding: 15px;
+  margin-left: 15px;
   &:hover{
     color: #495057;
   }
@@ -47,6 +48,9 @@ const Category = styled.div`
       font-weight: 600;
       color:white;
       background-color:#DA2A2A;
+      &:hover {
+        color: black;
+      }
     `
   }
   & + & {
@@ -61,7 +65,7 @@ const Categories = ({ onSelect, category }) => {
         <Category
           key={c.name}
           active={category === c.name}
-          onClick{...() => onSelect(c.name)}
+          onClick={() => onSelect(c.name)}
         >
           {c.text}
         </Category>
