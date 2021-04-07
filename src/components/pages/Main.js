@@ -1,6 +1,6 @@
 import React from 'react';
-import UserList from '../UserList';
-import UserList2 from '../UserList2';
+import UserList from '../DonaList';
+import UserList2 from '../ApList';
 import styled from 'styled-components';
 
 const MainPage = styled.div`
