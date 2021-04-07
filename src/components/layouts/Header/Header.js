@@ -14,8 +14,13 @@ import Profile from '../../pages/Profile';
 const KalbaHeader = styled.div`
 background-color: #383E4C;
 height: 140px;
+
 @media (min-width: 768px) {
     height: 200px;
+}
+
+a {
+  text-decoration:none !important
 }
 
 .kalba__logo__insert {
