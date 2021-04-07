@@ -94,9 +94,9 @@ const UserList2 = ({ type }) => {
         <div className="blockHead">
           <span className="rank">#</span>
           <span className="name">닉네임</span>
-          <span className="townHallLevel">홀 레벨</span>
-          <span className="donations">지원 수</span>
+          <span className="townHallLevel">홀</span>
           <span className="attackPower">공격력</span>
+          <span className="donations">지원량</span>
         </div>
         {donationData.slice(0, 10).map((data, idx) => (
           <UserInfo key={data.tag} idx={idx + 1} info={data} />

@@ -19,7 +19,6 @@ const UserInfoBlock = styled.div`
     .icon {
       width: 25px;
       height: 25px;
-      padding-right:5px;
     }
     .name {
       font-size: 12px;
@@ -28,13 +27,16 @@ const UserInfoBlock = styled.div`
     }
   }
   .townHallLevel  {
-    width: 15%
+    width: 15%;
+    padding-right: 12px;
   }
   .donations {
-    width: 15%
+    width: 15%;
+    padding-right: 3px;
   }
   .attackPower{
-    width: 15%
+    width: 15%;
+    padding-right: 3px;
   }
 `;
 
@@ -52,8 +54,8 @@ const UserInfo = ({ idx, info }) => {
         <a className="name" href="/">{name}</a>
       </span>
       <span className="townHallLevel">{townHallLevel}</span>
-      <span className="donations">{donations}</span>
       <span className="attackPower">{yonghaScore}</span>
+      <span className="donations">{donations}</span>
     </UserInfoBlock>
   );
 };

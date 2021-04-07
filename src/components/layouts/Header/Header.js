@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { Link, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
+// component
 import UserSearch from '../../UserSearch';
 // page
 import Home from '../../pages/Main';
