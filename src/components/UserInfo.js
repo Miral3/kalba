@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 const UserInfoBlock = styled.div`
   display:flex;
-  padding: 8px 8px;
+  padding: 8px 12px;
   border: 1px solid #e6e6e6;
   background-color: #fff;
   font-size: 15px;
   align-items: center;
+  text-align: center;
   .rank {
     width:5%;
-    padding-left:10px;
   }
   .nickname {
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 45%;
     .icon {
       width: 25px;
       height: 25px;
@@ -26,17 +26,10 @@ const UserInfoBlock = styled.div`
       color: black;
     }
   }
-  .townHallLevel  {
-    width: 15%;
-    padding-right: 12px;
-  }
-  .donations {
-    width: 15%;
-    padding-right: 3px;
-  }
-  .attackPower{
-    width: 15%;
-    padding-right: 3px;
+  .townHallLevel,
+  .donations,
+  .attackPower  {
+    width: 20%;
   }
 `;
 

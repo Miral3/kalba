@@ -10,7 +10,8 @@ const UserListBlock = styled.div`
   margin-right: 12px;
   .block {
     box-sizing: border-box;
-    padding-top: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     width: 100%;
   }
   .block .blockTitle__addBtn {
@@ -32,20 +33,18 @@ const UserListBlock = styled.div`
     font-weight: 400;
     padding: 12px 16px;
     font-size: 14px;
+    text-align: center;
     .rank {
       width:5%;
     }
     .name {
-      width: 50%;
+      text-align:left;
+      width: 45%;
     }
-    .townHallLevel {
-      width: 15%
-    }
-    .donations{
-      width: 15%
-    }
-    .attackPower{
-      width: 15%
+    .townHallLevel,
+    .donations,
+    .attackPower {
+      width: 20%
     }
   }
 `;
