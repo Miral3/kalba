@@ -1,4 +1,8 @@
+.table {
+  padding-bottom: 3rem;
+}
 table {
+  width: 100%;
   border: 1px solid #e6e2d6;
   border-collapse: collapse;
 }

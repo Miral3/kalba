@@ -7,7 +7,6 @@ import UserSearch from '../../UserSearch';
 // page
 import Home from '../../pages/Main';
 import LeaderBoards from '../../pages/LeaderBoards';
-import Attackpowercalc from '../../pages/Attackpowercalc';
 import Standardtable from '../../pages/Standardtable';
 import Profile from '../../pages/Profile';
 
@@ -164,16 +163,12 @@ const Header = () => {
             <li>
               <Link to="/standardtable"><span>기준표</span></Link>
             </li>
-            <li>
-              <Link to="/attackpowercalc"><span>공격력 계산기</span></Link>
-            </li>
           </ul>
         </div>
       </div>
       <Route path="/" component={Home} exact />
       <Route path="/leaderboards" component={LeaderBoards} />
       <Route path="/standardtable" component={Standardtable} />
-      <Route path="/attackpowercalc" component={Attackpowercalc} />
       <Route path="/profile" component={Profile} />
     </KalbaHeader>
   );

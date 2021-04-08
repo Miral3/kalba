@@ -19,6 +19,7 @@ const UserInfoBlock = styled.div`
     .icon {
       width: 25px;
       height: 25px;
+      margin-right: 2px;
     }
     .name {
       font-size: 12px;
