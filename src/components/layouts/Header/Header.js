@@ -161,7 +161,7 @@ const Header = () => {
               <Link to="/leaderboards/score"><span>순위표</span></Link>
             </li>
             <li>
-              <Link to="/standardTable"><span>기준표</span></Link>
+              <Link to="/standardTable/heroes"><span>기준표</span></Link>
             </li>
           </ul>
         </div>
