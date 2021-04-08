@@ -1,17 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const categories = [
-  {
-    name: 'score',
-    text: '공격력'
-  },
-  {
-    name: 'donations',
-    text: '지원률'
-  }
-];
-
 const CategoriesBlock = styled.div`
   display: flex;
   padding-top: 1rem;
@@ -27,6 +16,11 @@ const CategoriesBlock = styled.div`
   border-top: 2px solid #e3342f;
   @media (min-width: 576px) {
     max-width: 540px;
+  }
+  @media (max-width: 576px) {
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
   }
   @media (min-width: 768px) {
     max-width: 720px;
@@ -58,10 +52,10 @@ const Category = styled.div`
   }
 `;
 
-const Categories = ({ onSelect, category }) => {
+const Categories = ({ onSelect, category, type }) => {
   return (
     <CategoriesBlock>
-      {categories.map(c => (
+      {type.map(c => (
         <Category
           key={c.name}
           active={category === c.name}

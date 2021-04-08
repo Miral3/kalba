@@ -1,25 +1,62 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import HeroesTable from '../HeroesTable';
-import SiegeMachinesTable from '../SiegeMachinestable';
-import SpellsTable from '../SpellsTable';
-import TroopsTable from '../TroopsTable';
+import Categories from '../Categories';
+import HeroesTable from '../Table/HeroesTable';
+import SiegeMachinesTable from '../Table/SiegeMachinestable';
+import SpellsTable from '../Table/SpellsTable';
+import TroopsTable from '../Table/TroopsTable';
 
 const Table = styled.div`
-  display: flex;
+  display: flex;  
   height: auto;
-  flex-direction: column;
-  justify-content: space-between;
+  margin-top: 1rem;
+  justify-content: space-around;
 `
 
+const rankCategories = [
+  {
+    name: 'heroes',
+    text: '영웅'
+  },
+  {
+    name: 'siegeMachines',
+    text: '시즈머신'
+  },
+  {
+    name: 'spells',
+    text: '마법'
+  },
+  {
+    name: 'troops',
+    text: '유닛'
+  }
+];
+
+const selectTable = (props) => {
+  const type = props.category;
+  if (type === 'heroes') {
+    return <HeroesTable />
+  } else if (type === 'siegeMachines') {
+    return <SiegeMachinesTable />
+  } else if (type === 'spells') {
+    return <SpellsTable />
+  } else if (type === 'troops') {
+    return <TroopsTable />
+  }
+}
+
+
 const Standardtable = () => {
+  const [category, setCategory] = useState('heroes');
+  const onSelect = useCallback(category => setCategory(category), []);
+
   return (
-    <Table>
-      <HeroesTable />
-      <SiegeMachinesTable />
-      <SpellsTable />
-      <TroopsTable />
-    </Table>
+    <div>
+      <Categories category={category} onSelect={onSelect} type={rankCategories} />
+      <Table>
+        {selectTable({ category })}
+      </Table>
+    </div>
   );
 };
 
