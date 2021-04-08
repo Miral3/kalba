@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import Categories from '../Categories';
+
+import Categories from '../Categories/StandardTableCategory';
+
 import HeroesTable from '../Table/HeroesTable';
 import SiegeMachinesTable from '../Table/SiegeMachinestable';
 import SpellsTable from '../Table/SpellsTable';
@@ -46,13 +48,12 @@ const selectTable = (props) => {
 }
 
 
-const Standardtable = () => {
-  const [category, setCategory] = useState('heroes');
-  const onSelect = useCallback(category => setCategory(category), []);
+const Standardtable = ({ match }) => {
+  const category = match.params.category || 'heroes';
 
   return (
     <div>
-      <Categories category={category} onSelect={onSelect} type={rankCategories} />
+      <Categories type={rankCategories} />
       <Table>
         {selectTable({ category })}
       </Table>

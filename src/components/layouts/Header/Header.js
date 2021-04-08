@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
 // component
@@ -7,7 +7,7 @@ import UserSearch from '../../UserSearch';
 // page
 import Home from '../../pages/Main';
 import LeaderBoards from '../../pages/LeaderBoards';
-import Standardtable from '../../pages/Standardtable';
+import StandardTable from '../../pages/StandardTable';
 import Profile from '../../pages/Profile';
 
 const KalbaHeader = styled.div`
@@ -158,17 +158,23 @@ const Header = () => {
         <div className="container">
           <ul>
             <li>
-              <Link to="/leaderboards"><span>순위표</span></Link>
+              <Link to="/leaderboards/score"><span>순위표</span></Link>
             </li>
             <li>
-              <Link to="/standardtable"><span>기준표</span></Link>
+              <Link to="/standardTable"><span>기준표</span></Link>
             </li>
           </ul>
         </div>
       </div>
       <Route path="/" component={Home} exact />
-      <Route path="/leaderboards" component={LeaderBoards} />
-      <Route path="/standardtable" component={Standardtable} />
+      <Switch>
+        <Route path="/leaderboards/:category?" component={LeaderBoards} />
+        <Route path="/leaderboards" component={LeaderBoards} />
+      </Switch>
+      <Switch>
+        <Route path="/standardTable/:category?" component={StandardTable} />
+        <Route path="/standardTable" component={StandardTable} />
+      </Switch>
       <Route path="/profile" component={Profile} />
     </KalbaHeader>
   );

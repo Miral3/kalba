@@ -86,7 +86,7 @@ const UserList2 = ({ type }) => {
       <div className="block">
         <div className="blockTitle__addBtn">
           <span className="title">{type}</span>
-          <Link to="/leaderboards" className="addBtn">
+          <Link to="/leaderboards/score" className="addBtn">
             더보기
           </Link>
         </div>
@@ -100,7 +100,7 @@ const UserList2 = ({ type }) => {
         {donationData.slice(0, 10).map((data, idx) => (
           <UserInfo key={data.tag} idx={idx + 1} info={data} />
         ))}
-        <Route path="/leaderboards" component={LeaderBoards} />
+        <Route path="/leaderboards/score" component={LeaderBoards} />
       </div>
     </UserListBlock>
   );

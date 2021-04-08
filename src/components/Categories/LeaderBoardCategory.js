@@ -1,7 +1,12 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const CategoriesBlock = styled.div`
+  a:visited {
+    text-decoration:none;
+    color: black;
+  }
   display: flex;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -27,39 +32,40 @@ const CategoriesBlock = styled.div`
   }
 `;
 
-const Category = styled.div`
+const Category = styled(NavLink)`
+
   font-size: 1.125rem;
   cursor: pointer;
   text-decoration: none;
   padding: 15px;
   margin-left: 15px;
+  
   &:hover{
     color: #495057;
   }
 
-  ${props =>
-    props.active && css`
-      font-weight: 600;
-      color:white;
-      background-color:#DA2A2A;
-      &:hover {
-        color: black;
-      }
-    `
+  &.active{
+    font-weight: 600;
+    color:white;
+    background-color:#DA2A2A;
+    &:hover {
+      color: black;
+    }
   }
   & + & {
     margin-left: 1rem;
   }
 `;
 
-const Categories = ({ onSelect, category, type }) => {
+const Categories = ({ type }) => {
   return (
     <CategoriesBlock>
       {type.map(c => (
         <Category
           key={c.name}
-          active={category === c.name}
-          onClick={() => onSelect(c.name)}
+          activeClassName="active"
+          exact={c.name === 'score'}
+          to={c.name === 'score' ? '/leaderboards/score' : `/leaderboards/${c.name}`}
         >
           {c.text}
         </Category>

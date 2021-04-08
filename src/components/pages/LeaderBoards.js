@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import Categories from '../Categories';
+import React from 'react';
+import Categories from '../Categories/LeaderBoardCategory';
 import UserList from '../UserList';
 
 const rankCategories = [
@@ -13,12 +13,12 @@ const rankCategories = [
   }
 ];
 
-const LeaderBoards = () => {
-  const [category, setCategory] = useState('score');
-  const onSelect = useCallback(category => setCategory(category), []);
+const LeaderBoards = ({ match }) => {
+  const category = match.params.category || 'score';
+
   return (
     <div>
-      <Categories category={category} onSelect={onSelect} type={rankCategories} />
+      <Categories type={rankCategories} />
       <UserList category={category} />
     </div>
   );
