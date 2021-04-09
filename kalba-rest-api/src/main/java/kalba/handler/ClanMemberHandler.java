@@ -1,5 +1,6 @@
 package kalba.handler;
 
+import kalba.config.ReadConfig;
 import kalba.model.ClanMember;
 import kalba.model.League;
 import lombok.AllArgsConstructor;
@@ -22,15 +23,13 @@ public class ClanMemberHandler extends Thread{
     public static final Map<String, Map<Object, Object>> clanInfoMap=new ConcurrentHashMap<>();
     public static final Map<String, List<ClanMember>> clanMemberSortedByYHScoreMap =new ConcurrentHashMap<>();
     public static final Map<String, List<ClanMember>> clanMemberSortedByDonationsMap =new ConcurrentHashMap<>();
-
-    static String token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRkMWY1NzVlLWI4ZmUtNDI2YS05M2E1LWUxMGM3MmU5MWVhNCIsImlhdCI6MTYxNzUxNTAyMiwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjExMC4zNS41MC43MyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.o-FyYhqCW4xGzk86rS-E3WCTiw8JEaPDPBNjtvcmoulO82NSRJvHIXrdD1GtLaOGAbqVaFy2doxZqH59VSq7Aw";
-//    static String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImRiYzY1MjY2LTQ1MDItNDdhYS1hOTVmLWJiMWE2MTI5Yzc1YSIsImlhdCI6MTYxNzYyOTgzMywic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjM0LjY0LjIzNy4xNyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.Yo-QMJuhPro85ZMu_nueuO5cs09ST4smYoQv4zAa_FUViBY6ZTwGD9rbqegnwKszcfnpnjpK_QMMTT_5R0RuyA";
-
+    private static final String token=((boolean)(ReadConfig.config.isLocal)?ReadConfig.config.localToken:ReadConfig.config.serverToken).toString();
     public void run() {
         try {
             // kalba
-            clanCodeSet.add("%232Y2Y9YCUU");
-            loadingMap.put("%232Y2Y9YCUU", new AtomicBoolean(false));
+            String kalbaCode="%232Y2Y9YCUU";
+            clanCodeSet.add(kalbaCode);
+            loadingMap.put(kalbaCode, new AtomicBoolean(false));
             while(true){
                 update();
                 // 10min
