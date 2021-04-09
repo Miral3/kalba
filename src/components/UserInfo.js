@@ -36,7 +36,6 @@ const UserInfoBlock = styled.div`
 
 const UserInfo = ({ idx, info }) => {
   const { league, name, townHallLevel, donations, yonghaScore } = info;
-
   return (
     <UserInfoBlock>
       <span className="rank">{idx}</span>
