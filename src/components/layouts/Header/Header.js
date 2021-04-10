@@ -10,7 +10,7 @@ import { MdSearch } from 'react-icons/md';
 // page
 import Home from '../../pages/Main';
 import LeaderBoards from '../../pages/LeaderBoards';
-import StandardTable from '../../pages/StandardTable';
+import StandardTable from '../../pages/Standardtable';
 import Profile from '../../pages/Profile';
 
 const KalbaHeader = styled.div`
