@@ -22,9 +22,8 @@ li {
 }
 .profileBlock .profileContents {
   background: linear-gradient(to top, #6d779a, #8c96ae);
-  /* background-color: #8a94ad; */
   border-radius: 8px;
-  border: 2px solid #6a769c;
+  border: 3px solid #6a7497;
   display: flex;
   justify-content: space-around;
   padding: 15px;
