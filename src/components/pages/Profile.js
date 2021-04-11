@@ -15,6 +15,8 @@ function translateRole(engTxt) {
       return "장로";
     case "member":
       return "멤버";
+    default:
+      break;
   }
 }
 
@@ -39,6 +41,8 @@ function translateLeague(engTxt) {
       return "타이탄 리그 " + txt[2];
     case "Legend":
       return "전설 리그";
+    default:
+      break;
   }
 }
 
@@ -88,6 +92,7 @@ const Profile = ({ match }) => {
     return <div>프로필을 찾을 수 없습니다. 닉네임을 다시 한 번 확인해 주십시오.</div>
   }
   const userInfo = userData[0];
+  console.log(userInfo);
   return (
     <div className="profileBlock">
       <div className="profileContents">
@@ -155,6 +160,37 @@ const Profile = ({ match }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="profileRanking">
+        <span className="rankingHeader">전체 통계</span>
+        <ul className="rankingContents">
+          <li className="apRanking">
+            <div className="badgeRanking">
+              <img className="leagueBadge" src="https://api-assets.clashofclans.com/leagues/288/R2zmhyqQ0_lKcDR5EyghXCxgyC9mm_mVMIjAbmGoZtw.png" alt="leagueBadge" />
+              <span className="ranking">#{scoreRank}</span>
+            </div>
+            <div className="typeAmount">
+              <span className="type attackPower">공격력</span>
+              <div className="amount">
+                <img className="trophy" src={trophy} alt="trophy" />
+                <span className="score">{userInfo.yonghaScore}</span>
+              </div>
+            </div>
+          </li>
+          <li className="donaRanking">
+            <div className="badgeRanking">
+              <img className="leagueBadge" src="https://api-assets.clashofclans.com/leagues/288/R2zmhyqQ0_lKcDR5EyghXCxgyC9mm_mVMIjAbmGoZtw.png" alt="leagueBadge" />
+              <span className="ranking">#{donaRank}</span>
+            </div>
+            <div className="typeAmount">
+              <span className="type donations">지원량</span>
+              <div className="amount">
+                <img className="trophy" src={trophy} alt="trophy" />
+                <span className="score">{userInfo.donations}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   );
