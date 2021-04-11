@@ -98,9 +98,8 @@ const Profile = ({ match }) => {
               alt="leagueBadge"
             />
             <div className="leagueContents">
-              {/* {userInfo.league.name} */}
               <div className="leagueNameBlcok">
-                <span className="leagueName">골드 리그III</span>
+                <span className="leagueName">{userInfo.league.name}</span>
               </div>
               <div className="leagueScore">
                 <img className="trophy" src={trophy} alt="trophy" />

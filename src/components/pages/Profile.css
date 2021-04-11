@@ -17,7 +17,7 @@ li {
 }
 @media (min-width: 768px) {
   .profileBlock {
-    max-width: 720px;
+    max-width: 680px;
   }
 }
 .profileBlock .profileContents {
@@ -25,11 +25,8 @@ li {
   border-radius: 8px;
   border: 2px solid #6a769c;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   padding: 15px;
-}
-.profileBlock .userInfo {
-  border-right: 1px solid grey;
 }
 .profileBlock .userInfo .userNameTagRole {
   display: flex;
@@ -89,6 +86,7 @@ li {
 }
 
 .profileBlock .clanInfo {
+  border-left: 1px solid grey;
   border-right: 1px solid grey;
   text-align: center;
   width: 200px;
