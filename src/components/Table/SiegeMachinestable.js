@@ -8,8 +8,8 @@ const set = siegeMachines.map((arr, idx) =>
   <tr key={idx} className="type troops">
     {arr.map((value, num) => {
       if (num === 0) {
-        return <td className="type">{value}</td>
-      } else if (num === 1) {
+        return <td className="type name">{value}</td>
+      } else if (num === 3) {
         return <td className="type">{Math.ceil(value * 1000) / 1000}</td>
       }
       else {
