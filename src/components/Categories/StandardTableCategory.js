@@ -3,9 +3,16 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const CategoriesBlock = styled.div`
-  a:visited {
-    text-decoration:none;
-    color: black;
+  a {
+    text-decoration:none !important;
+    &:link { 
+      color: black; 
+      text-decoration: none;
+    }
+    &:visited{
+      color: black; 
+      text-decoration: none;
+    }
   }
   display: flex;
   padding-top: 1rem;

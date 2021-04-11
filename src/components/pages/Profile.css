@@ -43,13 +43,15 @@ li {
   grid-column: 1/1;
   text-align: center;
   font-size: 40px;
-  color: #2695c0;
+  color: #218ec5;
+  /* #218ec5
+  4fb8e1 */
 }
 
 .profileBlock .userInfo .userNameTagRole .userLevel .level {
   grid-row: 1/1;
   grid-column: 1/1;
-  margin-top: 9px;
+  margin-top: 8px;
   text-align: center;
   font-weight: 700;
   text-shadow: 1px 2px 1px black;
@@ -87,8 +89,8 @@ li {
 }
 
 .profileBlock .clanInfo {
-  border-left: 1px solid grey;
-  border-right: 1px solid grey;
+  border-left: 2px solid #7d819c;
+  border-right: 2px solid #7d819c;
   text-align: center;
   width: 200px;
 }
@@ -114,14 +116,34 @@ li {
 .profileBlock .userScore .currentScore {
   display: flex;
   text-align: center;
+  margin-bottom: 12px;
 }
 
 .profileBlock .userScore .currentScore .leagueBadge {
   position: absolute;
-  width: 80px;
-  right: 170px;
-  top: 7px;
 }
+@media (max-width: 576px) {
+  .leagueBadge {
+    width: 45px;
+    right: 23%;
+    top: 30px;
+  }
+}
+@media (min-width: 576px) {
+  .leagueBadge {
+    width: 50px;
+    right: 120px;
+    top: 25px;
+  }
+}
+@media (min-width: 768px) {
+  .leagueBadge {
+    width: 80px;
+    right: 170px;
+    top: 7px;
+  }
+}
+
 .profileBlock .userScore .currentScore .leagueContents {
   margin-top: 12px;
   padding: 0;
@@ -145,6 +167,10 @@ li {
 .profileBlock .userScore .currentScore .leagueContents .leagueScore {
   display: flex;
   background: linear-gradient(to right, #7450ae, #8a94ad);
+  border-width: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #403d73, #8a94ad);
+  border-image-slice: 1;
   border-radius: 3px;
   align-items: center;
   padding-left: 35px;
@@ -160,14 +186,14 @@ li {
 .profileBlock .userScore .bestScore .type,
 .profileBlock .userScore .warScore .type {
   width: 130px;
-  font-size: 10px;
+  font-size: 14px;
   text-align: left;
   margin-left: 30px;
 }
 
 .profileBlock .userScore .bestScore .space,
 .profileBlock .userScore .warScore .space {
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .profileBlock .userScore .bestScore .contents,

@@ -22,7 +22,15 @@ height: 140px;
 }
 
 a {
-  text-decoration:none !important
+  text-decoration:none !important;
+  &:link { 
+    color: black; 
+    text-decoration: none;
+  }
+  &:visited{
+    color: black; 
+    text-decoration: none;
+  }
 }
 
 .kalba__logo__insert {
