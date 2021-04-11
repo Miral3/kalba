@@ -24,6 +24,9 @@ const UserListBlock = styled.div`
     text-decoration: none;
     color: white;
     float:right;
+    &:hover{
+      border-bottom: 1px solid #ffffff;
+    }
   }
   .block .blockHead {
     display:flex;

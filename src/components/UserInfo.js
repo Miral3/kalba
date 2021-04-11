@@ -26,6 +26,9 @@ const UserInfoBlock = styled.div`
       font-size: 12px;
       text-decoration: none;
       color: black;
+      &:hover{
+      border-bottom: 1px solid black;
+    }
     }
   }
   .trophies,
