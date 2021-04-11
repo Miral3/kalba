@@ -1,5 +1,16 @@
 .table {
   padding-bottom: 3rem;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .table {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .table {
+    max-width: 720px;
+  }
 }
 table {
   width: 100%;

@@ -13,6 +13,7 @@ const Table = styled.div`
   height: auto;
   margin-top: 1rem;
   justify-content: space-around;
+  width:100%;
 `
 
 const rankCategories = [

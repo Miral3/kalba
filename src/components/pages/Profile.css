@@ -2,16 +2,31 @@ li {
   list-style: none;
 }
 .profileBlock {
+  display: block;
+  height: auto !important;
+  margin-top: 1rem !important;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative !important;
+}
+@media (min-width: 576px) {
+  .profileBlock {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .profileBlock {
+    max-width: 720px;
+  }
+}
+.profileBlock .profileContents {
   background-color: #8a94ad;
   border-radius: 8px;
   border: 2px solid #6a769c;
   display: flex;
   justify-content: center;
   padding: 15px;
-  width: 50%;
-  margin-top: 50px;
-  margin-left: 200px;
-  margin-right: 200px;
 }
 .profileBlock .userInfo {
   border-right: 1px solid grey;
@@ -90,7 +105,6 @@ li {
 }
 .profileBlock .userScore {
   display: flex;
-  text-align: center;
   flex-direction: column;
   color: white;
   text-shadow: 1px 2px 1px black;
@@ -107,15 +121,26 @@ li {
 }
 .profileBlock .userScore .currentScore .leagueContents {
   margin-top: 12px;
-}
-.profileBlock .userScore .currentScore .leagueContents .leagueName {
-  font-size: 15px;
+  padding: 0;
 }
 .profileBlock .userScore .currentScore .leagueContents .trophy {
   width: 30px;
 }
+.profileBlock .userScore .currentScore .leagueContents .leagueNameBlcok {
+  background: linear-gradient(to right, #373a46, #8a94ad);
+}
+.profileBlock
+  .userScore
+  .currentScore
+  .leagueContents
+  .leagueNameBlcok
+  .leagueName {
+  font-size: 10px;
+}
 .profileBlock .userScore .currentScore .leagueContents .leagueScore {
   display: flex;
+  background: linear-gradient(to right, #7450ae, #8a94ad);
+  border-radius: 3px;
   align-items: center;
 }
 .profileBlock .userScore .currentScore .leagueContents .score {

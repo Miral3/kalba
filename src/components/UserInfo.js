@@ -44,7 +44,7 @@ const UserInfo = ({ idx, info }) => {
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
         )}
-        <a className="name" href="/">{name}</a>
+        <a className="name" href={`/profile/${name}`}>{name}</a>
       </span>
       <span className="townHallLevel">{townHallLevel}</span>
       <span className="attackPower">{yonghaScore}</span>

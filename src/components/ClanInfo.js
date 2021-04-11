@@ -32,12 +32,10 @@ const ClanInfo = () => {
   if (!data) {
     return null;
   }
-  console.log(data);
   return (
-    <div>
-      <span></span>
-      <span>{data.name}</span>
-      <img className="icon" src={data.badgeUrls.medium} />
+    <div className="clanInfo">
+      <span className="clanName">{data.name}</span>
+      <img className="clanBadge" src={data.badgeUrls.medium} alt="clanBadge" />
     </div>
   );
 };
