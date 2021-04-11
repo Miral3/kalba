@@ -6,7 +6,7 @@ import axios from 'axios';
 import './Profile.css'
 
 function translateRole(engTxt) {
-  switch (engTxt){
+  switch (engTxt) {
     case "leader":
       return "대표";
     case "coLeader":
@@ -19,24 +19,24 @@ function translateRole(engTxt) {
 }
 
 function translateLeague(engTxt) {
-  let txt=engTxt.split(" ");
-  switch (txt[0]){
+  let txt = engTxt.split(" ");
+  switch (txt[0]) {
     case "Unranked":
       return "랭크되지 않음";
     case "Bronze":
-      return "브론즈 리그 "+txt[2];
+      return "브론즈 리그 " + txt[2];
     case "Silver":
       return "장로";
     case "Gold":
-      return "골드 리그 "+txt[2];
+      return "골드 리그 " + txt[2];
     case "Crystal":
-      return "크리스털 리그 "+txt[2];
+      return "크리스털 리그 " + txt[2];
     case "Master":
-      return "마스터 리그 "+txt[2];
+      return "마스터 리그 " + txt[2];
     case "Champion":
-      return "챔피언 리그 "+txt[2];
+      return "챔피언 리그 " + txt[2];
     case "Titan":
-      return "타이탄 리그 "+txt[2];
+      return "타이탄 리그 " + txt[2];
     case "Legend":
       return "전설 리그";
   }
@@ -128,7 +128,7 @@ const Profile = ({ match }) => {
           <div className="currentScore">
             <img
               className="leagueBadge"
-              src={`${userInfo.league.iconMedium!=null?userInfo.league.iconMedium:userInfo.league.iconSmall}`}
+              src={`${userInfo.league.iconMedium != null ? userInfo.league.iconMedium : userInfo.league.iconSmall}`}
               alt="leagueBadge"
             />
             <div className="leagueContents">
