@@ -5,8 +5,42 @@ import trophy from "./cocTrophy.png";
 import axios from 'axios';
 import './Profile.css'
 
+function translateRole(engTxt) {
+  switch (engTxt){
+    case "leader":
+      return "대표";
+    case "coLeader":
+      return "공동대표";
+    case "admin":
+      return "장로";
+    case "member":
+      return "멤버";
+  }
+}
 
-
+function translateLeague(engTxt) {
+  let txt=engTxt.split(" ");
+  switch (txt[0]){
+    case "Unranked":
+      return "랭크되지 않음";
+    case "Bronze":
+      return "브론즈 리그 "+txt[2];
+    case "Silver":
+      return "장로";
+    case "Gold":
+      return "골드 리그 "+txt[2];
+    case "Crystal":
+      return "크리스털 리그 "+txt[2];
+    case "Master":
+      return "마스터 리그 "+txt[2];
+    case "Champion":
+      return "챔피언 리그 "+txt[2];
+    case "Titan":
+      return "타이탄 리그 "+txt[2];
+    case "Legend":
+      return "전설 리그";
+  }
+}
 
 const Profile = ({ match }) => {
   const nickname = match.params.category;
@@ -15,6 +49,7 @@ const Profile = ({ match }) => {
   const [donaRank, setDonaRank] = useState('');
   const [scoreRank, setScoreRank] = useState('');
   const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +88,6 @@ const Profile = ({ match }) => {
     return <div>프로필을 찾을 수 없습니다. 닉네임을 다시 한 번 확인해 주십시오.</div>
   }
   const userInfo = userData[0];
-
   return (
     <div className="profileBlock">
       <div className="profileContents">
@@ -73,7 +107,7 @@ const Profile = ({ match }) => {
                 <span className="userTag">{userInfo.tag}</span>
               </li>
               <li>
-                <span className="userRole">{userInfo.role}</span>
+                <span className="userRole">{translateRole(userInfo.role)}</span>
               </li>
             </ul>
           </div>
@@ -94,12 +128,12 @@ const Profile = ({ match }) => {
           <div className="currentScore">
             <img
               className="leagueBadge"
-              src={`${userInfo.league.iconMedium}`}
+              src={`${userInfo.league.iconMedium!=null?userInfo.league.iconMedium:userInfo.league.iconSmall}`}
               alt="leagueBadge"
             />
             <div className="leagueContents">
               <div className="leagueNameBlcok">
-                <span className="leagueName">{userInfo.league.name}</span>
+                <span className="leagueName">{translateLeague(userInfo.league.name)}</span>
               </div>
               <div className="leagueScore">
                 <img className="trophy" src={trophy} alt="trophy" />
