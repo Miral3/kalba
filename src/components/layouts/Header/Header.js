@@ -159,7 +159,7 @@ const UserSearch = styled.div`
   padding: 5px 7px;
   line-height: 20px;
   margin-left: 5px;
-  width: auto;
+  width: 90%;
   &:focus {
     outline: none;
   }
