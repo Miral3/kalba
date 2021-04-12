@@ -5,15 +5,10 @@ li {
   display: block;
   height: auto !important;
   margin-top: 1rem !important;
-  width: 115%;
+  width: 95%;
   margin-right: auto;
   margin-left: auto;
   position: relative !important;
-}
-@media (min-width: 490px) {
-  .profileBlock {
-    width: 95%;
-  }
 }
 @media (min-width: 576px) {
   .profileBlock {
