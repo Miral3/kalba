@@ -4,7 +4,7 @@ import { FaCertificate } from "react-icons/fa";
 import trophy from "./cocTrophy.png";
 import axios from 'axios';
 import './Profile.css'
-import copyIcon from './copy.png';
+import { FaRegCopy } from "react-icons/fa";
 
 function translateRole(engTxt) {
   switch (engTxt) {
@@ -121,7 +121,7 @@ const Profile = ({ match }) => {
               </li>
               <li>
                 <span className="userTag">{userInfo.tag}&nbsp;</span>
-                <img className="userTagCopy" src={copyIcon} onClick={()=>copyTag(userInfo.tag)} onDoubleClick={()=>copyTag(userInfo.tag)} alt="userTagCopy" />
+                <FaRegCopy className="userTagCopy" onClick={()=>copyTag(userInfo.tag)} onDoubleClick={()=>copyTag(userInfo.tag)} alt="userTagCopy"></FaRegCopy>
               </li>
               <li>
                 <span className="userRole">{translateRole(userInfo.role)}</span>
