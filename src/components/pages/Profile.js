@@ -91,8 +91,8 @@ const Profile = ({ match }) => {
   if (!userData.length) {
     return <div>프로필을 찾을 수 없습니다. 닉네임을 다시 한 번 확인해 주십시오.</div>
   }
+
   const userInfo = userData[0];
-  console.log(userInfo);
   return (
     <div className="profileBlock">
       <div className="profileContents">
