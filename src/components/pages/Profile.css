@@ -74,6 +74,10 @@ li {
   color: #c7c9cc;
   font-weight: 600;
 }
+.userTagCopy {
+  position: relative;
+  top: 4px;
+}
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo .userRole {
   font-size: 13px;
   font-weight: 600;

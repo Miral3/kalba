@@ -4,6 +4,7 @@ import { FaCertificate } from "react-icons/fa";
 import trophy from "./cocTrophy.png";
 import axios from 'axios';
 import './Profile.css'
+import copyIcon from './copy.png';
 
 function translateRole(engTxt) {
   switch (engTxt) {
@@ -44,6 +45,16 @@ function translateLeague(engTxt) {
     default:
       break;
   }
+}
+
+function copyTag(txt) {
+  var t = document.createElement("textarea");
+  document.body.appendChild(t);
+  t.value = txt;
+  t.select();
+  document.execCommand('copy');
+  document.body.removeChild(t);
+  alert(txt+"가 클립보드에 복사되었습니다.");
 }
 
 const Profile = ({ match }) => {
@@ -109,7 +120,8 @@ const Profile = ({ match }) => {
                 <span className="userName">{userInfo.name}</span>
               </li>
               <li>
-                <span className="userTag">{userInfo.tag}</span>
+                <span className="userTag">{userInfo.tag}&nbsp;</span>
+                <img className="userTagCopy" src={copyIcon} onClick={()=>copyTag(userInfo.tag)} onDoubleClick={()=>copyTag(userInfo.tag)} alt="userTagCopy" />
               </li>
               <li>
                 <span className="userRole">{translateRole(userInfo.role)}</span>
