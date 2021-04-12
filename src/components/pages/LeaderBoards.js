@@ -9,7 +9,7 @@ const rankCategories = [
   },
   {
     name: 'donations',
-    text: '지원율'
+    text: '지원량'
   }
 ];
 

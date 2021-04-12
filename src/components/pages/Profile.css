@@ -5,7 +5,7 @@ li {
   display: block;
   height: auto !important;
   margin-top: 1rem !important;
-  width: 100%;
+  width: 95%;
   margin-right: auto;
   margin-left: auto;
   position: relative !important;
@@ -114,18 +114,21 @@ li {
 }
 
 .profileBlock .userScore .currentScore {
-  display: flex;
+  /* display: flex; */
+  display: inline-flex;
   text-align: center;
   margin-bottom: 12px;
 }
 
 .profileBlock .userScore .currentScore .leagueBadge {
   position: absolute;
+  grid-row: 1/1;
+  grid-column: 1/1;
 }
 @media (max-width: 576px) {
   .profileBlock .userScore .currentScore .leagueBadge {
     width: 45px;
-    right: 23%;
+    right: 21%;
     top: 30px;
   }
 }
@@ -145,6 +148,8 @@ li {
 }
 
 .profileBlock .userScore .currentScore .leagueContents {
+  grid-row: 1/1;
+  grid-column: 1/1;
   margin-top: 12px;
   padding: 0;
   width: 100%;
@@ -199,7 +204,7 @@ li {
 .profileBlock .userScore .bestScore .contents,
 .profileBlock .userScore .warScore .contents {
   background-color: #38385b;
-  width: 130px;
+  width: 100px;
   margin-left: 30px;
   border-radius: 3px;
   display: flex;
