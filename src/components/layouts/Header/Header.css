@@ -1,0 +1,111 @@
+.header {
+  background-color: #383e4c;
+  height: 140px;
+
+  @media (min-width: 768px) {
+    height: 200px;
+  }
+}
+a {
+  text-decoration: none !important;
+}
+
+.header .kalba__logo__insert {
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    max-width: 720px;
+  }
+  @media (max-width: 991px) {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+.header .kalba__logo__insert .logo {
+  margin-left: 15px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  text-decoration: none;
+  @media (min-width: 768px) {
+    margin-left: 20px;
+    min-width: 350px;
+  }
+}
+
+.header .kalba__logo__insert .logo h1 {
+  color: white;
+  max-width: 140px;
+  font-size: 50px;
+  @media (min-width: 768px) {
+    max-width: 160px;
+  }
+}
+
+.header .kalba__logo__insert .logo p {
+  margin-left: 12px;
+  margin-top: 24px;
+  padding: 8px;
+  height: 16px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  background-color: #da292a;
+  border-radius: 6px;
+  vertical-align: bottom;
+}
+
+.header .category {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+}
+
+.header .category .container {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
+.header .category .container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.header .category .container li {
+  margin-left: 15px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.header .category .container span {
+  color: #d6d6d6;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.header .category .container span:hover {
+  border-bottom: 4px solid #ffffff;
+}
