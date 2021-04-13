@@ -25,10 +25,11 @@ const UserInfoBlock = styled.div`
     .name {
       font-size: 12px;
       text-decoration: none;
+      margin-right: 2px;
       color: black;
       &:hover{
       border-bottom: 1px solid black;
-    }
+      }
     }
   }
   .trophies,
@@ -40,6 +41,7 @@ const UserInfoBlock = styled.div`
 `;
 
 const UserInfo = ({ idx, info }) => {
+  console.log(info);
   const { league, name, trophies, townHallLevel, donations, yonghaScore } = info;
   return (
     <UserInfoBlock>
@@ -49,7 +51,9 @@ const UserInfo = ({ idx, info }) => {
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
         )}
-        <a className="name" href={`/profile/${name}`}>{name}</a>
+        <a className="name" href={`/profile/${name}`}>
+          {name}
+        </a>
       </span>
       <span className="trophies">{trophies}</span>
       <span className="townHallLevel">{townHallLevel}</span>

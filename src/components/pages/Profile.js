@@ -54,7 +54,7 @@ function copyTag(txt) {
   t.select();
   document.execCommand('copy');
   document.body.removeChild(t);
-  alert(txt+"가 클립보드에 복사되었습니다.");
+  alert(txt + "가 클립보드에 복사되었습니다.");
 }
 
 const Profile = ({ match }) => {
@@ -100,7 +100,7 @@ const Profile = ({ match }) => {
     return null;
   }
   if (!userData.length) {
-    return <div>프로필을 찾을 수 없습니다. 닉네임을 다시 한 번 확인해 주십시오.</div>
+    return <div>프로필을 찾을 수 없습니다. 이름을 다시 한 번 확인해 주십시오.</div>
   }
 
   const userInfo = userData[0];
@@ -121,7 +121,7 @@ const Profile = ({ match }) => {
               </li>
               <li>
                 <span className="userTag">{userInfo.tag}&nbsp;</span>
-                <FaRegCopy className="userTagCopy" onClick={()=>copyTag(userInfo.tag)} onDoubleClick={()=>copyTag(userInfo.tag)} alt="userTagCopy"></FaRegCopy>
+                <FaRegCopy className="userTagCopy" onClick={() => copyTag(userInfo.tag)} onDoubleClick={() => copyTag(userInfo.tag)} alt="userTagCopy"></FaRegCopy>
               </li>
               <li>
                 <span className="userRole">{translateRole(userInfo.role)}</span>

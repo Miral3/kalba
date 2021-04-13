@@ -78,7 +78,7 @@
 //       <div className="insert">
 //         <form className="nicknameInsert" onSubmit={onSubmit}>
 //           <input
-//             placeholder="닉네임"
+//             placeholder="이름"
 //             value={value}
 //             onChange={onChange}
 //           />

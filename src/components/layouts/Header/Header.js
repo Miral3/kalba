@@ -206,7 +206,7 @@ const Header = () => {
           <div className="insert">
             <form className="nicknameInsert">
               <input
-                placeholder="닉네임"
+                placeholder="이름 검색"
                 value={nickname}
                 onChange={onChange}
               />

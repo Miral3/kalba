@@ -5,12 +5,12 @@ li {
   display: block;
   height: auto !important;
   margin-top: 1rem !important;
-  width: 129%;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   position: relative !important;
 }
-@media (min-width: 400px) {
+/* @media (min-width: 400px) {
   .profileBlock {
     width: 115%;
   }
@@ -19,7 +19,12 @@ li {
   .profileBlock {
     width: 95%;
   }
-}
+} */
+/* @media (min-width: 410px) {
+  .profileBlock {
+    max-width: 400px;
+  }
+} */
 @media (min-width: 576px) {
   .profileBlock {
     max-width: 540px;
@@ -83,6 +88,9 @@ li {
   font-size: 13px;
   color: #c7c9cc;
   font-weight: 600;
+}
+.profileBlock .userInfo .userNameTagRole .userNameClanInfo .userTagCopy {
+  cursor: pointer;
 }
 .userTagCopy {
   position: relative;

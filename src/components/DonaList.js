@@ -39,19 +39,19 @@ const UserListBlock = styled.div`
     text-align: center;
     .rank {
       width:10%;
-      margin-right:5px;
+      padding-left:3px;
     }
     .name {
       text-align:left;
       width: 45%;
-      padding-left: 23px;
+      padding-left: 16px;
     }
     .trophies,
     .townHallLevel,
     .donations,
     .attackPower {
       width: 20%;
-      padding-right:5px;
+      padding-right:4px;
     }
   }
 `;
@@ -99,7 +99,7 @@ const UserList = ({ type }) => {
         </div>
         <div className="blockHead">
           <span className="rank">#</span>
-          <span className="name">닉네임</span>
+          <span className="name">이름</span>
           <span className="trophies">트로피</span>
           <span className="townHallLevel">홀</span>
           <span className="attackPower">공격력</span>
