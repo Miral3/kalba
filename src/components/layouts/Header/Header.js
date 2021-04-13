@@ -131,13 +131,12 @@ a {
     border-bottom: 4px solid #ffffff;
   }
 }
-`;
-
-const UserSearch = styled.div`
 .insert {
   float: right;
   margin-top: 5px;
-  margin-left:10px;
+  width:auto;
+  margin-left: 10px;
+  margin-right: 3rem;
   @media (min-width: 768px) {
     width: auto;
     margin-right: 20px;
@@ -150,10 +149,12 @@ const UserSearch = styled.div`
   border: 1px solid #ffffff;
   border-radius: 4px;
   background-color: #ffffff;
-  margin-right: 0;
-  @media (min-width: 475px) {
+  margin-left:20px;
+  padding-right: 35px;
+  margin: 0;
+  /* @media (min-width: 475px) {
     width: 274px;
-  }
+  } */
   @media (min-width: 768px) {
     width: 274px;
     margin: 7px 0 0;
@@ -167,7 +168,7 @@ const UserSearch = styled.div`
   padding: 5px 7px;
   line-height: 20px;
   margin-left: 5px;
-  width: 90%;
+  width: 100%;
   &:focus {
     outline: none;
   }
@@ -202,22 +203,20 @@ const Header = () => {
           <h1>Kalba</h1>
           <p>칼없는 바바리안</p>
         </Link>
-        <UserSearch>
-          <div className="insert">
-            <form className="nicknameInsert">
-              <input
-                placeholder="이름 검색"
-                value={nickname}
-                onChange={onChange}
-              />
-              <Link to={`/profile/${nickname}`}>
-                <button type="submit">
-                  <MdSearch />
-                </button>
-              </Link>
-            </form>
-          </div>
-        </UserSearch>
+        <div className="insert">
+          <form className="nicknameInsert">
+            <input
+              placeholder="이름 검색"
+              value={nickname}
+              onChange={onChange}
+            />
+            <Link to={`/profile/${nickname}`}>
+              <button type="submit">
+                <MdSearch />
+              </button>
+            </Link>
+          </form>
+        </div>
       </div>
       <div className="category">
         <div className="container">
