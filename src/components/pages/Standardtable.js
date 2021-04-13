@@ -49,7 +49,7 @@ const selectTable = (props) => {
 }
 
 
-const Standardtable = ({ match }) => {
+const StandardTable = ({ match }) => {
   const category = match.params.category || 'heroes';
 
   return (
@@ -62,4 +62,4 @@ const Standardtable = ({ match }) => {
   );
 };
 
-export default Standardtable;
+export default StandardTable;
