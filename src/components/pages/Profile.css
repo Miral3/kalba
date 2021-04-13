@@ -10,21 +10,6 @@ li {
   margin-left: auto;
   position: relative !important;
 }
-/* @media (min-width: 400px) {
-  .profileBlock {
-    width: 115%;
-  }
-}
-@media (min-width: 490px) {
-  .profileBlock {
-    width: 95%;
-  }
-} */
-/* @media (min-width: 410px) {
-  .profileBlock {
-    max-width: 400px;
-  }
-} */
 @media (min-width: 576px) {
   .profileBlock {
     max-width: 540px;
@@ -59,8 +44,6 @@ li {
   text-align: center;
   font-size: 40px;
   color: #218ec5;
-  /* #218ec5
-  4fb8e1 */
 }
 
 .profileBlock .userInfo .userNameTagRole .userLevel .level {
@@ -89,6 +72,18 @@ li {
   color: #c7c9cc;
   font-weight: 600;
 }
+.profileBlock .userInfo .userNameTagRole .userNameClanInfo .leagueBadge {
+  display: none;
+}
+@media (max-width: 545px) {
+  .profileBlock .userInfo .userNameTagRole .userNameClanInfo .leagueBadge {
+    display: inline;
+    width: 25px;
+    position: relative;
+    top: 4px;
+  }
+}
+
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo .userTagCopy {
   cursor: pointer;
 }
@@ -111,26 +106,26 @@ li {
 }
 
 .profileBlock .clanInfo {
+  display: block;
   border-left: 2px solid #7d819c;
   border-right: 2px solid #7d819c;
   text-align: center;
   width: 200px;
-  /* width: 100px; */
+}
+@media (max-width: 768px) {
+  .profileBlock .clanInfo {
+    display: none;
+  }
 }
 .profileBlock .clanInfo .clanName {
   color: white;
   font-size: 15px;
-  /* font-size: 13px; */
   font-weight: 700;
   text-shadow: 1px 2px 1px black;
 }
 .profileBlock .clanInfo .clanBadge {
   width: 150px;
-  /* width: 100px; */
   padding-top: 9px;
-}
-.clanInfo {
-  display: block;
 }
 
 .profileBlock .userScore {
@@ -143,40 +138,35 @@ li {
 }
 
 .profileBlock .userScore .currentScore {
-  /* display: flex; */
   display: inline-grid;
   text-align: center;
   margin-bottom: 12px;
 }
-
+@media (max-width: 545px) {
+  .profileBlock .userScore .currentScore {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
 .profileBlock .userScore .currentScore .leagueBadge {
   width: 80px;
   position: absolute;
   grid-row: 1/1;
   grid-column: 1/1;
+  right: 160px;
 }
-/* @media (max-width: 576px) {
-  .profileBlock .userScore .currentScore .leagueBadge {
-    width: 45px;
-    right: 21%;
-    top: 30px;
-  }
-}
-@media (min-width: 576px) {
-  .profileBlock .userScore .currentScore .leagueBadge {
-    width: 50px;
-    right: 120px;
-    top: 25px;
-  }
-}
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .profileBlock .userScore .currentScore .leagueBadge {
     width: 80px;
-    right: 170px;
-    top: 7px;
+    right: 32%;
   }
-} */
-
+}
+@media (max-width: 545px) {
+  .profileBlock .userScore .currentScore .leagueBadge {
+    display: none;
+  }
+}
 .profileBlock .userScore .currentScore .leagueContents {
   grid-row: 1/1;
   grid-column: 1/1;
@@ -184,6 +174,11 @@ li {
   padding: 0;
   width: auto;
   margin-left: 20px;
+}
+@media (max-width: 545px) {
+  .profileBlock .userScore .currentScore .leagueContents {
+    margin: 0;
+  }
 }
 .profileBlock .userScore .currentScore .leagueContents .trophy {
   width: 30px;
@@ -198,6 +193,16 @@ li {
   .leagueNameBlcok
   .leagueName {
   font-size: 13px;
+}
+@media (max-width: 425px) {
+  .profileBlock
+    .userScore
+    .currentScore
+    .leagueContents
+    .leagueNameBlcok
+    .leagueName {
+    font-size: 12px;
+  }
 }
 .profileBlock .userScore .currentScore .leagueContents .leagueScore {
   display: flex;
@@ -224,9 +229,15 @@ li {
   width: 130px;
   font-size: 14px;
   text-align: center;
-  /* margin-left: 30px; */
 }
-
+@media (max-width: 300px) {
+  .profileBlock .userScore .bestScore .type,
+  .profileBlock .userScore .warScore .type {
+    width: 120px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
 .profileBlock .userScore .bestScore .space,
 .profileBlock .userScore .warScore .space {
   margin-bottom: 3px;
@@ -236,13 +247,17 @@ li {
 .profileBlock .userScore .warScore .contents {
   background-color: #38385b;
   width: 100px;
-  /* margin-left: 30px; */
   border-radius: 3px;
   display: flex;
   justify-content: center;
   align-content: center;
 }
-
+@media (max-width: 300px) {
+  .profileBlock .userScore .bestScore .contents,
+  .profileBlock .userScore .warScore .contents {
+    width: 80px;
+  }
+}
 .profileBlock .userScore .bestScore .trophy {
   width: 20px;
   height: 20px;
@@ -293,7 +308,12 @@ li {
     width: 70px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 405px) {
+  .profileBlock .profileRanking .rankingContents li .leagueBadge {
+    width: 65px;
+  }
+}
+@media (max-width: 370px) {
   .profileBlock .profileRanking .rankingContents li .leagueBadge {
     width: 60px;
   }
@@ -312,7 +332,13 @@ li {
     font-size: 21px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 405px) {
+  .profileBlock .profileRanking .rankingContents li .ranking {
+    margin-top: 21px;
+    font-size: 21px;
+  }
+}
+@media (max-width: 370px) {
   .profileBlock .profileRanking .rankingContents li .ranking {
     margin-top: 19px;
     font-size: 20px;
@@ -355,7 +381,7 @@ li {
   font-size: 18px;
   margin-left: 50px;
 }
-@media (max-width: 320px) {
+@media (max-width: 370px) {
   .profileBlock .profileRanking .rankingContents .amount .score {
     padding: 3px;
     margin-left: 40px;
@@ -374,7 +400,7 @@ li {
   display: flex;
   position: absolute;
 }
-@media (max-width: 320px) {
+@media (max-width: 370px) {
   .profileBlock .profileRanking .rankingContents .amount .trophy {
     width: 35px;
   }

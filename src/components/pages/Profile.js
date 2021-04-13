@@ -118,6 +118,11 @@ const Profile = ({ match }) => {
             <ul className="userNameClanInfo">
               <li>
                 <span className="userName">{userInfo.name}</span>
+                <img
+                  className="leagueBadge"
+                  src={`${userInfo.league.iconMedium != null ? userInfo.league.iconMedium : userInfo.league.iconSmall}`}
+                  alt="leagueBadge"
+                />
               </li>
               <li>
                 <span className="userTag">{userInfo.tag}&nbsp;</span>
