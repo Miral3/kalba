@@ -3,6 +3,7 @@ package kalba.handler;
 import kalba.config.ReadConfig;
 import kalba.model.ClanMember;
 import kalba.model.League;
+import kalba.model.PlayerLabel;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -17,59 +18,69 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClanMemberHandler extends Thread{
-    public final static Set<String> clanCodeSet =ConcurrentHashMap.newKeySet();
-    public static final Map<String, AtomicBoolean> loadingMap=new ConcurrentHashMap<>();
-    public static final Map<String, Map<Object, Object>> clanInfoMap=new ConcurrentHashMap<>();
-    public static final Map<String, List<ClanMember>> clanMemberSortedByYHScoreMap =new ConcurrentHashMap<>();
-    public static final Map<String, List<ClanMember>> clanMemberSortedByDonationsMap =new ConcurrentHashMap<>();
-    private static final String token=((boolean)(ReadConfig.config.isLocal)?ReadConfig.config.localToken:ReadConfig.config.serverToken).toString();
+public class ClanMemberHandler extends Thread {
+    public final static Set<String> clanCodeSet = ConcurrentHashMap.newKeySet();
+    public static final Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
+    public static final Map<String, Map<Object, Object>> clanInfoMap = new ConcurrentHashMap<>();
+    public static final Map<String, List<ClanMember>> clanMemberSortedByYHScoreMap = new ConcurrentHashMap<>();
+    public static final Map<String, List<ClanMember>> clanMemberSortedByDonationsMap = new ConcurrentHashMap<>();
+    private static final String token = ((boolean) (ReadConfig.config.isLocal) ? ReadConfig.config.localToken : ReadConfig.config.serverToken).toString();
+
     public void run() {
         try {
             // kalba
-            String kalbaCode="%232Y2Y9YCUU";
+            String kalbaCode = "%232Y2Y9YCUU";
             clanCodeSet.add(kalbaCode);
             loadingMap.put(kalbaCode, new AtomicBoolean(false));
-            while(true){
-                update();
+            while (true) {
+                updateAll();
                 // 10min
-                Thread.sleep(600000);
+                Thread.sleep(300000);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void update(){
-        for(String clanCode: clanCodeSet){
-            Map<Object, Object> clanInfo=getClanInfo(clanCode);
-            List<ClanMember> clanMemberList=getClanMemberList(clanInfo);
-            Collections.sort(clanMemberList);
-            loadingMap.get(clanCode).set(true);
-            clanInfoMap.put(clanCode, clanInfo);
-            clanMemberSortedByDonationsMap.put(clanCode, clanMemberList);
-            Comparator<ClanMember> yonghaScoreComparator = (o1, o2) -> {
-                int result = Integer.compare(o2.getYonghaScore(), o1.getYonghaScore());
-                if (result == 0) {
-                    result = Integer.compare(o2.getTrophies(), o1.getTrophies());
-                    if (result == 0) {
-                        return o1.getName().compareTo(o2.getName());
-                    } else {
-                        return result;
-                    }
-                } else {
-                    return result;
-                }
-            };
-            List<ClanMember> clanMemberListSortedByYHScore = new LinkedList<>(clanMemberList);
-            clanMemberListSortedByYHScore.sort(yonghaScoreComparator);
-            clanMemberSortedByYHScoreMap.put(clanCode, clanMemberListSortedByYHScore);
-            loadingMap.get(clanCode).set(false);
+    private void updateAll() {
+        for (String clanCode : clanCodeSet) {
+            updateClanInfo(clanCode);
         }
     }
 
+    public static boolean updateClanInfo(String clanCode) {
+        Map<Object, Object> clanInfo = getClanInfo(clanCode);
+        if (clanInfo.size() == 0) {
+            return false;
+        }
+        List<ClanMember> clanMemberList = getClanMemberList(clanInfo);
+        Collections.sort(clanMemberList);
+        while (loadingMap.get(clanCode).get()) ;
+        loadingMap.get(clanCode).set(true);
+        clanInfoMap.put(clanCode, clanInfo);
+        clanMemberSortedByDonationsMap.put(clanCode, clanMemberList);
+        Comparator<ClanMember> yonghaScoreComparator = (o1, o2) -> {
+            int result = Integer.compare(o2.getYonghaScore(), o1.getYonghaScore());
+            if (result == 0) {
+                result = Integer.compare(o2.getTrophies(), o1.getTrophies());
+                if (result == 0) {
+                    return o1.getName().compareTo(o2.getName());
+                } else {
+                    return result;
+                }
+            } else {
+                return result;
+            }
+        };
+        List<ClanMember> clanMemberListSortedByYHScore = new LinkedList<>(clanMemberList);
+        clanMemberListSortedByYHScore.sort(yonghaScoreComparator);
+        clanMemberSortedByYHScoreMap.put(clanCode, clanMemberListSortedByYHScore);
+        loadingMap.get(clanCode).set(false);
+        return true;
+    }
+
     @SuppressWarnings("unchecked")
-    private Map<Object, Object> getClanInfo(String id) {
+    private static Map<Object, Object> getClanInfo(String id) {
         Map<Object, Object> result = new HashMap<>();
         try {
             HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
@@ -96,7 +107,7 @@ public class ClanMemberHandler extends Thread{
     }
 
     @SuppressWarnings("unchecked")
-    private List<ClanMember> getClanMemberList(Map<Object, Object> clanInfo) {
+    private static List<ClanMember> getClanMemberList(Map<Object, Object> clanInfo) {
         Object memberListObj = clanInfo.get("memberList");
         if (memberListObj == null) {
             return new LinkedList<>();
@@ -150,11 +161,11 @@ public class ClanMemberHandler extends Thread{
         return clanMemberList;
     }
 
-    private String encodeUTF8(String userTag) {
+    private static String encodeUTF8(String userTag) {
         return URLEncoder.encode(userTag, StandardCharsets.UTF_8);
     }
 
-    private double calListScore(List<LinkedHashMap<Object, Object>> list) {
+    private static double calListScore(List<LinkedHashMap<Object, Object>> list) {
         double score = 0;
         for (LinkedHashMap<Object, Object> troop : list) {
             if (troop.get("village").equals("home")) {
@@ -211,7 +222,7 @@ public class ClanMemberHandler extends Thread{
     }
 
     @AllArgsConstructor
-    private class YonghaScoreThread extends Thread {
+    private static class YonghaScoreThread extends Thread {
         ClanMember clanMember;
 
         public void run() {
@@ -250,6 +261,26 @@ public class ClanMemberHandler extends Thread{
                 }
                 if (body.get("townHallLevel") != null) {
                     clanMember.setTownHallLevel((int) body.get("townHallLevel"));
+                }
+                if (body.get("bestTrophies") != null) {
+                    clanMember.setBestTrophies((int) body.get("bestTrophies"));
+                }
+                if (body.get("warStars") != null) {
+                    clanMember.setWarStars((int) body.get("warStars"));
+                }
+                if (body.get("labels") != null) {
+                    List<Object> labels = (List<Object>) body.get("labels");
+                    List<PlayerLabel> labelList = new LinkedList<>();
+                    for (Object label : labels) {
+                        PlayerLabel playerLabel = new PlayerLabel();
+                        playerLabel.setId((Integer) ((LinkedHashMap<String, Object>) label).get("id"));
+                        playerLabel.setName(((LinkedHashMap<String, Object>) label).get("name").toString());
+                        LinkedHashMap<String, String> iconUrls = (LinkedHashMap<String, String>) ((LinkedHashMap<String, Object>) label).get("iconUrls");
+                        playerLabel.setSmallIcon(iconUrls.get("small"));
+                        playerLabel.setMediumIcon(iconUrls.get("medium"));
+                        labelList.add(playerLabel);
+                    }
+                    clanMember.setLabels(labelList);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

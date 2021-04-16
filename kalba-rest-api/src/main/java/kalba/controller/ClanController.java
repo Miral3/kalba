@@ -34,4 +34,18 @@ public class ClanController {
         while (ClanMemberHandler.loadingMap.get(id.getId()).get()) ;
         return ClanMemberHandler.clanMemberSortedByYHScoreMap.get(id.getId());
     }
+
+    @ResponseBody
+    @PostMapping("/force/update")
+    public Map<String, String> forceUpdateClanInfo(@RequestBody ClanId id){
+        Map<String, String> result=new HashMap<>();
+        if(ClanMemberHandler.updateClanInfo(id.getId())){
+            result.put("status", "200");
+            result.put("message", "강제 갱신에 성공하였습니다.");
+        } else {
+            result.put("status", "205");
+            result.put("message", "강제 갱신 중 문제가 발생하였습니다.");
+        }
+        return result;
+    }
 }
