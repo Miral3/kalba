@@ -7,5 +7,5 @@ public class PlayerLabel {
     int id;
     String name;
     String smallIcon;
-    String largeIcon;
+    String mediumIcon;
 }

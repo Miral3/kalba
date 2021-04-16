@@ -2,6 +2,8 @@ package kalba.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ClanMember implements Comparable<ClanMember>{
     private String tag;
@@ -17,6 +19,9 @@ public class ClanMember implements Comparable<ClanMember>{
     private League league;
     private int yonghaScore;
     private int townHallLevel;
+    private List<PlayerLabel> labels;
+    private int bestTrophies;
+    private int warStars;
 
     @Override
     public int compareTo(ClanMember o) {
