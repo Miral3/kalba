@@ -19,6 +19,10 @@ const UserListBlock = styled.div`
     max-width: 720px;
   }
   .block .blockHead {
+    /* 블록헤드 스크롤바 따라오기 */
+    position: sticky;
+    top:0;
+
     display:flex;
     justify-content:space-around;
     background-color: #E6E2D6;

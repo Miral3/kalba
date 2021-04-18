@@ -18,15 +18,14 @@ table {
   border-collapse: collapse;
 }
 
-.head {
-  background-color: #e6e2d6;
-}
-
 .head tr th {
+  position: sticky;
+  top: 0;
   font-weight: normal;
   color: #5e4a3e;
   font-size: 14px;
   padding: 12px 16px;
+  background-color: #e6e2d6;
 }
 
 th,

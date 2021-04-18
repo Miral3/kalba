@@ -13,7 +13,7 @@ const UserInfoBlock = styled.div`
     width:10%;
     margin-right:5px;
   }
-  .nickname {
+  .names {
     display: flex;
     align-items: center;
     width: 45%;
@@ -46,7 +46,7 @@ const UserInfo = ({ idx, info }) => {
   return (
     <UserInfoBlock>
       <span className="rank">{idx}</span>
-      <span className="nickname">
+      <span className="names">
         {league && (
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
