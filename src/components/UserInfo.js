@@ -9,6 +9,12 @@ const UserInfoBlock = styled.div`
   font-size: 15px;
   align-items: center;
   text-align: center;
+  @media (max-width: 335px) {
+    font-size: 14px;
+  }
+  @media (max-width: 310px) {
+    font-size: 13px;
+  }
   .rank {
     width:10%;
     margin-right:5px;
@@ -30,6 +36,12 @@ const UserInfoBlock = styled.div`
       &:hover{
       border-bottom: 1px solid black;
       }
+      @media (max-width: 335px) {
+        font-size: 11px;
+      }
+      @media (max-width: 310px) {
+        font-size: 10px;
+      }
     }
   }
   .trophies,
@@ -40,9 +52,14 @@ const UserInfoBlock = styled.div`
   }
 `;
 
+// function resize(name) {
+//   if(name.length > 11) {
+
+//   }
+// }
 const UserInfo = ({ idx, info }) => {
-  console.log(info);
   const { league, name, trophies, townHallLevel, donations, yonghaScore } = info;
+  // console.log(JSON.stringify(name).length, name);
   return (
     <UserInfoBlock>
       <span className="rank">{idx}</span>

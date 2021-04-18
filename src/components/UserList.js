@@ -29,8 +29,15 @@ const UserListBlock = styled.div`
     color: #5E4A3E;
     font-weight: 400;
     padding: 12px 0;
-    font-size: 14px;
     text-align: center;
+    font-size: 14px;
+    @media (max-width: 425px) {
+      padding: 12px 12px;
+    }
+    @media (max-width: 385px) {
+      font-size: 12px;
+      padding: 12px 8px;
+    }
     .rank {
       width:10%;
       padding-left:3px;

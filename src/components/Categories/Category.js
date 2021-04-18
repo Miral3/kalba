@@ -40,7 +40,7 @@ const CategoriesBlock = styled.div`
 
 const Contents = styled(NavLink)`
 
-  font-size: 1.125rem;
+  font-size: 18px;
   cursor: pointer;
   text-decoration: none;
   padding: 15px;
@@ -60,6 +60,12 @@ const Contents = styled(NavLink)`
   }
   & + & {
     margin-left: 1rem;
+  }
+  @media (max-width: 340px) {
+    font-size: 15px;
+  }
+  @media (max-width: 315px) {
+    font-size: 11px;
   }
 `;
 
