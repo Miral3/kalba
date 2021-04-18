@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   height: 100%;
-  min-height: 660px;
+  min-height: 79.2vh;
 `;
 
 const Section = props => {
