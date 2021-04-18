@@ -20,10 +20,19 @@ const UserListBlock = styled.div`
     padding: 12px 16px;
     font-weight: 700;
   }
+  .block .blockTitle__addBtn .btn {
+    float: right;
+  }
+  .block .blockTitle__addBtn .refresh {
+    margin-right: 40px;
+    cursor: pointer;
+    &:hover{
+      border-bottom: 1px solid #ffffff;
+    }
+  }
   .block .blockTitle__addBtn .addBtn {
     text-decoration: none;
     color: white;
-    float:right;
     &:hover{
       border-bottom: 1px solid #ffffff;
     }
@@ -93,9 +102,12 @@ const UserList2 = ({ type }) => {
       <div className="block">
         <div className="blockTitle__addBtn">
           <span className="title">{type}</span>
-          <Link to="/leaderboards/score" className="addBtn">
-            더보기
-          </Link>
+          <div className="btn">
+            <span className="refresh">갱신</span>
+            <Link to={`/leaderboards/${type}`} className="addBtn">
+              더보기
+            </Link>
+          </div>
         </div>
         <div className="blockHead">
           <span className="rank">#</span>
