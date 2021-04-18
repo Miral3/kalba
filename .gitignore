@@ -1,6 +1,8 @@
-@ -0,0 +1,31 @@
 # Compiled class file
 *.class
+
+node_modules
+dist/*
 
 # Log file
 *.log
@@ -27,6 +29,10 @@ hs_err_pid*
 /kalba-rest-api/.idea/
 /kalba-rest-api/kalba-rest-api.iml
 /kalba-rest-api/out/*
+MANIFEST.MF
 
 # MacOS file
 .DS_Store
+
+# potion
+fe/*
