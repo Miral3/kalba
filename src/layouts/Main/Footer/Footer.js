@@ -30,9 +30,15 @@ const KalbaFooter = styled.div`
   .kalba-footer__contact {
     margin-bottom: .5rem!important;
     span {
+      margin-right: 5px;
       color: grey;
-    font-size: 12px;
+      font-size: 12px;
     }
+    .contact {
+        font-size:13px;
+        color: #2980b9;
+        font-weight: 600;
+      }
   }
 `;
 
@@ -52,8 +58,10 @@ const Footer = props => {
           </a>
         </div>
         <div className="kalba-footer__contact">
-          <span>© Kalba. All Rights Reserved.</span>
-          <span> Contact: dydtkd113@gmail.com </span>
+          <a href="/about">
+            <span className="contact">[About us]</span>
+          </a>
+          <span className="right">© Kalba. All Rights Reserved.</span>
         </div>
       </div>
     </KalbaFooter>

@@ -130,7 +130,6 @@ const RankingList = ({ title, type }) => {
     fetchData();
   }, [toggle]);
 
-  console.log(loading2);
   if (loading) {
     return <UserListBlock>대기 중...</UserListBlock>
   }

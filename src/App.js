@@ -11,6 +11,7 @@ import LeaderBoards from './routes/LeaderBoards';
 import StandardTable from './routes/StandardTable';
 import Profile from './routes/Profile';
 import NotFoundPage from './routes/NotFoundPage';
+import About from './routes/About';
 
 const App = () => {
   return (
@@ -40,6 +41,11 @@ const App = () => {
           path="/profile/:category?"
           layout={MainLayout}
           component={Profile}
+        />
+        <RouteWithLayout
+          path="/about"
+          layout={MainLayout}
+          component={About}
         />
         <RouteWithLayout
           path="/not-found"
