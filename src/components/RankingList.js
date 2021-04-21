@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
+import { VscLoading } from 'react-icons/vsc'
 import styled from 'styled-components';
+
 import UserInfo from './UserInfo';
 import axios from 'axios';
 
@@ -22,6 +25,18 @@ const UserListBlock = styled.div`
   .block .blockTitle__addBtn .btn {
     float: right;
   }
+  .block .blockTitle__addBtn .icon {
+    margin-right:5px;
+  }
+  .loading {
+    animation: rotate_image 10s linear infinite;
+    transform-origin: 50% 50%;
+    @keyframes rotate_image{
+	    100% {
+    	transform: rotate(360deg);
+      }
+    }
+  } 
   .block .blockTitle__addBtn .refresh {
     margin-right: 40px;
     cursor: pointer;
@@ -64,9 +79,31 @@ const UserListBlock = styled.div`
   }
 `;
 
-const UserList2 = ({ title, type }) => {
+const RankingList = ({ title, type }) => {
   const [donationData, setDonationData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [toggle, setToggle] = useState(false);
+
+  const onClick = async () => {
+    try {
+      setLoading2(true);
+      const res = await axios.post(
+        '/coc/clan/force/update', {
+        id: "%232Y2Y9YCUU"
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (Number(res.data.status) === 200) {
+        setToggle(!toggle);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    setLoading2(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,8 +124,9 @@ const UserList2 = ({ title, type }) => {
       setLoading(false);
     };
     fetchData();
-  }, [type]);
+  }, [toggle]);
 
+  console.log(loading2);
   if (loading) {
     return <UserListBlock>대기 중...</UserListBlock>
   }
@@ -102,7 +140,8 @@ const UserList2 = ({ title, type }) => {
         <div className="blockTitle__addBtn">
           <span className="title">{title}</span>
           <div className="btn">
-            <span className="refresh">갱신</span>
+            {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
+            <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
             <Link to={`/leaderboards/${type}`} className="addBtn">
               더보기
             </Link>
@@ -124,4 +163,4 @@ const UserList2 = ({ title, type }) => {
   );
 };
 
-export default UserList2;
+export default RankingList;
