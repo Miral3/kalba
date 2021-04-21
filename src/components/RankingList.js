@@ -20,6 +20,7 @@ const UserListBlock = styled.div`
     background-color: #5E4A3E;
     color: white;
     padding: 12px 16px;
+    font-size: 16px;
     font-weight: 700;
   }
   .block .blockTitle__addBtn .btn {
@@ -27,10 +28,13 @@ const UserListBlock = styled.div`
   }
   .block .blockTitle__addBtn .icon {
     margin-right:5px;
+    vertical-align: middle;
   }
   .loading {
-    animation: rotate_image 10s linear infinite;
-    transform-origin: 50% 50%;
+    //회전하는 애니메이션
+    //2s는 time period를 뜻하며 적을수록 회전이 빨라짐
+    animation: rotate_image 2s linear infinite; 
+    transform-origin: 50% 50%; // 회전의 중심 위치
     @keyframes rotate_image{
 	    100% {
     	transform: rotate(360deg);
