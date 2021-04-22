@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import { MdEmail } from "react-icons/md";
 import { AiFillGithub } from "react-icons/ai";
 
-import data1 from "./data1.jpeg";
-import data2 from "./data2.jpeg";
+import data1 from "./data1.png";
+import data2 from "./data2.png";
 
 const Container = styled.div`
 padding: 50px 0;
@@ -31,6 +31,8 @@ padding: 50px 0;
       text-align: center;
       padding: 0;
       .emoji {
+        border: 3px solid #E6E6E6;
+        border-radius: 50%;
         width: 60%;
         margin-bottom: 20px;
       }
@@ -42,8 +44,10 @@ padding: 50px 0;
         font-size: 25px;
       }
       .email {
+        cursor:pointer;
         color: #4b7bec;
         .icon-email {
+          vertical-align: middle;
           margin-right: 3px;
         }
       }
@@ -57,6 +61,16 @@ padding: 50px 0;
     }
   }
 `;
+
+const copyTag = (txt) => {
+  var t = document.createElement("textarea");
+  document.body.appendChild(t);
+  t.value = txt;
+  t.select();
+  document.execCommand('copy');
+  document.body.removeChild(t);
+  alert(txt + "가 클립보드에 복사되었습니다.");
+}
 
 const Home = () => {
 
@@ -76,7 +90,10 @@ const Home = () => {
           <li>
             <span classNmae="role">front-end</span>
           </li>
-          <li className="email">
+          <li
+            className="email"
+            onClick={() => copyTag("dydtkd113@gmail.com")}
+          >
             <MdEmail className="icon-email" />
             <span classNmae="email">Email Me</span>
           </li>
@@ -96,7 +113,10 @@ const Home = () => {
           <li>
             <span classNmae="role">back-end</span>
           </li>
-          <li className="email">
+          <li
+            className="email"
+            onClick={() => copyTag("potionkr@gmail.com")}
+          >
             <MdEmail className="icon-email" />
             <span classNmae="email">Email Me</span>
           </li>
