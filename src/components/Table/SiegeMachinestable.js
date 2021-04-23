@@ -25,9 +25,9 @@ const SiegeMachineTable = () => {
         <thead className="head">
           <tr>
             <th className="type">종류</th>
-            <th className="weight">비례 점수</th>
-            <th className="maxScore">최대 점수</th>
-            <th className="maxLevel last">최대 레벨</th>
+            <th className="weight">최대 점수</th>
+            <th className="maxScore">최대 레벨</th>
+            <th className="maxLevel last">비례 점수</th>
           </tr>
         </thead>
         <tbody>
