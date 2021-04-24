@@ -1,21 +1,13 @@
 import React from 'react';
 import "./Table.css";
 
-const spells = [["번개", 20, 9, 2.2222],
-["치유", 30, 8, 3.75],
-["분노", 30, 6, 5],
-["이동", 30, 4, 7.5],
-["얼음", 30, 7, 4.2857],
-["복제", 10, 7, 1.4286],
-["투명", 25, 4, 6.25],
-["독", 25, 8, 3.125],
-["지진", 20, 5, 4],
-["신속", 25, 5, 5],
-["해골", 10, 7, 1.4286],
-["박쥐", 20, 5, 4]];
+const pets = [["L.A.S.S.I", 30, 10, 3],
+["일렉트로 아울", 30, 10, 3],
+["마이티 야크", 30, 10, 3],
+["유니콘", 30, 10, 3]];
 
-const set = spells.map((arr, idx) =>
-  <tr className="type spells" key={idx}>
+const set = pets.map((arr, idx) =>
+  <tr className="type pets" key={idx}>
     {arr.map((value, num) => {
       if (num === 0) {
         return <td className="type name">{value}</td>
@@ -28,7 +20,7 @@ const set = spells.map((arr, idx) =>
     })}
   </tr>);
 
-const SpellsTable = () => {
+const PetsTable = () => {
   return (
     <div className="table">
       <table className="apStandardTable">
@@ -48,4 +40,4 @@ const SpellsTable = () => {
   );
 };
 
-export default SpellsTable;
+export default PetsTable;

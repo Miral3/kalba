@@ -1,15 +1,15 @@
 import React from 'react';
 import "./Table.css";
 
-const heroes = [["바바리안 킹", 50, 75, 0.6667],
-["아처 퀸", 50, 75, 0.6667],
-["그랜드 워든", 50, 50, 1],
-["로얄 챔피언", 50, 25, 2]];
+const heroes = [["바바리안 킹", 50, 80, 0.625],
+["아처 퀸", 50, 80, 0.625],
+["그랜드 워든", 50, 55, 0.9091],
+["로얄 챔피언", 50, 30, 1.6667]];
 
 
 
 const set = heroes.map((arr, idx) =>
-  <tr key={idx} className="type heroes">
+  <tr className="type heroes" key={idx}>
     {arr.map((value, num) => {
       if (num === 0) {
         return <td className="type name">{value}</td>

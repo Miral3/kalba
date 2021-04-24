@@ -140,7 +140,7 @@ const ProfileInfo = ({ match }) => {
           </div>
           <ul className="labels">
             {userInfo.labels.map((arr, idx) =>
-              <li className="label">
+              <li className="label" key={idx}>
                 <img src={`${userInfo.labels[idx].smallIcon}`} alt="label" />
               </li>
             )}

@@ -70,7 +70,6 @@ const Contents = styled(NavLink)`
 `;
 
 const Category = ({ items, type, any }) => {
-  console.log(type, any);
   return (
     <CategoriesBlock>
       {items.map(c => (

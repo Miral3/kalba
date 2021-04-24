@@ -10,6 +10,7 @@ import HeroesTable from '../../components/Table/HeroesTable';
 import SiegeMachinesTable from '../../components/Table/SiegeMachinestable';
 import SpellsTable from '../../components/Table/SpellsTable';
 import TroopsTable from '../../components/Table/TroopsTable';
+import PetsTable from '../../components/Table/PetsTable';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -26,7 +27,8 @@ const items = [
   { name: 'heroes', text: '영웅' },
   { name: 'siegeMachines', text: '시즈머신' },
   { name: 'spells', text: '마법' },
-  { name: 'troops', text: '유닛' }
+  { name: 'troops', text: '유닛' },
+  { name: 'pets', text: '펫' }
 ];
 
 const selectTable = (props) => {
@@ -39,6 +41,8 @@ const selectTable = (props) => {
     return <SpellsTable />
   } else if (type === 'troops') {
     return <TroopsTable />
+  } else if (type === 'pets') {
+    return <PetsTable />
   }
 }
 
