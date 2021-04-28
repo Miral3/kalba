@@ -25,10 +25,10 @@ const Table = styled.div`
 `
 const items = [
   { name: 'heroes', text: '영웅' },
-  { name: 'siegeMachines', text: '시즈머신' },
-  { name: 'spells', text: '마법' },
+  { name: 'pets', text: '펫' },
   { name: 'troops', text: '유닛' },
-  { name: 'pets', text: '펫' }
+  { name: 'spells', text: '마법' },
+  { name: 'siegeMachines', text: '시즈머신' },
 ];
 
 const selectTable = (props) => {
