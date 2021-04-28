@@ -23,25 +23,61 @@ const UserInfoBlock = styled.div`
     display: flex;
     align-items: center;
     width: 45%;
+    font-size: 12px;
+    @media (max-width: 335px) {
+        font-size: 11px;
+    }
+    @media (max-width: 310px) {
+      font-size: 10px;
+    }
     .icon {
       width: 25px;
       height: 25px;
       margin-right: 2px;
     }
     .name {
-      font-size: 12px;
       text-decoration: none;
       margin-right: 2px;
       color: black;
       &:hover{
       border-bottom: 1px solid black;
       }
-      @media (max-width: 335px) {
-        font-size: 11px;
+    }
+    .role {
+      margin-left: 2px;
+      padding: 2px;
+      color: white;
+      border-radius: 4px;
+      word-break: keep-all;
+      line-height: 200%;
+      font-weight: 600;
+    }
+    .leader {
+        background-color: #FFBB00;
       }
-      @media (max-width: 310px) {
-        font-size: 10px;
+      .coLeader {
+        background-color: #FF7803;
       }
+      .admin {
+        background-color: #FF1593;
+      }
+    .coLeader {
+      /* text-shadow: -1px 0px #b303ff,
+        1px 0px #b303ff,
+        0px -1px #b303ff,
+        0px 1px #b303ff;
+      color: #fff;
+      
+      font-weight: 700; */
+
+    }
+    .admin {
+      /* text-shadow: -1px 0px #0100ff,
+        1px 0px #0100ff,
+        0px -1px #0100ff,
+        0px 1px #0100ff;
+      color: #fff;
+      font-weight: 700; */
     }
   }
   .trophies,
@@ -52,14 +88,41 @@ const UserInfoBlock = styled.div`
   }
 `;
 
-// function resize(name) {
-//   if(name.length > 11) {
+const colorByRole = (name, role) => {
+  switch (role) {
+    case "leader":
+      return <div>
+        <a className="name" href={`/profile/${name}`}>
+          {name}
+        </a>
+        <span className="role leader">대표</span>
+      </div>
+    case "coLeader":
+      return <div>
+        <a className="name" href={`/profile/${name}`}>
+          {name}
+        </a>
+        <span className="role coLeader">공대</span>
+      </div>
+    case "admin":
+      return <div>
+        <a className="name" href={`/profile/${name}`}>
+          {name}
+        </a>
+        <span className="role admin">장로</span>
+      </div>
+    case "member":
+      return <a className="name" href={`/profile/${name}`}>
+        {name}
+      </a>
+    default:
+      break;
+  }
+}
 
-//   }
-// }
 const UserInfo = ({ idx, info }) => {
-  const { league, name, trophies, townHallLevel, donations, yonghaScore } = info;
-  // console.log(JSON.stringify(name).length, name);
+  const { league, name, role, trophies, townHallLevel, donations, yonghaScore } = info;
+
   return (
     <UserInfoBlock>
       <span className="rank">{idx}</span>
@@ -68,9 +131,7 @@ const UserInfo = ({ idx, info }) => {
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
         )}
-        <a className="name" href={`/profile/${name}`}>
-          {name}
-        </a>
+        {colorByRole(name, role)}
       </span>
       <span className="trophies">{trophies}</span>
       <span className="townHallLevel">{townHallLevel}</span>

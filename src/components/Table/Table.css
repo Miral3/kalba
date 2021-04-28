@@ -43,6 +43,9 @@ th,
 td {
   padding: 0.5rem;
 }
+tbody {
+  background-color: #fff;
+}
 tbody tr td {
   border-bottom: 1px solid #e6e2d6;
   font-size: 14px;
