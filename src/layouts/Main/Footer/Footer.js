@@ -10,8 +10,6 @@ const KalbaFooter = styled.div`
   background-color: #F0F0F0;
   .container {
     width: 100%;
-    padding-right: 16px;
-    padding-left: 16px;
     margin-right: auto;
     margin-left: auto;
     @media (min-width: 768px) {

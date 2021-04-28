@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import axios from 'axios';
 
-const UserListBlock = styled.div`
+const Container = styled.div`
   display: block;
   height: auto !important;
   margin-top: 1rem !important;
@@ -84,14 +84,14 @@ const UserList = ({ category }) => {
   }, [category]);
 
   if (loading) {
-    return <UserListBlock>대기 중...</UserListBlock>
+    return <Container>대기 중...</Container>
   }
   if (!data) {
     return null;
   }
   return (
     <div>
-      <UserListBlock>
+      <Container>
         <div className="block">
           <div className="blockHead">
             <span className="rank">#</span>
@@ -105,7 +105,7 @@ const UserList = ({ category }) => {
             <UserInfo key={data.tag} idx={idx + 1} info={data} />
           ))}
         </div>
-      </UserListBlock>
+      </Container>
     </div>
   );
 };

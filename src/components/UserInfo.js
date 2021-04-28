@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const UserInfoBlock = styled.div`
-  display:flex;
+  display: flex;
   padding: 8px 0;
   border: 1px solid #e6e6e6;
   background-color: #fff;
