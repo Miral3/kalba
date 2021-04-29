@@ -10,6 +10,9 @@ import axios from 'axios';
 const UserListBlock = styled.div`
   width: 100%;
   margin-right: 12px;
+  @media (max-width: 992px) {
+    margin: 0;
+  }
   .block {
     box-sizing: border-box;
     padding-top: 1.5rem;
@@ -65,8 +68,12 @@ const UserListBlock = styled.div`
     font-size: 14px;
     text-align: center;
     .rank {
+      display: table-cell;
       width:10%;
       padding-left:3px;
+      @media (max-width: 500px) {
+        display: none;
+      }
     }
     .name {
       text-align:left;
@@ -77,7 +84,7 @@ const UserListBlock = styled.div`
     .townHallLevel,
     .donations,
     .attackPower {
-      width: 20%;
+      width: 15%;
       padding-right:4px;
     }
   }

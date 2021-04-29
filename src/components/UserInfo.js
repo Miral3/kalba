@@ -6,30 +6,22 @@ const UserInfoBlock = styled.div`
   padding: 8px 0;
   border: 1px solid #e6e6e6;
   background-color: #fff;
-  font-size: 15px;
+  font-size: 12px;
   align-items: center;
   text-align: center;
-  @media (max-width: 335px) {
-    font-size: 14px;
-  }
-  @media (max-width: 310px) {
-    font-size: 13px;
-  }
+
   .rank {
+    display: table-cell;
     width:10%;
     margin-right:5px;
+    @media (max-width: 500px) {
+      display: none;
+    }
   }
   .names {
     display: flex;
     align-items: center;
     width: 45%;
-    font-size: 12px;
-    @media (max-width: 335px) {
-        font-size: 11px;
-    }
-    @media (max-width: 310px) {
-      font-size: 10px;
-    }
     .icon {
       width: 25px;
       height: 25px;
@@ -61,30 +53,12 @@ const UserInfoBlock = styled.div`
       .admin {
         background-color: #FF1593;
       }
-    .coLeader {
-      /* text-shadow: -1px 0px #b303ff,
-        1px 0px #b303ff,
-        0px -1px #b303ff,
-        0px 1px #b303ff;
-      color: #fff;
-      
-      font-weight: 700; */
-
-    }
-    .admin {
-      /* text-shadow: -1px 0px #0100ff,
-        1px 0px #0100ff,
-        0px -1px #0100ff,
-        0px 1px #0100ff;
-      color: #fff;
-      font-weight: 700; */
-    }
   }
   .trophies,
   .townHallLevel,
   .donations,
   .attackPower  {
-    width: 20%;
+    width: 15%;
   }
 `;
 

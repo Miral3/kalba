@@ -39,8 +39,12 @@ const Container = styled.div`
       padding: 12px 8px;
     }
     .rank {
+      display: table-cell;
       width:10%;
       padding-left:3px;
+      @media (max-width: 500px) {
+        display: none;
+      }
     }
     .name {
       text-align:left;
@@ -51,7 +55,7 @@ const Container = styled.div`
     .townHallLevel,
     .donations,
     .attackPower {
-      width: 20%;
+      width: 15%;
       padding-right:4px;
     }
   }
