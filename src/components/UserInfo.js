@@ -27,7 +27,6 @@ const UserInfoBlock = styled.div`
       display: none;
       color: #666;
       font-size: 11px;
-      margin-right: 2px;
       @media (max-width: 425px) {
         display: table-cell;
       }
@@ -112,7 +111,7 @@ const UserInfo = ({ idx, info }) => {
     <UserInfoBlock>
       <span className="rank">{idx}</span>
       <span className="names">
-        <span className="hiddenRank"># {idx}</span>
+        <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
