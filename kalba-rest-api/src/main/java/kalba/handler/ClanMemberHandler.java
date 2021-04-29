@@ -173,48 +173,58 @@ public class ClanMemberHandler extends Thread {
                 String name = (String) troop.get("name");
                 switch (name) {
                     // unit
-                    case "Barbarian" -> score += level * 1.1111;
-                    case "Archer" -> score += level * 1.6667;
-                    case "Giant", "Golem" -> score += level * 1.5;
-                    case "Goblin", "Valkyrie" -> score += level * 1.875;
-                    case "Wall Breaker", "Balloon" -> score += level * 2.7778;
-                    case "Wizard", "Hog Rider" -> score += level * 3;
-                    case "Healer", "Witch" -> score += level * 5;
-                    case "Dragon" -> score += level * 2.5;
-                    case "P.E.K.K.A" -> score += level * 3.3333;
-                    case "Baby Dragon" -> score += level * 3.5714;
-                    case "Miner" -> score += level * 4.2857;
-                    case "Electro Dragon" -> score += level * 7.5;
+                    case "Barbarian" -> score += level;
+                    case "Archer" -> score += level * 1.5;
+                    case "Giant" -> score += level * 1.5;
+                    case "Goblin" -> score += level * 1.875;
+                    case "Wall Breaker" -> score += level * 3;
+                    case "Balloon" -> score += level * 3.334;
+                    case "Wizard" -> score += level * 3;
+                    case "Healer" -> score += level * 4.286;
+                    case "Dragon" -> score += level * 3.125;
+                    case "P.E.K.K.A" -> score += level * 2.778;
+                    case "Baby Dragon" -> score += level * 3.125;
+                    case "Miner" -> score += level * 3.572;
+                    case "Electro Dragon" -> score += level * 6.25;
                     case "Yeti" -> score += level * 10;
-                    case "Minion" -> score += level * 2.2222;
-                    case "Lava Hound" -> score += level * 4.1667;
-                    case "Bowler" -> score += level * 6;
-                    case "Ice Golem" -> score += level * 4;
-                    case "Headhunter" -> score += level * 6.6667;
+                    case "Minion" -> score += level * 2;
+                    case "Hog Rider" -> score += level * 2.5;
+                    case "Valkyrie" -> score += 1.667;
+                    case "Golem" -> score += level * 1.5;
+                    case "Witch" -> score += level * 5;
+                    case "Lava Hound" -> score += level * 4.167;
+                    case "Bowler" -> score += level * 5;
+                    case "Ice Golem" -> score += level * 3.334;
+                    case "Headhunter" -> score += level * 5;
                     // siege machines
-                    case "Wall Wrecker" -> score += level * 5; // 전차
+                    case "Wall Wrecker" -> score += level * 6.25; // 전차
                     case "Battle Blimp" -> score += level * 7.5; // 전비
                     case "Stone Slammer" -> score += level * 5; // 돌풍
                     case "Siege Barracks" -> score += level * 6.25; // 훈련소
-                    case "Log Launcher" -> score += level * 7.5; // 통나무
+                    case "Log Launcher" -> score += level * 6.25; // 통나무
                     // spells
-                    case "Lightning Spell" -> score += level * 2.2222;
+                    case "Lightning Spell" -> score += level * 2.223;
                     case "Healing Spell" -> score += level * 3.75;
                     case "Rage Spell" -> score += level * 5;
                     case "Jump Spell" -> score += level * 7.5;
-                    case "Freeze Spell" -> score += level * 4.2857;
-                    case "Poison Spell" -> score += level * 4.2857;
-                    case "Earthquake Spell" -> score += level * 5;
-                    case "Haste Spell" -> score += level * 5;
-                    case "Clone Spell" -> score += level * 2.5;
-                    case "Skeleton Spell" -> score += level * 1.4286;
-                    case "Bat Spell" -> score += level * 4;
+                    case "Freeze Spell" -> score += level * 4.286;
+                    case "Clone Spell" -> score += level * 1.429;
                     case "Invisibility Spell" -> score += level * 6.25;
+                    case "Poison Spell" -> score += level * 3.125;
+                    case "Earthquake Spell" -> score += level * 4;
+                    case "Haste Spell" -> score += level * 5;
+                    case "Skeleton Spell" -> score += level * 1.429;
+                    case "Bat Spell" -> score += level * 4;
                     // heroes
-                    case "Barbarian King" -> score += level * 0.6667;
-                    case "Archer Queen" -> score += level * 0.6667;
-                    case "Grand Warden" -> score += level;
-                    case "Royal Champion" -> score += level * 2;
+                    case "Barbarian King" -> score += level * 0.625;
+                    case "Archer Queen" -> score += level * 0.625;
+                    case "Grand Warden" -> score += level * 0.91;
+                    case "Royal Champion" -> score += level * 1.667;
+                    // pets
+                    case "L.A.S.S.I" -> score += level * 3;
+                    case "Electro Owl" -> score += level * 3;
+                    case "Mighty Yak" -> score += level * 3;
+                    case "Unicorn" -> score += level * 3;
                 }
             }
         }
