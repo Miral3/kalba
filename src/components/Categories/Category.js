@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const CategoriesBlock = styled.div`
-  a {
+  /* a {
     text-decoration:none !important;
     &:link { 
       color: black; 
@@ -13,7 +13,7 @@ const CategoriesBlock = styled.div`
       color: black; 
       text-decoration: none;
     }
-  }
+  } */
   display: flex;
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -39,33 +39,21 @@ const CategoriesBlock = styled.div`
 `;
 
 const Contents = styled(NavLink)`
-
   font-size: 18px;
   cursor: pointer;
   text-decoration: none;
   padding: 15px;
   margin-left: 15px;
-  
-  &:hover{
-    color: #495057;
-  }
-
   &.active{
     font-weight: 600;
-    color:white;
+    color: white;
     background-color:#DA2A2A;
-    &:hover {
-      color: black;
-    }
   }
   & + & {
     margin-left: 1rem;
   }
-  @media (max-width: 340px) {
-    font-size: 15px;
-  }
-  @media (max-width: 315px) {
-    font-size: 11px;
+  @media (max-width: 375px) {
+    padding: 5px;
   }
 `;
 
