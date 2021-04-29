@@ -14,14 +14,24 @@ const UserInfoBlock = styled.div`
     display: table-cell;
     width:10%;
     margin-right:5px;
-    @media (max-width: 500px) {
+    @media (max-width: 425px) {
       display: none;
     }
   }
   .names {
     display: flex;
     align-items: center;
-    width: 45%;
+    /* width: 45%; */
+    width: 60%;
+    .hiddenRank{
+      display: none;
+      color: #666;
+      font-size: 11px;
+      margin-right: 2px;
+      @media (max-width: 425px) {
+        display: table-cell;
+      }
+    }
     .icon {
       width: 25px;
       height: 25px;
@@ -59,6 +69,7 @@ const UserInfoBlock = styled.div`
   .donations,
   .attackPower  {
     width: 15%;
+    /* width: 10%; */
   }
 `;
 
@@ -101,6 +112,7 @@ const UserInfo = ({ idx, info }) => {
     <UserInfoBlock>
       <span className="rank">{idx}</span>
       <span className="names">
+        <span className="hiddenRank"># {idx}</span>
         {league && (
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />

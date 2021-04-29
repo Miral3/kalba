@@ -30,25 +30,19 @@ const Container = styled.div`
     font-weight: 400;
     padding: 12px 0;
     text-align: center;
-    font-size: 14px;
-    @media (max-width: 425px) {
-      padding: 12px 12px;
-    }
-    @media (max-width: 385px) {
-      font-size: 12px;
-      padding: 12px 8px;
-    }
+    font-size: 13px;
     .rank {
       display: table-cell;
       width:10%;
       padding-left:3px;
-      @media (max-width: 500px) {
+      @media (max-width: 425px) {
         display: none;
       }
     }
     .name {
       text-align:left;
-      width: 45%;
+      /* width: 45%; */
+      width: 60%;
       padding-left: 16px;
     }
     .trophies,

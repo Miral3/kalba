@@ -71,7 +71,7 @@ const UserListBlock = styled.div`
       display: table-cell;
       width:10%;
       padding-left:3px;
-      @media (max-width: 500px) {
+      @media (max-width: 425px) {
         display: none;
       }
     }
