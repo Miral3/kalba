@@ -25,8 +25,8 @@ const Container = styled.div`
 
     display:flex;
     justify-content:space-around;
-    background-color: #E6E2D6;
-    color: #5E4A3E;
+    background-color: ${({ theme }) => theme.bgColors.listSecondHeader};
+    color: ${({ theme }) => theme.fontColors.listHeader};
     font-weight: 400;
     padding: 12px 0;
     text-align: center;
@@ -50,7 +50,7 @@ const Container = styled.div`
     .donations,
     .attackPower {
       width: 15%;
-      padding-right:4px;
+      padding-right:3px;
     }
   }
 `;

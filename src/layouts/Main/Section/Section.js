@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   height: 100%;
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: ${({ theme }) => theme.bgColors.section};
 `;
 
 const Wrapper = styled.div`
@@ -18,21 +18,19 @@ const Wrapper = styled.div`
 
 const Section = props => {
   const {
-    className,
-    children,
+    children
   } = props;
 
   return (
-    <Container className={className}>
+    <Container>
       <Wrapper>
         {children}
       </Wrapper>
-    </Container>
+    </Container >
   );
 }
 
 Section.propTypes = {
-  className: PropTypes.string,
   children: PropTypes.node,
 }
 

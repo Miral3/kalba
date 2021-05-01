@@ -5,6 +5,7 @@ import './app.css'
 
 import RouteWithLayout from './layouts/RouteWithLayout'
 import MainLayout from './layouts/Main';
+import { ThemeProvider } from './context/themeProvider';
 
 import Home from './routes/Home';
 import LeaderBoards from './routes/LeaderBoards';
@@ -16,44 +17,46 @@ import About from './routes/About';
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Redirect
-          exact
-          from="/"
-          to="/home"
-        />
-        <RouteWithLayout
-          path="/home"
-          layout={MainLayout}
-          component={Home}
-        />
-        <RouteWithLayout
-          path="/leaderBoards/:category?"
-          layout={MainLayout}
-          component={LeaderBoards}
-        />
-        <RouteWithLayout
-          path="/standardTable/:category?"
-          layout={MainLayout}
-          component={StandardTable}
-        />
-        <RouteWithLayout
-          path="/profile/:category?"
-          layout={MainLayout}
-          component={Profile}
-        />
-        <RouteWithLayout
-          path="/about"
-          layout={MainLayout}
-          component={About}
-        />
-        <RouteWithLayout
-          path="/not-found"
-          layout={MainLayout}
-          component={NotFoundPage}
-        />
-        <Redirect to="/not-found" />
-      </Switch>
+      <ThemeProvider>
+        <Switch>
+          <Redirect
+            exact
+            from="/"
+            to="/home"
+          />
+          <RouteWithLayout
+            path="/home"
+            layout={MainLayout}
+            component={Home}
+          />
+          <RouteWithLayout
+            path="/leaderBoards/:category?"
+            layout={MainLayout}
+            component={LeaderBoards}
+          />
+          <RouteWithLayout
+            path="/standardTable/:category?"
+            layout={MainLayout}
+            component={StandardTable}
+          />
+          <RouteWithLayout
+            path="/profile/:category?"
+            layout={MainLayout}
+            component={Profile}
+          />
+          <RouteWithLayout
+            path="/about"
+            layout={MainLayout}
+            component={About}
+          />
+          <RouteWithLayout
+            path="/not-found"
+            layout={MainLayout}
+            component={NotFoundPage}
+          />
+          <Redirect to="/not-found" />
+        </Switch>
+      </ThemeProvider>
     </Router>
   );
 };

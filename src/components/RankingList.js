@@ -20,7 +20,7 @@ const UserListBlock = styled.div`
     width: 100%;
   }
   .block .blockTitle__addBtn {
-    background-color: #5E4A3E;
+    background-color: ${({ theme }) => theme.bgColors.listFirstHeader};
     color: white;
     padding: 12px 16px;
     font-size: 16px;
@@ -61,11 +61,11 @@ const UserListBlock = styled.div`
   .block .blockHead {
     display:flex;
     justify-content:space-around;
-    background-color: #E6E2D6;
-    color: #5E4A3E;
+    background-color: ${({ theme }) => theme.bgColors.listSecondHeader};
+    color: ${({ theme }) => theme.fontColors.listHeader};
     font-weight: 400;
     padding: 12px 0;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     .rank {
       display: table-cell;
@@ -77,7 +77,7 @@ const UserListBlock = styled.div`
     }
     .name {
       text-align:left;
-      width: 45%;
+      width: 60%;
       padding-left: 16px;
     }
     .trophies,
@@ -85,7 +85,7 @@ const UserListBlock = styled.div`
     .donations,
     .attackPower {
       width: 15%;
-      padding-right:4px;
+      padding-right:3px;
     }
   }
 `;
@@ -135,6 +135,7 @@ const RankingList = ({ title, type }) => {
       setLoading(false);
     };
     fetchData();
+    // eslint-disable-next-line
   }, [toggle]);
 
   if (loading) {

@@ -3,27 +3,20 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
 const CategoriesBlock = styled.div`
-  /* a {
-    text-decoration:none !important;
-    &:link { 
-      color: black; 
-      text-decoration: none;
-    }
-    &:visited{
-      color: black; 
-      text-decoration: none;
-    }
-  } */
+  a {
+    color: ${({ theme }) => theme.fontColors.category};
+  }
+  
   display: flex;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #F0F0F0;
+  background-color: ${({ theme }) => theme.bgColors.category};
   height: auto !important;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   position: relative !important;
-  border: 1px solid #d6d6d6;
+  border: ${({ theme }) => theme.borderColors.category};
   border-top: 2px solid #e3342f;
   @media (min-width: 576px) {
     max-width: 540px;
@@ -44,6 +37,7 @@ const Contents = styled(NavLink)`
   text-decoration: none;
   padding: 15px;
   margin-left: 15px;
+
   &.active{
     font-weight: 600;
     color: white;

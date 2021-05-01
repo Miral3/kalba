@@ -7,8 +7,12 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 /* Sub Components */
 import Header from './Header';
-import Footer from './Footer';
+import ThemeToggle from '../../Theme/ThemeToggle';
 import Section from './Section';
+import Footer from './Footer';
+
+import { useTheme } from '../../context/themeProvider';
+
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -17,6 +21,17 @@ const GlobalStyle = createGlobalStyle`
   body {
       padding: 0;
       margin: 0;
+  }
+  a {
+    text-decoration: none !important;
+    &:link {
+      color: black;
+    text-decoration: none;
+    }
+    &:visited {
+      color: black;
+    text-decoration: none;
+    }
   }
   #root {
     height: 100%;
@@ -28,6 +43,7 @@ const Container = styled.div`
 `;
 
 const Main = props => {
+  const [ThemeMode, toggleTheme] = useTheme();
   const {
     className,
     children,
@@ -37,6 +53,9 @@ const Main = props => {
     <Container className={className}>
       <GlobalStyle />
       <Header />
+      <ThemeToggle toggle={toggleTheme} mode={ThemeMode}>
+        DarkMode
+      </ThemeToggle>
       <Section>
         {children}
       </Section>

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const UserInfoBlock = styled.div`
   display: flex;
   padding: 8px 0;
-  border: 1px solid #e6e6e6;
-  background-color: #fff;
+  border: ${({ theme }) => theme.borderColors.list};
+  background-color: ${({ theme }) => theme.bgColors.listContents};
   font-size: 12px;
   align-items: center;
   text-align: center;
@@ -14,6 +14,7 @@ const UserInfoBlock = styled.div`
     display: table-cell;
     width:10%;
     margin-right:5px;
+    color: ${({ theme }) => theme.fontColors.listName};
     @media (max-width: 425px) {
       display: none;
     }
@@ -21,7 +22,6 @@ const UserInfoBlock = styled.div`
   .names {
     display: flex;
     align-items: center;
-    /* width: 45%; */
     width: 60%;
     .hiddenRank{
       display: none;
@@ -39,9 +39,9 @@ const UserInfoBlock = styled.div`
     .name {
       text-decoration: none;
       margin-right: 2px;
-      color: black;
+      color: ${({ theme }) => theme.fontColors.listName};
       &:hover{
-      border-bottom: 1px solid black;
+        border-bottom: ${({ theme }) => theme.borderColors.listName};
       }
     }
     .role {
@@ -66,9 +66,9 @@ const UserInfoBlock = styled.div`
   .trophies,
   .townHallLevel,
   .donations,
-  .attackPower  {
+  .attackPower {
+    color: ${({ theme }) => theme.fontColors.listInfo};
     width: 15%;
-    /* width: 10%; */
   }
 `;
 

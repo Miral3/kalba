@@ -1,5 +1,5 @@
+/* React */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /* Styled */
 import styled from 'styled-components';
@@ -7,7 +7,8 @@ import styled from 'styled-components';
 const KalbaFooter = styled.div`
   height: 51px;
   padding: 16px;
-  background-color: #F0F0F0;
+  background-color: ${({ theme }) => theme.bgColors.footer};
+  
   .container {
     width: 100%;
     margin-right: auto;
@@ -21,6 +22,7 @@ const KalbaFooter = styled.div`
   }
 
   .kalba-footer__logo {
+    color: ${({ theme }) => theme.fontColors.footer};
     font-size: 19px;
     font-weight: 700;
   }
@@ -40,13 +42,10 @@ const KalbaFooter = styled.div`
   }
 `;
 
-const Footer = props => {
-  const {
-    className,
-  } = props;
+const Footer = () => {
 
   return (
-    <KalbaFooter className={className}>
+    <KalbaFooter>
       <div className="kalba-footer__content container">
         <div>
           <a href="/">
@@ -64,10 +63,6 @@ const Footer = props => {
       </div>
     </KalbaFooter>
   );
-}
-
-Footer.propTypes = {
-  className: PropTypes.string,
 }
 
 export default Footer;
