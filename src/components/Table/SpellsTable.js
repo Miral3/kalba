@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Table.css";
+
 
 const spells = [["번개", 20, 9, 2.2222],
 ["치유", 30, 8, 3.75],
@@ -30,7 +30,7 @@ const set = spells.map((arr, idx) =>
 
 const SpellsTable = () => {
   return (
-    <div className="table">
+    <div className="tableBlock">
       <table className="apStandardTable">
         <thead className="head">
           <tr>

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Table.css";
+
 
 const troops = [["바바리안", 10, 10, 1],
 ["아처", 15, 10, 1.5],
@@ -41,7 +41,7 @@ const set = troops.map((arr, idx) =>
 
 const TroopsTable = () => {
   return (
-    <div className="table">
+    <div className="tableBlock">
       <table className="apStandardTable">
         <thead className="head">
           <tr>

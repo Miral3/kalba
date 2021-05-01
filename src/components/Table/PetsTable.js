@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Table.css";
+
 
 const pets = [["L.A.S.S.I", 30, 10, 3],
 ["일렉트로 아울", 30, 10, 3],
@@ -22,7 +22,7 @@ const set = pets.map((arr, idx) =>
 
 const PetsTable = () => {
   return (
-    <div className="table">
+    <div className="tableBlock">
       <table className="apStandardTable">
         <thead className="head">
           <tr>

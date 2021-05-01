@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Table.css";
+
 
 const heroes = [["바바리안 킹", 50, 80, 0.625],
 ["아처 퀸", 50, 80, 0.625],
@@ -24,7 +24,7 @@ const set = heroes.map((arr, idx) =>
 
 const HeroesTable = () => {
   return (
-    <div className="table">
+    <div className="tableBlock">
       <table className="apStandardTable">
         <thead className="head">
           <tr>

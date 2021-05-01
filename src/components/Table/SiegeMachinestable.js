@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Table.css";
+
 
 const siegeMachines = [["파괴 전차", 25, 4, 6.25],
 ["전투 비행선", 30, 4, 7.5],
@@ -23,7 +23,7 @@ const set = siegeMachines.map((arr, idx) =>
 
 const SiegeMachineTable = () => {
   return (
-    <div className="table">
+    <div className="tableBlock">
       <table className="apStandardTable">
         <thead className="head">
           <tr>
