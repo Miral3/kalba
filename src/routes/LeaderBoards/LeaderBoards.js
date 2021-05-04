@@ -61,8 +61,10 @@ const items = [
 ];
 
 const printToPdf = () => {
-  html2canvas(document.getElementById("print_to_pdf")).then(canvas => {
-    var data = canvas.toDataURL();
+  const imageDiv = document.getElementById("print_to_pdf");
+
+  html2canvas(imageDiv, { scrollY: -window.scrollY }).then(canvas => {
+    const data = canvas.toDataURL();
     downloadURI(data, "ranking_list.png")
   });
 };
