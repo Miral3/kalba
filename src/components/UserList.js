@@ -10,7 +10,7 @@ const Container = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-bottom: 3rem;
+  padding-bottom: 1.5rem;
   position: relative !important;
   @media (min-width: 576px) {
     max-width: 540px;
