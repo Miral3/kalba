@@ -41,7 +41,6 @@ const Container = styled.div`
     }
     .name {
       text-align:left;
-      /* width: 45%; */
       width: 60%;
       padding-left: 16px;
     }
