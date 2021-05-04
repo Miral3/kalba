@@ -26,11 +26,11 @@ const printToPdf = () => {
       content: [
         {
           image: data,
-          width: 500
+          width: 350
         }
       ]
     };
-    pdfMake.createPdf(pdfExportSetting).download("test_file.pdf");
+    pdfMake.createPdf(pdfExportSetting).download("ranking_list.pdf");
   });
 };
 
