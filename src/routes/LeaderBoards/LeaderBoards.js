@@ -26,7 +26,7 @@ const printToPdf = () => {
       content: [
         {
           image: data,
-          width: 350
+          width: 300
         }
       ]
     };
