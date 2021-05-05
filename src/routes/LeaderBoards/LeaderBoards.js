@@ -55,6 +55,7 @@ const Button = styled.div`
     }
   }
 `
+
 const items = [
   { name: 'score', text: '공격력' },
   { name: 'donations', text: '지원량' }
@@ -62,10 +63,10 @@ const items = [
 
 const printToPdf = () => {
   const imageDiv = document.getElementById("print_to_pdf");
-
-  html2canvas(imageDiv, { scrollY: -window.scrollY }).then(canvas => {
+  window.scrollTo(0, 0);
+  html2canvas(imageDiv, {}).then(canvas => {
     const data = canvas.toDataURL();
-    downloadURI(data, "ranking_list.png")
+    downloadURI(data, "ranking_list.png");
   });
 };
 
@@ -77,9 +78,25 @@ const downloadURI = (uri, name) => {
   link.click();
 }
 
+// const downloadURI = (url, name) => {
+//   const link = document.createElement("a")
+//   link.download = name;
+//   link.href = url;
+//   document.body.appendChild(link);
+//   link.click();
+//   let imgObj = new Image();
+//   imgObj.src = url;
+//   let popup = window.open("", "profile_popup", "width=" + imgObj.width + "px, height=" + imgObj.height + "px");
+//   popup.document.write("<html><body style='margin:0'>");
+//   popup.document.write("<img src='" + imgObj.src + "' border=0>");
+//   popup.document.write("</body><html>");
+//   popup.document.title = "ranking download popup";
+// }
+
 const LeaderBoards = ({ match }) => {
   const category = match.params.category || 'score';
-
+  console.log(window.pageYOffset);
+  console.log(-window.pageYOffset);
   return (
     <Container>
       <Categories items={items} type="leaderboards" any="score" />
