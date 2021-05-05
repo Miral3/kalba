@@ -61,42 +61,46 @@ const items = [
   { name: 'donations', text: '지원량' }
 ];
 
-const printToPdf = () => {
+const saveBoard = () => {
   const imageDiv = document.getElementById("print_to_pdf");
   window.scrollTo(0, 0);
   html2canvas(imageDiv, {}).then(canvas => {
-    const data = canvas.toDataURL();
-    downloadURI(data, "ranking_list.png");
+    download(canvas.toDataURL(), "ranking_list.png");
   });
 };
 
-const downloadURI = (uri, name) => {
+const download = (url, fileName) => {
+  const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
+  if(!isMobile){
+    loadImageInThisPage(url, fileName);
+  } else {
+    downloadURL(url, fileName);
+  }
+};
+
+const loadImageInThisPage = (url, fileName) => {
+  document.write("<html><body>");
+  document.write("<a href=''><img src='" + url + "' alt = '"+fileName+"'></a>");
+  document.write("</body><html>");
+  if(window.localStorage.getItem("isAlertOn") !== "true"){
+    window.setTimeout(function(){
+      if(window.confirm("사진을 꾹 눌러 저장하세요.\n사진을 누르면 이전 페이지로 돌아갑니다.\n\n알림을 다시 보지 않으시겠습니까?")){
+        window.localStorage.setItem("isAlertOn", "true");
+      };
+    }, 1);
+  }
+}
+
+const downloadURL = (url, fileName) => {
   const link = document.createElement("a")
-  link.download = name;
-  link.href = uri;
+  link.download = fileName;
+  link.href = url;
   document.body.appendChild(link);
   link.click();
 }
 
-// const downloadURI = (url, name) => {
-//   const link = document.createElement("a")
-//   link.download = name;
-//   link.href = url;
-//   document.body.appendChild(link);
-//   link.click();
-//   let imgObj = new Image();
-//   imgObj.src = url;
-//   let popup = window.open("", "profile_popup", "width=" + imgObj.width + "px, height=" + imgObj.height + "px");
-//   popup.document.write("<html><body style='margin:0'>");
-//   popup.document.write("<img src='" + imgObj.src + "' border=0>");
-//   popup.document.write("</body><html>");
-//   popup.document.title = "ranking download popup";
-// }
-
 const LeaderBoards = ({ match }) => {
   const category = match.params.category || 'score';
-  console.log(window.pageYOffset);
-  console.log(-window.pageYOffset);
   return (
     <Container>
       <Categories items={items} type="leaderboards" any="score" />
@@ -104,7 +108,7 @@ const LeaderBoards = ({ match }) => {
         <UserList category={category} />
       </div>
       <Button>
-        <button className="downloadBtn" onClick={printToPdf}>
+        <button className="downloadBtn" onClick={saveBoard}>
           DOWNLOAD
         </button>
       </Button>
