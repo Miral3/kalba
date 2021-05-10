@@ -71,7 +71,7 @@ const saveBoard = () => {
 
 const download = (url, fileName) => {
   const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
-  if(!isMobile){
+  if(isMobile){
     loadImageInThisPage(url, fileName);
   } else {
     downloadURL(url, fileName);

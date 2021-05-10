@@ -22,6 +22,10 @@ public class ClanMember implements Comparable<ClanMember>{
     private List<PlayerLabel> labels;
     private int bestTrophies;
     private int warStars;
+    private Object troops;
+    private Object heroes;
+    private Object spells;
+    private Object pets;
 
     @Override
     public int compareTo(ClanMember o) {

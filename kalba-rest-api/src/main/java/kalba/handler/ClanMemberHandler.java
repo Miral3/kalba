@@ -258,15 +258,21 @@ public class ClanMemberHandler extends Thread {
                     return -1;
                 }
                 if (body.get("troops") != null) {
-                    List<LinkedHashMap<Object, Object>> troopList = (List<LinkedHashMap<Object, Object>>) body.get("troops");
+                    Object troopsObject=body.get("troops");
+                    clanMember.setTroops(troopsObject);
+                    List<LinkedHashMap<Object, Object>> troopList = (List<LinkedHashMap<Object, Object>>) troopsObject;
                     score += calListScore(troopList);
                 }
                 if (body.get("heroes") != null) {
-                    List<LinkedHashMap<Object, Object>> heroList = (List<LinkedHashMap<Object, Object>>) body.get("heroes");
+                    Object heroesObject=body.get("heroes");
+                    clanMember.setHeroes(heroesObject);
+                    List<LinkedHashMap<Object, Object>> heroList = (List<LinkedHashMap<Object, Object>>) heroesObject;
                     score += calListScore(heroList);
                 }
                 if (body.get("spells") != null) {
-                    List<LinkedHashMap<Object, Object>> spellList = (List<LinkedHashMap<Object, Object>>) body.get("spells");
+                    Object spellsObject=body.get("spells");
+                    clanMember.setSpells(spellsObject);
+                    List<LinkedHashMap<Object, Object>> spellList = (List<LinkedHashMap<Object, Object>>) spellsObject;
                     score += calListScore(spellList);
                 }
                 if (body.get("townHallLevel") != null) {
