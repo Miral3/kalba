@@ -11,7 +11,15 @@ import html2canvas from 'html2canvas';
 
 const Container = styled.div`
   padding-top: 1.5rem;
-`
+  .print_to_pdf {
+    display: flex;
+    height: auto;
+    margin-top: 1rem;
+    justify-content: space-around;
+    width:100%;
+  }
+`;
+
 const Button = styled.div`
   display: flex;
   justify-content: center;
@@ -71,7 +79,15 @@ const saveBoard = () => {
 
 const download = (url, fileName) => {
   const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
+<<<<<<< Updated upstream
   if(isMobile){
+=======
+<<<<<<< HEAD
+  if (!isMobile) {
+=======
+  if(isMobile){
+>>>>>>> 1c21386f2f90a8f9356e83ed4ac5da0074a341c0
+>>>>>>> Stashed changes
     loadImageInThisPage(url, fileName);
   } else {
     downloadURL(url, fileName);
@@ -80,11 +96,11 @@ const download = (url, fileName) => {
 
 const loadImageInThisPage = (url, fileName) => {
   document.write("<html><body>");
-  document.write("<a href=''><img src='" + url + "' alt = '"+fileName+"'></a>");
+  document.write("<a href=''><img src='" + url + "' alt = '" + fileName + "'></a>");
   document.write("</body><html>");
-  if(window.localStorage.getItem("isAlertOn") !== "true"){
-    window.setTimeout(function(){
-      if(window.confirm("사진을 꾹 눌러 저장하세요.\n사진을 누르면 이전 페이지로 돌아갑니다.\n\n알림을 다시 보지 않으시겠습니까?")){
+  if (window.localStorage.getItem("isAlertOn") !== "true") {
+    window.setTimeout(function () {
+      if (window.confirm("사진을 꾹 눌러 저장하세요.\n사진을 누르면 이전 페이지로 돌아갑니다.\n\n알림을 다시 보지 않으시겠습니까?")) {
         window.localStorage.setItem("isAlertOn", "true");
       };
     }, 1);

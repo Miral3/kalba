@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const UserInfoBlock = styled.div`
-  display: flex;
-  padding: 8px 0;
+const UserInfoBlock = styled.tr`
   border: ${({ theme }) => theme.borderColors.list};
   background-color: ${({ theme }) => theme.bgColors.listContents};
   font-size: 12px;
   align-items: center;
   text-align: center;
 
+  td {
+    padding: 8px 5px;
+  }
   .rank {
     display: table-cell;
-    width:10%;
-    margin-right:5px;
+    width: 10%;
     color: ${({ theme }) => theme.fontColors.listName};
     @media (max-width: 425px) {
       display: none;
@@ -21,8 +21,9 @@ const UserInfoBlock = styled.div`
   }
   .names {
     display: flex;
+    text-align: left;
     align-items: center;
-    width: 60%;
+    /* width: 60%; */
     .hiddenRank{
       display: none;
       color: #666;
@@ -68,7 +69,7 @@ const UserInfoBlock = styled.div`
   .donations,
   .attackPower {
     color: ${({ theme }) => theme.fontColors.listInfo};
-    width: 15%;
+    width: 10%;
   }
 `;
 
@@ -109,19 +110,19 @@ const UserInfo = ({ idx, info }) => {
 
   return (
     <UserInfoBlock>
-      <span className="rank">{idx}</span>
-      <span className="names">
+      <td className="rank">{idx}</td>
+      <td className="names">
         <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
           <img className="icon" src={league.iconTiny} />
         )}
         {colorByRole(name, role)}
-      </span>
-      <span className="trophies">{trophies}</span>
-      <span className="townHallLevel">{townHallLevel}</span>
-      <span className="attackPower">{yonghaScore}</span>
-      <span className="donations">{donations}</span>
+      </td>
+      <td className="trophies">{trophies}</td>
+      <td className="townHallLevel">{townHallLevel}</td>
+      <td className="attackPower">{yonghaScore}</td>
+      <td className="donations">{donations}</td>
     </UserInfoBlock>
   );
 };

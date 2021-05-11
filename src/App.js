@@ -10,6 +10,7 @@ import { ThemeProvider } from './context/themeProvider';
 import Home from './routes/Home';
 import LeaderBoards from './routes/LeaderBoards';
 import StandardTable from './routes/StandardTable';
+import Calc from './routes/Calc';
 import Profile from './routes/Profile';
 import NotFoundPage from './routes/NotFoundPage';
 import About from './routes/About';
@@ -38,6 +39,11 @@ const App = () => {
             path="/standardTable/:category?"
             layout={MainLayout}
             component={StandardTable}
+          />
+          <RouteWithLayout
+            path="/calc"
+            layout={MainLayout}
+            component={Calc}
           />
           <RouteWithLayout
             path="/profile/:category?"

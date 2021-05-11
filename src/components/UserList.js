@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
 import styled from 'styled-components';
+
 import UserInfo from './UserInfo';
 import axios from 'axios';
 
 const Container = styled.div`
-  display: block;
   height: auto !important;
   margin-top: 1rem !important;
   width: 100%;
@@ -18,19 +19,21 @@ const Container = styled.div`
   @media (min-width: 768px) {
     max-width: 720px;
   }
-  .block .blockHead {
-    /* 블록헤드 스크롤바 따라오기 */
+  table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .head tr{
+    th {
     position: sticky;
     top:0;
-
-    display:flex;
-    justify-content:space-around;
     background-color: ${({ theme }) => theme.bgColors.listSecondHeader};
     color: ${({ theme }) => theme.fontColors.listHeader};
-    font-weight: 400;
+    font-weight: normal;
     padding: 12px 0;
-    text-align: center;
     font-size: 13px;
+    }
     .rank {
       display: table-cell;
       width:10%;
@@ -48,7 +51,7 @@ const Container = styled.div`
     .townHallLevel,
     .donations,
     .attackPower {
-      width: 15%;
+      width: 10%;
       padding-right:3px;
     }
   }
@@ -87,23 +90,25 @@ const UserList = ({ category }) => {
     return null;
   }
   return (
-    <div>
-      <Container>
-        <div className="block">
-          <div className="blockHead">
-            <span className="rank">#</span>
-            <span className="name">이름</span>
-            <span className="trophies">트로피</span>
-            <span className="townHallLevel">홀</span>
-            <span className="attackPower">공격력</span>
-            <span className="donations">지원량</span>
-          </div>
+    <Container>
+      <table>
+        <thead className="head">
+          <tr>
+            <th className="rank">#</th>
+            <th className="name">이름</th>
+            <th className="trophies">트로피</th>
+            <th className="townHallLevel">홀</th>
+            <th className="attackPower">공격력</th>
+            <th className="donations">지원량</th>
+          </tr>
+        </thead>
+        <tbody>
           {data.map((data, idx) => (
             <UserInfo key={data.tag} idx={idx + 1} info={data} />
           ))}
-        </div>
-      </Container>
-    </div>
+        </tbody>
+      </table>
+    </Container>
   );
 };
 

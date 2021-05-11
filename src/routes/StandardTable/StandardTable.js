@@ -22,7 +22,7 @@ const Table = styled.div`
   margin-top: 1rem;
   justify-content: space-around;
   width:100%;
-  //통일성을 위해 Table.css대신 styled-components
+  
   .tableBlock {
     padding-bottom: 3rem;
     width: 100%;

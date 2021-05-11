@@ -7,29 +7,24 @@ import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import axios from 'axios';
 
-const UserListBlock = styled.div`
+const Container = styled.div`
   width: 100%;
   margin-right: 12px;
+  padding: 1.5rem 0;
   @media (max-width: 992px) {
     margin: 0;
   }
-  .block {
-    box-sizing: border-box;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-    width: 100%;
-  }
-  .block .blockTitle__addBtn {
+  .blockTitle__addBtn {
     background-color: ${({ theme }) => theme.bgColors.listFirstHeader};
     color: white;
     padding: 12px 16px;
     font-size: 16px;
     font-weight: 700;
   }
-  .block .blockTitle__addBtn .btn {
+  .blockTitle__addBtn .btn {
     float: right;
   }
-  .block .blockTitle__addBtn .icon {
+  .blockTitle__addBtn .icon {
     margin-right:5px;
     vertical-align: middle;
   }
@@ -44,32 +39,37 @@ const UserListBlock = styled.div`
       }
     }
   } 
-  .block .blockTitle__addBtn .refresh {
+  .blockTitle__addBtn .refresh {
     margin-right: 40px;
     cursor: pointer;
     &:hover{
       border-bottom: 1px solid #ffffff;
     }
   }
-  .block .blockTitle__addBtn .addBtn {
+  .blockTitle__addBtn .addBtn {
     text-decoration: none;
     color: white;
     &:hover{
       border-bottom: 1px solid #ffffff;
     }
   }
-  .block .blockHead {
-    display:flex;
-    justify-content:space-around;
+
+  table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .blockHead tr {
+    th {
     background-color: ${({ theme }) => theme.bgColors.listSecondHeader};
     color: ${({ theme }) => theme.fontColors.listHeader};
-    font-weight: 400;
+    font-weight: normal;
     padding: 12px 0;
     font-size: 13px;
-    text-align: center;
+    }
     .rank {
       display: table-cell;
-      width:10%;
+      width: 10%;
       padding-left:3px;
       @media (max-width: 425px) {
         display: none;
@@ -77,14 +77,14 @@ const UserListBlock = styled.div`
     }
     .name {
       text-align:left;
-      width: 60%;
+      width: 40%;
       padding-left: 16px;
     }
     .trophies,
     .townHallLevel,
     .donations,
     .attackPower {
-      width: 15%;
+      width: 10%;
       padding-right:3px;
     }
   }
@@ -139,38 +139,42 @@ const RankingList = ({ title, type }) => {
   }, [toggle]);
 
   if (loading) {
-    return <UserListBlock>대기 중...</UserListBlock>
+    return <Container>대기 중...</Container>
   }
   if (!donationData) {
     return null;
   }
 
   return (
-    <UserListBlock>
-      <div className="block">
-        <div className="blockTitle__addBtn">
-          <span className="title">{title}</span>
-          <div className="btn">
-            {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
-            <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
-            <Link to={`/leaderboards/${type}`} className="addBtn">
-              더보기
+    <Container>
+      <div className="blockTitle__addBtn">
+        <span className="title">{title}</span>
+        <div className="btn">
+          {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
+          <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
+          <Link to={`/leaderboards/${type}`} className="addBtn">
+            더보기
             </Link>
-          </div>
         </div>
-        <div className="blockHead">
-          <span className="rank">#</span>
-          <span className="name">이름</span>
-          <span className="trophies">트로피</span>
-          <span className="townHallLevel">홀</span>
-          <span className="attackPower">공격력</span>
-          <span className="donations">지원량</span>
-        </div>
-        {donationData.slice(0, 10).map((data, idx) => (
-          <UserInfo key={data.tag} idx={idx + 1} info={data} />
-        ))}
       </div>
-    </UserListBlock>
+      <table>
+        <thead className="blockHead">
+          <tr>
+            <th className="rank">#</th>
+            <th className="name">이름</th>
+            <th className="trophies">트로피</th>
+            <th className="townHallLevel">홀</th>
+            <th className="attackPower">공격력</th>
+            <th className="donations">지원량</th>
+          </tr>
+        </thead>
+        <tbody>
+          {donationData.slice(0, 10).map((data, idx) => (
+            <UserInfo key={data.tag} idx={idx + 1} info={data} />
+          ))}
+        </tbody>
+      </table>
+    </Container>
   );
 };
 
