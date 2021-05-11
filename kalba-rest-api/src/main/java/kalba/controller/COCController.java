@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/")
 public class COCController {
     @RequestMapping("/")
-    public String yongBrothers() {
-        return "yongsang ♥ yongha";
+    public String helloKalba() {
+        return "hello";
     }
 }
