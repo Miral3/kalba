@@ -87,9 +87,17 @@ const download = (url, fileName) => {
 };
 
 const loadImageInThisPage = (url, fileName) => {
-  document.write("<html><body>");
-  document.write("<a href=''><img src='" + url + "' alt = '" + fileName + "'></a>");
-  document.write("</body><html>");
+  document.write(
+    `
+    <html>
+      <body>
+        <a href=''>
+          <img src='" + url + "' alt = '" + fileName + "'>
+        </a>
+      </body>
+    <html>
+    `
+  )
   if (window.localStorage.getItem("isAlertOn") !== "true") {
     window.setTimeout(function () {
       if (window.confirm("사진을 꾹 눌러 저장하세요.\n사진을 누르면 이전 페이지로 돌아갑니다.\n\n알림을 다시 보지 않으시겠습니까?")) {

@@ -44,7 +44,7 @@ const Container = styled.div`
     }
     .name {
       text-align:left;
-      width: 60%;
+      width: 40%;
       padding-left: 16px;
     }
     .trophies,
