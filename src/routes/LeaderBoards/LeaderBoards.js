@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import Categories from '../../components/Categories/Category';
 import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -20,16 +21,15 @@ const Container = styled.div`
   }
 `;
 
-const Button = styled.div`
+const ButtonWrap = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 1.5rem;
-
-  .downloadBtn {
-    background-color: #1aab8a;
-    /* #e74c3d */
+`;
+const Button = styled.div`
+    margin: 0 5px; 
+    background-color: ${props => props.image ? '#e74c3d' : '#1aab8a'};
     color: #fff;
-    border: none;
     cursor: pointer;
     position: relative;
     width: 200px;
@@ -37,9 +37,15 @@ const Button = styled.div`
     font-size: 1.2em;
     transition:8 00ms ease all;
     outline: none;
+    text-align: center;
+    
+    button {
+      all: unset;
+    }
+
     &:hover  {
       background: #fff;
-      color: #1aab8a;
+      color: ${props => props.image ? '#e74c3d' : '#1aab8a'};
     }
     &:before,&:after {
       content:'';
@@ -48,7 +54,7 @@ const Button = styled.div`
       right: 0;
       height: 2px;
       width: 0;
-      background: #1aab8a;
+      background: ${props => props.image ? '#e74c3d' : '#1aab8a'};
       transition: 400ms ease all;
     }
     &:after{
@@ -61,7 +67,13 @@ const Button = styled.div`
       width: 100%;
       transition: 800ms ease all;
     }
-  }
+    
+    .text {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 `
 
 const items = [
@@ -123,11 +135,29 @@ const LeaderBoards = ({ match }) => {
       <div id="print_to_pdf">
         <UserList category={category} />
       </div>
-      <Button>
-        <button className="downloadBtn" onClick={saveBoard}>
-          DOWNLOAD
-        </button>
-      </Button>
+      <ButtonWrap>
+        <Button
+          image
+          className="downloadBtn"
+          onClick={saveBoard}
+        >
+          <div className="text">
+            Download PNG
+          </div>
+        </Button>
+        <Button>
+          <div className="text">
+            <ReactHTMLTableToExcel
+              excel
+              id="test-table-xls-button"
+              table="table-to-xls"
+              filename="ranking_list"
+              sheet="tablexls"
+              buttonText="Download XLS"
+            />
+          </div>
+        </Button>
+      </ButtonWrap>
     </Container>
   );
 }

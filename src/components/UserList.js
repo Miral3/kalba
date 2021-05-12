@@ -91,7 +91,7 @@ const UserList = ({ category }) => {
   }
   return (
     <Container>
-      <table>
+      <table id="table-to-xls">
         <thead className="head">
           <tr>
             <th className="rank">#</th>
