@@ -278,6 +278,9 @@ public class ClanMemberHandler extends Thread {
                 if (body.get("townHallLevel") != null) {
                     clanMember.setTownHallLevel((int) body.get("townHallLevel"));
                 }
+                if (body.get("townHallWeaponLevel") != null) {
+                    clanMember.setTownHallWeaponLevel((int) body.get("townHallWeaponLevel"));
+                }
                 if (body.get("bestTrophies") != null) {
                     clanMember.setBestTrophies((int) body.get("bestTrophies"));
                 }
