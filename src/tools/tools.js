@@ -14,3 +14,13 @@ export function translateRole(engTxt) {
       return "멤버";
   }
 }
+
+export function copyText(txt) {
+  let t = document.createElement("textarea");
+  document.body.appendChild(t);
+  t.value = txt;
+  t.select();
+  document.execCommand('copy');
+  document.body.removeChild(t);
+  alert(txt + "가 클립보드에 복사되었습니다.");
+}
