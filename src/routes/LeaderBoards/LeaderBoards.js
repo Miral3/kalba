@@ -146,7 +146,12 @@ const LeaderBoards = ({ match }) => {
 }
 
 const extractTableToXLSX = () => {
-  let wb = XLSX.utils.table_to_book(document.getElementById('save-target'), {sheet:"ranking list",raw:true});
+  let target=document.getElementById('save-target').cloneNode(true);
+  let spanArr=target.querySelectorAll("span");
+  for(let i=0; i<spanArr.length; i++){
+    spanArr[i].innerText='';
+  }
+  let wb = XLSX.utils.table_to_book(target, {sheet:"ranking list",raw:true});
   XLSX.writeFile(wb, ('ranking_list.xlsx'));
 }
 
