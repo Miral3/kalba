@@ -7,7 +7,8 @@ import { FaRegCopy } from "react-icons/fa";
 import trophy from "./cocTrophy.png";
 import ClanInfo from '../ClanInfo';
 import axios from 'axios';
-import { isEmpty, translateRole } from '../../tools/tools';
+import { heroesInfo, petsInfo, troopsInfo, spellsInfo, siegeMachinesInfo, heroesSrcPath, petsSrcPath, troopsSrcPath, spellsSrcPath, siegeMachinesSrcPath } from './data';
+import { isEmpty, translateRole, copyText } from '../../tools/tools';
 
 const Army = styled.div`
   display: flex;
@@ -100,14 +101,18 @@ const translateLeague = (engTxt) => {
   }
 }
 
-const copyTag = (txt) => {
-  let t = document.createElement("textarea");
-  document.body.appendChild(t);
-  t.value = txt;
-  t.select();
-  document.execCommand('copy');
-  document.body.removeChild(t);
-  alert(txt + "가 클립보드에 복사되었습니다.");
+const getIdxMap = (userInfo) => {
+  let idxMap = new Map();
+  for (let i = 0; i < userInfo.heroes.length; i++) {
+    idxMap.set(userInfo.heroes[i].name, i);
+  }
+  for (let i = 0; i < userInfo.spells.length; i++) {
+    idxMap.set(userInfo.spells[i].name, i);
+  }
+  for (let i = 0; i < userInfo.troops.length; i++) {
+    idxMap.set(userInfo.troops[i].name, i);
+  }
+  return idxMap;
 }
 
 const ProfileInfo = ({ match }) => {
@@ -117,7 +122,6 @@ const ProfileInfo = ({ match }) => {
   const [donaRank, setDonaRank] = useState('');
   const [scoreRank, setScoreRank] = useState('');
   const [loading, setLoading] = useState(false);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -157,13 +161,11 @@ const ProfileInfo = ({ match }) => {
   }
 
   const userInfo = userData[0];
-
+  const idxMap = getIdxMap(userInfo);
   const preCheck = (input) => {
     return isEmpty(input) ? ""
       : <div className="level">{input.level}</div>;
   }
-  console.log(userInfo);
-
   return (
     <div className="profileBlock">
       <div className="profileContents">
@@ -188,8 +190,8 @@ const ProfileInfo = ({ match }) => {
                 <span className="userTag">{userInfo.tag}&nbsp;</span>
                 <FaRegCopy
                   className="userTagCopy"
-                  onClick={() => copyTag(userInfo.tag)}
-                  onDoubleClick={() => copyTag(userInfo.tag)}
+                  onClick={() => copyText(userInfo.tag)}
+                  onDoubleClick={() => copyText(userInfo.tag)}
                   alt="userTagCopy"
                 />
               </li>
@@ -278,43 +280,23 @@ const ProfileInfo = ({ match }) => {
           <div className="heroes block">
             <span className="type">영웅</span>
             <ul className="first">
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.heroes[0])} className="king" src="/COC/coc_Heroes/Barbarian_King.png" alt="king" />
-                {preCheck(userInfo.heroes[0])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.heroes[1])} className="queen" src="/COC/coc_Heroes/Archer_Queen.png" alt="queen" />
-                {preCheck(userInfo.heroes[1])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.heroes[2])} className="warden" src="/COC/coc_Heroes/Grand_Warden.png" alt="warden" />
-                {preCheck(userInfo.heroes[2])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.heroes[3])} className="rochamp" src="/COC/coc_Heroes/Royal_Champion.png" alt="rochamp" />
-                {preCheck(userInfo.heroes[3])}
-              </li>
+              {heroesInfo.map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.heroes[idxMap.get(info.name)])} className={info.className} src={heroesSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.heroes[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="pets block">
             <span className="type">펫</span>
             <ul className="first">
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[50])} className="lassi" src="/COC/coc_Pets/L.A.S.S.I.png" alt="lassi" />
-                {preCheck(userInfo.troops[50])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[52])} className="owl" src="/COC/coc_Pets/Electro_Owl.png" alt="owl" />
-                {preCheck(userInfo.troops[52])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[51])} className="yak" src="/COC/coc_Pets/Mighty_Yak.png" alt="yak" />
-                {preCheck(userInfo.troops[51])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[53])} className="unicorn" src="/COC/coc_Pets/Unicorn.png" alt="unicorn" />
-                {preCheck(userInfo.troops[53])}
-              </li>
+              {petsInfo.map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={petsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -322,82 +304,58 @@ const ProfileInfo = ({ match }) => {
           <div className="troops block">
             <span className="type">병력</span>
             <ul className="first">
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[0])} className="barbarian" src="/COC/coc_Troops/Barbarian.png" alt="barbarian" />
-                {preCheck(userInfo.troops[0])}
-              </li>
-              <li>
-                <Img isLoaded={!isEmpty(userInfo.troops[1])} className="archer" src="/COC/coc_Troops/Archer.png" alt="archer" />
-                {preCheck(userInfo.troops[1])}
-              </li>
-              <li>
-                <img className="giant" src="/COC/coc_Troops/Giant.png" alt="giant" />
-              </li>
-              <li>
-                <img className="goblin" src="/COC/coc_Troops/Goblin.png" alt="goblin" />
-              </li>
-              <li>
-                <img className="wallBreaker" src="/COC/coc_Troops/Wall_Breaker.png" alt="wallBreaker" />
-              </li>
-              <li>
-                <img className="balloon" src="/COC/coc_Troops/Balloon.png" alt="balloon" />
-              </li>
-              <li>
-                <img className="wizard" src="/COC/coc_Troops/Wizard.png" alt="wizard" />
-              </li>
-              <li>
-                <img className="healer" src="/COC/coc_Troops/Healer.png" alt="healer" />
-              </li>
-              <li>
-                <img className="dragon" src="/COC/coc_Troops/Dragon.png" alt="dragon" />
-              </li>
+              {troopsInfo[0].map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
             <ul className="second">
-              <li><img className="pekka" src="/COC/coc_Troops/P.E.K.K.A.png" alt="pekka" /></li>
-              <li><img className="babyDragon" src="/COC/coc_Troops/Baby_Dragon.png" alt="babyDragon" /></li>
-              <li><img className="miner" src="/COC/coc_Troops/Miner.png" alt="miner" /></li>
-              <li><img className="electroDragon" src="/COC/coc_Troops/Electro_Dragon.png" alt="electroDragon" /></li>
-              <li><img className="yeti" src="/COC/coc_Troops/Yeti.png" alt="yeti" /></li>
-              <li><img className="minion" src="/COC/coc_Troops/Minion.png" alt="minion" /></li>
-              <li><img className="hogRider" src="/COC/coc_Troops/Hog_Rider.png" alt="hogRider" /></li>
-              <li><img className="valkyrie" src="/COC/coc_Troops/Valkyrie.png" alt="valkyrie" /></li>
-              <li><img className="golem" src="/COC/coc_Troops/Golem.png" alt="golem" /></li>
+              {troopsInfo[1].map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
             <ul className="third">
-              <li><img className="witch" src="/COC/coc_Troops/Witch.png" alt="witch" /></li>
-              <li><img className="lavaHound" src="/COC/coc_Troops/Lava_Hound.png" alt="lavaHound" /></li>
-              <li><img className="bowler" src="/COC/coc_Troops/Bowler.png" alt="bowler" /></li>
-              <li><img className="iceGolem" src="/COC/coc_Troops/Ice_Golem.png" alt="iceGolem" /></li>
-              <li><img className="headHunter" src="/COC/coc_Troops/Headhunter.png" alt="headHunter" /></li>
+              {troopsInfo[2].map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="spells block">
             <span className="type">마법</span>
             <ul className="first">
-              <li><img className="lightning" src="/COC/coc_Spells/Lightning_Spell.png" alt="lightning" /></li>
-              <li><img className="heal" src="/COC/coc_Spells/Healing_Spell.png" alt="heal" /></li>
-              <li><img className="rage" src="/COC/coc_Spells/Rage_Spell.png" alt="rage" /></li>
-              <li><img className="jump" src="/COC/coc_Spells/Jump_Spell.png" alt="jump" /></li>
-              <li><img className="freeze" src="/COC/coc_Spells/Freeze_Spell.png" alt="freeze" /></li>
-              <li><img className="clone" src="/COC/coc_Spells/Clone_Spell.png" alt="clone" /></li>
-              <li><img className="invisibility" src="/COC/coc_Spells/Invisibility_Spell.png" alt="invisibility" /></li>
-              <li><img className="poison" src="/COC/coc_Spells/Poison_Spell.png" alt="poison" /></li>
-              <li><img className="earthquake" src="/COC/coc_Spells/Earthquake_Spell.png" alt="earthquake" /></li>
+              {spellsInfo[0].map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.spells[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
             <ul className="second">
-              <li><img className="haste" src="/COC/coc_Spells/Haste_Spell.png" alt="haste" /></li>
-              <li><img className="skeleton" src="/COC/coc_Spells/Skeleton_Spell.png" alt="skeleton" /></li>
-              <li><img className="bat" src="/COC/coc_Spells/Bat_Spell.png" alt="bat" /></li>
+              {spellsInfo[1].map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.spells[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
           </div>
           <div className="siegeMachines block">
             <span className="type">시즈 머신</span>
             <ul className="first">
-              <li><img className="wallWrecker" src="/COC/coc_SiegeMachines/Wall_Wrecker.png" alt="wallWrecker" /></li>
-              <li><img className="battleBlimp" src="/COC/coc_SiegeMachines/Battle_Blimp.png" alt="battleBlimp" /></li>
-              <li><img className="stoneSlammer" src="/COC/coc_SiegeMachines/Stone_Slammer.png" alt="stoneSlammer" /></li>
-              <li><img className="siegeBarracks" src="/COC/coc_SiegeMachines/Siege_Barracks.png" alt="siegeBarracks" /></li>
-              <li><img className="logLauncher" src="/COC/coc_SiegeMachines/Log_Launcher.png" alt="logLauncher" /></li>
+              {siegeMachinesInfo.map((info, index) => (
+                <li key={index}>
+                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={siegeMachinesSrcPath + info.source} alt={info.className} />
+                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
