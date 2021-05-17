@@ -106,7 +106,7 @@ const loadImageInThisPage = (url, fileName) => {
     window.setTimeout(function () {
       if (window.confirm("사진을 꾹 눌러 저장하세요.\n사진을 누르면 이전 페이지로 돌아갑니다.\n\n알림을 다시 보지 않으시겠습니까?")) {
         window.localStorage.setItem("isAlertOn", "true");
-      };
+      }
     }, 1);
   }
 }

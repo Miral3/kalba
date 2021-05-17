@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translateRole } from '../tools/tools';
 
 const UserInfoBlock = styled.tr`
   border: ${({ theme }) => theme.borderColors.list};
@@ -74,35 +75,12 @@ const UserInfoBlock = styled.tr`
 `;
 
 const colorByRole = (name, role) => {
-  switch (role) {
-    case "leader":
-      return <div>
-        <a className="name" href={`/profile/${name}`}>
-          {name}
-        </a>
-        <span className="role leader">대표</span>
-      </div>
-    case "coLeader":
-      return <div>
-        <a className="name" href={`/profile/${name}`}>
-          {name}
-        </a>
-        <span className="role coLeader">공대</span>
-      </div>
-    case "admin":
-      return <div>
-        <a className="name" href={`/profile/${name}`}>
-          {name}
-        </a>
-        <span className="role admin">장로</span>
-      </div>
-    case "member":
-      return <a className="name" href={`/profile/${name}`}>
-        {name}
-      </a>
-    default:
-      break;
-  }
+  return <div>
+    <a className="name" href={`/profile/${name}`}>
+      {name}
+    </a>
+    <span className={"role " + role}>{translateRole(role)}</span>
+  </div>
 }
 
 const UserInfo = ({ idx, info }) => {

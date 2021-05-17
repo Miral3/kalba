@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import { FaCertificate } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";
 import trophy from "./cocTrophy.png";
-
 import ClanInfo from '../ClanInfo';
 import axios from 'axios';
+import { isEmpty, translateRole } from '../../tools/tools';
 
 const Army = styled.div`
   display: flex;
@@ -74,22 +74,7 @@ const Img = styled.img`
   filter: ${props => props.isLoaded ? 'none' : 'gray'};
 `
 
-function translateRole(engTxt) {
-  switch (engTxt) {
-    case "leader":
-      return "대표";
-    case "coLeader":
-      return "공동대표";
-    case "admin":
-      return "장로";
-    case "member":
-      return "멤버";
-    default:
-      break;
-  }
-}
-
-function translateLeague(engTxt) {
+const translateLeague = (engTxt) => {
   let txt = engTxt.split(" ");
   switch (txt[0]) {
     case "Unranked":
@@ -115,8 +100,8 @@ function translateLeague(engTxt) {
   }
 }
 
-function copyTag(txt) {
-  var t = document.createElement("textarea");
+const copyTag = (txt) => {
+  let t = document.createElement("textarea");
   document.body.appendChild(t);
   t.value = txt;
   t.select();
@@ -172,14 +157,6 @@ const ProfileInfo = ({ match }) => {
   }
 
   const userInfo = userData[0];
-
-  const isEmpty = (value) => {
-    if (value === "" || value == null ||
-      (typeof value == "object" && !Object.keys(value).length)) {
-      return true;
-    }
-    return false;
-  }
 
   const preCheck = (input) => {
     return isEmpty(input) ? ""
