@@ -214,7 +214,7 @@ const ProfileInfo = ({ match }) => {
                 />
               </li>
               <li>
-                <span className="userRole">{translateRole(userInfo.role)}</span>
+                <span className="userRole">{translateRole(userInfo.role, true)}</span>
               </li>
             </ul>
           </div>
