@@ -23,7 +23,7 @@ const Army = styled.div`
 
   img:not(.townHall) {
   width: 40px;
-  height: auto;
+  height: 40px;
   background-color: #9496c8;
   border: 2px solid #49485f;
   border-radius: 5px;
@@ -48,7 +48,7 @@ ul li {
   background-color: black;
   border-radius: 3px;
   color: white;
-  font-size: 3px;
+  font-size: .3rem;
   font-weight: 700;
   text-shadow: 1px 2px 1px black;
   text-align: center;
@@ -74,6 +74,7 @@ ul li {
 }
 .townHall {
   width: 150px;
+  height: 161px;
   margin: 28px 0;
 }
 .troops, .spells, .siegeMachines {
