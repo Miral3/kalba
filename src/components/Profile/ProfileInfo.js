@@ -1,10 +1,85 @@
 import React, { useState, useEffect } from 'react';
-import ClanInfo from '../ClanInfo';
-import { FaCertificate } from "react-icons/fa";
-import trophy from "./cocTrophy.png";
-import axios from 'axios';
+
 import './Profile.css'
+import styled from 'styled-components';
+import { FaCertificate } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa";
+import trophy from "./cocTrophy.png";
+
+import ClanInfo from '../ClanInfo';
+import axios from 'axios';
+
+const Army = styled.div`
+  display: flex;
+  justify-content: space-around;
+  background: linear-gradient(to top, #6d779a, #8c96ae);
+  border-radius: 8px;
+  border: 3px solid #6a7497;
+  margin-top: 15px;
+
+  img:not(.townHall) {
+  width: 40px;
+  height: auto;
+  background-color: #9496c8;
+  border: 2px solid #49485f;
+  border-radius: 5px;
+  grid-row: 1/1;
+  grid-column: 1/1;
+  }
+ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  padding-right: 5px;
+  display: inline-grid;
+}
+
+.level {
+  width: 15px;
+  height: 13px;
+  grid-row: 1/1;
+  grid-column: 1/1;
+  margin-top: 27px;
+  margin-left: 3px;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+  font-size: 3px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.block {
+  background-color: #616b8a;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.type {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 1px 2px 1px black;
+}
+
+.townHallBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.townHall {
+  width: 150px;
+  margin: 7px 0;
+}
+`
+const Img = styled.img`
+  -webkit-filter: ${props => props.isLoaded ? 'grayscale(0%)' : 'grayscale(100%)'};
+  filter: ${props => props.isLoaded ? 'none' : 'gray'};
+`
 
 function translateRole(engTxt) {
   switch (engTxt) {
@@ -104,6 +179,21 @@ const ProfileInfo = ({ match }) => {
   }
 
   const userInfo = userData[0];
+
+  const isEmpty = (value) => {
+    if (value === "" || value == null ||
+      (typeof value == "object" && !Object.keys(value).length)) {
+      return true;
+    }
+    return false;
+  }
+
+  const preCheck = (input) => {
+    return isEmpty(input) ? ""
+      : <div className="level">{input.level}</div>;
+  }
+  console.log(userInfo);
+
   return (
     <div className="profileBlock">
       <div className="profileContents">
@@ -210,6 +300,138 @@ const ProfileInfo = ({ match }) => {
           </li>
         </ul>
       </div>
+      <Army>
+        <div className="contents">
+          <div className="townHallBlock">
+            <img className="townHall" src="/COC/coc_TownHall/Town_Hall14-5.png" alt="townHall" />
+          </div>
+          <div className="heroes block">
+            <span className="type">영웅</span>
+            <ul className="first">
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.heroes[0])} className="king" src="/COC/coc_Heroes/Barbarian_King.png" alt="king" />
+                {preCheck(userInfo.heroes[0])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.heroes[1])} className="queen" src="/COC/coc_Heroes/Archer_Queen.png" alt="queen" />
+                {preCheck(userInfo.heroes[1])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.heroes[2])} className="warden" src="/COC/coc_Heroes/Grand_Warden.png" alt="warden" />
+                {preCheck(userInfo.heroes[2])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.heroes[3])} className="rochamp" src="/COC/coc_Heroes/Royal_Champion.png" alt="rochamp" />
+                {preCheck(userInfo.heroes[3])}
+              </li>
+            </ul>
+          </div>
+          <div className="pets block">
+            <span className="type">펫</span>
+            <ul className="first">
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[50])} className="lassi" src="/COC/coc_Pets/L.A.S.S.I.png" alt="lassi" />
+                {preCheck(userInfo.troops[50])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[52])} className="owl" src="/COC/coc_Pets/Electro_Owl.png" alt="owl" />
+                {preCheck(userInfo.troops[52])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[51])} className="yak" src="/COC/coc_Pets/Mighty_Yak.png" alt="yak" />
+                {preCheck(userInfo.troops[51])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[53])} className="unicorn" src="/COC/coc_Pets/Unicorn.png" alt="unicorn" />
+                {preCheck(userInfo.troops[53])}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="contents">
+          <div className="troops block">
+            <span className="type">병력</span>
+            <ul className="first">
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[0])} className="barbarian" src="/COC/coc_Troops/Barbarian.png" alt="barbarian" />
+                {preCheck(userInfo.troops[0])}
+              </li>
+              <li>
+                <Img isLoaded={!isEmpty(userInfo.troops[1])} className="archer" src="/COC/coc_Troops/Archer.png" alt="archer" />
+                {preCheck(userInfo.troops[1])}
+              </li>
+              <li>
+                <img className="giant" src="/COC/coc_Troops/Giant.png" alt="giant" />
+              </li>
+              <li>
+                <img className="goblin" src="/COC/coc_Troops/Goblin.png" alt="goblin" />
+              </li>
+              <li>
+                <img className="wallBreaker" src="/COC/coc_Troops/Wall_Breaker.png" alt="wallBreaker" />
+              </li>
+              <li>
+                <img className="balloon" src="/COC/coc_Troops/Balloon.png" alt="balloon" />
+              </li>
+              <li>
+                <img className="wizard" src="/COC/coc_Troops/Wizard.png" alt="wizard" />
+              </li>
+              <li>
+                <img className="healer" src="/COC/coc_Troops/Healer.png" alt="healer" />
+              </li>
+              <li>
+                <img className="dragon" src="/COC/coc_Troops/Dragon.png" alt="dragon" />
+              </li>
+            </ul>
+            <ul className="second">
+              <li><img className="pekka" src="/COC/coc_Troops/P.E.K.K.A.png" alt="pekka" /></li>
+              <li><img className="babyDragon" src="/COC/coc_Troops/Baby_Dragon.png" alt="babyDragon" /></li>
+              <li><img className="miner" src="/COC/coc_Troops/Miner.png" alt="miner" /></li>
+              <li><img className="electroDragon" src="/COC/coc_Troops/Electro_Dragon.png" alt="electroDragon" /></li>
+              <li><img className="yeti" src="/COC/coc_Troops/Yeti.png" alt="yeti" /></li>
+              <li><img className="minion" src="/COC/coc_Troops/Minion.png" alt="minion" /></li>
+              <li><img className="hogRider" src="/COC/coc_Troops/Hog_Rider.png" alt="hogRider" /></li>
+              <li><img className="valkyrie" src="/COC/coc_Troops/Valkyrie.png" alt="valkyrie" /></li>
+              <li><img className="golem" src="/COC/coc_Troops/Golem.png" alt="golem" /></li>
+            </ul>
+            <ul className="third">
+              <li><img className="witch" src="/COC/coc_Troops/Witch.png" alt="witch" /></li>
+              <li><img className="lavaHound" src="/COC/coc_Troops/Lava_Hound.png" alt="lavaHound" /></li>
+              <li><img className="bowler" src="/COC/coc_Troops/Bowler.png" alt="bowler" /></li>
+              <li><img className="iceGolem" src="/COC/coc_Troops/Ice_Golem.png" alt="iceGolem" /></li>
+              <li><img className="headHunter" src="/COC/coc_Troops/Headhunter.png" alt="headHunter" /></li>
+            </ul>
+          </div>
+          <div className="spells block">
+            <span className="type">마법</span>
+            <ul className="first">
+              <li><img className="lightning" src="/COC/coc_Spells/Lightning_Spell.png" alt="lightning" /></li>
+              <li><img className="heal" src="/COC/coc_Spells/Healing_Spell.png" alt="heal" /></li>
+              <li><img className="rage" src="/COC/coc_Spells/Rage_Spell.png" alt="rage" /></li>
+              <li><img className="jump" src="/COC/coc_Spells/Jump_Spell.png" alt="jump" /></li>
+              <li><img className="freeze" src="/COC/coc_Spells/Freeze_Spell.png" alt="freeze" /></li>
+              <li><img className="clone" src="/COC/coc_Spells/Clone_Spell.png" alt="clone" /></li>
+              <li><img className="invisibility" src="/COC/coc_Spells/Invisibility_Spell.png" alt="invisibility" /></li>
+              <li><img className="poison" src="/COC/coc_Spells/Poison_Spell.png" alt="poison" /></li>
+              <li><img className="earthquake" src="/COC/coc_Spells/Earthquake_Spell.png" alt="earthquake" /></li>
+            </ul>
+            <ul className="second">
+              <li><img className="haste" src="/COC/coc_Spells/Haste_Spell.png" alt="haste" /></li>
+              <li><img className="skeleton" src="/COC/coc_Spells/Skeleton_Spell.png" alt="skeleton" /></li>
+              <li><img className="bat" src="/COC/coc_Spells/Bat_Spell.png" alt="bat" /></li>
+            </ul>
+          </div>
+          <div className="siegeMachines block">
+            <span className="type">시즈 머신</span>
+            <ul className="first">
+              <li><img className="wallWrecker" src="/COC/coc_SiegeMachines/Wall_Wrecker.png" alt="wallWrecker" /></li>
+              <li><img className="battleBlimp" src="/COC/coc_SiegeMachines/Battle_Blimp.png" alt="battleBlimp" /></li>
+              <li><img className="stoneSlammer" src="/COC/coc_SiegeMachines/Stone_Slammer.png" alt="stoneSlammer" /></li>
+              <li><img className="siegeBarracks" src="/COC/coc_SiegeMachines/Siege_Barracks.png" alt="siegeBarracks" /></li>
+              <li><img className="logLauncher" src="/COC/coc_SiegeMachines/Log_Launcher.png" alt="logLauncher" /></li>
+            </ul>
+          </div>
+        </div>
+      </Army>
     </div>
   );
 };

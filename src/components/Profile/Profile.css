@@ -1,6 +1,7 @@
 li {
   list-style: none;
 }
+
 .profileBlock {
   display: block;
   height: auto !important;
@@ -20,6 +21,9 @@ li {
     max-width: 680px;
   }
 }
+
+/* user/clan info */
+
 .profileBlock .profileContents {
   background: linear-gradient(to top, #6d779a, #8c96ae);
   border-radius: 8px;
@@ -263,6 +267,8 @@ li {
   height: 20px;
 }
 
+/* ranking */
+
 .profileBlock .profileRanking {
   background: linear-gradient(to top, #49417a, #635c91);
   border-radius: 8px;
@@ -410,3 +416,4 @@ li {
     width: 30px;
   }
 }
+
