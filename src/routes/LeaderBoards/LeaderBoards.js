@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Categories from '../../components/Categories/Category';
 import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import XLSX from 'xlsx';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -34,6 +34,7 @@ const Button = styled.div`
     position: relative;
     width: 200px;
     height: 60px;
+    line-height: 60px;
     font-size: 1.2em;
     transition:8 00ms ease all;
     outline: none;
@@ -138,21 +139,15 @@ const LeaderBoards = ({ match }) => {
             Download PNG
           </div>
         </Button>
-        <Button>
-          <div className="text">
-            <ReactHTMLTableToExcel
-              excel
-              id="test-table-xls-button"
-              table="save-target"
-              filename="ranking_list"
-              sheet="tablexls"
-              buttonText="Download XLS"
-            />
-          </div>
-        </Button>
+        <Button onClick={extractTableToXLSX}>Download XLSX</Button>
       </ButtonWrap>
     </Container>
   );
+}
+
+const extractTableToXLSX = () => {
+  let wb = XLSX.utils.table_to_book(document.getElementById('save-target'), {sheet:"ranking list",raw:true});
+  XLSX.writeFile(wb, ('ranking_list.xlsx'));
 }
 
 export default LeaderBoards;
