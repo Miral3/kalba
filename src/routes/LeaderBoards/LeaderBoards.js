@@ -82,9 +82,10 @@ const items = [
 ];
 
 const saveBoard = () => {
-  const imageDiv = document.getElementById("print_to_pdf");
+  const imageDiv = document.getElementById("save-target");
+  imageDiv.style.setProperty("transform", "none");
   window.scrollTo(0, 0);
-  html2canvas(imageDiv, {}).then(canvas => {
+  html2canvas(imageDiv, {scrollX: -7}).then(canvas => {
     download(canvas.toDataURL(), "ranking_list.png");
   });
 };
@@ -124,7 +125,7 @@ const LeaderBoards = ({ match }) => {
   return (
     <Container>
       <Categories items={items} type="leaderboards" any="score" />
-      <div id="print_to_pdf">
+      <div>
         <UserList category={category} />
       </div>
       <ButtonWrap>
@@ -142,7 +143,7 @@ const LeaderBoards = ({ match }) => {
             <ReactHTMLTableToExcel
               excel
               id="test-table-xls-button"
-              table="table-to-xls"
+              table="save-target"
               filename="ranking_list"
               sheet="tablexls"
               buttonText="Download XLS"
