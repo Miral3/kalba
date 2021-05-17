@@ -1,5 +1,5 @@
 export function isEmpty(value) {
-  return value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
+  return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
 }
 
 export function translateRole(engTxt) {

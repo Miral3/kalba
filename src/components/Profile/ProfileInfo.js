@@ -17,6 +17,10 @@ const Army = styled.div`
   border-radius: 8px;
   border: 3px solid #6a7497;
   margin-top: 15px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   img:not(.townHall) {
   width: 40px;
   height: auto;
@@ -27,15 +31,14 @@ const Army = styled.div`
   grid-column: 1/1;
   }
 ul {
-  display: flex;
   padding: 0;
   margin: 0;
 }
 ul li {
-  padding-right: 5px;
+  padding-right: 3px;
   display: inline-grid;
 }
-.level {
+.level, .maxLevel{
   width: 15px;
   height: 13px;
   grid-row: 1/1;
@@ -47,7 +50,11 @@ ul li {
   color: white;
   font-size: 3px;
   font-weight: 700;
+  text-shadow: 1px 2px 1px black;
   text-align: center;
+}
+.maxLevel {
+  background-color: #e5c133;
 }
 .block {
   background-color: #616b8a;
@@ -67,7 +74,12 @@ ul li {
 }
 .townHall {
   width: 150px;
-  margin: 7px 0;
+  margin: 28px 0;
+}
+.troops, .spells, .siegeMachines {
+  @media (min-width: 768px) {
+    width: 440px;
+  }
 }
 `
 const Img = styled.img`
@@ -164,7 +176,13 @@ const ProfileInfo = ({ match }) => {
   const idxMap = getIdxMap(userInfo);
   const preCheck = (input) => {
     return isEmpty(input) ? ""
-      : <div className="level">{input.level}</div>;
+      : input.level === input.maxLevel ?
+        <div className="maxLevel">{input.level}</div> :
+        <div className="level">{input.level}</div>
+  }
+  const townHallCheck = (hallLevel, weaponLevel) => {
+    return isEmpty(weaponLevel) ? <img className="townHall" src={`/COC/coc_TownHall/Town_Hall${hallLevel}.png`} alt="townHall" /> :
+      <img className="townHall" src={`/COC/coc_TownHall/Town_Hall${hallLevel}-${weaponLevel}.png`} alt="townHall" />
   }
   return (
     <div className="profileBlock">
@@ -272,10 +290,10 @@ const ProfileInfo = ({ match }) => {
           </li>
         </ul>
       </div>
-      <Army>
+      <Army className="army">
         <div className="contents">
           <div className="townHallBlock">
-            <img className="townHall" src="/COC/coc_TownHall/Town_Hall14-5.png" alt="townHall" />
+            {townHallCheck(userInfo.townHallLevel, userInfo.townHallWeaponLevel)}
           </div>
           <div className="heroes block">
             <span className="type">영웅</span>
@@ -304,23 +322,7 @@ const ProfileInfo = ({ match }) => {
           <div className="troops block">
             <span className="type">병력</span>
             <ul className="first">
-              {troopsInfo[0].map((info, index) => (
-                <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
-                </li>
-              ))}
-            </ul>
-            <ul className="second">
-              {troopsInfo[1].map((info, index) => (
-                <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
-                </li>
-              ))}
-            </ul>
-            <ul className="third">
-              {troopsInfo[2].map((info, index) => (
+              {troopsInfo.map((info, index) => (
                 <li key={index}>
                   <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
                   {preCheck(userInfo.troops[idxMap.get(info.name)])}
@@ -331,15 +333,7 @@ const ProfileInfo = ({ match }) => {
           <div className="spells block">
             <span className="type">마법</span>
             <ul className="first">
-              {spellsInfo[0].map((info, index) => (
-                <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.spells[idxMap.get(info.name)])}
-                </li>
-              ))}
-            </ul>
-            <ul className="second">
-              {spellsInfo[1].map((info, index) => (
+              {spellsInfo.map((info, index) => (
                 <li key={index}>
                   <Img isLoaded={!isEmpty(userInfo.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
                   {preCheck(userInfo.spells[idxMap.get(info.name)])}

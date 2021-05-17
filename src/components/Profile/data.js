@@ -46,7 +46,7 @@ export const petsInfo = [
 ]
 
 export const troopsInfo = [
-  [{
+  {
     name: "Barbarian",
     className: "barbarian",
     source: "Barbarian.png"
@@ -82,7 +82,7 @@ export const troopsInfo = [
     name: "Dragon",
     className: "dragon",
     source: "Dragon.png"
-  }], [{
+  }, {
     name: "P.E.K.K.A",
     className: "pekka",
     source: "P.E.K.K.A.png"
@@ -118,7 +118,7 @@ export const troopsInfo = [
     name: "Golem",
     className: "golem",
     source: "Golem.png"
-  }], [{
+  }, {
     name: "Witch",
     className: "witch",
     source: "Witch.png"
@@ -138,11 +138,11 @@ export const troopsInfo = [
     name: "Headhunter",
     className: "headHunter",
     source: "Headhunter.png"
-  }]
+  }
 ]
 
 export const spellsInfo = [
-  [{
+  {
     name: "Lightning Spell",
     className: "lightning",
     source: "Lightning_Spell.png"
@@ -178,7 +178,7 @@ export const spellsInfo = [
     name: "Earthquake Spell",
     className: "earthquake",
     source: "Earthquake_Spell.png"
-  }], [{
+  }, {
     name: "Haste Spell",
     className: "haste",
     source: "Haste_Spell.png"
@@ -190,7 +190,7 @@ export const spellsInfo = [
     name: "Bat Spell",
     className: "bat",
     source: "Bat_Spell.png"
-  }]
+  }
 ]
 
 export const siegeMachinesInfo = [
