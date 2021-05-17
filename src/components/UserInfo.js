@@ -79,7 +79,7 @@ const colorByRole = (name, role) => {
     <a className="name" href={`/profile/${name}`}>
       {name}
     </a>
-    <span className={"role " + role}>{translateRole(role)}</span>
+    <span className={"role " + role}>{translateRole(role, false)}</span>
   </div>
 }
 

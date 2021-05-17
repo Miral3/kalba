@@ -2,12 +2,12 @@ export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
 }
 
-export function translateRole(engTxt) {
+export function translateRole(engTxt, isProfilePage) {
   switch (engTxt) {
     case "leader":
       return "대표";
     case "coLeader":
-      return "공동대표";
+      return isProfilePage?"공동대표":"공대";
     case "admin":
       return "장로";
     default:
