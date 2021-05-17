@@ -16,7 +16,6 @@ const Army = styled.div`
   border-radius: 8px;
   border: 3px solid #6a7497;
   margin-top: 15px;
-
   img:not(.townHall) {
   width: 40px;
   height: auto;
@@ -31,12 +30,10 @@ ul {
   padding: 0;
   margin: 0;
 }
-
 ul li {
   padding-right: 5px;
   display: inline-grid;
 }
-
 .level {
   width: 15px;
   height: 13px;
@@ -51,26 +48,22 @@ ul li {
   font-weight: 700;
   text-align: center;
 }
-
 .block {
   background-color: #616b8a;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
 }
-
 .type {
   color: #fff;
   font-size: 13px;
   font-weight: 700;
   text-shadow: 1px 2px 1px black;
 }
-
 .townHallBlock {
   display: flex;
   justify-content: center;
 }
-
 .townHall {
   width: 150px;
   margin: 7px 0;
