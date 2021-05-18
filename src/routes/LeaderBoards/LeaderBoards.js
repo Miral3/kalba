@@ -83,10 +83,9 @@ const items = [
 ];
 
 const saveBoard = () => {
-  const imageDiv = document.getElementById("save-target");
-  imageDiv.style.setProperty("transform", "none");
+  const target=document.getElementById('save-target')
   window.scrollTo(0, 0);
-  html2canvas(imageDiv, {scrollX: -8}).then(canvas => {
+  html2canvas(target).then(canvas => {
     download(canvas.toDataURL(), "ranking_list.png");
   });
 };
