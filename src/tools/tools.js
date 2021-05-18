@@ -24,3 +24,7 @@ export function copyText(txt) {
   document.body.removeChild(t);
   alert(txt + "가 클립보드에 복사되었습니다.");
 }
+
+export function isMobile(){
+  return /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
+}

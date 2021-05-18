@@ -9,6 +9,7 @@ import Categories from '../../components/Categories/Category';
 import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
 import XLSX from 'xlsx';
+import {isMobile} from "../../tools/tools";
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -85,14 +86,14 @@ const items = [
 const saveBoard = () => {
   const target=document.getElementById('save-target')
   window.scrollTo(0, 0);
-  html2canvas(target).then(canvas => {
+  let moveX=isMobile()?0:-8;
+  html2canvas(target, {scrollX: moveX}).then(canvas => {
     download(canvas.toDataURL(), "ranking_list.png");
   });
 };
 
 const download = (url, fileName) => {
-  const isMobile = /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
-  if (isMobile) {
+  if (isMobile()) {
     loadImageInThisPage(url, fileName);
   } else {
     downloadURL(url, fileName);
