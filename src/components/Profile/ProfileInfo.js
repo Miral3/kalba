@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import './Profile.css'
 import styled from 'styled-components';
-import { FaCertificate } from "react-icons/fa";
-import { FaRegCopy } from "react-icons/fa";
-import trophy from "./cocTrophy.png";
-import ClanInfo from '../ClanInfo';
+import { FaRegCopy, FaCertificate } from "react-icons/fa";
+
 import axios from 'axios';
+import ClanInfo from '../ClanInfo';
 import { heroesInfo, petsInfo, troopsInfo, spellsInfo, siegeMachinesInfo, heroesSrcPath, petsSrcPath, troopsSrcPath, spellsSrcPath, siegeMachinesSrcPath } from './data';
 import { isEmpty, translateRole, copyText } from '../../tools/tools';
 
@@ -30,59 +29,59 @@ const Army = styled.div`
   grid-row: 1/1;
   grid-column: 1/1;
   }
-ul {
-  padding: 0;
-  margin: 0;
-}
-ul li {
-  padding-right: 3px;
-  display: inline-grid;
-}
-.level, .maxLevel{
-  width: 15px;
-  height: 13px;
-  grid-row: 1/1;
-  grid-column: 1/1;
-  margin-top: 27px;
-  margin-left: 3px;
-  background-color: black;
-  border: 1px solid #fff;
-  border-radius: 3px;
-  color: white;
-  font-size: 10px;
-  font-weight: 700;
-  text-shadow: 1px 2px 1px black;
-  text-align: center;
-}
-.maxLevel {
-  background-color: #e5c133;
-}
-.block {
-  background-color: #616b8a;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
-.type {
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
-  text-shadow: 1px 2px 1px black;
-}
-.townHallBlock {
-  display: flex;
-  justify-content: center;
-}
-.townHall {
-  width: 150px;
-  height: 161px;
-  margin: 28px 0;
-}
-.troops, .spells, .siegeMachines {
-  @media (min-width: 768px) {
-    width: 440px;
+  ul {
+    padding: 0;
+    margin: 0;
   }
-}
+  ul li {
+    padding-right: 3px;
+    display: inline-grid;
+  }
+  .level, .maxLevel{
+    width: 15px;
+    height: 13px;
+    grid-row: 1/1;
+    grid-column: 1/1;
+    margin-top: 27px;
+    margin-left: 3px;
+    background-color: black;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    text-shadow: 1px 2px 1px black;
+    text-align: center;
+  }
+  .maxLevel {
+    background-color: #e5c133;
+  }
+  .block {
+    background-color: #616b8a;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+  }
+  .type {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-shadow: 1px 2px 1px black;
+  }
+  .townHallBlock {
+    display: flex;
+    justify-content: center;
+  }
+  .townHall {
+    width: 150px;
+    height: 161px;
+    margin: 28px 0;
+  }
+  .troops, .spells, .siegeMachines {
+    @media (min-width: 768px) {
+      width: 440px;
+    }
+  }
 `
 const Img = styled.img`
   -webkit-filter: ${props => props.isLoaded ? 'grayscale(0%)' : 'grayscale(100%)'};
@@ -241,7 +240,7 @@ const ProfileInfo = ({ match }) => {
                 <span className="leagueName">{translateLeague(userInfo.league.name)}</span>
               </div>
               <div className="leagueScore">
-                <img className="trophy" src={trophy} alt="trophy" />
+                <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 <span className="score">{userInfo.trophies}</span>
               </div>
             </div>
@@ -249,7 +248,7 @@ const ProfileInfo = ({ match }) => {
           <div className="bestScore">
             <span className="space type">전체 최고 기록:</span>
             <div className="space contents">
-              <img className="trophy" src={trophy} alt="trophy" />
+              <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
               <span>{userInfo.versusTrophies}</span>
             </div>
           </div>
@@ -272,7 +271,7 @@ const ProfileInfo = ({ match }) => {
             <div className="typeAmount">
               <span className="type attackPower">공격력</span>
               <div className="amount">
-                <img className="trophy" src={trophy} alt="trophy" />
+                <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 <span className="score">{userInfo.yonghaScore}</span>
               </div>
             </div>
@@ -285,7 +284,7 @@ const ProfileInfo = ({ match }) => {
             <div className="typeAmount">
               <span className="type donations">지원량</span>
               <div className="amount">
-                <img className="trophy" src={trophy} alt="trophy" />
+                <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 <span className="score">{userInfo.donations}</span>
               </div>
             </div>
