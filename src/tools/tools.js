@@ -11,7 +11,7 @@ export function translateRole(engTxt, isProfilePage) {
     case "admin":
       return "장로";
     default:
-      return "멤버";
+      return isProfilePage?"멤버":"";
   }
 }
 
