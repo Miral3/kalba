@@ -46,9 +46,10 @@ ul li {
   margin-top: 27px;
   margin-left: 3px;
   background-color: black;
+  border: 1px solid #fff;
   border-radius: 3px;
   color: white;
-  font-size: .3rem;
+  font-size: 10px;
   font-weight: 700;
   text-shadow: 1px 2px 1px black;
   text-align: center;
