@@ -25,10 +25,10 @@ export function copyText(txt) {
   alert(txt + "가 클립보드에 복사되었습니다.");
 }
 
-<<<<<<< Updated upstream
-export function isMobile(){
+export function isMobile() {
   return /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
-=======
+}
+
 let cutLine, coLeaderCnt, adminCnt;
 export function expectedRole(role, idx, donations) {
   if (idx <= cutLine) {
@@ -76,7 +76,6 @@ export function expectedRole(role, idx, donations) {
       return '멤버';
     } else if (role === 'coLeader') {
       if (donations > 1000) {
-
         return '장로';
       } else {
         return '멤버';
@@ -148,5 +147,4 @@ export function bodyDataByType(type, info, idx) {
       <td className="expectedRole side">{expectedRole(role, idx, donations)}</td>
     </>
   }
->>>>>>> Stashed changes
 }
