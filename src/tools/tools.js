@@ -2,16 +2,16 @@ export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
 }
 
-export function translateRole(engTxt, isProfilePage) {
+export function translateRole(engTxt) {
   switch (engTxt) {
     case "leader":
       return "대표";
     case "coLeader":
-      return isProfilePage ? "공동대표" : "공대";
+      return "공대"
     case "admin":
       return "장로";
     default:
-      return isProfilePage ? "멤버" : "";
+      return "멤버";
   }
 }
 
@@ -143,7 +143,7 @@ export function bodyDataByType(type, info, idx) {
         </a>
       </td>
       <td className="donations side">{donations}</td>
-      <td className="currentRole side">{translateRole(role, true)}</td>
+      <td className="currentRole side">{translateRole(role)}</td>
       <td className="expectedRole side">{expectedRole(role, idx, donations)}</td>
     </>
   }

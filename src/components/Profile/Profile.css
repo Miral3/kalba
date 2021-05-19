@@ -197,7 +197,9 @@ li {
 .profileBlock .userScore .currentScore .leagueContents .leagueNameBlcok {
   background: linear-gradient(to right, #373a46, #8a94ad);
 }
-
+.leagueName {
+  line-height: 25px;
+}
 .profileBlock
   .userScore
   .currentScore
