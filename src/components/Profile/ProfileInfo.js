@@ -117,13 +117,19 @@ const translateLeague = (engTxt) => {
 const getIdxMap = (userInfo) => {
   let idxMap = new Map();
   for (let i = 0; i < userInfo.heroes.length; i++) {
-    idxMap.set(userInfo.heroes[i].name, i);
+    if(userInfo.heroes[i].village==='home'){
+      idxMap.set(userInfo.heroes[i].name, i);
+    }
   }
   for (let i = 0; i < userInfo.spells.length; i++) {
-    idxMap.set(userInfo.spells[i].name, i);
+    if(userInfo.spells[i].village==='home'){
+      idxMap.set(userInfo.spells[i].name, i);
+    }
   }
   for (let i = 0; i < userInfo.troops.length; i++) {
-    idxMap.set(userInfo.troops[i].name, i);
+    if(userInfo.troops[i].village==='home'){
+      idxMap.set(userInfo.troops[i].name, i);
+    }
   }
   return idxMap;
 }
