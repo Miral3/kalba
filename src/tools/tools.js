@@ -41,7 +41,7 @@ export function expectedRole(role, idx, donations) {
       if (donations > 500) {
         if (coLeaderCnt > 0) {
           coLeaderCnt--;
-          return '공동대표';
+          return '공대';
         } else {
           if (adminCnt > 0) {
             adminCnt--;
@@ -57,7 +57,7 @@ export function expectedRole(role, idx, donations) {
       } else {
         if (coLeaderCnt > 0) {
           coLeaderCnt--;
-          return '공동대표';
+          return '공대';
         } else {
           if (adminCnt > 0) {
             adminCnt--;

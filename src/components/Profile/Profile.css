@@ -1,7 +1,13 @@
 li {
   list-style: none;
 }
-
+.userRole,
+.clanName,
+.rankingHeader,
+.type,
+.leagueName {
+  font-family: "NotoSansKR-Black";
+}
 .profileBlock {
   display: block;
   height: auto !important;
@@ -10,6 +16,7 @@ li {
   margin-left: auto;
   padding-bottom: 3rem;
   position: relative !important;
+  font-family: "supercell";
 }
 @media (min-width: 576px) {
   .profileBlock {
@@ -53,11 +60,11 @@ li {
 .profileBlock .userInfo .userNameTagRole .userLevel .level {
   grid-row: 1/1;
   grid-column: 1/1;
-  margin-top: 8px;
+  margin-top: 15px;
   text-align: center;
   font-weight: 700;
-  text-shadow: 1px 2px 1px black;
-  font-size: 20px;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
+  font-size: 15px;
 }
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo {
   padding: 0 0 0 5px;
@@ -65,14 +72,14 @@ li {
 }
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo li {
   line-height: 15px;
-  text-shadow: 1px 2px 1px black;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
 }
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo .userName {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
 }
 .profileBlock .userInfo .userNameTagRole .userNameClanInfo .userTag {
-  font-size: 13px;
+  font-size: 10px;
   color: #c7c9cc;
   font-weight: 600;
 }
@@ -123,9 +130,9 @@ li {
 }
 .profileBlock .clanInfo .clanName {
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
-  text-shadow: 1px 2px 1px black;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
 }
 .profileBlock .clanInfo .clanBadge {
   width: 150px;
@@ -136,7 +143,7 @@ li {
   display: flex;
   flex-direction: column;
   color: white;
-  text-shadow: 1px 2px 1px black;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
   font-weight: 700;
   width: 30%;
 }
@@ -190,6 +197,7 @@ li {
 .profileBlock .userScore .currentScore .leagueContents .leagueNameBlcok {
   background: linear-gradient(to right, #373a46, #8a94ad);
 }
+
 .profileBlock
   .userScore
   .currentScore
@@ -220,7 +228,7 @@ li {
   justify-content: center;
 }
 .profileBlock .userScore .currentScore .leagueContents .score {
-  font-size: 20px;
+  font-size: 15px;
 }
 .profileBlock .userScore .bestScore,
 .profileBlock .userScore .warScore {
@@ -287,6 +295,7 @@ li {
   justify-content: center;
   font-size: 20px;
   font-weight: 700;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
 }
 
 .profileBlock .profileRanking .rankingContents {
@@ -328,7 +337,7 @@ li {
   grid-row: 1/1;
   grid-column: 1/1;
   margin-top: 29px;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
 }
@@ -371,6 +380,7 @@ li {
 
 .profileBlock .profileRanking .rankingContents li .typeAmount .type {
   text-align: left;
+  text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
   margin-bottom: 4px;
 }
 
@@ -384,7 +394,7 @@ li {
 
 .profileBlock .profileRanking .rankingContents .amount .score {
   padding: 4px;
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 50px;
 }
 @media (max-width: 370px) {
@@ -396,7 +406,7 @@ li {
 @media (max-width: 280px) {
   .profileBlock .profileRanking .rankingContents .amount .score {
     padding: 3px;
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 30px;
   }
 }

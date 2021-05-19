@@ -38,19 +38,19 @@ const Army = styled.div`
     display: inline-grid;
   }
   .level, .maxLevel{
-    width: 15px;
-    height: 13px;
+    width: 17px;
+    height: 17px;
     grid-row: 1/1;
     grid-column: 1/1;
-    margin-top: 27px;
+    margin-top: 22px;
     margin-left: 3px;
     background-color: black;
     border: 1px solid #fff;
     border-radius: 3px;
     color: white;
     font-size: 10px;
-    font-weight: 700;
-    text-shadow: 1px 2px 1px black;
+    /* font-weight: 700; */
+    text-shadow: 0px 2px 0px black;
     text-align: center;
   }
   .maxLevel {
@@ -66,7 +66,7 @@ const Army = styled.div`
     color: #fff;
     font-size: 13px;
     font-weight: 700;
-    text-shadow: 1px 2px 1px black;
+    text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
   }
   .townHallBlock {
     display: flex;
@@ -117,17 +117,17 @@ const translateLeague = (engTxt) => {
 const getIdxMap = (userInfo) => {
   let idxMap = new Map();
   for (let i = 0; i < userInfo.heroes.length; i++) {
-    if(userInfo.heroes[i].village==='home'){
+    if (userInfo.heroes[i].village === 'home') {
       idxMap.set(userInfo.heroes[i].name, i);
     }
   }
   for (let i = 0; i < userInfo.spells.length; i++) {
-    if(userInfo.spells[i].village==='home'){
+    if (userInfo.spells[i].village === 'home') {
       idxMap.set(userInfo.spells[i].name, i);
     }
   }
   for (let i = 0; i < userInfo.troops.length; i++) {
-    if(userInfo.troops[i].village==='home'){
+    if (userInfo.troops[i].village === 'home') {
       idxMap.set(userInfo.troops[i].name, i);
     }
   }
@@ -255,13 +255,13 @@ const ProfileInfo = ({ match }) => {
             <span className="space type">전체 최고 기록:</span>
             <div className="space contents">
               <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-              <span>{userInfo.versusTrophies}</span>
+              <span className="score">{userInfo.versusTrophies}</span>
             </div>
           </div>
           <div className="warScore">
             <span className="space type">전쟁 별 획득:</span>
             <div className="space contents">
-              <span>{userInfo.warStars}</span>
+              <span className="score">{userInfo.warStars}</span>
             </div>
           </div>
         </div>

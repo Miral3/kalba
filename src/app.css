@@ -2,3 +2,7 @@
   font-family: "supercell";
   src: url("./font/supercell.ttf");
 }
+@font-face {
+  font-family: "NotoSansKR-Black";
+  src: url("./font/NotoSansKR-Black.otf");
+}
