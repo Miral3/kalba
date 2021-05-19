@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import UserInfo from './UserInfo';
+import { headerDataByType } from '../tools/tools';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -47,17 +48,14 @@ const Container = styled.div`
       width: 40%;
       padding-left: 16px;
     }
-    .trophies,
-    .townHallLevel,
-    .donations,
-    .attackPower {
+    .side {
       width: 10%;
       padding-right:3px;
     }
   }
 `;
 
-const UserList = ({ category }) => {
+const UserList = ({ type }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +63,7 @@ const UserList = ({ category }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const query = category === 'score' ? 'score' : `${category}`;
+        const query = type === 'score' ? 'score' : `${type}`;
         const response = await axios.post(
           `/coc/clan/${query}/rank`, {
           id: "%232Y2Y9YCUU"
@@ -81,7 +79,7 @@ const UserList = ({ category }) => {
       setLoading(false);
     };
     fetchData();
-  }, [category]);
+  }, [type]);
 
   if (loading) {
     return <Container>대기 중...</Container>
@@ -93,18 +91,11 @@ const UserList = ({ category }) => {
     <Container>
       <table id="save-target">
         <thead className="head">
-          <tr>
-            <th className="rank">#</th>
-            <th className="name">이름</th>
-            <th className="trophies">트로피</th>
-            <th className="townHallLevel">홀</th>
-            <th className="attackPower">공격력</th>
-            <th className="donations">지원량</th>
-          </tr>
+          {headerDataByType(type)}
         </thead>
         <tbody>
           {data.map((data, idx) => (
-            <UserInfo key={data.tag} idx={idx + 1} info={data} />
+            <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />
           ))}
         </tbody>
       </table>

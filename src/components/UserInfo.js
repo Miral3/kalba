@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { translateRole } from '../tools/tools';
+import { bodyDataByType } from '../tools/tools';
 
 const UserInfoBlock = styled.tr`
   border: ${({ theme }) => theme.borderColors.list};
@@ -65,42 +65,25 @@ const UserInfoBlock = styled.tr`
         background-color: #FF1593;
       }
   }
-  .trophies,
-  .townHallLevel,
-  .donations,
-  .attackPower {
+  .side {
     color: ${({ theme }) => theme.fontColors.listInfo};
     width: 10%;
   }
 `;
 
-const colorByRole = (name, role) => {
-  return <div>
-    <a className="name" href={`/profile/${name}`}>
-      {name}
-    </a>
-    <span className={"role " + role}>{translateRole(role, false)}</span>
-  </div>
-}
+// const colorByRole = (name, role) => {
+//   return <div>
+//     <a className="name" href={`/profile/${name}`}>
+//       {name}
+//     </a>
+//     <span className={"role " + role}>{translateRole(role, false)}</span>
+//   </div>
+// }
 
-const UserInfo = ({ idx, info }) => {
-  const { league, name, role, trophies, townHallLevel, donations, yonghaScore } = info;
-
+const UserInfo = ({ idx, info, type }) => {
   return (
     <UserInfoBlock>
-      <td className="rank">{idx}</td>
-      <td className="names">
-        <span className="hiddenRank">#{idx}</span>
-        {league && (
-          // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny} />
-        )}
-        {colorByRole(name, role)}
-      </td>
-      <td className="trophies">{trophies}</td>
-      <td className="townHallLevel">{townHallLevel}</td>
-      <td className="attackPower">{yonghaScore}</td>
-      <td className="donations">{donations}</td>
+      {bodyDataByType(type, info, idx)}
     </UserInfoBlock>
   );
 };

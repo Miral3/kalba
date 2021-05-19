@@ -5,6 +5,7 @@ import { VscLoading } from 'react-icons/vsc'
 import styled from 'styled-components';
 
 import UserInfo from './UserInfo';
+import { headerDataByType } from '../tools/tools';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -80,10 +81,7 @@ const Container = styled.div`
       width: 40%;
       padding-left: 16px;
     }
-    .trophies,
-    .townHallLevel,
-    .donations,
-    .attackPower {
+    .side {
       width: 10%;
       padding-right:3px;
     }
@@ -159,18 +157,11 @@ const RankingList = ({ title, type }) => {
       </div>
       <table>
         <thead className="blockHead">
-          <tr>
-            <th className="rank">#</th>
-            <th className="name">이름</th>
-            <th className="trophies">트로피</th>
-            <th className="townHallLevel">홀</th>
-            <th className="attackPower">공격력</th>
-            <th className="donations">지원량</th>
-          </tr>
+          {headerDataByType(type)}
         </thead>
         <tbody>
           {donationData.slice(0, 10).map((data, idx) => (
-            <UserInfo key={data.tag} idx={idx + 1} info={data} />
+            <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />
           ))}
         </tbody>
       </table>

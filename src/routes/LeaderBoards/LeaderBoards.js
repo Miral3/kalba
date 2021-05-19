@@ -84,7 +84,7 @@ const items = [
 ];
 
 const saveBoard = () => {
-  const target=document.getElementById('save-target')
+  const target = document.getElementById('save-target')
   window.scrollTo(0, 0);
   let moveX=isMobile()?0:-8;
   html2canvas(target, {scrollX: moveX}).then(canvas => {
@@ -122,12 +122,12 @@ const downloadURL = (url, fileName) => {
 }
 
 const LeaderBoards = ({ match }) => {
-  const category = match.params.category || 'score';
+  const type = match.params.category || 'score';
   return (
     <Container>
       <Categories items={items} type="leaderboards" any="score" />
       <div>
-        <UserList category={category} />
+        <UserList type={type} />
       </div>
       <ButtonWrap>
         <Button
@@ -146,12 +146,12 @@ const LeaderBoards = ({ match }) => {
 }
 
 const extractTableToXLSX = () => {
-  let target=document.getElementById('save-target').cloneNode(true);
-  let spanArr=target.querySelectorAll("span");
-  for(let i=0; i<spanArr.length; i++){
-    spanArr[i].innerText='';
+  let target = document.getElementById('save-target').cloneNode(true);
+  let spanArr = target.querySelectorAll("span");
+  for (let i = 0; i < spanArr.length; i++) {
+    spanArr[i].innerText = '';
   }
-  let wb = XLSX.utils.table_to_book(target, {sheet:"ranking list",raw:true});
+  let wb = XLSX.utils.table_to_book(target, { sheet: "ranking list", raw: true });
   XLSX.writeFile(wb, ('ranking_list.xlsx'));
 }
 
