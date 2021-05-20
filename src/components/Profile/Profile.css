@@ -1,13 +1,6 @@
 li {
   list-style: none;
 }
-.userRole,
-.clanName,
-.rankingHeader,
-.type,
-.leagueName {
-  font-family: "NotoSansKR-Black";
-}
 .profileBlock {
   display: block;
   height: auto !important;
@@ -16,7 +9,7 @@ li {
   margin-left: auto;
   padding-bottom: 3rem;
   position: relative !important;
-  font-family: "supercell";
+  font-family: "supercell+NotoSansKR";
 }
 @media (min-width: 576px) {
   .profileBlock {
@@ -131,7 +124,6 @@ li {
 .profileBlock .clanInfo .clanName {
   color: white;
   font-size: 13px;
-  font-weight: 700;
   text-shadow: -1px 0 black, 0 3px black, 1px 0 black, 0 -1px black;
 }
 .profileBlock .clanInfo .clanBadge {
@@ -194,7 +186,7 @@ li {
 .profileBlock .userScore .currentScore .leagueContents .trophy {
   width: 30px;
 }
-.profileBlock .userScore .currentScore .leagueContents .leagueNameBlcok {
+.profileBlock .userScore .currentScore .leagueContents .leagueNameBlock {
   background: linear-gradient(to right, #373a46, #8a94ad);
 }
 .leagueName {
@@ -204,7 +196,7 @@ li {
   .userScore
   .currentScore
   .leagueContents
-  .leagueNameBlcok
+  .leagueNameBlock
   .leagueName {
   font-size: 13px;
 }
@@ -213,7 +205,7 @@ li {
     .userScore
     .currentScore
     .leagueContents
-    .leagueNameBlcok
+    .leagueNameBlock
     .leagueName {
     font-size: 12px;
   }

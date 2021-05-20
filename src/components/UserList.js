@@ -47,10 +47,18 @@ const Container = styled.div`
       text-align:left;
       width: 40%;
       padding-left: 16px;
+      @media (max-width: 425px) {
+        width: 20%;
+      }
     }
     .side {
       width: 10%;
       padding-right:3px;
+    }
+    .currentRole, .expectedRole {
+      @media (max-width: 340px) {
+        font-size: 12px;
+      }
     }
   }
 `;

@@ -39,17 +39,16 @@ const Army = styled.div`
   }
   .level, .maxLevel{
     width: 17px;
-    height: 17px;
+    height: 15px;
     grid-row: 1/1;
     grid-column: 1/1;
-    margin-top: 22px;
+    margin-top: 24px;
     margin-left: 3px;
     background-color: black;
     border: 1px solid #fff;
     border-radius: 3px;
     color: white;
     font-size: 10px;
-    /* font-weight: 700; */
     text-shadow: 0px 2px 0px black;
     text-align: center;
   }
@@ -78,7 +77,7 @@ const Army = styled.div`
     margin: 28px 0;
   }
   .troops, .spells, .siegeMachines {
-    @media (min-width: 768px) {
+    @media (min-width: 769px) {
       width: 440px;
     }
   }
@@ -242,7 +241,7 @@ const ProfileInfo = ({ match }) => {
               alt="leagueBadge"
             />
             <div className="leagueContents">
-              <div className="leagueNameBlcok">
+              <div className="leagueNameBlock">
                 <span className="leagueName">{translateLeague(userInfo.league.name)}</span>
               </div>
               <div className="leagueScore">

@@ -19,7 +19,7 @@ padding: 50px 0;
     span {
       color: black;
       font-size: 50px;
-      font-family: "supercell";
+      font-family: "supercell+NotoSansKR";
     }
   }
   .team-info {

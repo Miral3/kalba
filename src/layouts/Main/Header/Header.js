@@ -66,7 +66,7 @@ const HeaderBlock = styled.div`
     color: white;
     max-width: 140px;
     font-size: 35px;
-    font-family: "supercell";
+    font-family: "supercell+NotoSansKR";
     @media (min-width: 768px) {
       max-width: 160px;
     }

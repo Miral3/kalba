@@ -1,8 +1,4 @@
 @font-face {
-  font-family: "supercell";
-  src: url("./font/supercell.ttf");
-}
-@font-face {
-  font-family: "NotoSansKR-Black";
-  src: url("./font/NotoSansKR-Black.otf");
+  font-family: "supercell+NotoSansKR";
+  src: url("./font/supercell+NotoSansKR.ttf");
 }
