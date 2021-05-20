@@ -46,24 +46,16 @@ const UserInfoBlock = styled.tr`
         border-bottom: ${({ theme }) => theme.borderColors.listName};
       }
     }
-    .role {
-      margin-left: 2px;
-      padding: 2px;
-      color: white;
-      border-radius: 4px;
-      word-break: keep-all;
-      line-height: 200%;
-      font-weight: 600;
-    }
-    .leader {
-        background-color: #FFBB00;
-      }
-      .coLeader {
-        background-color: #FF7803;
-      }
-      .admin {
-        background-color: #FF1593;
-      }
+  }
+  .leader {
+    color: #FFBB00 !important;
+    
+  }
+  .coLeader {
+    color: #FF7803 !important;
+  }
+  .admin {
+    color: #FF1593 !important;
   }
   .side {
     color: ${({ theme }) => theme.fontColors.listInfo};

@@ -21,14 +21,14 @@ const HeaderBlock = styled.div`
     }
   }
   background-color: #383e4c;
-  height: 140px;
+  height: 150px;
   @media (min-width: 768px) {
     height: 200px;
   }
   .kalba__logo__insert {
     display: flex;
     flex-direction: column;
-    height: 90px;
+    height: 100px;
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -49,8 +49,7 @@ const HeaderBlock = styled.div`
     }
   }
   .kalba__logo__insert .logo {
-    margin-left: 15px;
-    margin-top: 5px;
+    margin: 10px 0 10px 15px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -91,7 +90,6 @@ const HeaderBlock = styled.div`
   }
   .insert {
     float: right;
-    margin-top: 5px;
     width: auto;
     margin-left: 10px;
     margin-right: 3rem;
