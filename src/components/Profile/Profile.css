@@ -138,7 +138,11 @@ li {
   font-weight: 700;
   width: 30%;
 }
-
+@media (max-width: 545px) {
+  .profileBlock .userScore {
+    width: auto;
+  }
+}
 .profileBlock .userScore .currentScore {
   display: inline-grid;
   text-align: center;
@@ -345,22 +349,16 @@ li {
   font-weight: 700;
   text-align: center;
 }
-@media (max-width: 375px) {
-  .profileBlock .profileRanking .rankingContents li .ranking {
-    margin-top: 23px;
-    font-size: 21px;
-  }
-}
 @media (max-width: 405px) {
   .profileBlock .profileRanking .rankingContents li .ranking {
     margin-top: 21px;
-    font-size: 21px;
+    font-size: 18px;
   }
 }
 @media (max-width: 370px) {
   .profileBlock .profileRanking .rankingContents li .ranking {
     margin-top: 19px;
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 .profileBlock .profileRanking .rankingContents li .typeAmount {
