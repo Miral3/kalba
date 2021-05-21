@@ -181,6 +181,7 @@ li {
 @media (max-width: 545px) {
   .profileBlock .userScore .currentScore .leagueContents {
     margin: 0;
+    width: 100px;
   }
 }
 .profileBlock .userScore .currentScore .leagueContents .trophy {
