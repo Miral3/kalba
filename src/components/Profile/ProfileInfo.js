@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import './Profile.css'
 import styled from 'styled-components';
-import { FaRegCopy, FaCertificate } from "react-icons/fa";
+import { FaRegCopy } from "react-icons/fa";
 
 import axios from 'axios';
 import ClanInfo from '../ClanInfo';
@@ -196,9 +196,7 @@ const ProfileInfo = ({ match }) => {
         <div className="userInfo">
           <div className="userNameTagRole">
             <span className="userLevel">
-              <i className="icon">
-                <FaCertificate />
-              </i>
+              <img className="icon" src="/COC/user-level.png" alt="level" />
               <span className="level">{userInfo.expLevel}</span>
             </span>
             <ul className="userNameClanInfo">
@@ -277,7 +275,9 @@ const ProfileInfo = ({ match }) => {
               <span className="type attackPower">공격력</span>
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-                <span className="score">{userInfo.yonghaScore}</span>
+                <div className="scoreDiv">
+                  <span className="score">{userInfo.yonghaScore}</span>
+                </div>
               </div>
             </div>
           </li>
@@ -290,7 +290,9 @@ const ProfileInfo = ({ match }) => {
               <span className="type donations">지원량</span>
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
+                <div className="scoreDiv">
                 <span className="score">{userInfo.donations}</span>
+                </div>
               </div>
             </div>
           </li>
