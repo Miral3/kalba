@@ -258,6 +258,7 @@ const ProfileInfo = ({ match }) => {
           <div className="warScore">
             <span className="space type">전쟁 별 획득:</span>
             <div className="space contents">
+              <img className="warStar" src="/COC/war-star.png" alt="warStar" />
               <span className="score">{userInfo.warStars}</span>
             </div>
           </div>

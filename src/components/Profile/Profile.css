@@ -257,6 +257,7 @@ li {
   display: flex;
   justify-content: center;
   align-content: center;
+  position: relative;
 }
 @media (max-width: 300px) {
   .profileBlock .userScore .bestScore .contents,
@@ -268,6 +269,14 @@ li {
   width: 21px;
   height: 21px;
   margin-top: 1px;
+}
+
+.profileBlock .userScore .warStar {
+  width: 40px;
+  height: 40px;
+  left: -15%;
+  top: -35%;
+  position: absolute;
 }
 
 /* ranking */
