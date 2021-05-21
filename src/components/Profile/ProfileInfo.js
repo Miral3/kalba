@@ -292,7 +292,7 @@ const ProfileInfo = ({ match }) => {
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 <div className="scoreDiv">
-                <span className="score">{userInfo.donations}</span>
+                  <span className="score">{userInfo.donations}</span>
                 </div>
               </div>
             </div>
