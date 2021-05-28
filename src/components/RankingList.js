@@ -87,6 +87,10 @@ const Container = styled.div`
     .side {
       width: 10%;
       padding-right:3px;
+      @media (min-width: 992px) and (max-width: 1165px) {
+        font-size: 12px;
+        width: 13%;
+      }
     }
     .currentRole, .expectedRole {
       @media (max-width: 340px) {
