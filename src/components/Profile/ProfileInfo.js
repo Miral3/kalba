@@ -38,7 +38,7 @@ const Army = styled.div`
     display: inline-grid;
   }
   .level, .maxLevel{
-    width: 17px;
+    width: 18.5px;
     height: 15px;
     grid-row: 1/1;
     grid-column: 1/1;
@@ -252,7 +252,7 @@ const ProfileInfo = ({ match }) => {
             <span className="space type">전체 최고 기록:</span>
             <div className="space contents">
               <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-              <span className="score">{userInfo.versusTrophies}</span>
+              <span className="score">{userInfo.bestTrophies}</span>
             </div>
           </div>
           <div className="warScore">
