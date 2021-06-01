@@ -31,57 +31,39 @@ export function isMobile() {
 
 let cutLine, coLeaderCnt, adminCnt;
 export function expectedRole(role, idx, donations) {
-  if (idx <= cutLine) {
+  if (idx <= cutLine && donations >= 1000) {
     if (role === 'member') {
       if (adminCnt > 0) {
         adminCnt--;
         return '장로';
       }
     } else if (role === 'admin') {
-      if (donations > 500) {
-        if (coLeaderCnt > 0) {
-          coLeaderCnt--;
-          return '공대';
-        } else {
-          if (adminCnt > 0) {
-            adminCnt--;
-            return '장로';
-          }
-        }
+      if (coLeaderCnt > 0) {
+        coLeaderCnt--;
+        return '공대';
+      } else if (adminCnt > 0) {
+        adminCnt--;
+        return '장로';
       } else {
         return '멤버';
       }
     } else if (role === 'coLeader') {
-      if (donations < 1000) {
-        return '멤버';
-      } else {
-        if (coLeaderCnt > 0) {
-          coLeaderCnt--;
-          return '공대';
-        } else {
-          if (adminCnt > 0) {
-            adminCnt--;
-            return '장로';
-          }
-        }
+      if (coLeaderCnt > 0) {
+        coLeaderCnt--;
+        return '공대';
+      } else if (adminCnt > 0) {
+        adminCnt--;
+        return '장로';
       }
     } else if (role === 'leader') {
       cutLine++;
       return '-';
     }
   } else {
-    if (role === 'member') {
-      return '멤버';
-    } else if (role === 'admin') {
-      return '멤버';
-    } else if (role === 'coLeader') {
-      if (donations > 1000) {
-        return '장로';
-      } else {
-        return '멤버';
-      }
-    } else if (role === 'leader') {
+    if (role === 'leader') {
       return '-';
+    } else {
+      return '멤버';
     }
   }
 }
