@@ -276,9 +276,9 @@ const ProfileInfo = ({ match }) => {
               <span className="type attackPower">공격력</span>
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-                <div className="scoreDiv">
-                  <span className="score">{userInfo.yonghaScore}</span>
-                </div>
+                {/* <div className="scoreDiv"> */}
+                <span className="score">{userInfo.yonghaScore}</span>
+                {/* </div> */}
               </div>
             </div>
           </li>
