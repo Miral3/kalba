@@ -1,6 +1,6 @@
 package kalba.controller;
 
-import kalba.handler.ClanMemberHandler;
+import kalba.repository.ClanMemberRepository;
 import kalba.model.ClanId;
 import kalba.model.ClanMember;
 import org.springframework.web.bind.annotation.*;
@@ -13,29 +13,29 @@ public class ClanController {
     @ResponseBody
     @PostMapping("info")
     public Map<Object, Object> clanInfo(@RequestBody ClanId id) {
-        while (ClanMemberHandler.loadingMap.get(id.getId()).get()) ;
-        return ClanMemberHandler.clanInfoMap.get(id.getId());
+        while (ClanMemberRepository.loadingMap.get(id.getId()).get()) ;
+        return ClanMemberRepository.clanInfoMap.get(id.getId());
     }
 
     @ResponseBody
     @PostMapping("/donations/rank")
     public List<ClanMember> memberDonationRank(@RequestBody ClanId id) {
-        while (ClanMemberHandler.loadingMap.get(id.getId()).get()) ;
-        return ClanMemberHandler.clanMemberSortedByDonationsMap.get(id.getId());
+        while (ClanMemberRepository.loadingMap.get(id.getId()).get()) ;
+        return ClanMemberRepository.clanMemberSortedByDonationsMap.get(id.getId());
     }
 
     @ResponseBody
     @PostMapping("/score/rank")
     public List<ClanMember> memberYonghaScoreRank(@RequestBody ClanId id) {
-        while (ClanMemberHandler.loadingMap.get(id.getId()).get()) ;
-        return ClanMemberHandler.clanMemberSortedByYHScoreMap.get(id.getId());
+        while (ClanMemberRepository.loadingMap.get(id.getId()).get()) ;
+        return ClanMemberRepository.clanMemberSortedByYHScoreMap.get(id.getId());
     }
 
     @ResponseBody
     @PostMapping("/force/update")
     public Map<String, String> forceUpdateClanInfo(@RequestBody ClanId id) {
         Map<String, String> result = new HashMap<>();
-        if (ClanMemberHandler.updateClanInfo(id.getId())) {
+        if (ClanMemberRepository.updateClanInfo(id.getId())) {
             result.put("status", "200");
             result.put("message", "강제 갱신에 성공하였습니다.");
         } else {

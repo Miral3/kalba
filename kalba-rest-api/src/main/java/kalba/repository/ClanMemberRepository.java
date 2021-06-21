@@ -1,4 +1,4 @@
-package kalba.handler;
+package kalba.repository;
 
 import kalba.config.ReadConfig;
 import kalba.model.ClanMember;
@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClanMemberHandler extends Thread {
+public class ClanMemberRepository extends Thread {
     public final static Set<String> clanCodeSet = ConcurrentHashMap.newKeySet();
     public static final Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
     public static final Map<String, Map<Object, Object>> clanInfoMap = new ConcurrentHashMap<>();
@@ -130,7 +130,7 @@ public class ClanMemberHandler extends Thread {
                 League league = new League();
                 if (memberInfo.get("league") != null) {
                     LinkedHashMap<Object, Object> leagueInfo = (LinkedHashMap<Object, Object>) memberInfo.get("league");
-                    league.setId((Integer) leagueInfo.get("id"));
+                        league.setId((Integer) leagueInfo.get("id"));
                     league.setName((String) leagueInfo.get("name"));
                     LinkedHashMap<Object, Object> iconInfo = (LinkedHashMap<Object, Object>) leagueInfo.get("iconUrls");
                     league.setIconTiny((String) iconInfo.get("tiny"));
