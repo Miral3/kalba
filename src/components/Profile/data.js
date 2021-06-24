@@ -103,6 +103,10 @@ export const troopsInfo = [
     className: "yeti",
     source: "Yeti.png"
   }, {
+    name: "Dragon Rider",
+    className: "dragonRider",
+    source: "Dragon_Rider.png"
+  }, {
     name: "Minion",
     className: "minion",
     source: "Minion.png"

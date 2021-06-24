@@ -164,7 +164,7 @@ const RankingList = ({ title, type }) => {
           <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
           <Link to={`/leaderboards/${type}`} className="addBtn">
             더보기
-            </Link>
+          </Link>
         </div>
       </div>
       <table>

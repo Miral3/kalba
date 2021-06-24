@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const siegeMachines = [["파괴 전차", 25, 4, 6.25],
+const siegeMachines = [["파괴 전차", 20, 4, 5],
 ["전투 비행선", 30, 4, 7.5],
 ["바위 비행선", 20, 4, 5],
-["시즈 훈련소", 25, 4, 6.25],
-["통나무 발사기", 25, 4, 6.25]];
+["시즈 훈련소", 20, 4, 5],
+["통나무 발사기", 30, 4, 7.5]];
 
 const set = siegeMachines.map((arr, idx) =>
   <tr className="type troops" key={idx}>
