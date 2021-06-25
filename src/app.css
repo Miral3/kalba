@@ -2,3 +2,11 @@
   font-family: "supercell+NotoSansKR";
   src: url("./font/supercell+NotoSansKR.ttf");
 }
+@font-face {
+  font-family: "cocLight";
+  src: url("./font/COC_light.ttf");
+}
+@font-face {
+  font-family: "cocOpen";
+  src: url("./font/COC_Open.ttf");
+}

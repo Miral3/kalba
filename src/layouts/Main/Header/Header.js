@@ -74,7 +74,6 @@ const HeaderBlock = styled.div`
     margin-left: 12px;
     margin-top: 24px;
     padding: 8px;
-    height: 16px;
     color: white;
     font-size: 15px;
     font-weight: 700;
@@ -103,7 +102,8 @@ const HeaderBlock = styled.div`
 const Header = () => {
   const items = [
     { label: "순위표", href: "/leaderboards/score" },
-    { label: "기준표", href: "/standardTable/heroes" }
+    { label: "기준표", href: "/standardTable/heroes" },
+    { label: "퀴즈", href: "/Quiz" },
   ];
 
   return (
