@@ -30,6 +30,7 @@ export function isMobile() {
 }
 
 let cutLine, coLeaderCnt, adminCnt;
+
 export function expectedRole(role, idx, donations) {
   if (idx <= cutLine && donations >= 1000) {
     if (role === 'member') {
@@ -101,7 +102,7 @@ export function bodyDataByType(type, info, idx) {
         <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny} />
+          <img className="icon" src={league.iconTiny}/>
         )}
         <a className="name" href={`/profile/${name}`}>
           {name}
@@ -118,7 +119,7 @@ export function bodyDataByType(type, info, idx) {
         <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny} />
+          <img className="icon" src={league.iconTiny}/>
         )}
         <a className="name" href={`/profile/${name}`}>
           {name}
@@ -129,4 +130,43 @@ export function bodyDataByType(type, info, idx) {
       <td className="expectedRole side">{expectedRole(role, idx, donations)}</td>
     </>
   }
+}
+
+export function getPromotionDate() {
+  let date = new Date();
+  let firstMonDate = new Date(date.getFullYear(), date.getMonth(), 1);
+  if (firstMonDate.getDay() != 0) {
+    firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
+  }
+  firstMonDate.setDate(firstMonDate.getDate() + 1);
+  firstMonDate.setHours(22);
+  return firstMonDate;
+}
+
+export function getLeagueStartDate() {
+  let date = new Date();
+  let lastMonDate;
+  if (date.getMonth() != 11) {
+    lastMonDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+  } else {
+    lastMonDate = new Date(date.getFullYear() + 1, 1, 1);
+  }
+  if (lastMonDate.getDay() == 0) {
+    lastMonDate.setDate(lastMonDate.getDate() - 7);
+  } else {
+    lastMonDate.setDate(lastMonDate.getDate() - lastMonDate.getDay());
+  }
+  lastMonDate.setDate(lastMonDate.getDate() - 1);
+  lastMonDate.setHours(22);
+  return lastMonDate;
+}
+
+export function isSeasonPeriod() {
+  let date = new Date();
+  let firstMondayDate = getPromotionDate();
+  return date >= firstMondayDate;
+}
+
+export function calRemainTime(curTime, closeTime) {
+  return new Date(closeTime - curTime);
 }
