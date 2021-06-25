@@ -132,25 +132,25 @@ export function bodyDataByType(type, info, idx) {
   }
 }
 
-export function getPromotionDate() {
-  let date = new Date();
-  let firstMonDate = new Date(date.getFullYear(), date.getMonth(), 1);
+export function getPromotionDate(time) {
+  let firstMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
   if (firstMonDate.getDay() != 0) {
     firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
   }
   firstMonDate.setDate(firstMonDate.getDate() + 1);
   firstMonDate.setHours(22);
+  let curTime = new Date();
+  if(firstMonDate<=curTime){
+    firstMonDate.setMonth(curTime.getMonth()+1);
+    return getPromotionDate(firstMonDate);
+  }
   return firstMonDate;
 }
 
-export function getLeagueStartDate() {
+export function getLeagueStartDate(time) {
   let date = new Date();
-  let lastMonDate;
-  if (date.getMonth() != 11) {
-    lastMonDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-  } else {
-    lastMonDate = new Date(date.getFullYear() + 1, 1, 1);
-  }
+  let lastMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
+  lastMonDate.setMonth(lastMonDate.getMonth()+1);
   if (lastMonDate.getDay() == 0) {
     lastMonDate.setDate(lastMonDate.getDate() - 7);
   } else {
@@ -158,6 +158,11 @@ export function getLeagueStartDate() {
   }
   lastMonDate.setDate(lastMonDate.getDate() - 1);
   lastMonDate.setHours(22);
+  let curTime = new Date();
+  if(lastMonDate<=curTime){
+    lastMonDate.setMonth(curTime.getMonth()+1);
+    return getPromotionDate(lastMonDate);
+  }
   return lastMonDate;
 }
 
