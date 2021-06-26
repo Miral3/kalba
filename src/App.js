@@ -14,6 +14,7 @@ import Quiz from './routes/Quiz';
 import Profile from './routes/Profile';
 import NotFoundPage from './routes/NotFoundPage';
 import About from './routes/About';
+import Register from './routes/Register';
 
 const App = () => {
   return (
@@ -54,6 +55,11 @@ const App = () => {
             path="/about"
             layout={MainLayout}
             component={About}
+          />
+          <RouteWithLayout
+            path="/register"
+            layout={MainLayout}
+            component={Register}
           />
           <RouteWithLayout
             path="/not-found"
