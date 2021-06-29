@@ -12,11 +12,11 @@ const HeaderBlock = styled.div`
   a {
     text-decoration: none !important;
     &:link {
-      color: black;
+    color: black;
     text-decoration: none;
     }
     &:visited {
-      color: black;
+    color: black;
     text-decoration: none;
     }
   }
@@ -97,13 +97,18 @@ const HeaderBlock = styled.div`
       margin-right: 20px;
     }
   }
+  .login {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
 `;
 
-const Header = () => {
+const Header = ({ children }) => {
   const items = [
     { label: "순위표", href: "/leaderboards/score" },
     { label: "기준표", href: "/standardTable/heroes" },
-    { label: "퀴즈", href: "/Quiz" },
+    // { label: "퀴즈", href: "/Quiz" },
   ];
 
   return (
@@ -116,6 +121,9 @@ const Header = () => {
         <div className="insert">
           <HeaderInsert />
         </div>
+      </div>
+      <div className="login">
+        {children}
       </div>
       <div className="category">
         < HeaderNav items={items} />
