@@ -247,13 +247,22 @@ const Quiz = () => {
     </div>
   }
 
+  const highlightQuestion = (question) => {
+    const questionSplitted = question.split("--");
+    if(questionSplitted.length==3){
+      return <>{questionSplitted[0]}<ins><b>{questionSplitted[1]}</b></ins>{questionSplitted[2]}</>;
+    } else {
+        return question;
+    }
+  }
+
   const createQuiz = () => {
     const index = idx - 1;
     return <>
       <span className="remain">남은 문항 수: {data.length - idx}</span>
       <div className="quizBlock">
         <span className="question">
-          {data[index].question}
+          {highlightQuestion(data[index].question)}
         </span>
         <ul className="options">
           <li className="option">
