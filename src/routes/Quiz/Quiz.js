@@ -63,7 +63,7 @@ const QuizBlock = styled.div`
     .title {
       font-family: "cocOpen";
       font-size: 50px;
-      margin-bottom: 200px;
+      margin-bottom: 150px;
       @media(max-width: 500px) {
         font-size: 45px;
       }

@@ -21,7 +21,7 @@ let questionedata = [
       "본인 번호의 최대 ±10번 내에서 자유롭게 공격할 수 있다",
       "5회 연속으로 불참하면 추방한다."
     ],
-    rightAnswer: [4, 5]
+    rightAnswer: [1, 4, 5]
   },
   {
     id: 3,
