@@ -250,9 +250,18 @@ const Quiz = () => {
   const highlightQuestion = (question) => {
     const questionSplitted = question.split("--");
     if(questionSplitted.length==3){
-      return <>{questionSplitted[0]}<ins><b>{questionSplitted[1]}</b></ins>{questionSplitted[2]}</>;
+      return <>{boldText(questionSplitted[0])}<ins><b>{boldText(questionSplitted[1])}</b></ins>{boldText(questionSplitted[2])}</>;
     } else {
-        return question;
+        return boldText(question);
+    }
+  }
+
+  const boldText = (text) => {
+    const textSplitted = text.split("*");
+    if(textSplitted.length==3){
+      return <>{textSplitted[0]}<b>{textSplitted[1]}</b>{textSplitted[2]}</>;
+    } else {
+      return text;
     }
   }
 
