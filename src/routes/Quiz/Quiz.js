@@ -247,19 +247,19 @@ const Quiz = () => {
     </div>
   }
 
-  const highlightQuestion = (question) => {
-    const questionSplitted = question.split("--");
-    if(questionSplitted.length==3){
-      return <>{boldText(questionSplitted[0])}<ins><b>{boldText(questionSplitted[1])}</b></ins>{boldText(questionSplitted[2])}</>;
+  const highlightText = (text) => {
+    const textSplitted = text.split("--");
+    if(textSplitted.length % 2 == 1){
+      return <>{textSplitted.map((txt, idx) => (idx%2==1?<ins><b>{txt}</b></ins>:boldText(txt)))}</>
     } else {
-        return boldText(question);
+        return boldText(text);
     }
   }
 
   const boldText = (text) => {
     const textSplitted = text.split("*");
-    if(textSplitted.length==3){
-      return <>{textSplitted[0]}<b>{textSplitted[1]}</b>{textSplitted[2]}</>;
+    if(textSplitted.length % 2 == 1){
+      return <>{textSplitted.map((txt, idx) => (idx%2==1?<b>{txt}</b>:txt))}</>
     } else {
       return text;
     }
@@ -271,7 +271,7 @@ const Quiz = () => {
       <span className="remain">남은 문항 수: {data.length - idx}</span>
       <div className="quizBlock">
         <span className="question">
-          {highlightQuestion(data[index].question)}
+          {highlightText(data[index].question)}
         </span>
         <ul className="options">
           <li className="option">
