@@ -5,8 +5,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const KalbaFooter = styled.div`
-  height: 51px;
-  padding: 16px;
+  height: 60px;
+  padding: 5px;
   background-color: ${({ theme }) => theme.bgColors.footer};
   
   .container {
@@ -51,7 +51,7 @@ const Footer = () => {
           <a href="/">
             <span className="kalba-footer__logo">
               Kalba
-              </span>
+            </span>
           </a>
         </div>
         <div className="kalba-footer__contact">

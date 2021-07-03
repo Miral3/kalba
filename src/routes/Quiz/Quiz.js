@@ -249,17 +249,23 @@ const Quiz = () => {
 
   const highlightText = (text) => {
     const textSplitted = text.split("--");
-    if(textSplitted.length % 2 == 1){
-      return <>{textSplitted.map((txt, idx) => (idx%2==1?<ins><b>{txt}</b></ins>:boldText(txt)))}</>
+    if (textSplitted.length % 2 === 1) {
+      return <>
+        {textSplitted.map((txt, idx) => (idx % 2 === 1 ?
+          <ins><b>{txt}</b></ins> : boldText(txt)))}
+      </>
     } else {
-        return boldText(text);
+      return boldText(text);
     }
   }
 
   const boldText = (text) => {
     const textSplitted = text.split("*");
-    if(textSplitted.length % 2 == 1){
-      return <>{textSplitted.map((txt, idx) => (idx%2==1?<b>{txt}</b>:txt))}</>
+    if (textSplitted.length % 2 === 1) {
+      return <>
+        {textSplitted.map((txt, idx) => (idx % 2 === 1 ?
+          <b>{txt}</b> : txt))}
+      </>
     } else {
       return text;
     }

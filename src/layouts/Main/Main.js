@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styled, { createGlobalStyle } from 'styled-components';
 
 /* Sub Components */
-import Header from './Header';
+import Header from '../../containers/Base/HeaderContainer';
 import ThemeToggle from '../../Theme/ThemeToggle';
 import Section from './Section';
 import Footer from './Footer';
@@ -24,13 +24,8 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none !important;
-    &:link {
-      color: black;
-    text-decoration: none;
-    }
     &:visited {
-      color: black;
-    text-decoration: none;
+      text-decoration: none;
     }
   }
   #root {

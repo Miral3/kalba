@@ -14,7 +14,7 @@ import Quiz from './routes/Quiz';
 import Profile from './routes/Profile';
 import NotFoundPage from './routes/NotFoundPage';
 import About from './routes/About';
-import Register from './routes/Register';
+import Auth from './routes/Auth';
 
 const App = () => {
   return (
@@ -57,9 +57,9 @@ const App = () => {
             component={About}
           />
           <RouteWithLayout
-            path="/register"
+            path="/auth"
             layout={MainLayout}
-            component={Register}
+            component={Auth}
           />
           <RouteWithLayout
             path="/not-found"

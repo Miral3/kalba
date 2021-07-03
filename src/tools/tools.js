@@ -102,7 +102,7 @@ export function bodyDataByType(type, info, idx) {
         <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny}/>
+          <img className="icon" src={league.iconTiny} />
         )}
         <a className="name" href={`/profile/${name}`}>
           {name}
@@ -119,7 +119,7 @@ export function bodyDataByType(type, info, idx) {
         <span className="hiddenRank">#{idx}</span>
         {league && (
           // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny}/>
+          <img className="icon" src={league.iconTiny} />
         )}
         <a className="name" href={`/profile/${name}`}>
           {name}
@@ -134,24 +134,24 @@ export function bodyDataByType(type, info, idx) {
 
 export function getPromotionDate(time) {
   let firstMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
-  if (firstMonDate.getDay() != 0) {
+  if (firstMonDate.getDay() !== 0) {
     firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
   }
   firstMonDate.setDate(firstMonDate.getDate() + 1);
   firstMonDate.setHours(22);
   let curTime = new Date();
-  if(firstMonDate<=curTime){
-    firstMonDate.setMonth(curTime.getMonth()+1);
+  if (firstMonDate <= curTime) {
+    firstMonDate.setMonth(curTime.getMonth() + 1);
     return getPromotionDate(firstMonDate);
   }
   return firstMonDate;
 }
 
 export function getLeagueStartDate(time) {
-  let date = new Date();
+  // let date = new Date();
   let lastMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
-  lastMonDate.setMonth(lastMonDate.getMonth()+1);
-  if (lastMonDate.getDay() == 0) {
+  lastMonDate.setMonth(lastMonDate.getMonth() + 1);
+  if (lastMonDate.getDay() === 0) {
     lastMonDate.setDate(lastMonDate.getDate() - 7);
   } else {
     lastMonDate.setDate(lastMonDate.getDate() - lastMonDate.getDay());
@@ -159,8 +159,8 @@ export function getLeagueStartDate(time) {
   lastMonDate.setDate(lastMonDate.getDate() - 1);
   lastMonDate.setHours(22);
   let curTime = new Date();
-  if(lastMonDate<=curTime){
-    lastMonDate.setMonth(curTime.getMonth()+1);
+  if (lastMonDate <= curTime) {
+    lastMonDate.setMonth(curTime.getMonth() + 1);
     return getPromotionDate(lastMonDate);
   }
   return lastMonDate;

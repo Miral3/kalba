@@ -108,7 +108,7 @@ const Header = ({ children }) => {
   const items = [
     { label: "순위표", href: "/leaderboards/score" },
     { label: "기준표", href: "/standardTable/heroes" },
-    // { label: "퀴즈", href: "/Quiz" },
+    { label: "퀴즈", href: "/Quiz" },
   ];
 
   return (
