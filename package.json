@@ -2,7 +2,7 @@
   "name": "kalba",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://34.64.237.17:8080/",
+  "proxy": "http://kalba.kr:8080/",
   "secure": false,
   "dependencies": {
     "@babel/core": "7.12.3",
