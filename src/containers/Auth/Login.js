@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../../redux/modules/auth';
 
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
 
-class Login extends Component {
+const Login = ({ AuthActions, username, password }) => {
 
-  handleChange = (e) => {
-    const { AuthActions } = this.props;
+  const handleChange = (e) => {
     const { name, value } = e.target;
-
     AuthActions.changeInput({
       name,
       value,
@@ -18,37 +16,31 @@ class Login extends Component {
     });
   }
 
-  componentWillUnmount() {
-    const { AuthActions } = this.props;
-    AuthActions.initializeForm('login')
-  }
+  useEffect(() => {
+    return () => AuthActions.initializeForm('login');
+  }, [AuthActions]);
 
-  render() {
-    const { username, password } = this.props.form.toJS();
-    const { handleChange } = this;
-
-    return (
-      <AuthContent title="로그인">
-        <InputWithLabel
-          label="아이디"
-          name="username"
-          placeholder="아이디"
-          value={username}
-          onChange={handleChange}
-        />
-        <InputWithLabel
-          label="비밀번호"
-          name="password"
-          placeholder="비밀번호"
-          type="password"
-          value={password}
-          onChange={handleChange}
-        />
-        <AuthButton>로그인</AuthButton>
-        <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
-      </AuthContent>
-    );
-  }
+  return (
+    <AuthContent title="로그인">
+      <InputWithLabel
+        label="아이디"
+        name="username"
+        placeholder="아이디"
+        value={username}
+        onChange={handleChange}
+      />
+      <InputWithLabel
+        label="비밀번호"
+        name="password"
+        placeholder="비밀번호"
+        type="password"
+        value={password}
+        onChange={handleChange}
+      />
+      <AuthButton>로그인</AuthButton>
+      <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
+    </AuthContent>
+  );
 }
 
 export default connect(
