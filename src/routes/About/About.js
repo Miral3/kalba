@@ -1,5 +1,6 @@
 /* React */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /* Styled */
 import styled from 'styled-components';
@@ -76,9 +77,9 @@ const Home = () => {
 
   return (
     <Container>
-      <div className="logo">
+      <Link className="logo" to="/">
         <span>Kalba</span>
-      </div>
+      </Link>
       <div className="team-info">
         <ul>
           <li>

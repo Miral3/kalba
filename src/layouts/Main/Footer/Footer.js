@@ -1,6 +1,6 @@
 /* React */
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 /* Styled */
 import styled from 'styled-components';
 
@@ -48,16 +48,16 @@ const Footer = () => {
     <KalbaFooter>
       <div className="kalba-footer__content container">
         <div>
-          <a href="/">
+          <Link to="/">
             <span className="kalba-footer__logo">
               Kalba
             </span>
-          </a>
+          </Link>
         </div>
         <div className="kalba-footer__contact">
-          <a href="/about">
+          <Link to="/about">
             <span className="contact">[About us]</span>
-          </a>
+          </Link>
           <span className="right">© Kalba. All Rights Reserved.</span>
         </div>
       </div>
