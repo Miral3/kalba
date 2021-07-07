@@ -11,6 +11,19 @@ const UserInfoBlock = styled.tr`
 
   td {
     padding: 8px 5px;
+    
+    animation-name: fade;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    @keyframes fade{
+      0%,45% {
+        opacity: 0;
+      }
+      100%{
+        opacity: 1;
+      }
+    }
   }
   .rank {
     display: table-cell;

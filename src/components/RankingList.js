@@ -98,6 +98,11 @@ const Container = styled.div`
       }
     }
   }
+  .blank {
+    border: ${({ theme }) => theme.borderColors.list};
+    background-color: ${({ theme }) => theme.bgColors.listContents};
+    height: 42px;
+  }
 `;
 
 const RankingList = ({ title, type }) => {
@@ -105,6 +110,7 @@ const RankingList = ({ title, type }) => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const temporary = new Array(10).fill(0);
 
   const onClick = async () => {
     try {
@@ -148,12 +154,39 @@ const RankingList = ({ title, type }) => {
     // eslint-disable-next-line
   }, [toggle]);
 
-  if (loading) {
-    return <Container>대기 중...</Container>
+  if (loading || !donationData) {
+    return <Container>
+      <div className="blockTitle__addBtn">
+        <span className="title">{title}</span>
+        <div className="btn">
+          {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
+          <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
+          <Link to={`/leaderboards/${type}`} className="addBtn">
+            더보기
+          </Link>
+        </div>
+      </div>
+      <table>
+        <thead className="blockHead">
+          {headerDataByType(type)}
+        </thead>
+        <tbody>
+          {temporary.map((data, idx) => (
+            <tr key={idx} className="blank">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Container>
   }
-  if (!donationData) {
-    return null;
-  }
+  // if (!donationData) {
+  //   return null;
+  // }
 
   return (
     <Container>

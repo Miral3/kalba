@@ -61,11 +61,17 @@ const Container = styled.div`
       }
     }
   }
+  .blank {
+    border: ${({ theme }) => theme.borderColors.list};
+    background-color: ${({ theme }) => theme.bgColors.listContents};
+    height: 42px;
+  }
 `;
 
 const UserList = ({ type }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const temporary = new Array(50).fill(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,12 +95,29 @@ const UserList = ({ type }) => {
     fetchData();
   }, [type]);
 
-  if (loading) {
-    return <Container>대기 중...</Container>
+  if (loading || !data) {
+    return <Container>
+      <table id="save-target">
+        <thead className="head">
+          {headerDataByType(type)}
+        </thead>
+        <tbody>
+          {temporary.map((data, idx) => (
+            <tr key={idx} className="blank">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </Container>
   }
-  if (!data) {
-    return null;
-  }
+  // if (!data) {
+  //   return null;
+  // }
   return (
     <Container>
       <table id="save-target">
