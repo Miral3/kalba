@@ -133,22 +133,14 @@ export function bodyDataByType(type, info, idx) {
 }
 
 export function getLeagueStartDate(time) {
-  let firstMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
-  if (firstMonDate.getDay() !== 1) {
-    if(firstMonDate.getDay()===0){
-      firstMonDate.setDate(firstMonDate.getDate() + 1);
-    } else {
-      firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
-    }
-  }
-  firstMonDate.setDate(firstMonDate.getDate() + 1);
-  firstMonDate.setHours(22);
+  let startDate = new Date(time.getFullYear(), time.getMonth(), 2);
+  startDate.setHours(22);
   let curTime = new Date();
-  if (firstMonDate <= curTime) {
-    firstMonDate.setMonth(curTime.getMonth() + 1);
-    return getLeagueStartDate(firstMonDate);
+  if (startDate <= curTime) {
+    startDate.setMonth(curTime.getMonth() + 1);
+    return getLeagueStartDate(startDate);
   }
-  return firstMonDate;
+  return startDate;
 }
 
 export function getPromotionDate(time) {
