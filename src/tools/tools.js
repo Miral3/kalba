@@ -132,30 +132,29 @@ export function bodyDataByType(type, info, idx) {
   }
 }
 
-export function getPromotionDate(time) {
+export function getLeagueStartDate(time) {
   let firstMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
-  if (firstMonDate.getDay() !== 0) {
-    firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
+  if (firstMonDate.getDay() !== 1) {
+    if(firstMonDate.getDay()===0){
+      firstMonDate.setDate(firstMonDate.getDate() + 1);
+    } else {
+      firstMonDate.setDate(firstMonDate.getDate() + 8 - firstMonDate.getDay());
+    }
   }
   firstMonDate.setDate(firstMonDate.getDate() + 1);
   firstMonDate.setHours(22);
   let curTime = new Date();
   if (firstMonDate <= curTime) {
     firstMonDate.setMonth(curTime.getMonth() + 1);
-    return getPromotionDate(firstMonDate);
+    return getLeagueStartDate(firstMonDate);
   }
   return firstMonDate;
 }
 
-export function getLeagueStartDate(time) {
-  // let date = new Date();
+export function getPromotionDate(time) {
   let lastMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
   lastMonDate.setMonth(lastMonDate.getMonth() + 1);
-  if (lastMonDate.getDay() === 0) {
-    lastMonDate.setDate(lastMonDate.getDate() - 7);
-  } else {
-    lastMonDate.setDate(lastMonDate.getDate() - lastMonDate.getDay());
-  }
+  lastMonDate.setDate(lastMonDate.getDate() - 6 - lastMonDate.getDay());
   lastMonDate.setDate(lastMonDate.getDate() - 1);
   lastMonDate.setHours(22);
   let curTime = new Date();
@@ -166,12 +165,10 @@ export function getLeagueStartDate(time) {
   return lastMonDate;
 }
 
-export function isSeasonPeriod() {
-  let date = new Date();
-  let firstMondayDate = getPromotionDate();
-  return date >= firstMondayDate;
-}
-
 export function calRemainTime(curTime, closeTime) {
   return new Date(closeTime - curTime);
+}
+
+export function printRemainTime(time){
+  console.log("남은시간 : "+(time.getUTCDate()-1)+"일 "+time.getUTCHours()+"시간 "+time.getUTCMinutes()+"분 "+time.getUTCSeconds())
 }
