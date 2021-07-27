@@ -1,3 +1,5 @@
+import React, { useEffect, useRef } from 'react';
+
 export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
 }
@@ -161,6 +163,24 @@ export function calRemainTime(curTime, closeTime) {
   return new Date(closeTime - curTime);
 }
 
-export function printRemainTime(time){
-  console.log("남은시간 : "+(time.getUTCDate()-1)+"일 "+time.getUTCHours()+"시간 "+time.getUTCMinutes()+"분 "+time.getUTCSeconds())
+export function printRemainTime(time) {
+  return "남은시간 : " + (time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 " + time.getUTCMinutes() + "분 " + time.getUTCSeconds()
+}
+
+export function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }

@@ -1,5 +1,5 @@
 /* React */
-import React from 'react';
+import React, { useState } from 'react';
 
 /* Styled */
 import styled from 'styled-components';
@@ -9,7 +9,8 @@ import Categories from '../../components/Categories/Category';
 import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
 import XLSX from 'xlsx';
-import {isMobile} from "../../tools/tools";
+import { isMobile } from "../../tools/tools";
+import { getPromotionDate, getLeagueStartDate, calRemainTime, printRemainTime, useInterval } from '../../tools/tools';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -78,6 +79,26 @@ const Button = styled.div`
     }
 `
 
+const CountDown = styled.div`
+  height: auto !important;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  position: relative !important;
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  background-color: ${({ theme }) => theme.bgColors.category};
+  font-size: 18px;
+  padding: 15px;
+  border: ${({ theme }) => theme.borderColors.category};
+  border-top-width: 0px;
+`
+
 const items = [
   { name: 'score', text: '공격력' },
   { name: 'donations', text: '지원량' }
@@ -86,8 +107,8 @@ const items = [
 const saveBoard = () => {
   const target = document.getElementById('save-target')
   window.scrollTo(0, 0);
-  let moveX=isMobile()?0:-8;
-  html2canvas(target, {scrollX: moveX}).then(canvas => {
+  let moveX = isMobile() ? 0 : -8;
+  html2canvas(target, { scrollX: moveX }).then(canvas => {
     download(canvas.toDataURL(), "ranking_list.png");
   });
 };
@@ -121,11 +142,35 @@ const downloadURL = (url, fileName) => {
   link.click();
 }
 
+const Count = () => {
+  let [promtionTime, setPromotionTime] = useState(null);
+  let [leagueTime, setLeagueTime] = useState(null);
+
+  useInterval(() => {
+    setPromotionTime(calRemainTime(new Date(), getPromotionDate(new Date())));
+    setLeagueTime(calRemainTime(new Date(), getLeagueStartDate(new Date())));
+  }, 1000);
+
+  if (promtionTime != null && leagueTime != null) {
+    return <div>
+      <div className='league'>
+        <span>승강전 : {printRemainTime(promtionTime)}</span>
+      </div>
+      <div className='promotion'>
+        <span>리그전 : {printRemainTime(leagueTime)}</span>
+      </div>
+    </div>
+  }
+}
+
 const LeaderBoards = ({ match }) => {
   const type = match.params.category || 'score';
   return (
     <Container>
       <Categories items={items} type="leaderboards" any="score" />
+      <CountDown>
+        {Count()}
+      </CountDown>
       <div>
         <UserList type={type} />
       </div>

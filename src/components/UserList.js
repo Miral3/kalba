@@ -27,6 +27,7 @@ const Container = styled.div`
   }
   .head tr{
     th {
+    z-index: 1;
     position: sticky;
     top:0;
     background-color: ${({ theme }) => theme.bgColors.listSecondHeader};

@@ -1,10 +1,15 @@
-import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware, compose } from 'redux';
+import penderMiddleware from 'redux-pender';
 import modules from './modules';
 
-// Todo: 미들웨어, react-hot-loader 적용
+const isDevelopment = process.env.NODE_ENV === 'development';
+const composeEnhancers = isDevelopment ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose;
+
 const configureStore = (initialState) => {
-  const store = createStore(modules, composeWithDevTools());
+  const store = createStore(modules, initialState, composeEnhancers(
+    applyMiddleware(penderMiddleware())
+  ));
+
   return store;
 }
 

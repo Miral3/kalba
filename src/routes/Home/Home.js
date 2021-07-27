@@ -34,7 +34,7 @@ const Container = styled.div`
   }
 `;
 
-const Home = props => {
+const Home = () => {
 
   return (
     <Container>
