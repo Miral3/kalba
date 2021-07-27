@@ -10,7 +10,7 @@ import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
 import XLSX from 'xlsx';
 import { isMobile } from "../../tools/tools";
-import { getPromotionDate, getLeagueStartDate, calRemainTime, printRemainTime, useInterval } from '../../tools/tools';
+import { getPromotionDate, getLeagueStartDate, calRemainTime, getRemainTime, useInterval } from '../../tools/tools';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -143,24 +143,24 @@ const downloadURL = (url, fileName) => {
 }
 
 const Count = () => {
-  let [promtionTime, setPromotionTime] = useState(null);
-  let [leagueTime, setLeagueTime] = useState(null);
+  const current = new Date();
+  let [promotionTime, setPromotionTime] = useState(calRemainTime(current, getPromotionDate(current)));
+  let [leagueTime, setLeagueTime] = useState(calRemainTime(current, getLeagueStartDate(current)));
 
   useInterval(() => {
-    setPromotionTime(calRemainTime(new Date(), getPromotionDate(new Date())));
-    setLeagueTime(calRemainTime(new Date(), getLeagueStartDate(new Date())));
+    const current = new Date();
+    setPromotionTime(calRemainTime(current, getPromotionDate(current)));
+    setLeagueTime(calRemainTime(current, getLeagueStartDate(current)));
   }, 1000);
 
-  if (promtionTime != null && leagueTime != null) {
-    return <div>
-      <div className='league'>
-        <span>승강전 : {printRemainTime(promtionTime)}</span>
-      </div>
-      <div className='promotion'>
-        <span>리그전 : {printRemainTime(leagueTime)}</span>
-      </div>
+  return <div>
+    <div className='league'>
+      <span>승강전 : {(promotionTime != null)?getRemainTime(promotionTime):"wait.."}</span>
     </div>
-  }
+    <div className='promotion'>
+      <span>리그전 : {(leagueTime != null)?getRemainTime(leagueTime):"wait.."}</span>
+    </div>
+  </div>
 }
 
 const LeaderBoards = ({ match }) => {
