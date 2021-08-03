@@ -10,7 +10,6 @@ import UserList from '../../components/UserList';
 import html2canvas from 'html2canvas';
 import XLSX from 'xlsx';
 import { isMobile } from "../../tools/tools";
-import { getPromotionDate, getLeagueStartDate, calRemainTime, getRemainTime, useInterval } from '../../tools/tools';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -79,29 +78,9 @@ const Button = styled.div`
     }
 `
 
-const CountDown = styled.div`
-  height: auto !important;
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  position: relative !important;
-  @media (min-width: 576px) {
-    max-width: 540px;
-  }
-  @media (min-width: 768px) {
-    max-width: 720px;
-  }
-
-  background-color: ${({ theme }) => theme.bgColors.category};
-  font-size: 18px;
-  padding: 15px;
-  border: ${({ theme }) => theme.borderColors.category};
-  border-top-width: 0px;
-`
-
 const items = [
-  { name: 'score', text: '공격력' },
-  { name: 'donations', text: '지원량' }
+  { name: 'donations', text: '지원량' },
+  { name: 'score', text: '공격력' }
 ];
 
 const saveBoard = () => {
@@ -142,35 +121,12 @@ const downloadURL = (url, fileName) => {
   link.click();
 }
 
-const Count = () => {
-  const current = new Date();
-  let [promotionTime, setPromotionTime] = useState(calRemainTime(current, getPromotionDate(current)));
-  let [leagueTime, setLeagueTime] = useState(calRemainTime(current, getLeagueStartDate(current)));
-
-  useInterval(() => {
-    const current = new Date();
-    setPromotionTime(calRemainTime(current, getPromotionDate(current)));
-    setLeagueTime(calRemainTime(current, getLeagueStartDate(current)));
-  }, 1000);
-
-  return <div>
-    <div className='league'>
-      <span>승강전 : {(promotionTime != null)?getRemainTime(promotionTime):"wait.."}</span>
-    </div>
-    <div className='promotion'>
-      <span>리그전 : {(leagueTime != null)?getRemainTime(leagueTime):"wait.."}</span>
-    </div>
-  </div>
-}
-
 const LeaderBoards = ({ match }) => {
-  const type = match.params.category || 'score';
+  const type = match.params.category || 'donations';
+
   return (
     <Container>
-      <Categories items={items} type="leaderboards" any="score" />
-      <CountDown>
-        {Count()}
-      </CountDown>
+      <Categories items={items} type="leaderboards" any="donations" />
       <div>
         <UserList type={type} />
       </div>

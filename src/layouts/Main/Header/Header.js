@@ -106,7 +106,7 @@ const HeaderBlock = styled.div`
 
 const Header = ({ children }) => {
   const items = [
-    { label: "순위표", href: "/leaderboards/score" },
+    { label: "순위표", href: "/leaderboards/donations" },
     { label: "기준표", href: "/standardTable/heroes" },
     { label: "퀴즈", href: "/Quiz" },
   ];
