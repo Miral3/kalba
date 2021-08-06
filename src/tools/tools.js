@@ -164,12 +164,12 @@ export function calRemainTime(curTime, closeTime) {
 }
 
 export function getRemainTime(time) {
-  return "D-" + (time.getUTCDate() - 1) + " " + transformNumber(time.getUTCHours()) + " : " + transformNumber(time.getUTCMinutes());
+  return (time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 후";
 }
 
-export function transformNumber(Number) {
-  return Number < 10 ? `0${Number}` : Number;
-}
+// export function transformNumber(Number) {
+//   return Number < 10 ? `0${Number}` : Number;
+// }
 
 export function useInterval(callback, delay) {
   const savedCallback = useRef();

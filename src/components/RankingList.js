@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import UserInfo from './UserInfo';
 import { headerDataByType } from '../tools/tools';
 import axios from 'axios';
+import { getPromotionDate, getLeagueStartDate, calRemainTime, getRemainTime, useInterval } from '../tools/tools';
 
 const Container = styled.div`
   width: 100%;
@@ -15,17 +16,27 @@ const Container = styled.div`
   @media (max-width: 992px) {
     margin: 0;
   }
-  .blockTitle__addBtn {
+  .header {
+    display: flex;
+    flex-direction: column;
     background-color: ${({ theme }) => theme.bgColors.listFirstHeader};
     color: white;
     padding: 12px 16px;
     font-size: 16px;
     font-weight: 700;
   }
-  .blockTitle__addBtn .btn {
-    float: right;
+  .title_count {
+    .title {
+      font-size: 20px
+    }
+    display: flex;
+    justify-content: space-between;
   }
-  .blockTitle__addBtn .icon {
+  .header .btn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .header .icon {
     margin-right:5px;
     vertical-align: middle;
   }
@@ -40,14 +51,14 @@ const Container = styled.div`
       }
     }
   } 
-  .blockTitle__addBtn .refresh {
+  .header .refresh {
     margin-right: 40px;
     cursor: pointer;
     &:hover{
       border-bottom: 1px solid #ffffff;
     }
   }
-  .blockTitle__addBtn .addBtn {
+  .header .addBtn {
     text-decoration: none;
     color: white;
     &:hover{
@@ -105,6 +116,28 @@ const Container = styled.div`
   }
 `;
 
+const Count = (type) => {
+  const current = new Date();
+  let [promotionTime, setPromotionTime] = useState(calRemainTime(current, getPromotionDate(current)));
+  let [leagueTime, setLeagueTime] = useState(calRemainTime(current, getLeagueStartDate(current)));
+
+  useInterval(() => {
+    const current = new Date();
+    setPromotionTime(calRemainTime(current, getPromotionDate(current)));
+    setLeagueTime(calRemainTime(current, getLeagueStartDate(current)));
+  }, 1000);
+
+  if (type === 'score') {
+    return <div>
+      <span>리그전: {(leagueTime != null) ? getRemainTime(leagueTime) : "wait.."}</span>
+    </div>
+  } else if (type === 'donations') {
+    return <div>
+      <span>승강전: {(promotionTime != null) ? getRemainTime(promotionTime) : "wait.."}</span>
+    </div>
+  }
+}
+
 const RankingList = ({ title, type }) => {
   const [donationData, setDonationData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -156,8 +189,13 @@ const RankingList = ({ title, type }) => {
 
   if (loading || !donationData) {
     return <Container>
-      <div className="blockTitle__addBtn">
-        <span className="title">{title}</span>
+      <div className="header">
+        <div className="title_count">
+          <span className="title">{title}</span>
+          <div className="count">
+            {type !== null ? Count(type) : null}
+          </div>
+        </div>
         <div className="btn">
           {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
           <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
@@ -184,14 +222,16 @@ const RankingList = ({ title, type }) => {
       </table>
     </Container>
   }
-  // if (!donationData) {
-  //   return null;
-  // }
 
   return (
     <Container>
-      <div className="blockTitle__addBtn">
-        <span className="title">{title}</span>
+      <div className="header">
+        <div className="title_count">
+          <span className="title">{title}</span>
+          <div className="count">
+            {type !== null ? Count(type) : null}
+          </div>
+        </div>
         <div className="btn">
           {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
           <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
