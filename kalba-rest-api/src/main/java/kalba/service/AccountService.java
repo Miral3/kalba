@@ -2,18 +2,16 @@ package kalba.service;
 
 import kalba.models.account.Account;
 import kalba.repository.AccountRepository;
+import lombok.AllArgsConstructor;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
+@AllArgsConstructor
 public class AccountService {
     private final AccountRepository accountRepository;
-
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
 
     public int register(Account account) {
         if (validateDuplicateMember(account)) {
