@@ -1,20 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from '../../redux/modules/auth';
 
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
+import axios from "axios";
+import { isEmpty } from "../../tools/tools";
 
-const Register = ({ AuthActions, name, tag, username, password, passwordConfirm }) => {
-
+const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm }) => {
+  const [registerForm, setRegisterForm] = useState({nickname: "", tag: "", name: "", password:"", passwordConfirm:""});
   const handleChange = (e) => {
     const { name, value } = e.target;
+    registerForm[name] = value;
+    setRegisterForm(registerForm);
     AuthActions.changeInput({
       name,
       value,
       form: 'register'
     });
   }
+
+  const register = async () => {
+    if(registerForm["password"]!==registerForm["passwordConfirm"]){
+      alert("비밀번호가 일치하지 않습니다.")
+    } else {
+      await axios.post(
+        '/account/register', {
+          nickname: registerForm["nickname"],
+          tag: registerForm["tag"],
+          name: registerForm["name"],
+          password: registerForm["password"]
+        }, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).then(res => {
+        if(res.status === 201){
+          alert("회원가입에 성공하였습니다. 반갑습니다!");
+        } else {
+          alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+        }
+      }).catch(e => {
+        if(!isEmpty(e.response.status) && e.response.status === 409){
+          alert("이미 존재하는 아이디입니다. 다른 아이디로 다시 시도해보세요");
+        } else {
+          alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+        }
+      });
+    }
+  };
 
   useEffect(() => {
     return () => AuthActions.initializeForm('register');
@@ -24,9 +58,9 @@ const Register = ({ AuthActions, name, tag, username, password, passwordConfirm 
     <AuthContent title="회원가입">
       <InputWithLabel
         label="닉네임"
-        name="name"
+        name="nickname"
         placeholder="닉네임"
-        value={name}
+        value={nickname}
         onChange={handleChange}
       />
       <InputWithLabel
@@ -38,9 +72,9 @@ const Register = ({ AuthActions, name, tag, username, password, passwordConfirm 
       />
       <InputWithLabel
         label="아이디"
-        name="username"
+        name="name"
         placeholder="아이디"
-        value={username}
+        value={name}
         onChange={handleChange}
       />
       <InputWithLabel
@@ -59,7 +93,7 @@ const Register = ({ AuthActions, name, tag, username, password, passwordConfirm 
         value={passwordConfirm}
         onChange={handleChange}
       />
-      <AuthButton>회원가입</AuthButton>
+      <AuthButton onClick={register}>회원가입</AuthButton>
       <RightAlignedLink to="/auth/login">로그인</RightAlignedLink>
     </AuthContent>
   );

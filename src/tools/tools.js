@@ -188,3 +188,11 @@ export function useInterval(callback, delay) {
     }
   }, [delay]);
 }
+
+export function isLogin(){
+  return !isEmpty(getLoginUser());
+}
+
+export function getLoginUser(){
+  return window.localStorage.getItem('name');
+}
