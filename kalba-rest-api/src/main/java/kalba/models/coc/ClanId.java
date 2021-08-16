@@ -1,4 +1,4 @@
-package kalba.model;
+package kalba.models.coc;
 
 import lombok.Data;
 

@@ -1,9 +1,9 @@
-package kalba.repository;
+package kalba.service;
 
 import kalba.config.ReadConfig;
-import kalba.model.ClanMember;
-import kalba.model.League;
-import kalba.model.PlayerLabel;
+import kalba.models.coc.ClanMember;
+import kalba.models.coc.League;
+import kalba.models.coc.PlayerLabel;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class ClanMemberRepository extends Thread {
+public class ClanMemberService extends Thread {
     public final static Set<String> clanCodeSet = ConcurrentHashMap.newKeySet();
     public static final Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
     public static final Map<String, Map<Object, Object>> clanInfoMap = new ConcurrentHashMap<>();
