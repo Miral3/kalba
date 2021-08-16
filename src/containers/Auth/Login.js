@@ -33,7 +33,7 @@ const Login = ({ AuthActions, username, password }) => {
         }
       }).then(res => {
       if(res.status === 200){
-        window.localStorage.setItem('token', res.token);
+        window.localStorage.setItem('token', res.data.token);
         window.localStorage.setItem('name', loginForm["username"]);
         history.push("/");
       } else {

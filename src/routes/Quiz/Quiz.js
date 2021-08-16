@@ -1,5 +1,6 @@
 /* React */
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 /* Styled */
 import styled from 'styled-components';
@@ -20,6 +21,8 @@ import FiveRoundedIcon from '@material-ui/icons/Looks5Rounded';
 
 /* Sub Components */
 import quizData from './quizdata';
+import { getLoginToken, getLoginUser, isEmpty, isLogin, logout } from "../../tools/tools";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -160,11 +163,13 @@ const QuizBlock = styled.div`
 `;
 
 const Quiz = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(getLoginUser());
+  const [passState, setPassState] = useState(false);
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
   const [checkList, setCheckList] = useState([]);
   const answerList = Array(10).fill().map(() => Array(5).fill(false));
+  const history = useHistory();
 
   useEffect(() => {
     setData(quizData);
@@ -221,7 +226,7 @@ const Quiz = () => {
   };
 
   const reset = () => {
-    setName('');
+    // setName('');
     setIdx(0);
     setCheckList(Array(10).fill().map(() => Array(5).fill(false)));
   }
@@ -237,11 +242,17 @@ const Quiz = () => {
   }
 
   const createFirst = () => {
+    if(!isLogin()){
+      alert("로그인이 필요한 서비스입니다.");
+      history.push("/");
+    }
+    isValidateLoginState();
+    checkPassState();
     return <div className="nameBlock">
       <span className="title">칼바클랜 공지 퀴즈</span>
-      <span className="askName">이름을 입력하세요.</span>
+      {passState?<span className="askName">{name}님은 이미 통과하였습니다.<br/>다시 풀이하시겠습니까?</span>:<span className="askName">{name}님 반갑습니다.</span>}
       <div className="inputBlock">
-        <input className="nameInput" value={name} onChange={onChangeName} placeholder="이름 입력" />
+        {/*<input className="nameInput" value={name} onChange={onChangeName} placeholder="이름 입력" />*/}
         <CgArrowRightR className="start" onClick={() => onButtonClick("start")} />
       </div>
     </div>
@@ -339,7 +350,16 @@ const Quiz = () => {
     </>
   }
 
+  const isPassScore = (score) => {
+    return score >= 100;
+  }
+
   const createResult = () => {
+    const score=grade();
+    isValidateLoginState();
+    if(isPassScore(score)){
+      savePassedUserInDB(name, score);
+    }
     return <>
       <div className="resultBlock">
         <span className="thanks">수고하셨습니다.</span>
@@ -347,12 +367,76 @@ const Quiz = () => {
           <span className="name">{name}</span>
           <span> 님의 점수는 </span>
           <span className="score">{grade()}</span>
-          <span>점 입니다.</span>
+          {isPassScore(score)?<span>점으로 통과하셨습니다!</span>:<span>점으로<br/>아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
         </div>
-        <button className="reset" onClick={() => reset()}>처음으로</button>
+        {isPassScore(score)?<button className="reset" onClick={() => history.push("/")}>메인으로</button>:<button className="reset" onClick={() => reset()}>다시풀기</button>}
       </div>
       <span className="questioner">출제자: 달달</span>
     </>
+  }
+
+  const savePassedUserInDB = (name, score) => {
+    axios.post(
+      '/quiz/pass', {
+        name: name,
+        score: score
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getLoginToken()}`
+        }
+      }).then(res => {
+      if(!(res.status === 201 && !isEmpty(res.data.message))){
+        alert("에러가 발생하였습니다.")
+      }
+    }).catch(e => {
+      alert("에러가 발생하였습니다.")
+    });
+  }
+
+  const isValidateLoginState = () =>{
+    axios.post(
+      '/account/login/name', {
+        token: getLoginToken(),
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+      if(res.status === 200 && !isEmpty(res.data.name)){
+        if(res.data.name !== getLoginUser()){
+          invalidLoginState();
+        }
+      } else {
+        invalidLoginState();
+      }
+    }).catch(e => {
+      invalidLoginState();
+    });
+  }
+
+  const checkPassState = () =>{
+    axios.post(
+      '/quiz/state', {
+        name: name,
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getLoginToken()}`
+        }
+      }).then(res => {
+      if(res.status === 200 && !isEmpty(res.data.state)){
+        if(res.data.state===true){
+          setPassState(true);
+        }
+      }
+    });
+  }
+
+  const invalidLoginState = () => {
+    logout();
+    alert("올바르지 못한 접근입니다.");
+    history.push("/");
   }
 
   setAnswerList();

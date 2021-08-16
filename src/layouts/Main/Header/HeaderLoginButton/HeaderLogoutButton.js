@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { logout } from "../../../../tools/tools";
 
 const BorderedButton = styled(Link)`
     .contents {
@@ -21,11 +22,6 @@ const BorderedButton = styled(Link)`
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
 `;
-
-const logout = () => {
-  window.localStorage.removeItem('token');
-  window.localStorage.removeItem('name');
-}
 
 const LogoutButton = () => (
   <BorderedButton to="/" onClick={logout}>

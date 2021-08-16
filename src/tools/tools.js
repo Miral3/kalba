@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
@@ -193,6 +195,15 @@ export function isLogin(){
   return !isEmpty(getLoginUser());
 }
 
+export function logout(){
+  window.localStorage.removeItem('token');
+  window.localStorage.removeItem('name');
+}
+
 export function getLoginUser(){
   return window.localStorage.getItem('name');
+}
+
+export function getLoginToken(){
+  return window.localStorage.getItem('token');
 }
