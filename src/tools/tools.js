@@ -204,6 +204,10 @@ export function getLoginUser(){
   return window.localStorage.getItem('name');
 }
 
+export function getLoginUserNickname(){
+  return window.localStorage.getItem('nickname');
+}
+
 export function getLoginToken(){
   return window.localStorage.getItem('token');
 }

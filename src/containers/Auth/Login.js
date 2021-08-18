@@ -5,7 +5,7 @@ import * as authActions from '../../redux/modules/auth';
 
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
 import axios from "axios";
-import { isEmpty } from "../../tools/tools";
+import { getLoginToken, isEmpty } from "../../tools/tools";
 import { useHistory } from 'react-router-dom';
 
 const Login = ({ AuthActions, username, password }) => {
@@ -35,7 +35,7 @@ const Login = ({ AuthActions, username, password }) => {
       if(res.status === 200){
         window.localStorage.setItem('token', res.data.token);
         window.localStorage.setItem('name', loginForm["username"]);
-        history.push("/");
+        getNickname().then(() => history.push("/"));
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
@@ -45,6 +45,26 @@ const Login = ({ AuthActions, username, password }) => {
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
+    });
+  };
+
+  const getNickname = async () => {
+    await axios.post(
+      '/account/login/info', {
+        name: loginForm["username"],
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getLoginToken()}`
+        }
+      }).then(res => {
+      if(res.status === 200 && isEmpty(res.data.message)){
+        window.localStorage.setItem('nickname', res.data.nickname);
+      } else {
+        alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+      }
+    }).catch(e => {
+      alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
     });
   };
 

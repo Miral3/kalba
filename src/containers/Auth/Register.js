@@ -51,7 +51,7 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       registerForm["nickname"] = undefined;
-      await getTag(registerForm["tag"]).then(res => {
+      await getTag(registerForm["tag"]).then(() => {
           if(!isEmpty(registerForm["nickname"])){
             axios.post(
               '/account/register', {

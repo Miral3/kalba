@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Header, { LoginButton } from '../../layouts/Main/Header';
-import { getLoginUser, isLogin } from "../../tools/tools";
+import { getLoginUserNickname, isLogin } from "../../tools/tools";
 import LogoutButton from "../../layouts/Main/Header/HeaderLoginButton/HeaderLogoutButton";
 
 
@@ -10,7 +10,7 @@ const HeaderContainer = ({ visible }) => {
   if (!visible) return null;
   return (
     <Header>
-      <span style={{color:"white"}}>{isLogin()?getLoginUser()+"님 반갑습니다 ":""}
+      <span style={{color:"white"}}>{isLogin()?getLoginUserNickname()+"님 반갑습니다 ":""}
       </span>
       {isLogin()?<LogoutButton />:<LoginButton />}
     </Header>

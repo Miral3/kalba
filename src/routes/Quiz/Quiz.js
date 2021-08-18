@@ -21,7 +21,7 @@ import FiveRoundedIcon from '@material-ui/icons/Looks5Rounded';
 
 /* Sub Components */
 import quizData from './quizdata';
-import { getLoginToken, getLoginUser, isEmpty, isLogin, logout } from "../../tools/tools";
+import { getLoginToken, getLoginUser, getLoginUserNickname, isEmpty, isLogin, logout } from "../../tools/tools";
 import axios from "axios";
 
 const Container = styled.div`
@@ -163,7 +163,7 @@ const QuizBlock = styled.div`
 `;
 
 const Quiz = () => {
-  const [name, setName] = useState(getLoginUser());
+  const [name, setName] = useState(getLoginUserNickname());
   const [passState, setPassState] = useState(false);
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
@@ -418,7 +418,7 @@ const Quiz = () => {
   const checkPassState = () =>{
     axios.post(
       '/quiz/state', {
-        name: name,
+        name: getLoginUser(),
       }, {
         headers: {
           "Content-Type": "application/json",
