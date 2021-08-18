@@ -245,14 +245,14 @@ const Quiz = () => {
     if(!isLogin()){
       alert("로그인이 필요한 서비스입니다.");
       history.push("/");
+    } else {
+      isValidateLoginState();
+      checkPassState();
     }
-    isValidateLoginState();
-    checkPassState();
     return <div className="nameBlock">
       <span className="title">칼바클랜 공지 퀴즈</span>
       {passState?<span className="askName">{name}님은 이미 통과하였습니다.<br/>다시 풀이하시겠습니까?</span>:<span className="askName">{name}님 반갑습니다.</span>}
       <div className="inputBlock">
-        {/*<input className="nameInput" value={name} onChange={onChangeName} placeholder="이름 입력" />*/}
         <CgArrowRightR className="start" onClick={() => onButtonClick("start")} />
       </div>
     </div>
