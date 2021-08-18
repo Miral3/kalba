@@ -1,10 +1,6 @@
 package kalba.controller;
 
-import kalba.models.account.JwtRequest;
-import kalba.models.account.JwtResponse;
-import kalba.models.account.RegisterForm;
-import kalba.models.account.Token;
-import kalba.models.account.Account;
+import kalba.models.account.*;
 import kalba.service.AccountService;
 import kalba.service.JwtUserDetailsService;
 import kalba.util.JwtTokenUtil;
@@ -41,10 +37,18 @@ public class AccountController {
                 .role("USER")
                 .build();
         int result = accountService.register(account);
-        if (result != -1) {
+        if (result > 0) {
             return ResponseEntity.created(URI.create("/account/" + account.getId())).body(Map.of("message", "success"));
         } else {
-            return new ResponseEntity<>(Map.of("message", "존재하는 아이디입니다."), HttpStatus.CONFLICT);
+            String msg;
+            if (result == -1) {
+                msg = "존재하는 아이디입니다.";
+            } else if (result == -2) {
+                msg = "해당 태그로 가입된 아이디가 존재합니다.";
+            } else {
+                msg = "예상하지 못한 에러가 발생하였습니다.";
+            }
+            return new ResponseEntity<>(Map.of("message", msg), HttpStatus.CONFLICT);
         }
     }
 
@@ -65,5 +69,24 @@ public class AccountController {
     @PostMapping("/login/name")
     public ResponseEntity<?> getUserNameFromToken(@RequestBody Token token) {
         return ResponseEntity.ok(Map.of("name", jwtTokenUtil.getUsernameFromToken(token.getToken())));
+    }
+
+    @PostMapping("/login/tag")
+    public ResponseEntity<?> getTagByName(@RequestBody Name name) {
+        return accountService.findAccountByName(name.getName())
+                .<ResponseEntity<?>>map(account -> ResponseEntity.ok(Map.of("tag", account.getTag())))
+                .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
+    }
+
+    @PostMapping("/login/info")
+    public ResponseEntity<?> getAccountInfoByName(@RequestBody Name name) {
+        return accountService.findAccountInfoByName(name.getName())
+                .<ResponseEntity<?>>map(accountInfo -> ResponseEntity.ok(
+                        Map.of("name", accountInfo.getName(),
+                                "tag", accountInfo.getTag(),
+                                "nickname", accountInfo.getNickname(),
+                                "role", accountInfo.getRole()
+                        )))
+                .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
     }
 }

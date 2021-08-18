@@ -1,6 +1,7 @@
 package kalba.repository;
 
 import kalba.models.account.Account;
+import kalba.models.account.AccountInfo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -43,6 +44,27 @@ public class JdbcAccountRepository implements AccountRepository {
     public Optional<Account> findByName(String name) {
         List<Account> result = jdbcTemplate.query("select * from account where name = ? ", accountRowMapper(), name);
         return result.stream().findAny();
+    }
+
+    @Override
+    public Optional<Account> findByTag(String tag) {
+        List<Account> result = jdbcTemplate.query("select * from account where tag = ? ", accountRowMapper(), tag);
+        return result.stream().findAny();
+    }
+
+    @Override
+    public Optional<AccountInfo> findAccountInfoByName(String name) {
+        List<AccountInfo> result = jdbcTemplate.query("select * from account where name = ? ", accountInfoRowMapper(), name);
+        return result.stream().findAny();
+    }
+
+    private RowMapper<AccountInfo> accountInfoRowMapper() {
+        return (rs, rowNum) -> AccountInfo.builder()
+                .name(rs.getString("name"))
+                .tag(rs.getString("tag"))
+                .nickname(rs.getString("nickname"))
+                .role(rs.getString("role"))
+                .build();
     }
 
     private RowMapper<Account> accountRowMapper() {

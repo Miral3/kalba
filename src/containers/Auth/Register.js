@@ -20,33 +20,62 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
     });
   }
 
+  const getTag = async (tag) => {
+    await axios.post(
+      '/coc/clan/member/name', {
+        tag: tag
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => {
+      if(!isEmpty(res.data.name)){
+        registerForm["nickname"]=res.data.name;
+        setRegisterForm(registerForm);
+        return res.data.name;
+      } else {
+        alert("해당 태그명으로 가입된 칼 없는 바바리안 유저가 없습니다.");
+        return undefined;
+      }
+    }).catch(e => {
+      alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+      return undefined;
+    });
+  }
+
   const register = async () => {
     if(registerForm["password"]!==registerForm["passwordConfirm"]){
-      alert("비밀번호가 일치하지 않습니다.")
+      alert("비밀번호가 일치하지 않습니다.");
     } else {
-      await axios.post(
-        '/account/register', {
-          nickname: registerForm["nickname"],
-          tag: registerForm["tag"],
-          name: registerForm["name"],
-          password: registerForm["password"]
-        }, {
-          headers: {
-            "Content-Type": "application/json"
+      registerForm["nickname"] = undefined;
+      await getTag(registerForm["tag"]).then(res => {
+          if(!isEmpty(registerForm["nickname"])){
+            axios.post(
+              '/account/register', {
+                nickname: registerForm["nickname"],
+                tag: registerForm["tag"],
+                name: registerForm["name"],
+                password: registerForm["password"]
+              }, {
+                headers: {
+                  "Content-Type": "application/json"
+                }
+              }).then(res => {
+              if(res.status === 201){
+                alert("회원가입에 성공하였습니다. 반갑습니다!");
+              } else {
+                alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+              }
+            }).catch(e => {
+              if(!isEmpty(e.response.status) && e.response.status === 409){
+                alert(e.response.data.message);
+              } else {
+                alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+              }
+            });
           }
-        }).then(res => {
-        if(res.status === 201){
-          alert("회원가입에 성공하였습니다. 반갑습니다!");
-        } else {
-          alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
         }
-      }).catch(e => {
-        if(!isEmpty(e.response.status) && e.response.status === 409){
-          alert("이미 존재하는 아이디입니다. 다른 아이디로 다시 시도해보세요");
-        } else {
-          alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
-        }
-      });
+      )
     }
   };
 
@@ -56,13 +85,6 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
 
   return (
     <AuthContent title="회원가입">
-      <InputWithLabel
-        label="닉네임"
-        name="nickname"
-        placeholder="닉네임"
-        value={nickname}
-        onChange={handleChange}
-      />
       <InputWithLabel
         label="태그번호"
         name="tag"

@@ -25,6 +25,8 @@ public class ClanMemberService extends Thread {
     public static final Map<String, List<ClanMember>> clanMemberSortedByYHScoreMap = new ConcurrentHashMap<>();
     public static final Map<String, List<ClanMember>> clanMemberSortedByDonationsMap = new ConcurrentHashMap<>();
     private static final String token = ((boolean) (ReadConfig.config.isLocal) ? ReadConfig.config.localToken : ReadConfig.config.serverToken).toString();
+    private static final Map<String, String> clanMemberTagInfo = new ConcurrentHashMap<>();
+    private static final Map<String, List<String>> clanMemberNameInfo = new ConcurrentHashMap<>();
 
     public void run() {
         try {
@@ -119,6 +121,10 @@ public class ClanMemberService extends Thread {
                 ClanMember clanMember = new ClanMember();
                 clanMember.setTag((String) memberInfo.get("tag"));
                 clanMember.setName((String) memberInfo.get("name"));
+                clanMemberTagInfo.put((String) memberInfo.get("tag"), (String) memberInfo.get("name"));
+                List<String> nameList = clanMemberNameInfo.getOrDefault((String) memberInfo.get("name"), Collections.synchronizedList(new LinkedList<>()));
+                nameList.add((String) memberInfo.get("tag"));
+                clanMemberNameInfo.put((String) memberInfo.get("name"), nameList);
                 clanMember.setRole((String) memberInfo.get("role"));
                 clanMember.setExpLevel((int) memberInfo.get("expLevel"));
                 clanMember.setTrophies((int) memberInfo.get("trophies"));
@@ -159,6 +165,14 @@ public class ClanMemberService extends Thread {
             return new LinkedList<>();
         }
         return clanMemberList;
+    }
+
+    public static Optional<List<String>> findTagByName(String name){
+        return Optional.ofNullable(clanMemberNameInfo.get(name));
+    }
+
+    public static Optional<String> findNameByTag(String tag){
+        return Optional.ofNullable(clanMemberTagInfo.get(tag));
     }
 
     private static String encodeUTF8(String userTag) {
