@@ -6,9 +6,12 @@ import * as authActions from '../../redux/modules/auth';
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
 import axios from "axios";
 import { isEmpty } from "../../tools/tools";
+import { useHistory } from 'react-router-dom';
 
 const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm }) => {
   const [registerForm, setRegisterForm] = useState({nickname: "", tag: "", name: "", password:"", passwordConfirm:""});
+  const history = useHistory();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     registerForm[name] = value;
@@ -62,6 +65,7 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
                 }
               }).then(res => {
               if(res.status === 201){
+                history.push("/auth/login");
                 alert("회원가입에 성공하였습니다. 반갑습니다!");
               } else {
                 alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
