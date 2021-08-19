@@ -168,7 +168,8 @@ const Quiz = () => {
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
   const [checkList, setCheckList] = useState([]);
-  const answerList = Array(10).fill().map(() => Array(5).fill(false));
+  // const answerList = Array(10).fill().map(() => Array(5).fill(false));
+  const [score, setScore] = useState(-1);
   const history = useHistory();
 
   useEffect(() => {
@@ -176,13 +177,13 @@ const Quiz = () => {
     setCheckList(Array(10).fill().map(() => Array(5).fill(false)));
   }, []);
 
-  const setAnswerList = () => {
-    for (let i = 0; i < quizData.length; i++) {
-      for (let j = 0; j < quizData[i].rightAnswer.length; j++) {
-        answerList[i][quizData[i].rightAnswer[j] - 1] = true;
-      }
-    }
-  }
+  // const setAnswerList = () => {
+  //   for (let i = 0; i < quizData.length; i++) {
+  //     for (let j = 0; j < quizData[i].rightAnswer.length; j++) {
+  //       answerList[i][quizData[i].rightAnswer[j] - 1] = true;
+  //     }
+  //   }
+  // }
 
   const displayItems = () => {
     if (idx === 0) {
@@ -210,10 +211,6 @@ const Quiz = () => {
     }
   }
 
-  const onChangeName = e => {
-    setName(e.target.value);
-  }
-
   const handleChange = (num) => {
     const changeCheck = checkList.map((check, idx1) =>
       check.map((data, idx2) => {
@@ -225,19 +222,43 @@ const Quiz = () => {
     setCheckList(changeCheck);
   };
 
+  const checkListToAnswerSheet = () => {
+    let sheet= [];
+    for(let i=0; i<checkList.length; i++){
+      let s=[]
+      for(let j=0; j<=checkList[0].length; j++){
+        if(checkList[i][j]){
+          s.push(j+1);
+        }
+      }
+      sheet.push(s);
+    }
+    return sheet;
+  }
+
   const reset = () => {
-    // setName('');
     setIdx(0);
     setCheckList(Array(10).fill().map(() => Array(5).fill(false)));
   }
 
-  const grade = () => {
-    let score = 0;
-    for (let i = 0; i < quizData.length; i++) {
-      if (JSON.stringify(checkList[i]) === JSON.stringify(answerList[i])) {
-        score += 10;
+  const markQuiz = async () => {
+    await axios.post(
+      '/quiz/mark', {
+        sheet: checkListToAnswerSheet(),
+      }, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getLoginToken()}`
+        }
+      }).then(res => {
+      if(res.status === 200 && res.data.score!==undefined){
+        setScore(res.data.score);
+      } else {
+        alert("채점중 에러가 발생하였습니다.");
       }
-    }
+    }).catch(e => {
+      alert("채점중 에러가 발생하였습니다.");
+    });
     return score;
   }
 
@@ -355,22 +376,28 @@ const Quiz = () => {
   }
 
   const createResult = () => {
-    const score=grade();
+    markQuiz();
     isValidateLoginState();
     if(isPassScore(score)){
       savePassedUserInDB(name, score);
     }
     return <>
-      <div className="resultBlock">
-        <span className="thanks">수고하셨습니다.</span>
-        <div className="info">
-          <span className="name">{name}</span>
-          <span> 님의 점수는 </span>
-          <span className="score">{grade()}</span>
-          {isPassScore(score)?<span>점으로 통과하셨습니다!</span>:<span>점으로<br/>아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
-        </div>
-        {isPassScore(score)?<button className="reset" onClick={() => history.push("/")}>메인으로</button>:<button className="reset" onClick={() => reset()}>다시풀기</button>}
-      </div>
+      {score===-1?(
+        <div className="resultBlock"><span className="thanks">채점중....</span>
+        </div>)
+        :(
+          <div className="resultBlock">
+            <span className="thanks">수고하셨습니다.</span>
+            <div className="info">
+              <span className="name">{name}</span>
+              <span> 님의 점수는 </span>
+              <span className="score">{score}</span>
+              {isPassScore(score)?<span>점으로 통과하셨습니다!</span>:<span>점으로<br/>아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
+            </div>
+            {isPassScore(score)?<button className="reset" onClick={() => history.push("/")}>메인으로</button>:<button className="reset" onClick={() => reset()}>다시풀기</button>}
+          </div>
+        )
+      }
       <span className="questioner">출제자: 달달</span>
     </>
   }
@@ -439,7 +466,7 @@ const Quiz = () => {
     history.push("/");
   }
 
-  setAnswerList();
+  // setAnswerList();
   return (
     <Container>
       <QuizBlock idx={idx}>

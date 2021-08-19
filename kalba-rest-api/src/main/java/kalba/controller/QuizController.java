@@ -1,8 +1,9 @@
 package kalba.controller;
 
 import kalba.models.account.*;
-import kalba.models.coc.Quiz;
-import kalba.models.coc.QuizDto;
+import kalba.models.coc.quiz.Quiz;
+import kalba.models.coc.quiz.QuizAnswerSheet;
+import kalba.models.coc.quiz.QuizDto;
 import kalba.service.QuizService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,15 @@ public class QuizController {
     @PostMapping("/state")
     public ResponseEntity<?> getUserNameFromToken(@RequestBody Name name) {
         return ResponseEntity.ok(Map.of("state", quizService.isPassedUser(name)));
+    }
+
+    @PostMapping("/mark")
+    public ResponseEntity<?> markingQuiz(@RequestBody QuizAnswerSheet quizAnswerSheet){
+        int score=quizService.markingQuiz(quizAnswerSheet);
+        if(score==-1){
+            return ResponseEntity.badRequest().body(Map.of("message", "bad request"));
+        } else {
+            return ResponseEntity.ok(Map.of("score", score));
+        }
     }
 }

@@ -1,6 +1,6 @@
 package kalba.repository;
 
-import kalba.models.coc.Quiz;
+import kalba.models.coc.quiz.Quiz;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

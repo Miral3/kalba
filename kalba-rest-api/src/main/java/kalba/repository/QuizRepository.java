@@ -1,6 +1,6 @@
 package kalba.repository;
 
-import kalba.models.coc.Quiz;
+import kalba.models.coc.quiz.Quiz;
 
 import java.util.List;
 import java.util.Optional;
