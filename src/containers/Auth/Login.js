@@ -9,7 +9,7 @@ import { getLoginToken, isEmpty } from "../../tools/tools";
 import { useHistory } from 'react-router-dom';
 
 const Login = ({ AuthActions, username, password }) => {
-  const [loginForm, setLoginForm] = useState({name: "", password: ""});
+  const [loginForm, setLoginForm] = useState({ name: "", password: "" });
   const history = useHistory();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,17 +22,23 @@ const Login = ({ AuthActions, username, password }) => {
     });
   }
 
+  const onKeyPress = (e) => {
+    if (e.key == 'Enter') {
+      login();
+    }
+  }
+
   const login = async () => {
     await axios.post(
       '/account/login', {
-        username: loginForm["username"],
-        password: loginForm["password"]
-      }, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => {
-      if(res.status === 200){
+      username: loginForm["username"],
+      password: loginForm["password"]
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      if (res.status === 200) {
         window.localStorage.setItem('token', res.data.token);
         window.localStorage.setItem('name', loginForm["username"]);
         getNickname().then(() => history.push("/"));
@@ -40,7 +46,7 @@ const Login = ({ AuthActions, username, password }) => {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
     }).catch(e => {
-      if(!isEmpty(e.response.status) && e.response.status === 401){
+      if (!isEmpty(e.response.status) && e.response.status === 401) {
         alert("계정 정보가 올바르지 않습니다. 다시 한번 확인해주세요.");
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
@@ -51,14 +57,14 @@ const Login = ({ AuthActions, username, password }) => {
   const getNickname = async () => {
     await axios.post(
       '/account/login/info', {
-        name: loginForm["username"],
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getLoginToken()}`
-        }
-      }).then(res => {
-      if(res.status === 200 && isEmpty(res.data.message)){
+      name: loginForm["username"],
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getLoginToken()}`
+      }
+    }).then(res => {
+      if (res.status === 200 && isEmpty(res.data.message)) {
         window.localStorage.setItem('nickname', res.data.nickname);
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
@@ -80,6 +86,7 @@ const Login = ({ AuthActions, username, password }) => {
         placeholder="아이디"
         value={username}
         onChange={handleChange}
+        onKeyPress={onKeyPress}
       />
       <InputWithLabel
         label="비밀번호"
@@ -88,6 +95,7 @@ const Login = ({ AuthActions, username, password }) => {
         type="password"
         value={password}
         onChange={handleChange}
+        onKeyPress={onKeyPress}
       />
       <AuthButton onClick={login}>로그인</AuthButton>
       <RightAlignedLink to="/auth/register">회원가입</RightAlignedLink>
