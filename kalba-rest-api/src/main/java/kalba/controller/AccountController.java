@@ -7,6 +7,7 @@ import kalba.util.JwtTokenUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -88,5 +89,11 @@ public class AccountController {
                                 "role", accountInfo.getRole()
                         )))
                 .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
+    }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> isAdmin(){
+        return ResponseEntity.ok(Map.of("isAdmin", true));
     }
 }
