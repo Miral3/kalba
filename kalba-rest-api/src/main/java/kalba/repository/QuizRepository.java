@@ -1,5 +1,6 @@
 package kalba.repository;
 
+import kalba.models.coc.quiz.MemberQuizState;
 import kalba.models.coc.quiz.Quiz;
 
 import java.util.List;
@@ -11,4 +12,6 @@ public interface QuizRepository {
     Optional<Quiz> findByName(String name);
 
     Quiz passQuiz(Quiz quiz);
+
+    List<MemberQuizState> findAllQuizState();
 }

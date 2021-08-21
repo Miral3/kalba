@@ -2,13 +2,13 @@ package kalba.service;
 
 import kalba.config.ReadConfig;
 import kalba.models.account.Name;
+import kalba.models.coc.quiz.MemberQuizState;
 import kalba.models.coc.quiz.Quiz;
 import kalba.models.coc.quiz.QuizAnswerSheet;
 import kalba.repository.QuizRepository;
 import lombok.AllArgsConstructor;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +28,10 @@ public class QuizService {
 
     public List<Quiz> findAllPassedUser() {
         return quizRepository.findAll();
+    }
+
+    public List<MemberQuizState> findAllState() {
+        return quizRepository.findAllQuizState();
     }
 
     public Optional<Quiz> findByName(String name) {

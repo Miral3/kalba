@@ -1,5 +1,6 @@
 package kalba.repository;
 
+import kalba.models.coc.quiz.MemberQuizState;
 import kalba.models.coc.quiz.Quiz;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -33,20 +34,28 @@ public class JdbcQuizRepository implements QuizRepository {
 
     @Override
     public List<Quiz> findAll() {
-        return jdbcTemplate.query("select * from quiz", accountRowMapper());
+        return jdbcTemplate.query("select * from quiz", quizRowMapper());
     }
 
     @Override
     public Optional<Quiz> findByName(String name) {
-        List<Quiz> result = jdbcTemplate.query("select * from quiz where name = ? ", accountRowMapper(), name);
+        List<Quiz> result = jdbcTemplate.query("select * from quiz where name = ? ", quizRowMapper(), name);
         return result.stream().findAny();
     }
 
-    private RowMapper<Quiz> accountRowMapper() {
+    private RowMapper<Quiz> quizRowMapper() {
         return (rs, rowNum) -> Quiz.builder()
                 .id(rs.getInt("id"))
                 .name(rs.getString("name"))
                 .score(rs.getInt("score"))
                 .build();
+    }
+
+    @Override
+    public List<MemberQuizState> findAllQuizState() {
+        return jdbcTemplate.query("select account.name, quiz.score from quiz right join account on account.name = quiz.name",(rs, rowNum) -> MemberQuizState.builder()
+                .name(rs.getString("name"))
+                .score(rs.getInt("score"))
+                .build());
     }
 }

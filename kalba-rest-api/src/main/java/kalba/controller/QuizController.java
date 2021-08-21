@@ -7,10 +7,8 @@ import kalba.models.coc.quiz.QuizDto;
 import kalba.service.QuizService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Map;
@@ -43,5 +41,11 @@ public class QuizController {
         } else {
             return ResponseEntity.ok(Map.of("score", score));
         }
+    }
+
+    @GetMapping("/member/state")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getMemberQuizState(){
+        return ResponseEntity.ok(quizService.findAllState());
     }
 }
