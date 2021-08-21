@@ -1,5 +1,5 @@
 /* React */
-import React from 'react';
+import React, { useState } from 'react';
 
 /* Styled */
 import styled from 'styled-components';
@@ -7,6 +7,8 @@ import styled from 'styled-components';
 /* Sub Components */
 import HeaderNav from './HeaderNav';
 import HeaderInsert from './HeaderInsert';
+import axios from "axios";
+import { getLoginToken, isEmpty } from "../../../tools/tools";
 
 const HeaderBlock = styled.div`
   a {
@@ -105,12 +107,36 @@ const HeaderBlock = styled.div`
 `;
 
 const Header = ({ children }) => {
-  const items = [
+  const [admin, setAdmin] = useState(false);
+
+  const userItems = [
     { label: "순위표", href: "/leaderboards/donations" },
     { label: "기준표", href: "/standardTable/heroes" },
     { label: "퀴즈", href: "/Quiz" },
   ];
 
+  const adminItems = [
+    { label: "순위표", href: "/leaderboards/donations" },
+    { label: "기준표", href: "/standardTable/heroes" },
+    { label: "퀴즈", href: "/Quiz" },
+    { label: "관리자페이지", href: "/admin" },
+  ];
+
+  const isAdmin = async () => {
+    await axios.get(
+      '/account/admin', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${getLoginToken()}`
+        }
+      }).then(res => {
+      if (res.status === 200) {
+        setAdmin(true);
+      }
+    });
+  }
+
+  isAdmin();
   return (
     <HeaderBlock>
       <div className="kalba__logo__insert">
@@ -126,7 +152,7 @@ const Header = ({ children }) => {
         {children}
       </div>
       <div className="category">
-        < HeaderNav items={items} />
+        < HeaderNav items={admin?adminItems:userItems} />
       </div>
     </HeaderBlock>
   );
