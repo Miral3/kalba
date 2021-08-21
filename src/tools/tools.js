@@ -150,8 +150,7 @@ export function getLeagueStartDate(time) {
 export function getPromotionDate(time) {
   let lastMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
   lastMonDate.setMonth(lastMonDate.getMonth() + 1);
-  lastMonDate.setDate(lastMonDate.getDate() - 6 - lastMonDate.getDay());
-  lastMonDate.setDate(lastMonDate.getDate() - 1);
+  lastMonDate.setDate(lastMonDate.getDate() - lastMonDate.getDay());
   lastMonDate.setHours(22);
   let curTime = new Date();
   if (lastMonDate <= curTime) {
