@@ -6,11 +6,7 @@ import styled from 'styled-components';
 
 /* Sub Components */
 import Categories from '../../components/Categories/Category';
-import HeroesTable from '../../components/Table/HeroesTable';
-import SiegeMachinesTable from '../../components/Table/SiegeMachinestable';
-import SpellsTable from '../../components/Table/SpellsTable';
-import TroopsTable from '../../components/Table/TroopsTable';
-import PetsTable from '../../components/Table/PetsTable';
+import StandardList from '../../components/Table/StandardList';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -89,21 +85,6 @@ const items = [
   { name: 'siegeMachines', text: '시즈머신' },
 ];
 
-const selectTable = (props) => {
-  const type = props.category;
-  if (type === 'heroes') {
-    return <HeroesTable />
-  } else if (type === 'siegeMachines') {
-    return <SiegeMachinesTable />
-  } else if (type === 'spells') {
-    return <SpellsTable />
-  } else if (type === 'troops') {
-    return <TroopsTable />
-  } else if (type === 'pets') {
-    return <PetsTable />
-  }
-}
-
 const StandardTable = ({ match }) => {
   const category = match.params.category || 'heroes';
 
@@ -111,7 +92,7 @@ const StandardTable = ({ match }) => {
     <Container>
       <Categories items={items} type="standardTable" any="heores" />
       <Table>
-        {selectTable({ category })}
+        <StandardList category={category} />
       </Table>
     </Container>
   );
