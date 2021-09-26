@@ -150,7 +150,7 @@ const RankingList = ({ title, type }) => {
       setLoading2(true);
       const res = await axios.post(
         '/coc/clan/force/update', {
-        id: "%232Y2Y9YCUU"
+        tag: "%232Y2Y9YCUU"
       }, {
         headers: {
           "Content-Type": "application/json"
@@ -171,12 +171,21 @@ const RankingList = ({ title, type }) => {
       try {
         const response = await axios.post(
           `/coc/clan/${type}/rank`, {
-          id: "%232Y2Y9YCUU"
+          tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"
           }
         });
+        if(type==="donations"){
+          response.data.sort((a, b) => {
+            return b.donations - a.donations
+          });
+        } else {
+          response.data.sort((a, b) => {
+            return b.yonghaScore - a.yonghaScore
+          });
+        }
         setDonationData(response.data);
       } catch (e) {
         console.log(e);

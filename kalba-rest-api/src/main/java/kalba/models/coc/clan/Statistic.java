@@ -1,11 +1,11 @@
-package kalba.models.coc;
+package kalba.models.coc.clan;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ClanMember implements Comparable<ClanMember>{
+public class Statistic {
     private String tag;
     private String name;
     private String role;
@@ -27,9 +27,4 @@ public class ClanMember implements Comparable<ClanMember>{
     private Object spells;
     private Object pets;
     private int townHallWeaponLevel;
-
-    @Override
-    public int compareTo(ClanMember o) {
-        return Integer.compare(o.getDonations(), this.donations);
-    }
 }

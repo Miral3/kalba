@@ -81,12 +81,21 @@ const UserList = ({ type }) => {
         const query = type === 'score' ? 'score' : `${type}`;
         const response = await axios.post(
           `/coc/clan/${query}/rank`, {
-          id: "%232Y2Y9YCUU"
+          tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"
           }
         });
+        if(type==="donations"){
+          response.data.sort((a, b) => {
+            return b.donations - a.donations
+          });
+        } else {
+          response.data.sort((a, b) => {
+            return b.yonghaScore - a.yonghaScore
+          });
+        }
         setData(response.data);
       } catch (e) {
         console.log(e);

@@ -11,7 +11,7 @@ const ClanInfo = () => {
       try {
         const response = await axios.post(
           "/coc/clan/info", {
-          id: "%232Y2Y9YCUU"
+          tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"

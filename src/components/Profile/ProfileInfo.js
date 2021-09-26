@@ -115,6 +115,7 @@ const translateLeague = (engTxt) => {
 
 const getIdxMap = (userInfo) => {
   let idxMap = new Map();
+  console.log(userInfo);
   for (let i = 0; i < userInfo.heroes.length; i++) {
     if (userInfo.heroes[i].village === 'home') {
       idxMap.set(userInfo.heroes[i].name, i);
@@ -147,7 +148,7 @@ const ProfileInfo = ({ match }) => {
       try {
         const response = await axios.post(
           "/coc/clan/score/rank", {
-          id: "%232Y2Y9YCUU"
+          tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"
@@ -155,6 +156,9 @@ const ProfileInfo = ({ match }) => {
         });
         setUsersList(response.data);
         setUserData(response.data.filter(data => data.name === `${name}`));
+        response.data.sort((a, b) => {
+          return b.yonghaScore - a.yonghaScore
+        });
         setScoreRank(response.data.findIndex(i => i.name === `${name}`) + 1);
         response.data.sort((a, b) => {
           return b.donations - a.donations

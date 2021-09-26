@@ -1,21 +1,29 @@
 package kalba.config;
 
-import kalba.repository.AccountRepository;
-import kalba.repository.JdbcAccountRepository;
-import kalba.repository.JdbcQuizRepository;
-import kalba.repository.QuizRepository;
+import kalba.repository.*;
 import kalba.service.AccountService;
+import kalba.service.ClanMemberService;
 import kalba.service.QuizService;
-import lombok.AllArgsConstructor;
+import kalba.util.MemberDataThread;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDatabaseFactory;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
 import javax.sql.DataSource;
 
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SpringConfig {
     private final DataSource dataSource;
+    @Value("${spring.data.mongodb.uri}")
+    private String mongoDBUri;
+    @Value("${spring.data.mongodb.database}")
+    private String mongoDBDatabase;
+
 
     @Bean
     public AccountService accountService() {
@@ -35,5 +43,32 @@ public class SpringConfig {
     @Bean
     public QuizRepository quizRepository() {
         return new JdbcQuizRepository(dataSource);
+    }
+
+    @Bean
+    public StatisticMongoRepository statisticMongoRepository() {
+        return new StatisticMongoRepository(mongoTemplate());
+    }
+
+    @Bean
+    public ClanMemberService clanMemberService2() {
+        return new ClanMemberService(statisticMongoRepository());
+    }
+
+    @Bean
+    public MongoDatabaseFactory mongoDatabaseFactory() {
+        return new SimpleMongoClientDatabaseFactory(mongoDBUri + "/" + mongoDBDatabase);
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongoDatabaseFactory());
+    }
+
+    @Bean
+    public MemberDataThread memberDataThread() {
+        MemberDataThread memberDataThread = new MemberDataThread(statisticMongoRepository());
+        memberDataThread.start();
+        return memberDataThread;
     }
 }

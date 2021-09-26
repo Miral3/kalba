@@ -1,6 +1,7 @@
 package kalba.config;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadConfig {
-    public static final ReadConfig config=fromFile();;
+    public static final ReadConfig config = fromFile();
+    ;
     public boolean isLocal;
     public String localToken;
     public String serverToken;
@@ -30,18 +32,18 @@ public class ReadConfig {
         }
     }
 
-    public static List<int[]> readQuizAnswer(List<Object> quizAnswerObjVal){
-        List<int[]> quizAnswer=new ArrayList<>();
-        for(Object o:quizAnswerObjVal){
+    public static List<int[]> readQuizAnswer(List<Object> quizAnswerObjVal) {
+        List<int[]> quizAnswer = new ArrayList<>();
+        for (Object o : quizAnswerObjVal) {
             quizAnswer.add(stringArrToIntArr(o.toString().split(",")));
         }
         return quizAnswer;
     }
 
-    private static int[] stringArrToIntArr(String[] arr){
-        int[] ret=new int[arr.length];
-        for(int i=0; i<arr.length; i++){
-            ret[i]= Integer.parseInt(arr[i]);
+    private static int[] stringArrToIntArr(String[] arr) {
+        int[] ret = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            ret[i] = Integer.parseInt(arr[i]);
         }
         return ret;
     }
