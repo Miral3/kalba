@@ -7,29 +7,37 @@ const Container = styled.div`
   a {
     color: ${({ theme }) => theme.fontColors.category};
   }
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 200px;
-  height: 365px;
-  background-color: ${({ theme }) => theme.bgColors.category};
-  border: ${({ theme }) => theme.borderColors.category};
-
-  .header {
-    width: 100%;
-    background-color: ${({ theme }) => theme.bgColors.category};
+  .sidebar {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-
-    .sidebarTitle {
-      color: ${({ theme }) => theme.fontColors.category};
-      font-size: 20px;
-      font-weight: 700;
-      padding: 10px 0;
+    width: 200px;
+    height: 80vh;
+    background-color: ${({ theme }) => theme.bgColors.category};
+    border: ${({ theme }) => theme.borderColors.category};
+    position: absolute;
+    left: -200px;
+    transition: 850ms;
+    .header {
+      width: 100%;
+      background-color: ${({ theme }) => theme.bgColors.category};
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .sidebarTitle {
+        color: ${({ theme }) => theme.fontColors.category};
+        font-size: 20px;
+        font-weight: 700;
+        padding: 10px 0;
+      }
     }
   }
+
+  .sidebar.active {
+    left: 0;
+    transition: 350ms;
+  }
+
 `;
 
 const Contents = styled(NavLink)`
@@ -47,8 +55,8 @@ const Contents = styled(NavLink)`
 
 const Sidebar = ({ open, menus, type, any }) => {
   return (
-    open ?
-      <Container>
+    <Container>
+      <nav className={open ? "sidebar active" : "sidebar"}>
         <div className="header">
           <div className="sidebarTitle">MENU</div>
         </div>
@@ -64,9 +72,8 @@ const Sidebar = ({ open, menus, type, any }) => {
             </Contents>
           );
         })}
-      </Container>
-      :
-      <div></div>
+      </nav>
+    </Container>
   );
 }
 

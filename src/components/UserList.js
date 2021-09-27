@@ -87,7 +87,7 @@ const UserList = ({ type }) => {
             "Content-Type": "application/json"
           }
         });
-        if(type==="donations"){
+        if (type === "donations") {
           response.data.sort((a, b) => {
             return b.donations - a.donations
           });
@@ -108,9 +108,7 @@ const UserList = ({ type }) => {
   if (loading || !data) {
     return <Container>
       <table id="save-target">
-        <thead className="head">
-          {headerDataByType(type)}
-        </thead>
+        {headerDataByType(type)}
         <tbody>
           {temporary.map((data, idx) => (
             <tr key={idx} className="blank">
@@ -131,9 +129,7 @@ const UserList = ({ type }) => {
   return (
     <Container>
       <table id="save-target">
-        <thead className="head">
-          {headerDataByType(type)}
-        </thead>
+        {headerDataByType(type)}
         <tbody>
           {data.map((data, idx) => (
             <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />

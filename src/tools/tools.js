@@ -76,21 +76,46 @@ export function headerDataByType(type) {
   coLeaderCnt = 4;
   adminCnt = 7;
   if (type === 'score') {
-    return <tr>
-      <th className="rank">#</th>
-      <th className="name">이름</th>
-      <th className="trophies side">트로피</th>
-      <th className="townHallLevel side">홀</th>
-      <th className="attackPower side">공격력</th>
-    </tr>
+    return <thead className="head">
+      <tr>
+        <th className="rank">#</th>
+        <th className="name">이름</th>
+        <th className="trophies side">트로피</th>
+        <th className="townHallLevel side">홀</th>
+        <th className="attackPower side">공격력</th>
+      </tr>
+    </thead>
   } else if (type === 'donations') {
-    return <tr>
-      <th className="rank">#</th>
-      <th className="name">이름</th>
-      <th className="dontaions side">지원량</th>
-      <th className="currentRole side">현재직책</th>
-      <th className="expectedRole side">예상직책</th>
-    </tr>
+    return <thead className="head">
+      <tr>
+        <th className="rank">#</th>
+        <th className="name">이름</th>
+        <th className="dontaions side">지원량</th>
+        <th className="currentRole side">현재직책</th>
+        <th className="expectedRole side">예상직책</th>
+      </tr>
+    </thead>
+  } else if (type === 'userInfo') {
+    return <>
+      <thead className="head">
+        <tr>
+          <th className="rank">#</th>
+          <th className="name">이름</th>
+          <th className="register side">회원가입</th>
+          <th className="quizScore side">퀴즈 점수</th>
+          <th className="league side">리그전</th>
+        </tr>
+      </thead>
+      <thead className="head">
+        <tr>
+          <th className="rank"></th>
+          <th className="name"></th>
+          <th className="register side"></th>
+          <th className="detail noAttack"></th>
+          <th className="detail caution">미공 | 경고</th>
+        </tr>
+      </thead>
+    </>
   }
 }
 
@@ -165,10 +190,6 @@ export function calRemainTime(curTime, closeTime) {
 export function getRemainTime(time) {
   return (time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 후";
 }
-
-// export function transformNumber(Number) {
-//   return Number < 10 ? `0${Number}` : Number;
-// }
 
 export function useInterval(callback, delay) {
   const savedCallback = useRef();
