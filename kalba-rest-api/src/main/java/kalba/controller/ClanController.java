@@ -1,6 +1,7 @@
 package kalba.controller;
 
 import kalba.models.account.Name;
+import kalba.models.account.Tag;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
@@ -26,14 +27,8 @@ public class ClanController {
     }
 
     @ResponseBody
-    @PostMapping("/donations/rank")
-    public List<Statistic> memberDonationRank(@RequestBody ClanTag clanTag) {
-        return clanMemberService.findClanMemberStatistic(clanTag.getTag());
-    }
-
-    @ResponseBody
-    @PostMapping("/score/rank")
-    public List<Statistic> memberYonghaScoreRank(@RequestBody ClanTag tag) {
+    @PostMapping("/rank")
+    public List<Ranking> memberStatisticRank(@RequestBody ClanTag tag) {
         return clanMemberService.findClanMemberStatistic(tag.getTag());
     }
 
@@ -57,6 +52,12 @@ public class ClanController {
     @PostMapping("/member/statistic/name")
     public ResponseEntity<?> findByName(@RequestBody Name name) {
         return ResponseEntity.ok(clanMemberService.findByName(name.getName()));
+    }
+
+    @ResponseBody
+    @PostMapping("/member/statistic/tag")
+    public ResponseEntity<?> findByTag(@RequestBody Tag tag) {
+        return ResponseEntity.ok(clanMemberService.findByTag(tag.getTag()));
     }
 
     @ResponseBody

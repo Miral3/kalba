@@ -12,9 +12,12 @@ import lombok.NoArgsConstructor;
 public class Ranking {
     Object league;
     String name;
+    String tag;
     String role;
     int trophies;
     int townHallLevel;
     int donations;
     int yonghaScore;
+    int yonghaScoreRank;
+    int donationRank;
 }

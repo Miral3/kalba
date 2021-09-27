@@ -78,25 +78,25 @@ const UserList = ({ type }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const query = type === 'score' ? 'score' : `${type}`;
         const response = await axios.post(
-          `/coc/clan/${query}/rank`, {
+          `/coc/clan/rank`, {
           tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"
           }
         });
+        let data = new Array(response.data.length);
         if (type === "donations") {
-          response.data.sort((a, b) => {
-            return b.donations - a.donations
-          });
+          for(let rank of response.data) {
+            data[rank.donationRank - 1] = rank;
+          }
         } else {
-          response.data.sort((a, b) => {
-            return b.yonghaScore - a.yonghaScore
-          });
+          for(let rank of response.data) {
+            data[rank.yonghaScoreRank - 1] = rank;
+          }
         }
-        setData(response.data);
+        setData(data);
       } catch (e) {
         console.log(e);
       }

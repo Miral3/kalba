@@ -1,12 +1,14 @@
 package kalba.service;
 
 import kalba.models.coc.clan.ClanInfo;
+import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
 import kalba.repository.StatisticMongoRepository;
 import kalba.util.MemberDataManager;
 import lombok.AllArgsConstructor;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,22 +25,24 @@ public class ClanMemberService {
         return statisticMongoRepository.findByTag(tag);
     }
 
-    public List<Statistic> findClanMemberStatistic(String clanTag) {
+    public List<Ranking> findClanMemberStatistic(String clanTag) {
         List<Statistic> statisticList = statisticMongoRepository.findAllClanMemberStatistic(clanTag);
-        return statisticList;
-//        List<Ranking> ranking = new LinkedList<>();
-//        for (Statistic statistic : statisticList) {
-//            ranking.add(Ranking.builder()
-//                    .league(statistic.getLeague())
-//                    .name(statistic.getName())
-//                    .role(statistic.getRole())
-//                    .trophies(statistic.getTrophies())
-//                    .townHallLevel(statistic.getTownHallLevel())
-//                    .donations(statistic.getDonations())
-//                    .yonghaScore(statistic.getYonghaScore())
-//                    .build());
-//        }
-//        return ranking;
+        List<Ranking> ranking = new LinkedList<>();
+        for (Statistic statistic : statisticList) {
+            ranking.add(Ranking.builder()
+                    .league(statistic.getLeague())
+                    .name(statistic.getName())
+                    .tag(statistic.getTag())
+                    .role(statistic.getRole())
+                    .trophies(statistic.getTrophies())
+                    .townHallLevel(statistic.getTownHallLevel())
+                    .donations(statistic.getDonations())
+                    .yonghaScore(statistic.getYonghaScore())
+                    .yonghaScoreRank(statistic.getYonghaScoreRank())
+                    .donationRank(statistic.getDonationRank())
+                    .build());
+        }
+        return ranking;
     }
 
     public ClanInfo findClanInfo(String clanCode) {

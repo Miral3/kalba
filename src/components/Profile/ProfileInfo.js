@@ -147,7 +147,7 @@ const ProfileInfo = ({ match }) => {
       setLoading(true);
       try {
         const response = await axios.post(
-          "/coc/clan/score/rank", {
+          "/coc/clan/rank", {
           tag: "%232Y2Y9YCUU"
         }, {
           headers: {

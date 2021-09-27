@@ -139,7 +139,7 @@ const Count = (type) => {
 }
 
 const RankingList = ({ title, type }) => {
-  const [donationData, setDonationData] = useState(null);
+  const [rankingData, setRankingData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [toggle, setToggle] = useState(false);
@@ -170,23 +170,24 @@ const RankingList = ({ title, type }) => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `/coc/clan/${type}/rank`, {
+          `/coc/clan/rank`, {
           tag: "%232Y2Y9YCUU"
         }, {
           headers: {
             "Content-Type": "application/json"
           }
         });
-        if(type==="donations"){
-          response.data.sort((a, b) => {
-            return b.donations - a.donations
-          });
+        let data = new Array(response.data.length);
+        if (type === "donations") {
+          for(let rank of response.data) {
+            data[rank.donationRank - 1] = rank;
+          }
         } else {
-          response.data.sort((a, b) => {
-            return b.yonghaScore - a.yonghaScore
-          });
+          for(let rank of response.data) {
+            data[rank.yonghaScoreRank - 1] = rank;
+          }
         }
-        setDonationData(response.data);
+        setRankingData(data);
       } catch (e) {
         console.log(e);
       }
@@ -196,7 +197,7 @@ const RankingList = ({ title, type }) => {
     // eslint-disable-next-line
   }, [toggle]);
 
-  if (loading || !donationData) {
+  if (loading || !rankingData) {
     return <Container>
       <div className="header">
         <div className="title_count">
@@ -254,7 +255,7 @@ const RankingList = ({ title, type }) => {
           {headerDataByType(type)}
         </thead>
         <tbody>
-          {donationData.slice(0, 10).map((data, idx) => (
+          {rankingData.slice(0, 10).map((data, idx) => (
             <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />
           ))}
         </tbody>
