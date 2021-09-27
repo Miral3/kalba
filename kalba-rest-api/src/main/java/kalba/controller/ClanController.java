@@ -7,6 +7,7 @@ import kalba.models.coc.clan.Statistic;
 import kalba.service.ClanMemberService;
 import kalba.models.coc.clan.ClanTag;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,34 +39,13 @@ public class ClanController {
 
     @ResponseBody
     @PostMapping("/force/update")
-    public Map<String, String> forceUpdateClanInfo(@RequestBody ClanTag tag) {
-//        Map<String, String> result = new HashMap<>();
-//        if (ClanMemberService.updateClanInfo(id.getId())) {
-//            result.put("status", "200");
-//            result.put("message", "강제 갱신에 성공하였습니다.");
-//        } else {
-//            result.put("status", "205");
-//            result.put("message", "강제 갱신 중 문제가 발생하였습니다.");
-//        }
-//        return result;
-        return Map.of("error", "임시 중단");
+    public ResponseEntity<?> forceUpdateClanInfo(@RequestBody ClanTag tag) {
+        if(clanMemberService.forceUpdate(tag.getTag())){
+            return ResponseEntity.ok(Map.of("message", "강제 갱신에 성공하였습니다."));
+        } else {
+            return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+        }
     }
-
-//    @ResponseBody
-//    @PostMapping("/member/name")
-//    public ResponseEntity<?> getNameByTag(@RequestBody Tag tag) {
-//        return ClanMemberService.findNameByTag(tag.getTag())
-//                .<ResponseEntity<?>>map(name -> ResponseEntity.ok(Map.of("name", name)))
-//                .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid tag")));
-//    }
-//
-//    @ResponseBody
-//    @PostMapping("/member/tag")
-//    public ResponseEntity<?> getTagByName(@RequestBody Name name) {
-//        return ClanMemberService.findTagByName(name.getName())
-//                .<ResponseEntity<?>>map(tag -> ResponseEntity.ok(Map.of("tag", tag)))
-//                .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
-//    }
 
     @ResponseBody
     @PostMapping("/member/tag")

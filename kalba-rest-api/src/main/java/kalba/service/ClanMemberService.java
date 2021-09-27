@@ -1,19 +1,19 @@
 package kalba.service;
 
 import kalba.models.coc.clan.ClanInfo;
-import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
 import kalba.repository.StatisticMongoRepository;
+import kalba.util.MemberDataManager;
 import lombok.AllArgsConstructor;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
 public class ClanMemberService {
     private final StatisticMongoRepository statisticMongoRepository;
+    private final MemberDataManager memberDataManager;
 
     public Statistic findByName(String name) {
         return statisticMongoRepository.findByName(name);
@@ -45,11 +45,11 @@ public class ClanMemberService {
         return statisticMongoRepository.findClanInfoByClanId(clanCode);
     }
 
-    public Optional<Formula> findYonghaScoreFormula(){
+    public Optional<Formula> findYonghaScoreFormula() {
         return statisticMongoRepository.findYonghaScoreFormula();
     }
 
-    public boolean forceUpdate(String clanTag){
-        return false;
+    public boolean forceUpdate(String clanTag) {
+        return memberDataManager.updateClanInfo(clanTag);
     }
 }

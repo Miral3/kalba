@@ -3,6 +3,7 @@ package kalba.repository;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
+import kalba.util.MemberDataManager;
 import kalba.util.MemberDataThread;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,7 +29,7 @@ public class StatisticMongoRepository {
     }
 
     public ClanInfo findClanInfoByClanId(String id) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("tag").is(MemberDataThread.decodeUTF8(id))), ClanInfo.class, "clan");
+        return mongoTemplate.findOne(Query.query(Criteria.where("tag").is(MemberDataManager.decodeUTF8(id))), ClanInfo.class, "clan");
     }
 
     public List<Statistic> findAllClanMemberStatistic(String clanTag) {

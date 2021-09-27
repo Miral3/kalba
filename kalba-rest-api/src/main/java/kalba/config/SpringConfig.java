@@ -4,6 +4,7 @@ import kalba.repository.*;
 import kalba.service.AccountService;
 import kalba.service.ClanMemberService;
 import kalba.service.QuizService;
+import kalba.util.MemberDataManager;
 import kalba.util.MemberDataThread;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,8 +52,8 @@ public class SpringConfig {
     }
 
     @Bean
-    public ClanMemberService clanMemberService2() {
-        return new ClanMemberService(statisticMongoRepository());
+    public ClanMemberService clanMemberService() {
+        return new ClanMemberService(statisticMongoRepository(), memberDataManager());
     }
 
     @Bean
@@ -67,8 +68,13 @@ public class SpringConfig {
 
     @Bean
     public MemberDataThread memberDataThread() {
-        MemberDataThread memberDataThread = new MemberDataThread(statisticMongoRepository());
+        MemberDataThread memberDataThread = new MemberDataThread(memberDataManager());
         memberDataThread.start();
         return memberDataThread;
+    }
+
+    @Bean
+    public MemberDataManager memberDataManager() {
+        return new MemberDataManager(statisticMongoRepository());
     }
 }
