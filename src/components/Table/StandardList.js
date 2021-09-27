@@ -84,18 +84,18 @@ const StandardList = (props) => {
     } else if (category === 'siegeMachines') {
       setData(siegeMachines);
     }
-  })
+  }, [category])
 
   const set = data.map((arr, idx) =>
     <tr className="type spells" key={idx}>
       {arr.map((value, num) => {
         if (num === 0) {
-          return <td className="type name">{value}</td>
+          return <td key={idx * value + num} className="type name">{value}</td>
         } else if (num === 3) {
-          return <td className="type">{Math.ceil(value * 1000) / 1000}</td>
+          return <td key={idx * value + num} className="type">{Math.ceil(value * 1000) / 1000}</td>
         }
         else {
-          return <td>{value}</td>
+          return <td key={idx * value + num}>{value}</td>
         }
       })}
     </tr>);

@@ -163,12 +163,12 @@ const QuizBlock = styled.div`
 `;
 
 const Quiz = () => {
-  const [name, setName] = useState(getLoginUserNickname());
+  // const [name, setName] = useState(getLoginUserNickname());
+  const [name] = useState(getLoginUserNickname());
   const [passState, setPassState] = useState(false);
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
   const [checkList, setCheckList] = useState([]);
-  // const answerList = Array(10).fill().map(() => Array(5).fill(false));
   const [score, setScore] = useState(-1);
   const history = useHistory();
 
@@ -176,14 +176,6 @@ const Quiz = () => {
     setData(quizData);
     setCheckList(Array(10).fill().map(() => Array(5).fill(false)));
   }, []);
-
-  // const setAnswerList = () => {
-  //   for (let i = 0; i < quizData.length; i++) {
-  //     for (let j = 0; j < quizData[i].rightAnswer.length; j++) {
-  //       answerList[i][quizData[i].rightAnswer[j] - 1] = true;
-  //     }
-  //   }
-  // }
 
   const displayItems = () => {
     if (idx === 0) {
@@ -223,12 +215,12 @@ const Quiz = () => {
   };
 
   const checkListToAnswerSheet = () => {
-    let sheet= [];
-    for(let i=0; i<checkList.length; i++){
-      let s=[]
-      for(let j=0; j<=checkList[0].length; j++){
-        if(checkList[i][j]){
-          s.push(j+1);
+    let sheet = [];
+    for (let i = 0; i < checkList.length; i++) {
+      let s = []
+      for (let j = 0; j <= checkList[0].length; j++) {
+        if (checkList[i][j]) {
+          s.push(j + 1);
         }
       }
       sheet.push(s);
@@ -244,14 +236,14 @@ const Quiz = () => {
   const markQuiz = async () => {
     await axios.post(
       '/quiz/mark', {
-        sheet: checkListToAnswerSheet(),
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getLoginToken()}`
-        }
-      }).then(res => {
-      if(res.status === 200 && res.data.score!==undefined){
+      sheet: checkListToAnswerSheet(),
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getLoginToken()}`
+      }
+    }).then(res => {
+      if (res.status === 200 && res.data.score !== undefined) {
         setScore(res.data.score);
       } else {
         alert("채점중 에러가 발생하였습니다.");
@@ -263,7 +255,7 @@ const Quiz = () => {
   }
 
   const createFirst = () => {
-    if(!isLogin()){
+    if (!isLogin()) {
       alert("로그인이 필요한 서비스입니다.");
       history.push("/");
     } else {
@@ -272,7 +264,7 @@ const Quiz = () => {
     }
     return <div className="nameBlock">
       <span className="title">칼바클랜 공지 퀴즈</span>
-      {passState?<span className="askName">{name}님은 이미 통과하였습니다.<br/>다시 풀이하시겠습니까?</span>:<span className="askName">{name}님 반갑습니다.</span>}
+      {passState ? <span className="askName">{name}님은 이미 통과하였습니다.<br />다시 풀이하시겠습니까?</span> : <span className="askName">{name}님 반갑습니다.</span>}
       <div className="inputBlock">
         <CgArrowRightR className="start" onClick={() => onButtonClick("start")} />
       </div>
@@ -378,23 +370,23 @@ const Quiz = () => {
   const createResult = () => {
     markQuiz();
     isValidateLoginState();
-    if(isPassScore(score)){
+    if (isPassScore(score)) {
       savePassedUserInDB(name, score);
     }
     return <>
-      {score===-1?(
+      {score === -1 ? (
         <div className="resultBlock"><span className="thanks">채점중....</span>
         </div>)
-        :(
+        : (
           <div className="resultBlock">
             <span className="thanks">수고하셨습니다.</span>
             <div className="info">
               <span className="name">{name}</span>
               <span> 님의 점수는 </span>
               <span className="score">{score}</span>
-              {isPassScore(score)?<span>점으로 통과하셨습니다!</span>:<span>점으로<br/>아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
+              {isPassScore(score) ? <span>점으로 통과하셨습니다!</span> : <span>점으로<br />아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
             </div>
-            {isPassScore(score)?<button className="reset" onClick={() => history.push("/")}>메인으로</button>:<button className="reset" onClick={() => reset()}>다시풀기</button>}
+            {isPassScore(score) ? <button className="reset" onClick={() => history.push("/")}>메인으로</button> : <button className="reset" onClick={() => reset()}>다시풀기</button>}
           </div>
         )
       }
@@ -405,15 +397,15 @@ const Quiz = () => {
   const savePassedUserInDB = (name, score) => {
     axios.post(
       '/quiz/pass', {
-        name: name,
-        score: score
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getLoginToken()}`
-        }
-      }).then(res => {
-      if(!(res.status === 201 && !isEmpty(res.data.message))){
+      name: name,
+      score: score
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getLoginToken()}`
+      }
+    }).then(res => {
+      if (!(res.status === 201 && !isEmpty(res.data.message))) {
         alert("에러가 발생하였습니다.")
       }
     }).catch(e => {
@@ -421,17 +413,17 @@ const Quiz = () => {
     });
   }
 
-  const isValidateLoginState = () =>{
+  const isValidateLoginState = () => {
     axios.post(
       '/account/login/name', {
-        token: getLoginToken(),
-      }, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(res => {
-      if(res.status === 200 && !isEmpty(res.data.name)){
-        if(res.data.name !== getLoginUser()){
+      token: getLoginToken(),
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      if (res.status === 200 && !isEmpty(res.data.name)) {
+        if (res.data.name !== getLoginUser()) {
           invalidLoginState();
         }
       } else {
@@ -442,18 +434,18 @@ const Quiz = () => {
     });
   }
 
-  const checkPassState = () =>{
+  const checkPassState = () => {
     axios.post(
       '/quiz/state', {
-        name: getLoginUser(),
-      }, {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getLoginToken()}`
-        }
-      }).then(res => {
-      if(res.status === 200 && !isEmpty(res.data.state)){
-        if(res.data.state===true){
+      name: getLoginUser(),
+    }, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getLoginToken()}`
+      }
+    }).then(res => {
+      if (res.status === 200 && !isEmpty(res.data.state)) {
+        if (res.data.state === true) {
           setPassState(true);
         }
       }
@@ -466,7 +458,6 @@ const Quiz = () => {
     history.push("/");
   }
 
-  // setAnswerList();
   return (
     <Container>
       <QuizBlock idx={idx}>

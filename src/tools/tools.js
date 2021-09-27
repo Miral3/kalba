@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
@@ -190,23 +188,23 @@ export function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export function isLogin(){
+export function isLogin() {
   return !isEmpty(getLoginUser());
 }
 
-export function logout(){
+export function logout() {
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('name');
 }
 
-export function getLoginUser(){
+export function getLoginUser() {
   return window.localStorage.getItem('name');
 }
 
-export function getLoginUserNickname(){
+export function getLoginUserNickname() {
   return window.localStorage.getItem('nickname');
 }
 
-export function getLoginToken(){
+export function getLoginToken() {
   return window.localStorage.getItem('token');
 }

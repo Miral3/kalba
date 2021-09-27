@@ -23,7 +23,7 @@ const Login = ({ AuthActions, username, password }) => {
   }
 
   const onKeyPress = (e) => {
-    if (e.key == 'Enter') {
+    if (e.key === 'Enter') {
       login();
     }
   }

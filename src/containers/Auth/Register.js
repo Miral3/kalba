@@ -47,7 +47,7 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
   }
 
   const onKeyPress = (e) => {
-    if (e.key == 'Enter') {
+    if (e.key === 'Enter') {
       register();
     }
   }

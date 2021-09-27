@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import HeaderNav from './HeaderNav';
 import HeaderInsert from './HeaderInsert';
 import axios from "axios";
-import { getLoginToken, isEmpty } from "../../../tools/tools";
+import { getLoginToken } from "../../../tools/tools";
 
 const HeaderBlock = styled.div`
   a {
@@ -125,11 +125,11 @@ const Header = ({ children }) => {
   const isAdmin = async () => {
     await axios.get(
       '/account/admin', {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${getLoginToken()}`
-        }
-      }).then(res => {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${getLoginToken()}`
+      }
+    }).then(res => {
       if (res.status === 200) {
         setAdmin(true);
       }
@@ -152,7 +152,7 @@ const Header = ({ children }) => {
         {children}
       </div>
       <div className="category">
-        < HeaderNav items={admin?adminItems:userItems} />
+        < HeaderNav items={admin ? adminItems : userItems} />
       </div>
     </HeaderBlock>
   );
