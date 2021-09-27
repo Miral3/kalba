@@ -27,4 +27,6 @@ public class Statistic {
     private Object spells;
     private Object pets;
     private int townHallWeaponLevel;
+    private int yonghaScoreRank;
+    private int donationRank;
 }

@@ -40,7 +40,7 @@ public class ClanController {
     @ResponseBody
     @PostMapping("/force/update")
     public ResponseEntity<?> forceUpdateClanInfo(@RequestBody ClanTag tag) {
-        if(clanMemberService.forceUpdate(tag.getTag())){
+        if (clanMemberService.forceUpdate(tag.getTag())) {
             return ResponseEntity.ok(Map.of("message", "강제 갱신에 성공하였습니다."));
         } else {
             return new ResponseEntity<>(HttpStatus.RESET_CONTENT);

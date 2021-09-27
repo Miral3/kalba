@@ -4,7 +4,6 @@ import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
 import kalba.util.MemberDataManager;
-import kalba.util.MemberDataThread;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -47,7 +46,7 @@ public class StatisticMongoRepository {
         }
         for (Statistic statistic : list) {
             memberUpdateState.put(statistic.getTag(), true);
-            mongoTemplate.upsert(new Query(Criteria.where("tag").is(statistic.getTag())), clanMemberUpdate(statistic, clanTag), "statistic");
+            mongoTemplate.upsert(new Query(Criteria.where("tag").is(statistic.getTag())), memberStatisticUpdate(statistic, clanTag), "statistic");
         }
         for (String member : memberUpdateState.keySet()) {
             if (!memberUpdateState.get(member)) {
@@ -64,7 +63,7 @@ public class StatisticMongoRepository {
         return mongoTemplate.findAll(Formula.class, "formula").stream().findAny();
     }
 
-    private Update clanMemberUpdate(Statistic statistic, String clanTag) {
+    private Update memberStatisticUpdate(Statistic statistic, String clanTag) {
         Update update = new Update();
         update.set("name", statistic.getName())
                 .set("role", statistic.getRole())
@@ -86,7 +85,9 @@ public class StatisticMongoRepository {
                 .set("spells", statistic.getSpells())
                 .set("pets", statistic.getPets())
                 .set("townHallWeaponLevel", statistic.getTownHallWeaponLevel())
-                .set("clanTag", clanTag);
+                .set("clanTag", clanTag)
+                .set("yonghaScoreRank", statistic.getYonghaScoreRank())
+                .set("donationRank", statistic.getDonationRank());
         return update;
     }
 

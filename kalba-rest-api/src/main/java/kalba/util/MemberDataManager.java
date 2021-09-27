@@ -58,6 +58,18 @@ public class MemberDataManager {
         }
         statisticMongoRepository.updateClanInfo(clanInfo);
         List<Statistic> statisticList = getClanMemberList(clanInfo);
+        statisticList.sort(Comparator.comparing(Statistic::getYonghaScore).reversed());
+        int idx=1;
+        for(Statistic statistic:statisticList){
+            statistic.setYonghaScoreRank(idx);
+            idx++;
+        }
+        idx=1;
+        statisticList.sort(Comparator.comparing(Statistic::getDonations).reversed());
+        for(Statistic statistic:statisticList){
+            statistic.setDonationRank(idx);
+            idx++;
+        }
         statisticMongoRepository.updateClanMemberStatistic(statisticList, clanCode);
         loadingMap.get(clanCode).set(false);
         return true;
