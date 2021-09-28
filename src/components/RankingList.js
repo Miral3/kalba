@@ -71,7 +71,7 @@ const Container = styled.div`
     width: 100%;
     border-collapse: collapse;
   }
-  .blockHead tr {
+  .head tr {
     th {
     background-color: ${({ theme }) => theme.bgColors.listSecondHeader};
     color: ${({ theme }) => theme.fontColors.listHeader};
@@ -179,11 +179,11 @@ const RankingList = ({ title, type }) => {
         });
         let data = new Array(response.data.length);
         if (type === "donations") {
-          for(let rank of response.data) {
+          for (let rank of response.data) {
             data[rank.donationRank - 1] = rank;
           }
         } else {
-          for(let rank of response.data) {
+          for (let rank of response.data) {
             data[rank.yonghaScoreRank - 1] = rank;
           }
         }
@@ -215,9 +215,7 @@ const RankingList = ({ title, type }) => {
         </div>
       </div>
       <table>
-        <thead className="blockHead">
-          {headerDataByType(type)}
-        </thead>
+        {headerDataByType(type)}
         <tbody>
           {temporary.map((data, idx) => (
             <tr key={idx} className="blank">
@@ -251,9 +249,7 @@ const RankingList = ({ title, type }) => {
         </div>
       </div>
       <table>
-        <thead className="blockHead">
-          {headerDataByType(type)}
-        </thead>
+        {headerDataByType(type)}
         <tbody>
           {rankingData.slice(0, 10).map((data, idx) => (
             <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />

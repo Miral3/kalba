@@ -88,11 +88,11 @@ const UserList = ({ type }) => {
         });
         let data = new Array(response.data.length);
         if (type === "donations") {
-          for(let rank of response.data) {
+          for (let rank of response.data) {
             data[rank.donationRank - 1] = rank;
           }
         } else {
-          for(let rank of response.data) {
+          for (let rank of response.data) {
             data[rank.yonghaScoreRank - 1] = rank;
           }
         }
@@ -123,9 +123,7 @@ const UserList = ({ type }) => {
       </table>
     </Container>
   }
-  // if (!data) {
-  //   return null;
-  // }
+
   return (
     <Container>
       <table id="save-target">

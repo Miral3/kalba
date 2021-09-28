@@ -76,21 +76,25 @@ export function headerDataByType(type) {
   coLeaderCnt = 4;
   adminCnt = 7;
   if (type === 'score') {
-    return <tr>
+    return <thead className="head">
+      <tr>
         <th className="rank">#</th>
         <th className="name">이름</th>
         <th className="trophies side">트로피</th>
         <th className="townHallLevel side">홀</th>
         <th className="attackPower side">공격력</th>
       </tr>
+    </thead>
   } else if (type === 'donations') {
-    return <tr>
+    return <thead className="head">
+      <tr>
         <th className="rank">#</th>
         <th className="name">이름</th>
         <th className="dontaions side">지원량</th>
         <th className="currentRole side">현재직책</th>
         <th className="expectedRole side">예상직책</th>
       </tr>
+    </thead>
   } else if (type === 'userInfo') {
     return <>
       <thead className="head">
