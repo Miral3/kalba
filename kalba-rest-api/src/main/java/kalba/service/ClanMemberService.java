@@ -17,11 +17,11 @@ public class ClanMemberService {
     private final StatisticMongoRepository statisticMongoRepository;
     private final MemberDataManager memberDataManager;
 
-    public Statistic findByName(String name) {
+    public Optional<Statistic> findByName(String name) {
         return statisticMongoRepository.findByName(name);
     }
 
-    public Statistic findByTag(String tag) {
+    public Optional<Statistic> findByTag(String tag) {
         return statisticMongoRepository.findByTag(tag);
     }
 

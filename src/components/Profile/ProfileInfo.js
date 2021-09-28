@@ -115,7 +115,6 @@ const translateLeague = (engTxt) => {
 
 const getIdxMap = (userInfo) => {
   let idxMap = new Map();
-  console.log(userInfo);
   for (let i = 0; i < userInfo.heroes.length; i++) {
     if (userInfo.heroes[i].village === 'home') {
       idxMap.set(userInfo.heroes[i].name, i);
@@ -135,55 +134,44 @@ const getIdxMap = (userInfo) => {
 }
 
 const ProfileInfo = ({ match }) => {
-  const name = match;
-  const [usersList, setUsersList] = useState(null);
+  const tag = match;
   const [userData, setUserData] = useState(null);
-  const [donaRank, setDonaRank] = useState('');
-  const [scoreRank, setScoreRank] = useState('');
   const [loading, setLoading] = useState(false);
+  const [existTag, setExistTag] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          "/coc/clan/rank", {
-          tag: "%232Y2Y9YCUU"
+          "/coc/clan/member/statistic/tag", {
+          tag: "#"+tag
         }, {
           headers: {
             "Content-Type": "application/json"
           }
         });
-        setUsersList(response.data);
-        setUserData(response.data.filter(data => data.name === `${name}`));
-        response.data.sort((a, b) => {
-          return b.yonghaScore - a.yonghaScore
-        });
-        setScoreRank(response.data.findIndex(i => i.name === `${name}`) + 1);
-        response.data.sort((a, b) => {
-          return b.donations - a.donations
-        });
-        setDonaRank(response.data.findIndex(i => i.name === `${name}`) + 1);
+        if (response.status === 200) {
+          setUserData(response.data);
+        } else {
+          setExistTag(false);
+        }
       } catch (e) {
         console.log(e);
       }
       setLoading(false);
     };
     fetchData();
-  }, [name]);
+  }, [tag]);
 
-  if (loading) {
-    return <div>대기 중...</div>
-  }
-  if (!usersList) {
-    return null;
-  }
-  if (!userData.length) {
+  if (!existTag) {
     return <div>프로필을 찾을 수 없습니다. 이름을 다시 한 번 확인해 주십시오.</div>
   }
 
-  const userInfo = userData[0];
-  const idxMap = getIdxMap(userInfo);
+  if (loading || !userData) {
+    return <div/>
+  }
+  const idxMap = getIdxMap(userData);
   const preCheck = (input) => {
     return isEmpty(input) ? ""
       : input.level === input.maxLevel ?
@@ -201,35 +189,35 @@ const ProfileInfo = ({ match }) => {
           <div className="userNameTagRole">
             <span className="userLevel">
               <img className="icon" src="/COC/user-level.png" alt="level" />
-              <span className="level">{userInfo.expLevel}</span>
+              <span className="level">{userData.expLevel}</span>
             </span>
             <ul className="userNameClanInfo">
               <li>
-                <span className="userName">{userInfo.name}</span>
+                <span className="userName">{userData.name}</span>
                 <img
                   className="leagueBadge"
-                  src={`${userInfo.league.iconMedium != null ? userInfo.league.iconMedium : userInfo.league.iconSmall}`}
+                  src={`${userData.league.iconMedium != null ? userData.league.iconMedium : userData.league.iconSmall}`}
                   alt="leagueBadge"
                 />
               </li>
               <li>
-                <span className="userTag">{userInfo.tag}&nbsp;</span>
+                <span className="userTag">{userData.tag}&nbsp;</span>
                 <FaRegCopy
                   className="userTagCopy"
-                  onClick={() => copyText(userInfo.tag)}
-                  onDoubleClick={() => copyText(userInfo.tag)}
+                  onClick={() => copyText(userData.tag)}
+                  onDoubleClick={() => copyText(userData.tag)}
                   alt="userTagCopy"
                 />
               </li>
               <li>
-                <span className="userRole">{translateRole(userInfo.role)}</span>
+                <span className="userRole">{translateRole(userData.role)}</span>
               </li>
             </ul>
           </div>
           <ul className="labels">
-            {userInfo.labels.map((arr, idx) =>
+            {userData.labels.map((arr, idx) =>
               <li className="label" key={idx}>
-                <img src={`${userInfo.labels[idx].smallIcon}`} alt="label" />
+                <img src={`${userData.labels[idx].smallIcon}`} alt="label" />
               </li>
             )}
           </ul>
@@ -239,16 +227,16 @@ const ProfileInfo = ({ match }) => {
           <div className="currentScore">
             <img
               className="leagueBadge"
-              src={`${userInfo.league.iconMedium != null ? userInfo.league.iconMedium : userInfo.league.iconSmall}`}
+              src={`${userData.league.iconMedium != null ? userData.league.iconMedium : userData.league.iconSmall}`}
               alt="leagueBadge"
             />
             <div className="leagueContents">
               <div className="leagueNameBlock">
-                <span className="leagueName">{translateLeague(userInfo.league.name)}</span>
+                <span className="leagueName">{translateLeague(userData.league.name)}</span>
               </div>
               <div className="leagueScore">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-                <span className="score">{userInfo.trophies}</span>
+                <span className="score">{userData.trophies}</span>
               </div>
             </div>
           </div>
@@ -256,14 +244,14 @@ const ProfileInfo = ({ match }) => {
             <span className="space type">전체 최고 기록:</span>
             <div className="space contents">
               <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
-              <span className="score">{userInfo.bestTrophies}</span>
+              <span className="score">{userData.bestTrophies}</span>
             </div>
           </div>
           <div className="warScore">
             <span className="space type">전쟁 별 획득:</span>
             <div className="space contents">
               <img className="warStar" src="/COC/war-star.png" alt="warStar" />
-              <span className="score">{userInfo.warStars}</span>
+              <span className="score">{userData.warStars}</span>
             </div>
           </div>
         </div>
@@ -274,14 +262,14 @@ const ProfileInfo = ({ match }) => {
           <li className="apRanking">
             <div className="badgeRanking">
               <img className="leagueBadge" src="https://api-assets.clashofclans.com/leagues/288/R2zmhyqQ0_lKcDR5EyghXCxgyC9mm_mVMIjAbmGoZtw.png" alt="leagueBadge" />
-              <span className="ranking">#{scoreRank}</span>
+              <span className="ranking">#{userData.yonghaScoreRank}</span>
             </div>
             <div className="typeAmount">
               <span className="type attackPower">공격력</span>
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 {/* <div className="scoreDiv"> */}
-                <span className="score">{userInfo.yonghaScore}</span>
+                <span className="score">{userData.yonghaScore}</span>
                 {/* </div> */}
               </div>
             </div>
@@ -289,14 +277,14 @@ const ProfileInfo = ({ match }) => {
           <li className="donaRanking">
             <div className="badgeRanking">
               <img className="leagueBadge" src="https://api-assets.clashofclans.com/leagues/288/R2zmhyqQ0_lKcDR5EyghXCxgyC9mm_mVMIjAbmGoZtw.png" alt="leagueBadge" />
-              <span className="ranking">#{donaRank}</span>
+              <span className="ranking">#{userData.donationRank}</span>
             </div>
             <div className="typeAmount">
               <span className="type donations">지원량</span>
               <div className="amount">
                 <img className="trophy" src="/COC/cocTrophy.png" alt="trophy" />
                 <div className="scoreDiv">
-                  <span className="score">{userInfo.donations}</span>
+                  <span className="score">{userData.donations}</span>
                 </div>
               </div>
             </div>
@@ -306,15 +294,15 @@ const ProfileInfo = ({ match }) => {
       <Army className="army">
         <div className="contents">
           <div className="townHallBlock">
-            {townHallCheck(userInfo.townHallLevel, userInfo.townHallWeaponLevel)}
+            {townHallCheck(userData.townHallLevel, userData.townHallWeaponLevel)}
           </div>
           <div className="heroes block">
             <span className="type">영웅</span>
             <ul className="first">
               {heroesInfo.map((info, index) => (
                 <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.heroes[idxMap.get(info.name)])} className={info.className} src={heroesSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.heroes[idxMap.get(info.name)])}
+                  <Img isLoaded={!isEmpty(userData.heroes[idxMap.get(info.name)])} className={info.className} src={heroesSrcPath + info.source} alt={info.className} />
+                  {preCheck(userData.heroes[idxMap.get(info.name)])}
                 </li>
               ))}
             </ul>
@@ -324,8 +312,8 @@ const ProfileInfo = ({ match }) => {
             <ul className="first">
               {petsInfo.map((info, index) => (
                 <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={petsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                  <Img isLoaded={!isEmpty(userData.troops[idxMap.get(info.name)])} className={info.className} src={petsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userData.troops[idxMap.get(info.name)])}
                 </li>
               ))}
             </ul>
@@ -337,8 +325,8 @@ const ProfileInfo = ({ match }) => {
             <ul className="first">
               {troopsInfo.map((info, index) => (
                 <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                  <Img isLoaded={!isEmpty(userData.troops[idxMap.get(info.name)])} className={info.className} src={troopsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userData.troops[idxMap.get(info.name)])}
                 </li>
               ))}
             </ul>
@@ -348,8 +336,8 @@ const ProfileInfo = ({ match }) => {
             <ul className="first">
               {spellsInfo.map((info, index) => (
                 <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.spells[idxMap.get(info.name)])}
+                  <Img isLoaded={!isEmpty(userData.spells[idxMap.get(info.name)])} className={info.className} src={spellsSrcPath + info.source} alt={info.className} />
+                  {preCheck(userData.spells[idxMap.get(info.name)])}
                 </li>
               ))}
             </ul>
@@ -359,8 +347,8 @@ const ProfileInfo = ({ match }) => {
             <ul className="first">
               {siegeMachinesInfo.map((info, index) => (
                 <li key={index}>
-                  <Img isLoaded={!isEmpty(userInfo.troops[idxMap.get(info.name)])} className={info.className} src={siegeMachinesSrcPath + info.source} alt={info.className} />
-                  {preCheck(userInfo.troops[idxMap.get(info.name)])}
+                  <Img isLoaded={!isEmpty(userData.troops[idxMap.get(info.name)])} className={info.className} src={siegeMachinesSrcPath + info.source} alt={info.className} />
+                  {preCheck(userData.troops[idxMap.get(info.name)])}
                 </li>
               ))}
             </ul>

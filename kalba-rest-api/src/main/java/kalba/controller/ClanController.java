@@ -45,7 +45,9 @@ public class ClanController {
     @ResponseBody
     @PostMapping("/member/tag")
     public ResponseEntity<?> getTagByName(@RequestBody Name name) {
-        return ResponseEntity.ok(Map.of("tag", clanMemberService.findByName(name.getName()).getTag()));
+        return clanMemberService.findByName(name.getName())
+                .<ResponseEntity<?>>map((tag) -> ResponseEntity.ok(Map.of("tag", tag.getTag())))
+                .orElseGet(() -> new ResponseEntity<>(Map.of("message", "non existent name"), HttpStatus.NO_CONTENT));
     }
 
     @ResponseBody
@@ -57,7 +59,9 @@ public class ClanController {
     @ResponseBody
     @PostMapping("/member/statistic/tag")
     public ResponseEntity<?> findByTag(@RequestBody Tag tag) {
-        return ResponseEntity.ok(clanMemberService.findByTag(tag.getTag()));
+        return clanMemberService.findByTag(tag.getTag())
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> new ResponseEntity<>(Map.of("message", "non existent tag"), HttpStatus.NO_CONTENT));
     }
 
     @ResponseBody

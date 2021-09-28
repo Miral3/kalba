@@ -19,12 +19,12 @@ public class StatisticMongoRepository {
     private final MongoTemplate mongoTemplate;
     public static Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
 
-    public Statistic findByName(String name) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Statistic.class, "statistic");
+    public Optional<Statistic> findByName(String name) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Statistic.class, "statistic"));
     }
 
-    public Statistic findByTag(String tag) {
-        return mongoTemplate.findOne(Query.query(Criteria.where("tag").is(tag)), Statistic.class, "statistic");
+    public Optional<Statistic> findByTag(String tag) {
+        return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("tag").is(tag)), Statistic.class, "statistic"));
     }
 
     public ClanInfo findClanInfoByClanId(String id) {
