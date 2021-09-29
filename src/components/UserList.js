@@ -25,7 +25,7 @@ const Container = styled.div`
     width: 100%;
     border-collapse: collapse;
   }
-  .head tr{
+  thead tr {
     th {
     z-index: 1;
     position: sticky;
@@ -61,6 +61,9 @@ const Container = styled.div`
         font-size: 12px;
       }
     }
+  }
+  .multiple tr th{
+    /* padding-bottom: 0px; */
   }
   .blank {
     border: ${({ theme }) => theme.borderColors.list};

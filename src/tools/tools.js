@@ -97,16 +97,16 @@ export function headerDataByType(type) {
     </thead>
   } else if (type === 'userInfo') {
     return <>
-      <thead className="head">
+      <thead className="head multiple">
         <tr>
           <th className="rank">#</th>
           <th className="name">이름</th>
           <th className="register side">회원가입</th>
           <th className="quizScore side">퀴즈 점수</th>
-          <th className="league side">리그전</th>
+          <th className="league side">리그전<br /> 미공 | 경고</th>
         </tr>
       </thead>
-      <thead className="head">
+      {/* <thead className="subhead">
         <tr>
           <th className="rank"></th>
           <th className="name"></th>
@@ -114,7 +114,7 @@ export function headerDataByType(type) {
           <th className="detail noAttack"></th>
           <th className="detail caution">미공 | 경고</th>
         </tr>
-      </thead>
+      </thead> */}
     </>
   }
 }
