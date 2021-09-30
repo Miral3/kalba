@@ -2,8 +2,10 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Container = styled.div`
+  z-index:4;
   a {
     color: ${({ theme }) => theme.fontColors.category};
   }
@@ -24,6 +26,12 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      .burger {
+        position: relative;
+        font-size: 30px;
+        cursor: pointer;
+        left: -40px;
+      }
       .sidebarTitle {
         color: ${({ theme }) => theme.fontColors.category};
         font-size: 20px;
@@ -53,11 +61,19 @@ const Contents = styled(NavLink)`
   }
 `;
 
-const Sidebar = ({ open, menus, type, any }) => {
+const Sidebar = ({ open, menus, type, any, handleSidebar }) => {
+  const onClick = () => {
+    handleSidebar(open);
+  }
+
   return (
     <Container>
       <nav className={open ? "sidebar active" : "sidebar"}>
         <div className="header">
+          <GiHamburgerMenu
+            className="burger"
+            onClick={() => onClick()}
+          />
           <div className="sidebarTitle">MENU</div>
         </div>
         {menus.map((menu, idx) => {
@@ -66,7 +82,7 @@ const Sidebar = ({ open, menus, type, any }) => {
               key={idx}
               activeClassName="active"
               exact={menu.name === { any }}
-              to={menu.name === { any } ? `/${type}/quiz` : `/${type}/${menu.name}`}
+              to={menu.name === { any } ? `/${type}/management` : `/${type}/${menu.name}`}
             >
               {menu.text}
             </Contents>

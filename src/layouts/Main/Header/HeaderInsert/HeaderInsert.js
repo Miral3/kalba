@@ -3,13 +3,13 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 /* Router */
-import {NavLink, useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 /* Styled */
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import axios from "axios";
-import {isEmpty} from "../../../../tools/tools";
+
 
 const Form = styled.form`
   position: relative;
@@ -77,18 +77,18 @@ const HeaderInsert = props => {
   } = props;
 
   const test = async () => {
-      await axios.post(
-          '/coc/clan/member/tag', {
-              name: name
-          }, {
-              headers: {
-                  "Content-Type": "application/json"
-              }
-          }).then(res => {
-              history.push('/profile/'+res.data.tag.substr(1));
-      }).catch(e => {
-          alert("이름을 다시 한번 확인해주세요.");
-      });
+    await axios.post(
+      '/coc/clan/member/tag', {
+      name: name
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      history.push('/profile/' + res.data.tag.substr(1));
+    }).catch(e => {
+      alert("이름을 다시 한번 확인해주세요.");
+    });
   }
   return (
     <Form className={className}>
@@ -97,14 +97,14 @@ const HeaderInsert = props => {
         value={name}
         onChange={onChange}
       />
-        {/*{() => test(name)}*/}
+      {/*{() => test(name)}*/}
       {/*<NavLink to={`/profile/${tag}`}>*/}
       {/*  <button type="submit">*/}
       {/*    <MdSearch />*/}
       {/*  </button>*/}
       {/*</NavLink>*/}
       <div className="tempButton">
-        <MdSearch onClick={test}/>
+        <MdSearch onClick={test} />
       </div>
     </Form>
   );

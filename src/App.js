@@ -15,7 +15,7 @@ import Profile from './routes/Profile';
 import NotFoundPage from './routes/NotFoundPage';
 import About from './routes/About';
 import Auth from './routes/Auth';
-import AdminPage from './routes/AdminPage';
+import Admin from './routes/Admin';
 
 const App = () => {
   return (
@@ -63,9 +63,9 @@ const App = () => {
             component={Auth}
           />
           <RouteWithLayout
-            path="/adminpage/:category?"
+            path="/admin/:category?"
             layout={MainLayout}
-            component={AdminPage}
+            component={Admin}
           />
           <RouteWithLayout
             path="/not-found"
