@@ -225,11 +225,7 @@ export function getNextPromotionDate(next) {
 export function getNextLeagueDate(next) {
   let time = new Date();
   time.setMonth(time.getMonth() + next);
-  time.setDate(1);
-  while(time.getDay() !== 1) {
-    time.setDate(time.getDate() + 1);
-  }
-  time.setDate(time.getDate() + 1);
+  time.setDate(2);
   time.setHours(22);
   time.setMinutes(0);
   time.setSeconds(0);
