@@ -5,9 +5,8 @@ import { VscLoading } from 'react-icons/vsc'
 import styled from 'styled-components';
 
 import UserInfo from './UserInfo';
-import { headerDataByType } from '../tools/tools';
+import { getLeagueDate, getPromotionDate, headerDataByType, prettierTime, calRemainTime, useInterval } from '../tools/tools';
 import axios from 'axios';
-import { getPromotionDate, getLeagueStartDate, calRemainTime, getRemainTime, useInterval } from '../tools/tools';
 
 const Container = styled.div`
   width: 100%;
@@ -118,22 +117,22 @@ const Container = styled.div`
 
 const Count = (type) => {
   const current = new Date();
-  let [promotionTime, setPromotionTime] = useState(calRemainTime(current, getPromotionDate(current)));
-  let [leagueTime, setLeagueTime] = useState(calRemainTime(current, getLeagueStartDate(current)));
+  let [promotionTime, setPromotionTime] = useState(calRemainTime(current, getPromotionDate()));
+  let [leagueTime, setLeagueTime] = useState(calRemainTime(current, getLeagueDate()));
 
   useInterval(() => {
     const current = new Date();
-    setPromotionTime(calRemainTime(current, getPromotionDate(current)));
-    setLeagueTime(calRemainTime(current, getLeagueStartDate(current)));
+    setPromotionTime(calRemainTime(current, getPromotionDate()));
+    setLeagueTime(calRemainTime(current, getLeagueDate()));
   }, 1000);
 
   if (type === 'score') {
     return <div>
-      <span>리그전: {(leagueTime != null) ? getRemainTime(leagueTime) : "wait.."}</span>
+      <span>리그전: {(leagueTime != null) ? prettierTime(leagueTime) : "wait.."}</span>
     </div>
   } else if (type === 'donations') {
     return <div>
-      <span>승강전: {(promotionTime != null) ? getRemainTime(promotionTime) : "wait.."}</span>
+      <span>승강전: {(promotionTime != null) ? prettierTime(promotionTime) : "wait.."}</span>
     </div>
   }
 }

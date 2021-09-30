@@ -43,7 +43,6 @@ const KalbaFooter = styled.div`
 `;
 
 const Footer = () => {
-
   return (
     <KalbaFooter>
       <div className="kalba-footer__content container">

@@ -159,35 +159,11 @@ export function bodyDataByType(type, info, idx) {
   }
 }
 
-export function getLeagueStartDate(time) {
-  let startDate = new Date(time.getFullYear(), time.getMonth(), 2);
-  startDate.setHours(22);
-  let curTime = new Date();
-  if (startDate <= curTime) {
-    startDate.setMonth(curTime.getMonth() + 1);
-    return getLeagueStartDate(startDate);
-  }
-  return startDate;
-}
-
-export function getPromotionDate(time) {
-  let lastMonDate = new Date(time.getFullYear(), time.getMonth(), 1);
-  lastMonDate.setMonth(lastMonDate.getMonth() + 1);
-  lastMonDate.setDate(lastMonDate.getDate() - lastMonDate.getDay());
-  lastMonDate.setHours(22);
-  let curTime = new Date();
-  if (lastMonDate <= curTime) {
-    lastMonDate.setMonth(curTime.getMonth() + 1);
-    return getPromotionDate(lastMonDate);
-  }
-  return lastMonDate;
-}
-
 export function calRemainTime(curTime, closeTime) {
   return new Date(closeTime - curTime);
 }
 
-export function getRemainTime(time) {
+export function prettierTime(time) {
   return (time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 후";
 }
 
@@ -228,4 +204,53 @@ export function getLoginUserNickname() {
 
 export function getLoginToken() {
   return isEmpty(window.localStorage.getItem('token'))?"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3Rpb25kZXYiLCJleHAiOjE2Mjk4ODk2NDksImlhdCI6MTYyOTg3MTY0OX0.1G0XJBpMy2QWiGiI9mIhfagKpIOi8uFM2k0hxZFKTyMo6vN3OE0B17Xa-u9k6u1aDpqWkTTLkaIFQAgJhkHd-g":window.localStorage.getItem('token');
+}
+
+export function getNextPromotionDate(next) {
+  let time = new Date();
+  time.setMonth(time.getMonth() + next);
+  time.setDate(1);
+  time.setDate(time.getDate() - 1);
+  while(time.getDay() !== 1) {
+    time.setDate(time.getDate() - 1);
+  }
+  time.setDate(time.getDate() - 1);
+  time.setHours(22);
+  time.setMinutes(0);
+  time.setSeconds(0);
+  time.setMilliseconds(0);
+  return time;
+}
+
+export function getNextLeagueDate(next) {
+  let time = new Date();
+  time.setMonth(time.getMonth() + next);
+  time.setDate(1);
+  while(time.getDay() !== 1) {
+    time.setDate(time.getDate() + 1);
+  }
+  time.setDate(time.getDate() + 1);
+  time.setHours(22);
+  time.setMinutes(0);
+  time.setSeconds(0);
+  time.setMilliseconds(0);
+  return time;
+}
+
+export function getPromotionDate(){
+  let next = getNextPromotionDate(1);
+  if(next < new Date()) {
+    return getNextPromotionDate(2);
+  } else {
+    return next;
+  }
+}
+
+export function getLeagueDate(){
+  let next = getNextLeagueDate(0);
+  if(next < new Date()) {
+    return getNextLeagueDate(1);
+  } else {
+    return next;
+  }
 }
