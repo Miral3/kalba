@@ -13,8 +13,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0;
-  margin: 0;  
+  padding-top: 1.5rem;  
   @media (min-width: 992px) {
     flex-direction: row;
   }

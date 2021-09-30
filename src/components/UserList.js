@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Container = styled.div`
   height: auto !important;
-  margin-top: 1rem !important;
+  /* margin-top: 1rem !important; */
   width: 100%;
   margin-right: auto;
   margin-left: auto;

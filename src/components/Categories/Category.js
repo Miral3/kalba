@@ -15,6 +15,7 @@ const CategoriesBlock = styled.div`
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 1rem;
   position: relative !important;
   border: ${({ theme }) => theme.borderColors.category};
   border-top: 2px solid #e3342f;

@@ -11,7 +11,7 @@ import axios from 'axios';
 const Container = styled.div`
   width: 100%;
   margin-right: 12px;
-  padding: 1.5rem 0;
+  padding-bottom: 1.5rem;
   @media (max-width: 992px) {
     margin: 0;
   }
