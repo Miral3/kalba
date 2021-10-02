@@ -41,6 +41,11 @@ public class JdbcAccountRepository implements AccountRepository {
     }
 
     @Override
+    public List<AccountInfo> findAllAccountInfo() {
+        return jdbcTemplate.query("select * from account", accountInfoRowMapper());
+    }
+
+    @Override
     public Optional<Account> findByName(String name) {
         List<Account> result = jdbcTemplate.query("select * from account where name = ? ", accountRowMapper(), name);
         return result.stream().findAny();
@@ -64,6 +69,8 @@ public class JdbcAccountRepository implements AccountRepository {
                 .tag(rs.getString("tag"))
                 .nickname(rs.getString("nickname"))
                 .role(rs.getString("role"))
+                .attackState(rs.getBoolean("attack_state"))
+                .warningState(rs.getBoolean("warning_state"))
                 .build();
     }
 
@@ -75,6 +82,8 @@ public class JdbcAccountRepository implements AccountRepository {
                 .nickname(rs.getString("nickname"))
                 .password(rs.getString("password"))
                 .role(rs.getString("role"))
+                .attackState(rs.getBoolean("attack_state"))
+                .warningState(rs.getBoolean("warning_state"))
                 .build();
     }
 }

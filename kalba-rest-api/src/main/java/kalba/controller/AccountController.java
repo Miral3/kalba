@@ -80,16 +80,16 @@ public class AccountController {
                 .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
     }
 
-    @PostMapping("/login/info")
+    @PostMapping("/info")
     public ResponseEntity<?> getAccountInfoByName(@RequestBody Name name) {
         return accountService.findAccountInfoByName(name.getName())
-                .<ResponseEntity<?>>map(accountInfo -> ResponseEntity.ok(
-                        Map.of("name", accountInfo.getName(),
-                                "tag", accountInfo.getTag(),
-                                "nickname", accountInfo.getNickname(),
-                                "role", accountInfo.getRole()
-                        )))
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.ok(Map.of("message", "invalid name")));
+    }
+
+    @GetMapping("/info/all")
+    public ResponseEntity<?> getAllAccountInfo() {
+        return ResponseEntity.ok(accountService.findAllAccountInfo());
     }
 
     @GetMapping("/admin")

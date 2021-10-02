@@ -21,4 +21,6 @@ public class AccountInfo {
     private String tag;
     private String nickname;
     private String role;
+    private boolean attackState;
+    private boolean warningState;
 }

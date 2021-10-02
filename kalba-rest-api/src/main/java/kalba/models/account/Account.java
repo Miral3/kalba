@@ -26,6 +26,8 @@ public class Account implements UserDetails {
     private String nickname;
     private String password;
     private String role;
+    private boolean attackState;
+    private boolean warningState;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

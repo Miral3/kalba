@@ -11,6 +11,8 @@ public interface AccountRepository {
 
     List<Account> findAll();
 
+    List<AccountInfo> findAllAccountInfo();
+
     Optional<Account> findByName(String name);
 
     Optional<Account> findByTag(String tag);

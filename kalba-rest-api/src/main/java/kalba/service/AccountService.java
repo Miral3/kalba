@@ -36,6 +36,10 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public List<AccountInfo> findAllAccountInfo() {
+        return accountRepository.findAllAccountInfo();
+    }
+
     public Optional<Account> findAccountByName(String name) {
         return accountRepository.findByName(name);
     }
