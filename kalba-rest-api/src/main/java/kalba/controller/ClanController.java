@@ -20,6 +20,7 @@ import java.util.*;
 public class ClanController {
     private final ClanMemberService clanMemberService;
 
+
     @ResponseBody
     @PostMapping("info")
     public ClanInfo clanInfo(@RequestBody ClanTag id) {
@@ -70,5 +71,10 @@ public class ClanController {
         return clanMemberService.findYonghaScoreFormula()
                 .<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.ok(Map.of("message", "get formula error")));
+    }
+
+    @PostMapping("/member/state")
+    public ResponseEntity<?> getAllMemberAccountState(@RequestBody ClanTag clanTag) {
+        return ResponseEntity.ok(clanMemberService.getMemberStateList(clanTag.getTag()));
     }
 }

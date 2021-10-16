@@ -53,7 +53,7 @@ public class SpringConfig {
 
     @Bean
     public ClanMemberService clanMemberService() {
-        return new ClanMemberService(statisticMongoRepository(), memberDataManager());
+        return new ClanMemberService(statisticMongoRepository(), memberDataManager(), accountRepository());
     }
 
     @Bean

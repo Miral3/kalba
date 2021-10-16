@@ -2,6 +2,7 @@ package kalba.repository;
 
 import kalba.models.account.Account;
 import kalba.models.account.AccountInfo;
+import kalba.models.account.AccountQuizAndState;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -61,6 +62,22 @@ public class JdbcAccountRepository implements AccountRepository {
     public Optional<AccountInfo> findAccountInfoByName(String name) {
         List<AccountInfo> result = jdbcTemplate.query("select * from account where name = ? ", accountInfoRowMapper(), name);
         return result.stream().findAny();
+    }
+
+    public List<AccountQuizAndState> findAllAccountQuizAndState(){
+        return jdbcTemplate.query("select account.name, tag, nickname, attack_state, warning_state, score from account left outer join quiz on account.name = quiz.name", accountQuizAndStateRowMapper());
+    }
+
+    private RowMapper<AccountQuizAndState> accountQuizAndStateRowMapper() {
+        return (rs, rowNum) -> AccountQuizAndState.builder()
+                .name(rs.getString("name"))
+                .nickname(rs.getString("nickname"))
+                .tag(rs.getString("tag"))
+                .member(true)
+                .attackState(rs.getBoolean("attack_state"))
+                .warningState(rs.getBoolean("warning_state"))
+                .quizScore(rs.getInt("score"))
+                .build();
     }
 
     private RowMapper<AccountInfo> accountInfoRowMapper() {

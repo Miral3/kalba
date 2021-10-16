@@ -1,6 +1,7 @@
 package kalba.controller;
 
 import kalba.models.account.*;
+import kalba.models.coc.clan.ClanTag;
 import kalba.service.AccountService;
 import kalba.service.JwtUserDetailsService;
 import kalba.util.JwtTokenUtil;
