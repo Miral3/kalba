@@ -1,5 +1,7 @@
 package kalba.config;
 
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import kalba.repository.*;
 import kalba.service.AccountService;
 import kalba.service.ClanMemberService;
@@ -24,7 +26,6 @@ public class SpringConfig {
     private String mongoDBUri;
     @Value("${spring.data.mongodb.database}")
     private String mongoDBDatabase;
-
 
     @Bean
     public AccountService accountService() {
@@ -58,7 +59,7 @@ public class SpringConfig {
 
     @Bean
     public MongoDatabaseFactory mongoDatabaseFactory() {
-        return new SimpleMongoClientDatabaseFactory(mongoDBUri + "/" + mongoDBDatabase);
+        return new SimpleMongoClientDatabaseFactory(MongoClients.create(mongoDBUri), mongoDBDatabase);
     }
 
     @Bean
