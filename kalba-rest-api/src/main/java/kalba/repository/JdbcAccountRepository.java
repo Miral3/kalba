@@ -64,8 +64,22 @@ public class JdbcAccountRepository implements AccountRepository {
         return result.stream().findAny();
     }
 
-    public List<AccountQuizAndState> findAllAccountQuizAndState(){
+    @Override
+    public List<AccountQuizAndState> findAllAccountQuizAndState() {
         return jdbcTemplate.query("select account.name, tag, nickname, attack_state, warning_state, score from account left outer join quiz on account.name = quiz.name", accountQuizAndStateRowMapper());
+    }
+
+    public boolean updateMemberAccountQuizAndStateList(List<AccountQuizAndState> list) {
+        try {
+            for (AccountQuizAndState quizAndState : list) {
+                jdbcTemplate.update("update account set attack_state = " + quizAndState.isAttackState() + ", "
+                        + "warning_state = " + quizAndState.isWarningState()
+                        + " where tag = '" + quizAndState.getTag() + "'");
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     private RowMapper<AccountQuizAndState> accountQuizAndStateRowMapper() {

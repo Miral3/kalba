@@ -21,4 +21,6 @@ public interface AccountRepository {
     Optional<AccountInfo> findAccountInfoByName(String name);
 
     List<AccountQuizAndState> findAllAccountQuizAndState();
+
+    boolean updateMemberAccountQuizAndStateList(List<AccountQuizAndState> list);
 }

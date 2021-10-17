@@ -81,4 +81,8 @@ public class ClanMemberService {
         retList.sort(Comparator.comparing(AccountQuizAndState::getNickname));
         return retList;
     }
+
+    public boolean updateMemberState(List<AccountQuizAndState> list){
+        return accountRepository.updateMemberAccountQuizAndStateList(list);
+    }
 }

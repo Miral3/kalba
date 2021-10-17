@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @RequiredArgsConstructor
 public class StatisticMongoRepository {
     private final MongoTemplate mongoTemplate;
-    public static Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
 
     public Optional<Statistic> findByName(String name) {
         return Optional.ofNullable(mongoTemplate.findOne(Query.query(Criteria.where("name").is(name)), Statistic.class, "statistic"));
