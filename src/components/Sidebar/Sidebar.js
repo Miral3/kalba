@@ -14,7 +14,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 200px;
-    height: 80vh;
+    height: 100vh;
     background-color: ${({ theme }) => theme.bgColors.category};
     border: ${({ theme }) => theme.borderColors.category};
     position: absolute;

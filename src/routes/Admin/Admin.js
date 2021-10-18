@@ -8,6 +8,7 @@ import UserList from '../../components/UserList';
 import Categories from '../../components/Categories/Category';
 import StandardList from '../../components/Table/StandardList';
 import Cover from './Cover'
+// import InputForm from '../../components/InputForm';
 
 const Container = styled.div`
   display: flex;
@@ -71,10 +72,11 @@ const Admin = ({ match }) => {
 
     if (type === 'management') {
       return <div>
-        <UserList type='userInfo' />
+        <UserList type='memberState' />
       </div>
     } else if (type === 'standardTable') {
       return <div>
+        {/* <InputForm /> */}
         <Categories items={items} type="admin/standardTable" any="heores" />
         <StandardList category={kind} />
       </div>

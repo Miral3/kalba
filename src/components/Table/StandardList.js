@@ -86,19 +86,18 @@ const StandardList = (props) => {
     }
   }, [category])
 
-  const set = data.map((arr, idx) =>
-    <tr className="type spells" key={idx}>
-      {arr.map((value, num) => {
-        if (num === 0) {
-          return <td key={idx * value + num} className="type name">{value}</td>
-        } else if (num === 3) {
-          return <td key={idx * value + num} className="type">{Math.ceil(value * 1000) / 1000}</td>
-        }
-        else {
-          return <td key={idx * value + num}>{value}</td>
-        }
-      })}
+  const set = data.map((element) =>
+    <tr className={`type ${category}`} key={element.id}>
+      <td className="name">{element.name}</td>
+      <td className="maxScore">{element.maxScore}</td>
+      <td className="maxLevel">{element.maxLevel}</td>
+      <td className="scoreCoefficient">{Math.ceil(element.scoreCoefficient * 1000) / 1000}</td>
     </tr>);
+
+  // const temp = data[1]; // 옮기고싶은 데이터
+  // const idx = 1; // 옮기고싶은 위치
+  // data.splice(data.indexOf(temp), idx);
+  // data.unshift(temp);
 
   return (
     <Container>

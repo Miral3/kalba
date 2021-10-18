@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function isEmpty(value) {
   return value === 0 || value === "" || value == null || (typeof value == "object" && !Object.keys(value).length);
@@ -31,35 +31,33 @@ export function isMobile() {
   return /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
 }
 
-let cutLine, coLeaderCnt, adminCnt;
-
-export function expectedRole(role, idx, donations) {
-  if (idx <= cutLine && donations >= 1000) {
+export function expectedRole(role, idx, donations, rankData) {
+  if (idx <= rankData.cutLine && donations >= 1000) {
     if (role === 'member') {
-      if (adminCnt > 0) {
-        adminCnt--;
+      if (rankData.adminCnt > 0) {
+        rankData.adminCnt--;
         return '장로';
       }
     } else if (role === 'admin') {
-      if (coLeaderCnt > 0) {
-        coLeaderCnt--;
+      if (rankData.coLeaderCnt > 0) {
+        rankData.coLeaderCnt--;
         return '공대';
-      } else if (adminCnt > 0) {
-        adminCnt--;
+      } else if (rankData.adminCnt > 0) {
+        rankData.adminCnt--;
         return '장로';
       } else {
         return '멤버';
       }
     } else if (role === 'coLeader') {
-      if (coLeaderCnt > 0) {
-        coLeaderCnt--;
+      if (rankData.coLeaderCnt > 0) {
+        rankData.coLeaderCnt--;
         return '공대';
-      } else if (adminCnt > 0) {
-        adminCnt--;
+      } else if (rankData.adminCnt > 0) {
+        rankData.adminCnt--;
         return '장로';
       }
     } else if (role === 'leader') {
-      cutLine++;
+      rankData.cutLine++;
       return '-';
     }
   } else {
@@ -68,94 +66,6 @@ export function expectedRole(role, idx, donations) {
     } else {
       return '멤버';
     }
-  }
-}
-
-export function headerDataByType(type) {
-  cutLine = 11;
-  coLeaderCnt = 4;
-  adminCnt = 7;
-  if (type === 'score') {
-    return <thead className="head">
-      <tr>
-        <th className="rank">#</th>
-        <th className="name">이름</th>
-        <th className="trophies side">트로피</th>
-        <th className="townHallLevel side">홀</th>
-        <th className="attackPower side">공격력</th>
-      </tr>
-    </thead>
-  } else if (type === 'donations') {
-    return <thead className="head">
-      <tr>
-        <th className="rank">#</th>
-        <th className="name">이름</th>
-        <th className="dontaions side">지원량</th>
-        <th className="currentRole side">현재직책</th>
-        <th className="expectedRole side">예상직책</th>
-      </tr>
-    </thead>
-  } else if (type === 'userInfo') {
-    return <>
-      <thead className="head multiple">
-        <tr>
-          <th className="rank">#</th>
-          <th className="name">이름</th>
-          <th className="register side">회원가입</th>
-          <th className="quizScore side">퀴즈 점수</th>
-          <th className="league side">리그전<br /> 미공 | 경고</th>
-        </tr>
-      </thead>
-      {/* <thead className="subhead">
-        <tr>
-          <th className="rank"></th>
-          <th className="name"></th>
-          <th className="register side"></th>
-          <th className="detail noAttack"></th>
-          <th className="detail caution">미공 | 경고</th>
-        </tr>
-      </thead> */}
-    </>
-  }
-}
-
-export function bodyDataByType(type, info, idx) {
-  const { league, name, tag, role, trophies, townHallLevel, donations, yonghaScore } = info;
-  const linkTagArg=tag.substr(1);
-  if (type === 'score') {
-    return <>
-      <td className="rank">{idx}</td>
-      <td className="names">
-        <span className="hiddenRank">#{idx}</span>
-        {league && (
-          // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny} />
-        )}
-        <a className="name" href={`/profile/${linkTagArg}`}>
-          {name}
-        </a>
-      </td>
-      <td className="trophies side">{trophies}</td>
-      <td className="townHallLevel side">{townHallLevel}</td>
-      <td className="attackPower side">{yonghaScore}</td>
-    </>
-  } else if (type === 'donations') {
-    return <>
-      <td className="rank">{idx}</td>
-      <td className="names">
-        <span className="hiddenRank">#{idx}</span>
-        {league && (
-          // eslint-disable-next-line
-          <img className="icon" src={league.iconTiny} />
-        )}
-        <a className="name" href={`/profile/${linkTagArg}`}>
-          {name}
-        </a>
-      </td>
-      <td className="donations side">{donations}</td>
-      <td className="currentRole side">{translateRole(role)}</td>
-      <td className="expectedRole side">{expectedRole(role, idx, donations)}</td>
-    </>
   }
 }
 
@@ -203,7 +113,7 @@ export function getLoginUserNickname() {
 }
 
 export function getLoginToken() {
-  return isEmpty(window.localStorage.getItem('token'))?"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3Rpb25kZXYiLCJleHAiOjE2Mjk4ODk2NDksImlhdCI6MTYyOTg3MTY0OX0.1G0XJBpMy2QWiGiI9mIhfagKpIOi8uFM2k0hxZFKTyMo6vN3OE0B17Xa-u9k6u1aDpqWkTTLkaIFQAgJhkHd-g":window.localStorage.getItem('token');
+  return isEmpty(window.localStorage.getItem('token')) ? "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3Rpb25kZXYiLCJleHAiOjE2Mjk4ODk2NDksImlhdCI6MTYyOTg3MTY0OX0.1G0XJBpMy2QWiGiI9mIhfagKpIOi8uFM2k0hxZFKTyMo6vN3OE0B17Xa-u9k6u1aDpqWkTTLkaIFQAgJhkHd-g" : window.localStorage.getItem('token');
 }
 
 export function getNextPromotionDate(next) {
@@ -211,7 +121,7 @@ export function getNextPromotionDate(next) {
   time.setMonth(time.getMonth() + next);
   time.setDate(1);
   time.setDate(time.getDate() - 1);
-  while(time.getDay() !== 1) {
+  while (time.getDay() !== 1) {
     time.setDate(time.getDate() - 1);
   }
   time.setDate(time.getDate() - 1);
@@ -233,18 +143,18 @@ export function getNextLeagueDate(next) {
   return time;
 }
 
-export function getPromotionDate(){
+export function getPromotionDate() {
   let next = getNextPromotionDate(1);
-  if(next < new Date()) {
+  if (next < new Date()) {
     return getNextPromotionDate(2);
   } else {
     return next;
   }
 }
 
-export function getLeagueDate(){
+export function getLeagueDate() {
   let next = getNextLeagueDate(0);
-  if(next < new Date()) {
+  if (next < new Date()) {
     return getNextLeagueDate(1);
   } else {
     return next;

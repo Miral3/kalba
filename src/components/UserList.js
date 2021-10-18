@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
-import UserInfo from './UserInfo';
-import { headerDataByType } from '../tools/tools';
+import Thead from './Thead';
+import Tbody from './Tbody';
 import axios from 'axios';
 
 const Container = styled.div`
   height: auto !important;
-  /* margin-top: 1rem !important; */
   width: 100%;
   margin-right: auto;
   margin-left: auto;
@@ -62,27 +61,25 @@ const Container = styled.div`
       }
     }
   }
-  .multiple tr th{
-    /* padding-bottom: 0px; */
-  }
-  .blank {
-    border: ${({ theme }) => theme.borderColors.list};
-    background-color: ${({ theme }) => theme.bgColors.listContents};
-    height: 42px;
-  }
 `;
 
 const UserList = ({ type }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const temporary = new Array(50).fill(0);
 
   useEffect(() => {
+    let url;
+    if (type === 'donations' || type === 'score') {
+      url = '/coc/clan/rank';
+    } else if (type === 'memberState') {
+      url = '/coc/clan/member/state';
+    }
+
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await axios.post(
-          `/coc/clan/rank`, {
+          `${url}`, {
           tag: "%232Y2Y9YCUU"
         }, {
           headers: {
@@ -94,10 +91,14 @@ const UserList = ({ type }) => {
           for (let rank of response.data) {
             data[rank.donationRank - 1] = rank;
           }
-        } else {
+        } else if (type === "score") {
           for (let rank of response.data) {
             data[rank.yonghaScoreRank - 1] = rank;
           }
+        } else if (type === 'memberState') {
+          data = response.data.map((state, idx) => {
+            return data[idx] = state;
+          })
         }
         setData(data);
       } catch (e) {
@@ -108,34 +109,11 @@ const UserList = ({ type }) => {
     fetchData();
   }, [type]);
 
-  if (loading || !data) {
-    return <Container>
-      <table id="save-target">
-        {headerDataByType(type)}
-        <tbody>
-          {temporary.map((data, idx) => (
-            <tr key={idx} className="blank">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Container>
-  }
-
   return (
     <Container>
       <table id="save-target">
-        {headerDataByType(type)}
-        <tbody>
-          {data.map((data, idx) => (
-            <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />
-          ))}
-        </tbody>
+        <Thead type={type} />
+        <Tbody type={type} data={data} loading={loading} />
       </table>
     </Container>
   );

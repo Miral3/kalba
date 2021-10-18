@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { VscLoading } from 'react-icons/vsc'
 import styled from 'styled-components';
 
-import UserInfo from './UserInfo';
-import { getLeagueDate, getPromotionDate, headerDataByType, prettierTime, calRemainTime, useInterval } from '../tools/tools';
+import Thead from './Thead';
+import Tbody from './Tbody';
+import { getLeagueDate, getPromotionDate, prettierTime, calRemainTime, useInterval } from '../tools/tools';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -108,11 +109,6 @@ const Container = styled.div`
       }
     }
   }
-  .blank {
-    border: ${({ theme }) => theme.borderColors.list};
-    background-color: ${({ theme }) => theme.bgColors.listContents};
-    height: 42px;
-  }
 `;
 
 const Count = (type) => {
@@ -142,7 +138,6 @@ const RankingList = ({ title, type }) => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const temporary = new Array(10).fill(0);
 
   const onClick = async () => {
     try {
@@ -196,40 +191,6 @@ const RankingList = ({ title, type }) => {
     // eslint-disable-next-line
   }, [toggle]);
 
-  if (loading || !rankingData) {
-    return <Container>
-      <div className="header">
-        <div className="title_count">
-          <span className="title">{title}</span>
-          <div className="count">
-            {type !== null ? Count(type) : null}
-          </div>
-        </div>
-        <div className="btn">
-          {loading2 ? <i className="icon"><VscLoading className="loading" /></i> : null}
-          <span className="refresh" onClick={onClick}>{loading2 ? '갱신중' : '갱신'}</span>
-          <Link to={`/leaderboards/${type}`} className="addBtn">
-            더보기
-          </Link>
-        </div>
-      </div>
-      <table>
-        {headerDataByType(type)}
-        <tbody>
-          {temporary.map((data, idx) => (
-            <tr key={idx} className="blank">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </Container>
-  }
-
   return (
     <Container>
       <div className="header">
@@ -248,12 +209,8 @@ const RankingList = ({ title, type }) => {
         </div>
       </div>
       <table>
-        {headerDataByType(type)}
-        <tbody>
-          {rankingData.slice(0, 10).map((data, idx) => (
-            <UserInfo key={data.tag} idx={idx + 1} info={data} type={type} />
-          ))}
-        </tbody>
+        <Thead type={type} />
+        <Tbody type={type} data={rankingData} loading={loading} list="ranking" />
       </table>
     </Container>
   );
