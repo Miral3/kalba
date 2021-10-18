@@ -8,7 +8,10 @@ const Container = styled.tbody`
   .blank {
     border: ${({ theme }) => theme.borderColors.list};
     background-color: ${({ theme }) => theme.bgColors.listContents};
-    height: 42px;
+    height: 42px;    
+  }
+  .memberState {
+      height: 36px;
   }
 `
 
@@ -146,7 +149,7 @@ const Tbody = (props) => {
   if (props.loading || !props.data) {
     return <Container>
       {blank.map((data, idx) => (
-        <Tr key={idx} className="blank">
+        <Tr key={idx} className={`blank ${type}`}>
           <td></td>
           <td></td>
           <td></td>
