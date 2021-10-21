@@ -56,7 +56,7 @@ const Login = ({ AuthActions, username, password }) => {
 
   const getNickname = async () => {
     await axios.post(
-      '/account/login/info', {
+      '/account/info', {
       name: loginForm["username"],
     }, {
       headers: {
