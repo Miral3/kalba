@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { translateRole, expectedRole } from '../tools/tools';
+import {translateRole, expectedRole, isEmpty} from '../tools/tools';
+import axios from "axios";
 
 const Container = styled.tbody`
   .blank {
@@ -76,9 +77,13 @@ const Tr = styled.tr`
   }
 `;
 
+
 const Tbody = (props) => {
   const [data, setData] = useState(props.data);
   const [type, setType] = useState(props.type);
+  const [checkedAttackState] = useState(isEmpty(props.checked)?new Set():props.checked.checkedAttackState);
+  const [checkedWarningState] = useState(isEmpty(props.checked)?new Set():props.checked.checkedWarningState);
+
   useEffect(() => setType(props.type), [props.type]);
   useEffect(() => setData(props.data), [props.data]);
 
@@ -88,9 +93,46 @@ const Tbody = (props) => {
     adminCnt: 7
   }
 
+  const handleChange = (e) => {
+    let { className, name, id } = e.target;
+    let idx = parseInt(name)+1;
+    if(className==='attack'){
+      if(checkedAttackState.has(idx)){
+        checkedAttackState.delete(idx);
+      } else {
+        checkedAttackState.add(idx);
+      }
+    } else {
+      if(checkedWarningState.has(idx)){
+        checkedWarningState.delete(idx);
+      } else {
+        checkedWarningState.add(idx);
+      }
+    }
+    updateChange("#"+id, checkedAttackState.has(idx), checkedWarningState.has(idx));
+  }
+
+  const updateChange = async (tag, attackState, warningState) => {
+    await axios.put(
+        '/coc/clan/member/state',
+        [{tag: tag,
+          attackState: attackState,
+          warningState: warningState}],
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).then(res => {
+      if(res.status === 205){
+        alert("예상하지 못한 에러가 발생하여 서버에 저장하지 못하였습니다. 다시 한번 시도해주세요.");
+      }
+    }).catch(e => {
+      alert("예상하지 못한 에러가 발생하여 서버에 저장하지 못하였습니다. 다시 한번 시도해주세요.");
+    });
+  }
+
   const tdByType = (idx, val) => {
     const linkTagArg = val.tag.substr(1);
-
     if (type === 'memberState') {
       return <>
         <td className="rank">{idx}</td>
@@ -103,8 +145,8 @@ const Tbody = (props) => {
         <td className="register side">{val.member ? "O" : "X"}</td>
         <td className="quizScore side">{val.quizScore}</td>
         <td className="league side">
-          <input className="attack" type="checkbox" />
-          <input className="warning" type="checkbox" />
+          <input className="attack" type="checkbox" name={idx-1} id={linkTagArg} defaultChecked={checkedAttackState.has(idx)} onChange={event => handleChange(event)}/>
+          <input className="warning" type="checkbox" name={idx-1} id={linkTagArg} defaultChecked={checkedWarningState.has(idx)} onChange={event => handleChange(event)}/>
         </td>
       </>
     } else if (type === 'score' || type === 'donations') {
