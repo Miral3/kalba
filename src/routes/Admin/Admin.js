@@ -48,6 +48,7 @@ const Component = styled.div`
 const Admin = ({ match }) => {
   const [open, setOpen] = useState(false);
   const category = match.params.category || 'management';
+  const categorySelect = (window.location.pathname).split('/')[3] || 'heroes';
 
   const handleSidebar = (open) => {
     setOpen(!open);
@@ -55,12 +56,11 @@ const Admin = ({ match }) => {
 
   const menus = [
     { name: 'management', text: '관리' },
-    { name: 'standardTable/heroes', text: '기준표' }
+    { name: `standardTable/${categorySelect}`, text: '기준표' }
   ];
 
   const selectCategory = (props) => {
     const type = props.category;
-    const kind = (window.location.pathname).split('/')[3];
 
     const items = [
       { name: 'heroes', text: '영웅' },
@@ -78,7 +78,7 @@ const Admin = ({ match }) => {
       return <div>
         {/* <InputForm /> */}
         <Categories items={items} type="admin/standardTable" any="heores" />
-        <StandardList category={kind} />
+        <StandardList category={props.categorySelect} />
       </div>
     }
   }
@@ -97,7 +97,7 @@ const Admin = ({ match }) => {
             />
           </div>
           <Component>
-            {selectCategory({ category })}
+            {selectCategory({ category, categorySelect })}
           </Component>
         </div>
       </Contents>
