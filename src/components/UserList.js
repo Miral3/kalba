@@ -65,7 +65,7 @@ const Container = styled.div`
 
 const UserList = ({ type }) => {
   const [data, setData] = useState(null);
-  const [checked, setChecked] = useState({"checkedAttackState": new Set(), "checkedWarningState": new Set()});
+  const [checked] = useState({ "checkedAttackState": new Set(), "checkedWarningState": new Set() });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -98,11 +98,11 @@ const UserList = ({ type }) => {
           }
         } else if (type === 'memberState') {
           data = response.data.map((state, idx) => {
-            if(state.attackState){
-              checked.checkedAttackState.add(idx+1)
+            if (state.attackState) {
+              checked.checkedAttackState.add(idx + 1)
             }
-            if(state.warningState){
-              checked.checkedWarningState.add(idx+1)
+            if (state.warningState) {
+              checked.checkedWarningState.add(idx + 1)
             }
             return data[idx] = state;
           })
@@ -114,13 +114,13 @@ const UserList = ({ type }) => {
       setLoading(false);
     };
     fetchData();
-  }, [type]);
+  }, [type, checked]);
 
   return (
     <Container>
       <table id="save-target">
         <Thead type={type} />
-        <Tbody type={type} data={data} loading={loading} checked={checked}/>
+        <Tbody type={type} data={data} loading={loading} checked={checked} />
       </table>
     </Container>
   );
