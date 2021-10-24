@@ -125,7 +125,7 @@ const Tbody = (props) => {
           "Content-Type": "application/json"
         }
       }).then(res => {
-        if (res.status === 205) {
+        if (res.status === 400) {
           alert("예상하지 못한 에러가 발생하여 서버에 저장하지 못하였습니다. 다시 한번 시도해주세요.");
         }
       }).catch(e => {

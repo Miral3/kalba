@@ -1,10 +1,13 @@
 package kalba.service;
 
 import kalba.models.account.AccountQuizAndState;
+import kalba.models.account.Name;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
+import kalba.models.coc.yongha.FormulaData;
+import kalba.models.coc.yongha.FormulaUpdateInfo;
 import kalba.repository.AccountRepository;
 import kalba.repository.StatisticMongoRepository;
 import kalba.util.MemberDataManager;
@@ -82,7 +85,15 @@ public class ClanMemberService {
         return retList;
     }
 
-    public boolean updateMemberState(List<AccountQuizAndState> list){
+    public boolean updateMemberState(List<AccountQuizAndState> list) {
         return accountRepository.updateMemberAccountQuizAndStateList(list);
+    }
+
+    public boolean updateYonghaScoreFormula(FormulaUpdateInfo formulaUpdateInfo) {
+        if (formulaUpdateInfo.validateFormulaName()) {
+            return statisticMongoRepository.updateYonghaScoreFormula(formulaUpdateInfo);
+        } else {
+            return false;
+        }
     }
 }

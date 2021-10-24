@@ -3,6 +3,7 @@ package kalba.repository;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Statistic;
 import kalba.models.coc.yongha.Formula;
+import kalba.models.coc.yongha.FormulaUpdateInfo;
 import kalba.util.MemberDataManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,8 +12,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @RequiredArgsConstructor
 public class StatisticMongoRepository {
@@ -60,6 +59,15 @@ public class StatisticMongoRepository {
 
     public Optional<Formula> findYonghaScoreFormula() {
         return mongoTemplate.findAll(Formula.class, "formula").stream().findAny();
+    }
+
+    public boolean updateYonghaScoreFormula(FormulaUpdateInfo formulaUpdateInfo) {
+        try {
+            mongoTemplate.upsert(new Query(), new Update().set(formulaUpdateInfo.getName(), formulaUpdateInfo.getFormulaDataObject()), "formula");
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     private Update memberStatisticUpdate(Statistic statistic, String clanTag) {

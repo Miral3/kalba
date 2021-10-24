@@ -6,6 +6,7 @@ import kalba.models.account.Tag;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
+import kalba.models.coc.yongha.FormulaUpdateInfo;
 import kalba.service.ClanMemberService;
 import kalba.models.coc.clan.ClanTag;
 import lombok.AllArgsConstructor;
@@ -83,17 +84,29 @@ public class ClanController {
                 .orElseGet(() -> ResponseEntity.ok(Map.of("message", "get formula error")));
     }
 
+    @ResponseBody
     @PostMapping("/member/state")
     public ResponseEntity<?> getAllMemberAccountState(@RequestBody ClanTag clanTag) {
         return ResponseEntity.ok(clanMemberService.getMemberStateList(clanTag.getTag()));
     }
 
+    @ResponseBody
     @PutMapping("/member/state")
     public ResponseEntity<?> updateMemberAccountState(@RequestBody List<AccountQuizAndState> list) {
         if (clanMemberService.updateMemberState(list)) {
             return ResponseEntity.ok(Map.of("message", "변경 사항 저장에 성공하였습니다."));
         } else {
-            return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ResponseBody
+    @PutMapping("/formula")
+    public ResponseEntity<?> updateYonghaScoreFormula(@RequestBody FormulaUpdateInfo formulaUpdateInfo) {
+        if (clanMemberService.updateYonghaScoreFormula(formulaUpdateInfo)) {
+            return ResponseEntity.ok(Map.of("message", "변경 사항 저장에 성공하였습니다."));
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }
