@@ -31,6 +31,8 @@ public class JdbcAccountRepository implements AccountRepository {
         parameters.put("nickname", account.getNickname());
         parameters.put("password", account.getPassword());
         parameters.put("role", account.getRole());
+        parameters.put("attack_state", account.isAttackState());
+        parameters.put("warning_state", account.isWarningState());
         Number key = insert.executeAndReturnKey(new MapSqlParameterSource(parameters));
         account.setId(key.intValue());
         return account;

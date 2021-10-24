@@ -53,6 +53,15 @@ public class ClanController {
     }
 
     @ResponseBody
+    @PostMapping("/member/name")
+    public ResponseEntity<?> getTagByTag(@RequestBody Tag tag) {
+        return clanMemberService.findByTag(tag.getTag())
+                .<ResponseEntity<?>>map((name) -> ResponseEntity.ok(Map.of("name", name.getName())))
+                .orElseGet(() -> new ResponseEntity<>(Map.of("message", "non existent tag"), HttpStatus.NO_CONTENT));
+    }
+
+
+    @ResponseBody
     @PostMapping("/member/statistic/name")
     public ResponseEntity<?> findByName(@RequestBody Name name) {
         return ResponseEntity.ok(clanMemberService.findByName(name.getName()));
