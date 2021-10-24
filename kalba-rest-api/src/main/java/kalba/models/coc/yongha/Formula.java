@@ -12,9 +12,9 @@ import java.util.LinkedHashMap;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Formula {
-    LinkedHashMap<String, Double> heroes;
-    LinkedHashMap<String, Double> pets;
-    LinkedHashMap<String, Double> units;
-    LinkedHashMap<String, Double> spells;
-    LinkedHashMap<String, Double> siegeMachines;
+    LinkedHashMap<String, FormulaData> heroes;
+    LinkedHashMap<String, FormulaData> pets;
+    LinkedHashMap<String, FormulaData> units;
+    LinkedHashMap<String, FormulaData> spells;
+    LinkedHashMap<String, FormulaData> siegeMachines;
 }
