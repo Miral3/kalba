@@ -165,6 +165,7 @@ const QuizBlock = styled.div`
 const Quiz = () => {
   // const [name, setName] = useState(getLoginUserNickname());
   const [name] = useState(getLoginUserNickname());
+  const [accountName] = useState(getLoginUser());
   const [passState, setPassState] = useState(false);
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
@@ -397,7 +398,7 @@ const Quiz = () => {
   const savePassedUserInDB = (name, score) => {
     axios.post(
       '/quiz/pass', {
-      name: name,
+      name: accountName,
       score: score
     }, {
       headers: {
@@ -423,7 +424,7 @@ const Quiz = () => {
       }
     }).then(res => {
       if (res.status === 200 && !isEmpty(res.data.name)) {
-        if (res.data.name !== getLoginUser()) {
+        if (res.data.name !== accountName) {
           invalidLoginState();
         }
       } else {
@@ -437,7 +438,7 @@ const Quiz = () => {
   const checkPassState = () => {
     axios.post(
       '/quiz/state', {
-      name: getLoginUser(),
+      name: accountName,
     }, {
       headers: {
         "Content-Type": "application/json",
