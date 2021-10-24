@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { heroes, pets, troops, spells, siegeMachines } from './data'
+import axios from "axios";
+import {isEmpty} from "../../tools/tools";
 
 const Container = styled.div`
   display: flex;  
@@ -69,30 +70,52 @@ const Container = styled.div`
 `
 
 const StandardList = (props) => {
-  const [data, setData] = useState(heroes);
+  const [data, setData] = useState([]);
   const category = props.category;
 
   useEffect(() => {
-    if (category === 'heroes') {
-      setData(heroes);
-    } else if (category === 'pets') {
-      setData(pets);
-    } else if (category === 'troops') {
-      setData(troops);
-    } else if (category === 'spells') {
-      setData(spells);
-    } else if (category === 'siegeMachines') {
-      setData(siegeMachines);
-    }
-  }, [category])
+    const fetchData = async () => {
+      try {
+        await axios.get(
+          '/coc/clan/formula', {
+            headers: {
+              "Content-Type": "application/json",
+            }
+          }).then(res => {
+            setData(res.data);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const set = data.map((element) =>
-    <tr className={`type ${category}`} key={element.id}>
-      <td className="name">{element.name}</td>
-      <td className="maxScore">{element.maxScore}</td>
-      <td className="maxLevel">{element.maxLevel}</td>
-      <td className="scoreCoefficient">{Math.ceil(element.scoreCoefficient * 1000) / 1000}</td>
-    </tr>);
+  const set = () => {
+    let thisData;
+    if (category === 'heroes') {
+      thisData = data.heroes;
+    } else if (category === 'pets') {
+      thisData = data.pets;
+    } else if (category === 'troops') {
+      thisData = data.units;
+    } else if (category === 'spells') {
+      thisData = data.spells;
+    } else if (category === 'siegeMachines') {
+      thisData = data.siegeMachines;
+    }
+    thisData = Object.entries(thisData);
+    thisData.sort((a, b) => {
+      return a[1].index - b[1].index;
+    });
+    return thisData.map((element) =>
+      <tr className={`type ${category}`} key={element[1].index}>
+        <td className="name">{element[1].korean}</td>
+        <td className="maxScore">{element[1].maxScore}</td>
+        <td className="maxLevel">{element[1].maxLevel}</td>
+        <td className="scoreCoefficient">{element[1].value}</td>
+      </tr>);
+  }
 
   // const temp = data[1]; // 옮기고싶은 데이터
   // const idx = 1; // 옮기고싶은 위치
@@ -112,7 +135,14 @@ const StandardList = (props) => {
             </tr>
           </thead>
           <tbody>
-            {set}
+            {isEmpty(data)?
+              <tr className={"loading"} key={0}>
+                <td className="name">loading...</td>
+                <td className="maxScore"> </td>
+                <td className="maxLevel"> </td>
+                <td className="scoreCoefficient"> </td>
+              </tr>
+              :set()}
           </tbody>
         </table>
       </div >
