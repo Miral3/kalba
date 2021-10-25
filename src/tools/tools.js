@@ -74,7 +74,7 @@ export function calRemainTime(curTime, closeTime) {
 }
 
 export function prettierTime(time) {
-  return (time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 후";
+  return (time.getUTCMonth() > 0 ? "1개월 " : "") +(time.getUTCDate() - 1) + "일 " + time.getUTCHours() + "시간 후";
 }
 
 export function useInterval(callback, delay) {
