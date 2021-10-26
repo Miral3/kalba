@@ -84,7 +84,7 @@ const StandardList = (props) => {
               "Content-Type": "application/json",
             }
           }).then(res => {
-            setData(dataPreprocess(res.data));
+            setData(res.data);
           });
       } catch (e) {
         console.log(e);
@@ -93,39 +93,52 @@ const StandardList = (props) => {
     fetchData();
   }, []);
 
-  const dataPreprocess = (data) => {
-    console.log(data)
-    const classNameArr = ["heroes", "pets", "units", "spells", "siegeMachines"];
-    for(let i=0; i<classNameArr.length; i++){
-      data[classNameArr[i]] = Object.entries(data[classNameArr[i]]);
-      data[classNameArr[i]].sort((a, b) => {
-        return a[1].index - b[1].index;
-      });
-    }
-    return data;
-  }
-
-  const changeHandle = (e) => {
-    const { id, className, value } = e.target;
-    data[category][id][1][className] = value;
-    if(className === "maxScore" || className === "maxLevel"){
-      data[category][id][1].value = Math.round(data[category][id][1].maxScore / data[category][id][1].maxLevel * 1000) / 1000;
-    }
-    setData(data)
-  }
-
   const set = () => {
-    console.log(data[category])
+    let thisData;
+    if (category === 'heroes') {
+      thisData = data.heroes;
+    } else if (category === 'pets') {
+      thisData = data.pets;
+    } else if (category === 'troops') {
+      thisData = data.units;
+    } else if (category === 'spells') {
+      thisData = data.spells;
+    } else if (category === 'siegeMachines') {
+      thisData = data.siegeMachines;
+    }
+    thisData = Object.entries(thisData);
+    thisData.sort((a, b) => {
+      return a[1].index - b[1].index;
+    });
+
+
+    const test = (e) => {
+      const { id, className, value } = e.target;
+      switch (className){
+        case "korean":
+          thisData[id][1].korean = value;
+          break;
+        case "number":
+          thisData[id][1].maxScore = value;
+          thisData[id][1].value = Math.round(thisData[id][1].maxScore / thisData[id][1].maxLevel * 1000) / 1000;
+          // thisDa
+          break;
+        case "maxLevel":
+          thisData[id][1].maxLevel = value;
+          thisData[id][1].value = Math.round(thisData[id][1].maxScore / thisData[id][1].maxLevel * 1000) / 1000;
+      }
+    }
+
     if(editorMode){
-      return data[category].map((element, idx) =>
+      return thisData.map((element, idx) =>
           <tr className={`type ${category}`} key={element[1].index}>
-            <td className="name"><input type="text" onChange={changeHandle} id={idx} className="korean" defaultValue={element[1].korean}/></td>
-            <td className="maxScore"><input type="number" onChange={changeHandle} id={idx} className="maxScore" defaultValue={element[1].maxScore}/></td>
-            <td className="maxLevel"><input type="number" onChange={changeHandle} id={idx} className="maxLevel" defaultValue={element[1].maxLevel}/></td>
-            <td className="scoreCoefficient">{data[category][idx][1].value}</td>
+            <td className="name"><input type="text" onChange={test} id={idx} className="korean" value={element[1].korean}/></td>
+            <td className="maxScore"><input type="number" onChange={test} id={idx} className="maxScore" value={element[1].maxScore}/></td>
+            <td className="maxLevel"><input type="number" onChange={test} id={idx} className="maxLevel" value={element[1].maxLevel}/></td>
+            <td className="scoreCoefficient"><input onChange={test} id={idx} className="value" value={element[1].value} readOnly={true}/></td>
           </tr>);
     } else {
-      return data[category].map((element) =>
+      return thisData.map((element) =>
           <tr className={`type ${category}`} key={element[1].index}>
             <td className="name">{element[1].korean}</td>
             <td className="maxScore">{element[1].maxScore}</td>
