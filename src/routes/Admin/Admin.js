@@ -77,8 +77,8 @@ const Admin = ({ match }) => {
     } else if (type === 'standardTable') {
       return <div>
         {/* <InputForm /> */}
-        <Categories items={items} type="admin/standardTable" any="heores" />
-        <StandardList category={props.categorySelect} />
+        <Categories items={items} type="admin/standardTable" any="heroes" />
+        <StandardList editorMode={true} category={props.categorySelect} />
       </div>
     }
   }

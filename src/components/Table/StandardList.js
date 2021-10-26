@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import axios from "axios";
 import {isEmpty} from "../../tools/tools";
+import {Button} from "@material-ui/core";
 
 const Container = styled.div`
   display: flex;  
@@ -72,6 +73,7 @@ const Container = styled.div`
 const StandardList = (props) => {
   const [data, setData] = useState([]);
   const category = props.category;
+  const editorMode = isEmpty(props.editorMode)?false:props.editorMode;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,7 +84,7 @@ const StandardList = (props) => {
               "Content-Type": "application/json",
             }
           }).then(res => {
-            setData(res.data);
+            setData(dataPreprocess(res.data));
           });
       } catch (e) {
         console.log(e);
@@ -91,32 +93,50 @@ const StandardList = (props) => {
     fetchData();
   }, []);
 
-  const set = () => {
-    let thisData;
-    if (category === 'heroes') {
-      thisData = data.heroes;
-    } else if (category === 'pets') {
-      thisData = data.pets;
-    } else if (category === 'troops') {
-      thisData = data.units;
-    } else if (category === 'spells') {
-      thisData = data.spells;
-    } else if (category === 'siegeMachines') {
-      thisData = data.siegeMachines;
+  const dataPreprocess = (data) => {
+    console.log(data)
+    const classNameArr = ["heroes", "pets", "units", "spells", "siegeMachines"];
+    for(let i=0; i<classNameArr.length; i++){
+      data[classNameArr[i]] = Object.entries(data[classNameArr[i]]);
+      data[classNameArr[i]].sort((a, b) => {
+        return a[1].index - b[1].index;
+      });
     }
-    thisData = Object.entries(thisData);
-    thisData.sort((a, b) => {
-      return a[1].index - b[1].index;
-    });
-    return thisData.map((element) =>
-      <tr className={`type ${category}`} key={element[1].index}>
-        <td className="name">{element[1].korean}</td>
-        <td className="maxScore">{element[1].maxScore}</td>
-        <td className="maxLevel">{element[1].maxLevel}</td>
-        <td className="scoreCoefficient">{element[1].value}</td>
-      </tr>);
+    return data;
   }
 
+  const changeHandle = (e) => {
+    const { id, className, value } = e.target;
+    data[category][id][1][className] = value;
+    if(className === "maxScore" || className === "maxLevel"){
+      data[category][id][1].value = Math.round(data[category][id][1].maxScore / data[category][id][1].maxLevel * 1000) / 1000;
+    }
+    setData(data)
+  }
+
+  const set = () => {
+    console.log(data[category])
+    if(editorMode){
+      return data[category].map((element, idx) =>
+          <tr className={`type ${category}`} key={element[1].index}>
+            <td className="name"><input type="text" onChange={changeHandle} id={idx} className="korean" defaultValue={element[1].korean}/></td>
+            <td className="maxScore"><input type="number" onChange={changeHandle} id={idx} className="maxScore" defaultValue={element[1].maxScore}/></td>
+            <td className="maxLevel"><input type="number" onChange={changeHandle} id={idx} className="maxLevel" defaultValue={element[1].maxLevel}/></td>
+            <td className="scoreCoefficient">{data[category][idx][1].value}</td>
+          </tr>);
+    } else {
+      return data[category].map((element) =>
+          <tr className={`type ${category}`} key={element[1].index}>
+            <td className="name">{element[1].korean}</td>
+            <td className="maxScore">{element[1].maxScore}</td>
+            <td className="maxLevel">{element[1].maxLevel}</td>
+            <td className="scoreCoefficient">{element[1].value}</td>
+          </tr>);
+    }
+  }
+  const test = () => {
+    console.log("test");
+  }
   // const temp = data[1]; // 옮기고싶은 데이터
   // const idx = 1; // 옮기고싶은 위치
   // data.splice(data.indexOf(temp), idx);
@@ -145,6 +165,15 @@ const StandardList = (props) => {
               :set()}
           </tbody>
         </table>
+        {editorMode?(<div><br></br><Button
+            className="saveBtn"
+            onClick={test}
+            color="primary"
+        >
+          <div className="text">
+            저장하기
+          </div>
+        </Button></div>):<></>}
       </div >
     </Container>
   );
