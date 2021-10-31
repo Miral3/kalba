@@ -137,10 +137,10 @@ const StandardList = (props) => {
   const save = async ()  => {
     await axios.put(
       '/coc/clan/formula',
-      [{
+      {
         name: category,
         formulaDataObject: getFormulaDataObject()
-      }],
+      },
       {
         headers: {
           "Content-Type": "application/json"
