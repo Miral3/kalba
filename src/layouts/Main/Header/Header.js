@@ -119,7 +119,7 @@ const Header = ({ children }) => {
     { label: "순위표", href: "/leaderboards/donations" },
     { label: "기준표", href: "/standardTable/heroes" },
     { label: "퀴즈", href: "/Quiz" },
-    { label: "관리자페이지", href: "/admin" },
+    { label: "관리자페이지", href: "/admin/management" },
   ];
 
   const isAdmin = async () => {

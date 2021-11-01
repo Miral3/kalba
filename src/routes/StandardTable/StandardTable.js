@@ -26,7 +26,7 @@ const StandardTable = ({ match }) => {
 
   return (
     <Container>
-      <Categories items={items} type={type} any="heores" />
+      <Categories items={items} type={type} any="heroes" />
       <StandardList category={category} />
     </Container>
   );
