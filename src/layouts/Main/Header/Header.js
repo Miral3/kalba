@@ -1,5 +1,6 @@
 /* React */
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 /* Styled */
 import styled from 'styled-components';
@@ -108,6 +109,7 @@ const HeaderBlock = styled.div`
 
 const Header = ({ children }) => {
   const [admin, setAdmin] = useState(false);
+  const history = useHistory();
 
   const userItems = [
     { label: "순위표", href: "/leaderboards/donations" },
@@ -135,8 +137,22 @@ const Header = ({ children }) => {
       }
     });
   }
-
   isAdmin();
+
+  const onInsert = async (name) => {
+    await axios.post(
+      '/coc/clan/member/tag', {
+      name: name
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
+      history.push('/profile/' + res.data.tag.substr(1));
+    }).catch(e => {
+      alert("이름을 다시 한번 확인해주세요.");
+    });
+  }
   return (
     <HeaderBlock>
       <div className="kalba__logo__insert">
@@ -145,7 +161,7 @@ const Header = ({ children }) => {
           <p>칼없는 바바리안</p>
         </a>
         <div className="insert">
-          <HeaderInsert />
+          <HeaderInsert onInsert={onInsert} />
         </div>
       </div>
       <div className="login">
