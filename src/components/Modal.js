@@ -25,6 +25,10 @@ const FormContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
+
+  .closeBtn {
+    cursor: pointer;
+  }
 `
 const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
   const [edited, setEdited] = useState(selectedData);
@@ -78,7 +82,7 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
         <FormContainer>
           <div className="header">
             <h3>데이터 추가하기</h3>
-            <MdClose onClick={onCancel} />
+            <MdClose onClick={onCancel} className="closeBtn" />
           </div>
           <form onSubmit={onSubmit}>
             <div>

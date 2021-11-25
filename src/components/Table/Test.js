@@ -8,6 +8,7 @@ const Test = (props) => {
   const [data, setData] = useState([]);
   const [nextId, setNextId] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [modalOn, setModalOn] = useState(false);
   const category = props.category === "troops" ? "units" : props.category;
 
   useEffect(() => {
@@ -72,24 +73,27 @@ const Test = (props) => {
   }
 
   const addRow = () => {
-    data[category].push(["hi", {
-      index: nextId,
-      korean: "A",
-      maxScore: 1,
-      maxLevel: 2,
-      value: 3,
-    }]);
-    setNextId(nextId + 1);
-    setData((prevState) => ({ ...prevState, }));
+    // data[category].push(["hi", {
+    //   index: nextId,
+    //   korean: "A",
+    //   maxScore: 1,
+    //   maxLevel: 2,
+    //   value: 3,
+    // }]);
+    // setNextId(nextId + 1);
+    // setData((prevState) => ({ ...prevState, }));
+    setModalOn(true);
   }
 
-
+  const handleCancel = () => {
+    setModalOn(false);
+  }
   if (loading) {
     return <div></div>
   }
   return (
     <div>
-      <Modal open={true} />
+      {modalOn && <Modal handleCancel={handleCancel} />}
       <Table
         columns={columns}
         data={set()}
