@@ -73,27 +73,62 @@ const Test = (props) => {
   }
 
   const addRow = () => {
-    // data[category].push(["hi", {
-    //   index: nextId,
-    //   korean: "A",
-    //   maxScore: 1,
-    //   maxLevel: 2,
-    //   value: 3,
-    // }]);
-    // setNextId(nextId + 1);
-    // setData((prevState) => ({ ...prevState, }));
     setModalOn(true);
+  }
+
+  const save = async () => {
+    await axios.put(
+        '/coc/clan/formula',
+        {
+          name: category,
+          formulaDataObject: getFormulaDataObject()
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).then(res => {
+      if (res.status === 400) {
+        alert("예상하지 못한 에러가 발생하여 서버에 저장하지 못하였습니다. 다시 한번 시도해주세요.");
+      } else {
+        alert("저장에 성공하였습니다. 지금 즉시 적용된 점수를 확인하시려면 갱신 버튼을 눌러주세요.");
+      }
+    }).catch(e => {
+      alert("예상하지 못한 에러가 발생하여 서버에 저장하지 못하였습니다. 다시 한번 시도해주세요.");
+    });
+  }
+
+  const getFormulaDataObject = () => {
+    let obj = {};
+    for (let i = 0; i < data[category].length; i++) {
+      obj[data[category][i][0]] = data[category][i][1];
+    }
+    return obj;
   }
 
   const handleCancel = () => {
     setModalOn(false);
   }
+
+  const handleSubmit = async (form) => {
+    data[category].push([form.englishName, {
+      index: nextId,
+      korean: form.korean,
+      maxScore: form.maxScore,
+      maxLevel: form.maxLevel,
+      value: form.value,
+    }]);
+    setNextId(nextId + 1);
+    setData((prevState) => ({ ...prevState, }));
+    await save();
+  }
+
   if (loading) {
     return <div></div>
   }
   return (
     <div>
-      {modalOn && <Modal handleCancel={handleCancel} />}
+      {modalOn && <Modal handleCancel={handleCancel} handleSubmit={handleSubmit}/>}
       <Table
         columns={columns}
         data={set()}

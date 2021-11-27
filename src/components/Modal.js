@@ -72,7 +72,7 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    handleSubmit(form);
   }
 
   return (
