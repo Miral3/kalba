@@ -30,26 +30,14 @@ const FormContainer = styled.div`
     cursor: pointer;
   }
 `
-const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
-  const [edited, setEdited] = useState(selectedData);
-
+const Modal = ({ handleCancel, handleSubmit }) => {
   const [form, setForm] = useState(
     {
       englishName: '',
-      index: '',
       korean: '',
       maxScore: '',
       maxLevel: '',
-      value: '',
     });
-
-  // const handleChange = (e) => {
-  //   const {english} = e.target;
-  //   const {name, value} = e.target;
-  //   form.push([english, {
-  //       [name]: value,
-  //     }]);
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,13 +51,6 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
     handleCancel();
   }
 
-  // const onEditChange = (e) => {
-  //   setEdited({
-  //     ...edited,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
-
   const onSubmit = (e) => {
     e.preventDefault();
     handleSubmit(form);
@@ -77,7 +58,6 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
 
   return (
     <Container>
-      {/* <div className={open ? "cover active" : "cover"}> */}
       <div className="cover active">
         <FormContainer>
           <div className="header">
@@ -93,16 +73,6 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
                   type='text'
                   name='englishName'
                   value={form.englishName}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                순서
-                <input
-                  placeholder='순서를 입력해주세요'
-                  type='text'
-                  name='index'
-                  value={form.index}
                   onChange={handleChange}
                 />
               </label>
@@ -133,16 +103,6 @@ const Modal = ({ selectedData, handleCancel, handleSubmit, onSaveData }) => {
                   type='text'
                   name='maxLevel'
                   value={form.maxLevel}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                비례 점수
-                <input
-                  placeholder='비례점수를 입력해주세요'
-                  type='text'
-                  name='value'
-                  value={form.value}
                   onChange={handleChange}
                 />
               </label>

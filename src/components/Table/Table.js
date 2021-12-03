@@ -11,7 +11,7 @@ const Container = styled.div`
   width:100%;
   
   .tableBlock {
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
     width: 100%;
     @media (min-width: 576px) {
       max-width: 540px;
@@ -58,18 +58,20 @@ const Container = styled.div`
       width: 50px;
     } */
   }
-  tbody tr :first-child {
+  tbody tr td:nth-child(1) {
     width: 40%;
-    color: ${({ theme }) => theme.fontColors.listName};
+  }
+
+  tbody tr td input {
+    width: 100px;
   }
 `
 
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data, removeRow }) => {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, setGlobalFilter } =
-    useTable({ columns, data }, useGlobalFilter, useSortBy);
+    useTable({ columns, data, removeRow }, useGlobalFilter, useSortBy);
 
-  console.log(data);
   return (
     <Container>
       <div className="tableBlock">
