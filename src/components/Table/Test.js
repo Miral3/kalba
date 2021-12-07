@@ -54,6 +54,7 @@ const StyledUpDownArrow = styled(UpDownArrow)`
     isSomethingDragging ? "none" : "inline"};
   }
 `;
+
 const Description = styled.span`
     display: flex;
     justify-content: center;
@@ -261,6 +262,13 @@ const Test = (props) => {
     setData((prevState) => ({ ...prevState, }));
   };
 
+  const reorderData = (startIndex, endIndex) => {
+    const newData = data[category];
+    const [movedRow] = newData.splice(startIndex, 1);
+    newData.splice(endIndex, 0, movedRow);
+    setData((prevState) => ({ ...prevState, }));
+  }
+
   if (loading) {
     return <div></div>
   }
@@ -272,6 +280,7 @@ const Test = (props) => {
         columns={columns}
         data={set()}
         removeRow={removeRow}
+        reorderData={reorderData}
       />
       <EditBtn
         handleEditMode={handleEditMode}

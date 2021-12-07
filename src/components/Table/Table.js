@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
-import Search from "./Search";
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import styled from 'styled-components';
+
+import Search from "./Search";
 
 const Container = styled.div`
   display: flex;  
@@ -67,10 +69,25 @@ const Container = styled.div`
   }
 `
 
-const Table = ({ columns, data, removeRow }) => {
+const Tr = styled.tr`
+  background-color: white;
+  display: ${({ isDragging }) => (isDragging ? "table" : "")};
+`
+
+const Table = ({ columns, data, removeRow, reorderData }) => {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, setGlobalFilter } =
-    useTable({ columns, data, removeRow }, useGlobalFilter, useSortBy);
+    useTable({ columns, data, removeRow, reorderData }, useGlobalFilter, useSortBy);
+
+  const handleDragEnd = (result) => {
+    const { source, destination } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    reorderData(source.index, destination.index);
+  }
 
   return (
     <Container>
@@ -88,20 +105,46 @@ const Table = ({ columns, data, removeRow }) => {
               </tr>
             ))}
           </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()} >
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="table-body">
+              {(provided, snapshot) => (
+                <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                  {rows.map((row, index) => {
+                    prepareRow(row);
+                    return (
+                      <Draggable
+                        draggableId={row.id}
+                        key={row.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => {
+                          return (
+                            <Tr
+                              {...row.getRowProps()}
+                              {...provided.draggableProps}
+                              // {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                              isDragging={snapshot.isDragging}
+                            >
+                              {row.cells.map((cell) => (
+                                <td {...cell.getCellProps()}>
+                                  {cell.render("Cell", {
+                                    dragHandleProps: provided.dragHandleProps,
+                                    isSomethingDragging: snapshot.isDraggingOver
+                                  })}
+                                </td>
+                              ))}
+                            </Tr>
+                          );
+                        }}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </tbody>
+              )}
+            </Droppable>
+          </DragDropContext>
         </table>
       </div>
     </Container>
