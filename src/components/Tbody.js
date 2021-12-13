@@ -140,7 +140,7 @@ const Tbody = (props) => {
       return <>
         <td className="rank">{idx}</td>
         <td className="names">
-          <span className="hiddenRank">#{idx}</span>
+          {!props.admin && <span className="hiddenRank">#{idx}</span>}
           <a className="name" href={`/profile/${linkTagArg}`}>
             {val.nickname}
           </a>

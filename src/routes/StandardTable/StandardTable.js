@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 /* Sub Components */
 import Categories from '../../components/Categories/Category';
+// import StandardList from '../../components/Table/StandardList';
 import StandardList from '../../components/Table/StandardList';
-import Test from '../../components/Table/Test';
 
 const Container = styled.div`
   padding-top: 1.5rem;
@@ -28,7 +28,7 @@ const StandardTable = ({ match }) => {
   return (
     <Container>
       <Categories items={items} type={type} any="heroes" />
-      <Test category={category} />
+      <StandardList category={category} admin={false} />
     </Container>
   );
 }

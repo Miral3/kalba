@@ -15,17 +15,43 @@ const Container = styled.div`
     @media (min-width: 768px) {
       max-width: 720px;
     }
-    
-    .editBtn,
+    button {
+      background-color: #fff;
+      border: 1px solid #DDDBE7;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      color: #505050;
+      font-weight: 600;
+    }
+    .editBtn {
+      float:right;
+      &:hover {
+        border: 1px solid  #4ade80;
+        color:  #4ade80;
+      }
+    }
     .cancelBtn  {
       float:right;
+      &:hover {
+        border: 1px solid  #ef4444;
+        color:  #ef4444;
+      }
     }
     .addBtn {
       float: left;
+      &:hover {
+        border: 1px solid #fb923c;
+        color: #fb923c;
+      }
     }
     .saveBtn {
       float:right;
       margin-right: 1rem;
+      &:hover {
+        border: 1px solid #60a5fa; 
+        color: #60a5fa;
+      }
     }
   }
 `;

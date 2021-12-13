@@ -1,10 +1,9 @@
 import React from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import SwipeToRevealActions from "react-swipe-to-reveal-actions";
 
 import styled from 'styled-components';
-
-import Search from "./Search";
 
 const Container = styled.div`
   display: flex;  
@@ -46,6 +45,9 @@ const Container = styled.div`
   td {
     padding: 0.5rem;
   }
+  .editMode {
+      padding: 10.5px 16px;
+  }
   tbody {
     background-color: ${({ theme }) => theme.bgColors.listContents};
   }
@@ -60,23 +62,28 @@ const Container = styled.div`
       width: 50px;
     } */
   }
-  tbody tr td:nth-child(1) {
-    width: 40%;
-  }
-
-  tbody tr td input {
-    width: 100px;
+  tbody tr td {
+    :nth-child(1) {
+      width: 40%;
+    }
+    .korean {
+      width: 100px;
+    }
+    .maxScore, .maxLevel {
+      text-align: center;
+      width: 53px;
+    }
   }
 `
 
 const Tr = styled.tr`
-  background-color: white;
+  background-color: ${({ theme }) => theme.bgColors.listContents};
   display: ${({ isDragging }) => (isDragging ? "table" : "")};
 `
 
-const Table = ({ columns, data, removeRow, reorderData }) => {
+const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, setGlobalFilter } =
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data, removeRow, reorderData }, useGlobalFilter, useSortBy);
 
   const handleDragEnd = (result) => {
@@ -89,10 +96,96 @@ const Table = ({ columns, data, removeRow, reorderData }) => {
     reorderData(source.index, destination.index);
   }
 
+  const getActions = (index) => [
+    {
+      content: (
+        <div className="action-button-content action-button-content--edit">
+          <span>EDIT</span>
+        </div>
+      ),
+      onClick: () => alert(`Pressed the EDIT button of item #${index}`),
+    },
+    {
+      content: (
+        <div className="action-button-content action-button-content--delete">
+          <span>DELETE</span>
+        </div>
+      ),
+      onClick: () => alert(`Pressed the DELETE button of item #${index}`),
+    },
+  ];
+
+  const swipeContainerStyles = {
+    backgroundColor: '#FFF',
+    paddingLeft: '1rem'
+  };
+
+  const TbodyContents = () => {
+    if (!editMode) {
+      return (
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} >
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>
+                    {cell.render("Cell")}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      )
+    } else {
+      return (
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="table-body">
+            {(provided, snapshot) => (
+              <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                {rows.map((row, index) => {
+                  prepareRow(row);
+                  return (
+                    <Draggable
+                      draggableId={row.id}
+                      key={row.id}
+                      index={index}
+                    >
+                      {(provided, snapshot) => {
+                        return (
+                          <Tr
+                            ref={provided.innerRef}
+                            isDragging={snapshot.isDragging}
+                            {...provided.draggableProps}
+                            // {...provided.dragHandleProps}
+                            {...row.getRowProps()}
+                          >
+                            {row.cells.map((cell) => (
+                              <td className="editMode" {...cell.getCellProps()}>
+                                {cell.render("Cell", {
+                                  dragHandleProps: provided.dragHandleProps,
+                                  isSomethingDragging: snapshot.isDraggingOver
+                                })}
+                              </td>
+                            ))}
+                          </Tr>
+                        );
+                      }}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </tbody>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )
+    }
+  }
   return (
     <Container>
       <div className="tableBlock">
-        <Search onSubmit={setGlobalFilter} />
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -105,46 +198,7 @@ const Table = ({ columns, data, removeRow, reorderData }) => {
               </tr>
             ))}
           </thead>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="table-body">
-              {(provided, snapshot) => (
-                <tbody ref={provided.innerRef} {...provided.droppableProps}>
-                  {rows.map((row, index) => {
-                    prepareRow(row);
-                    return (
-                      <Draggable
-                        draggableId={row.id}
-                        key={row.id}
-                        index={index}
-                      >
-                        {(provided, snapshot) => {
-                          return (
-                            <Tr
-                              {...row.getRowProps()}
-                              {...provided.draggableProps}
-                              // {...provided.dragHandleProps}
-                              ref={provided.innerRef}
-                              isDragging={snapshot.isDragging}
-                            >
-                              {row.cells.map((cell) => (
-                                <td {...cell.getCellProps()}>
-                                  {cell.render("Cell", {
-                                    dragHandleProps: provided.dragHandleProps,
-                                    isSomethingDragging: snapshot.isDraggingOver
-                                  })}
-                                </td>
-                              ))}
-                            </Tr>
-                          );
-                        }}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </tbody>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <TbodyContents />
         </table>
       </div>
     </Container>

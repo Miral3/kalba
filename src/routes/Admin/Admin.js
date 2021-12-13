@@ -23,13 +23,14 @@ const Contents = styled.div`
   .contents {
     display: flex;
     flex-direction: column;
-    padding-left: 15px;
+    /* padding-left: 15px; */
     position: relative;
   }
   .icon {  
     border-bottom: 1px solid #E9EAEE;
     padding: 15px 0;
     .burger {
+      margin-left: 15px;
       font-size: 30px;
       cursor: pointer;
     }
@@ -72,13 +73,13 @@ const Admin = ({ match }) => {
 
     if (type === 'management') {
       return <div>
-        <UserList type='memberState' />
+        <UserList admin={true} type='memberState' />
       </div>
     } else if (type === 'standardTable') {
       return <div>
         {/* <InputForm /> */}
         <Categories items={items} type="admin/standardTable" any="heroes" />
-        <StandardList editorMode={true} category={props.categorySelect} />
+        <StandardList admin={true} category={props.categorySelect} />
       </div>
     }
   }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { MdClose } from "react-icons/md";
 
 const Container = styled.div`
+
   .cover {
     width:100%;
     z-index: 3;
@@ -23,11 +24,53 @@ const Container = styled.div`
 
 const FormContainer = styled.div`
   background-color: white;
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d6d6d6;
+    padding: 10px;
+    .headerTitle {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .closeBtn {
+      cursor: pointer;
+      font-size: 25px;
+    }
+  }
 
-  .closeBtn {
-    cursor: pointer;
+  form {  
+    .inputSection {
+      padding: 10px;
+      border-bottom: 1px solid #d6d6d6;
+      .input + .input {
+        margin-top: 4px;
+      }
+      input {
+        margin-left: 3px;
+      }
+    }
+    
+    .submitBtn {
+      margin: 10px;
+      float: right;
+      background-color: #fff;
+      border: 1px solid #DDDBE7;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      color: #505050;
+      font-weight: 600;
+      &:hover {
+        border: 1px solid #60a5fa; 
+        color: #60a5fa;
+      }
+    }
   }
 `
 const Modal = ({ handleCancel, handleSubmit }) => {
@@ -61,13 +104,13 @@ const Modal = ({ handleCancel, handleSubmit }) => {
       <div className="cover active">
         <FormContainer>
           <div className="header">
-            <h3>데이터 추가하기</h3>
+            <span className="headerTitle">데이터 추가하기</span>
             <MdClose onClick={onCancel} className="closeBtn" />
           </div>
           <form onSubmit={onSubmit}>
-            <div>
-              <label>
-                영어이름
+            <div className="inputSection">
+              <div className="input">
+                영어 이름:
                 <input
                   placeholder='영어이름을 입력해주세요'
                   type='text'
@@ -75,9 +118,9 @@ const Modal = ({ handleCancel, handleSubmit }) => {
                   value={form.englishName}
                   onChange={handleChange}
                 />
-              </label>
-              <label>
-                한국이름
+              </div>
+              <div className="input">
+                한국 이름:
                 <input
                   placeholder='한국이름을 입력해주세요'
                   type='text'
@@ -85,9 +128,9 @@ const Modal = ({ handleCancel, handleSubmit }) => {
                   value={form.korean}
                   onChange={handleChange}
                 />
-              </label>
-              <label>
-                최대 점수
+              </div>
+              <div className="input">
+                최대 점수:
                 <input
                   placeholder='최대점수를 입력해주세요'
                   type='text'
@@ -95,9 +138,9 @@ const Modal = ({ handleCancel, handleSubmit }) => {
                   value={form.maxScore}
                   onChange={handleChange}
                 />
-              </label>
-              <label>
-                최대 레벨
+              </div>
+              <div className="input">
+                최대 레벨:
                 <input
                   placeholder='최대레벨을 입력해주세요'
                   type='text'
@@ -105,10 +148,10 @@ const Modal = ({ handleCancel, handleSubmit }) => {
                   value={form.maxLevel}
                   onChange={handleChange}
                 />
-              </label>
+              </div>
             </div>
             <div>
-              <button type='submit'>저장</button>
+              <button className="submitBtn" type='submit'>저장</button>
             </div>
           </form>
         </FormContainer>

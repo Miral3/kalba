@@ -218,5 +218,9 @@ export const siegeMachinesInfo = [
     name: "Log Launcher",
     className: "logLauncher",
     source: "Log_Launcher.png"
+  }, {
+    name: "Flame Flinger",
+    className: "flameFlinger",
+    source: "Flame_Flinger.png"
   }
 ]

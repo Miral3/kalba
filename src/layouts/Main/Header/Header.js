@@ -156,10 +156,10 @@ const Header = ({ children }) => {
   return (
     <HeaderBlock>
       <div className="kalba__logo__insert">
-        <a href="/" className="logo">
-          <h1>Kalba</h1>
+        <div className="logo">
+          <a href="/"><h1>Kalba</h1></a>
           <p>칼없는 바바리안</p>
-        </a>
+        </div>
         <div className="insert">
           <HeaderInsert onInsert={onInsert} />
         </div>
