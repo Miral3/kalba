@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTable, useGlobalFilter, useSortBy } from 'react-table';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import SwipeToRevealActions from "react-swipe-to-reveal-actions";
 
 import styled from 'styled-components';
 
@@ -95,30 +94,6 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
 
     reorderData(source.index, destination.index);
   }
-
-  const getActions = (index) => [
-    {
-      content: (
-        <div className="action-button-content action-button-content--edit">
-          <span>EDIT</span>
-        </div>
-      ),
-      onClick: () => alert(`Pressed the EDIT button of item #${index}`),
-    },
-    {
-      content: (
-        <div className="action-button-content action-button-content--delete">
-          <span>DELETE</span>
-        </div>
-      ),
-      onClick: () => alert(`Pressed the DELETE button of item #${index}`),
-    },
-  ];
-
-  const swipeContainerStyles = {
-    backgroundColor: '#FFF',
-    paddingLeft: '1rem'
-  };
 
   const TbodyContents = () => {
     if (!editMode) {
