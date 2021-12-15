@@ -66,6 +66,7 @@ const Login = ({ AuthActions, username, password }) => {
     }).then(res => {
       if (res.status === 200 && isEmpty(res.data.message)) {
         window.localStorage.setItem('nickname', res.data.nickname);
+        window.localStorage.setItem('tag', res.data.tag);
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
