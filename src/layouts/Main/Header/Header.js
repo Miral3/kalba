@@ -1,5 +1,5 @@
 /* React */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 /* Styled */
@@ -75,7 +75,7 @@ const HeaderBlock = styled.div`
   }
   .kalba__logo__insert .logo p {
     margin-left: 12px;
-    margin-top: 24px;
+    /* margin-top: 24px; */
     padding: 8px;
     color: white;
     font-size: 15px;
@@ -102,7 +102,7 @@ const HeaderBlock = styled.div`
   }
   .login {
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: 10px;
   }
 `;
@@ -110,6 +110,7 @@ const HeaderBlock = styled.div`
 const Header = ({ children }) => {
   const [admin, setAdmin] = useState(false);
   const history = useHistory();
+  const token = getLoginToken();
 
   const userItems = [
     { label: "순위표", href: "/leaderboards/donations" },
@@ -124,20 +125,22 @@ const Header = ({ children }) => {
     { label: "관리자페이지", href: "/admin/management" },
   ];
 
-  const isAdmin = async () => {
-    await axios.get(
-      '/account/admin', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${getLoginToken()}`
-      }
-    }).then(res => {
-      if (res.status === 200) {
-        setAdmin(true);
-      }
-    });
-  }
-  isAdmin();
+  useEffect(() => {
+    const isAdmin = async () => {
+      await axios.get(
+        '/account/admin', {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          setAdmin(true);
+        }
+      });
+    }
+    isAdmin();
+  }, [token]);
 
   const onInsert = async (name) => {
     await axios.post(
@@ -153,6 +156,7 @@ const Header = ({ children }) => {
       alert("이름을 다시 한번 확인해주세요.");
     });
   }
+
   return (
     <HeaderBlock>
       <div className="kalba__logo__insert">
