@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { MdClose } from "react-icons/md";
 
 const Container = styled.div`
-
   .cover {
     width:100%;
     z-index: 3;
@@ -29,6 +28,7 @@ const FormContainer = styled.div`
   top: 50%;
   transform: translate(-50%, -50%);
   width: 450px;
+  height: 212px;
   .header {
     display: flex;
     justify-content: space-between;
@@ -55,20 +55,21 @@ const FormContainer = styled.div`
         margin-left: 3px;
       }
     }
-    
-    .submitBtn {
-      margin: 10px;
-      float: right;
-      background-color: #fff;
-      border: 1px solid #DDDBE7;
-      padding: 5px 10px;
-      border-radius: 3px;
-      cursor: pointer;
-      color: #505050;
-      font-weight: 600;
-      &:hover {
-        border: 1px solid #60a5fa; 
-        color: #60a5fa;
+    .footer {
+      .submitBtn {
+        margin: 10px;
+        float: right;
+        background-color: #fff;
+        border: 1px solid #DDDBE7;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        color: #505050;
+        font-weight: 600;
+        &:hover {
+          border: 1px solid #60a5fa; 
+          color: #60a5fa;
+        }
       }
     }
   }
@@ -150,7 +151,7 @@ const Modal = ({ handleCancel, handleSubmit }) => {
                 />
               </div>
             </div>
-            <div>
+            <div className="footer">
               <button className="submitBtn" type='submit'>저장</button>
             </div>
           </form>
