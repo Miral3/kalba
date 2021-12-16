@@ -1,6 +1,6 @@
 /* React */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 /* Styled */
 import styled from 'styled-components';
@@ -164,8 +164,8 @@ const QuizBlock = styled.div`
 
 const Quiz = () => {
   // const [name, setName] = useState(getLoginUserNickname());
-  const [name] = useState(getLoginUserNickname());
-  const [accountName] = useState(getLoginUser());
+  const name = getLoginUserNickname();
+  const accountName = getLoginUser();
   const [passState, setPassState] = useState(false);
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
@@ -258,7 +258,9 @@ const Quiz = () => {
   const createFirst = () => {
     if (!isLogin()) {
       alert("로그인이 필요한 서비스입니다.");
-      history.push("/");
+      return (
+        <Redirect to={"/"} />
+      )
     } else {
       isValidateLoginState();
       checkPassState();
