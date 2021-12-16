@@ -16,7 +16,7 @@ const Form = styled.form`
   margin: 0;
   @media (min-width: 768px) {
     width: 274px;
-    margin: 7px 0 0;
+    /* margin: 7px 0 0; */
   }
   input {
   background-color: #ffffff;

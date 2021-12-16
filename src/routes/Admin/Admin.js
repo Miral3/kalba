@@ -27,7 +27,7 @@ const Contents = styled.div`
     position: relative;
   }
   .icon {  
-    border-bottom: 1px solid #E9EAEE;
+    border-bottom: ${({ theme }) => theme.borderColors.accountInfoBottom};
     padding: 15px 0;
     .burger {
       margin-left: 15px;
