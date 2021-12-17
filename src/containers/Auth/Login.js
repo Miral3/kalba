@@ -5,7 +5,7 @@ import * as authActions from '../../redux/modules/auth';
 
 import { AuthContent, InputWithLabel, AuthButton, RightAlignedLink } from '../../components/Auth';
 import axios from "axios";
-import { getLoginToken, isEmpty } from "../../tools/tools";
+import { getLoginToken, isEmpty, getLoginUserTag, translateRole } from "../../tools/tools";
 import { useHistory } from 'react-router-dom';
 
 const Login = ({ AuthActions, username, password }) => {
@@ -41,7 +41,8 @@ const Login = ({ AuthActions, username, password }) => {
       if (res.status === 200) {
         window.localStorage.setItem('token', res.data.token);
         window.localStorage.setItem('name', loginForm["username"]);
-        getNickname().then(() => history.push("/"));
+        getNickname();
+        getUserData().then(() => history.push("/"));
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
@@ -73,6 +74,25 @@ const Login = ({ AuthActions, username, password }) => {
     }).catch(e => {
       alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
     });
+  };
+
+  const getUserData = async () => {
+    try {
+      const res = await axios.post(
+        "/coc/clan/member/statistic/tag", {
+        tag: getLoginUserTag()
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      if (res.status === 200) {
+        window.localStorage.setItem('yonghaScore', res.data.yonghaScore);
+        window.localStorage.setItem('role', translateRole(res.data.role));
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {

@@ -26,7 +26,7 @@ const Tr = styled.tr`
     padding: 8px 5px;
     animation-name: fade;
     animation-fill-mode: forwards;
-    animation-duration: 1s;
+    animation-duration: 0.1s;
     animation-direction: alternate;
     @keyframes fade{
       0%,45% {

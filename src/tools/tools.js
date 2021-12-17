@@ -116,6 +116,14 @@ export function getLoginUserTag() {
   return window.localStorage.getItem('tag');
 }
 
+export function getLoginUserYonghaScore() {
+  return window.localStorage.getItem('yonghaScore');
+}
+
+export function getLoginUserRole() {
+  return window.localStorage.getItem('role');
+}
+
 export function getLoginToken() {
   return isEmpty(window.localStorage.getItem('token')) ? "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb3Rpb25kZXYiLCJleHAiOjE2Mjk4ODk2NDksImlhdCI6MTYyOTg3MTY0OX0.1G0XJBpMy2QWiGiI9mIhfagKpIOi8uFM2k0hxZFKTyMo6vN3OE0B17Xa-u9k6u1aDpqWkTTLkaIFQAgJhkHd-g" : window.localStorage.getItem('token');
 }

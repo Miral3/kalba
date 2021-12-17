@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { getLoginUser, getLoginUserNickname, isEmpty, getLoginUserTag, copyText, logout } from "../tools/tools";
+import { useHistory } from 'react-router-dom';
+import { getLoginUser, getLoginUserNickname, isEmpty, getLoginUserTag, copyText, logout, getLoginUserRole, getLoginUserYonghaScore } from "../tools/tools";
 import { LogoutButton } from "../components/Button";
 
 import styled from 'styled-components';
@@ -35,6 +36,11 @@ const Container = styled.div`
       width: 100px;
       padding: 15px 0;
     }
+
+    .leagueBadge, 
+    .nickname {
+      cursor: pointer;
+    }
     .contents {
       padding-bottom: 3px;
     }
@@ -57,8 +63,10 @@ const Blank = styled.div`
 `
 
 const AccountInfo = () => {
-  const [leagueBadge, setLeagueBadge] = useState(null);
   const userTag = getLoginUserTag();
+  const history = useHistory();
+  const linkTag = getLoginUserTag().substr(1);
+  const [leagueBadge, setLeagueBadge] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,12 +87,17 @@ const AccountInfo = () => {
     fetchData();
   }, [userTag]);
 
+  const moveProfilePage = () => {
+    history.push(`/profile/${linkTag}`);
+  }
+
   return (
     <Container>
       <div className="userInfo">
-        {isEmpty(leagueBadge) ? <Blank></Blank> : <img className="leagueBadge" src={leagueBadge.badge} alt="leagueBadge" />}
-        <span className="nickname contents">{getLoginUserNickname()}</span>
-        <span className="name contents">{getLoginUser()}</span>
+        {isEmpty(leagueBadge) ? <Blank></Blank> : <img className="leagueBadge" src={leagueBadge.badge} onClick={() => moveProfilePage()} alt="leagueBadge" />}
+        <span className="nickname contents" onClick={() => moveProfilePage()}>{getLoginUserNickname()}</span>
+        {/* <span className="name contents">{getLoginUser()}</span> */}
+        <span className="role yonghaScore contents">{getLoginUserRole()} (공{getLoginUserYonghaScore()})</span>
         <div className="userTagBtn contents">
           <span className="tag">{userTag}</span>
           <FaRegCopy className="userTagCopy" onClick={() => copyText(getLoginUserTag())} />
