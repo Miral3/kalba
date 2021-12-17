@@ -42,7 +42,6 @@ const Login = ({ AuthActions, username, password }) => {
         window.localStorage.setItem('token', res.data.token);
         window.localStorage.setItem('name', loginForm["username"]);
         getNickname();
-        getUserData().then(() => history.push("/"));
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
@@ -68,6 +67,7 @@ const Login = ({ AuthActions, username, password }) => {
       if (res.status === 200 && isEmpty(res.data.message)) {
         window.localStorage.setItem('nickname', res.data.nickname);
         window.localStorage.setItem('tag', res.data.tag);
+        getUserData().then(() => history.push("/"));
       } else {
         alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
       }
@@ -77,22 +77,21 @@ const Login = ({ AuthActions, username, password }) => {
   };
 
   const getUserData = async () => {
-    try {
-      const res = await axios.post(
-        "/coc/clan/member/statistic/tag", {
-        tag: getLoginUserTag()
-      }, {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
+    await axios.post(
+      "/coc/clan/member/statistic/tag", {
+      tag: getLoginUserTag()
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => {
       if (res.status === 200) {
         window.localStorage.setItem('yonghaScore', res.data.yonghaScore);
         window.localStorage.setItem('role', translateRole(res.data.role));
       }
-    } catch (e) {
+    }).catch(e => {
       console.log(e);
-    }
+    });
   };
 
   useEffect(() => {
