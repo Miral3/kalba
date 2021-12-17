@@ -22,7 +22,7 @@ const HeaderContainer = ({ visible }) => {
   const onClick = () => setShowProfile(!showProfile);
 
   const handleCloseModal = e => {
-    if (!el.current.contains(e.target)) {
+    if (el.current && !el.current.contains(e.target)) {
       setShowProfile(false);
     }
   }
