@@ -100,12 +100,10 @@ export function isLogin() {
 }
 
 export function logout() {
-  window.localStorage.removeItem('yonghaScore');
-  window.localStorage.removeItem('role');
-  window.localStorage.removeItem('nickname');
-  window.localStorage.removeItem('name');
-  window.localStorage.removeItem('token');
-  window.localStorage.removeItem('tag');
+  const key = 'theme';
+  const value = window.localStorage.getItem(key);
+  window.localStorage.clear();
+  window.localStorage.setItem(key, value);
 }
 
 export function getLoginUser() {
