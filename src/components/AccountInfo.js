@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
-import { getLoginUser, getLoginUserNickname, isEmpty, getLoginUserTag, copyText, logout, getLoginUserRole, getLoginUserYonghaScore } from "../tools/tools";
+import { getLoginUserNickname, isEmpty, getLoginUserTag, copyText, logout, getLoginUserRole, getLoginUserYonghaScore } from "../tools/tools";
 import { LogoutButton } from "../components/Button";
 
 import styled from 'styled-components';
@@ -96,7 +96,6 @@ const AccountInfo = () => {
       <div className="userInfo">
         {isEmpty(leagueBadge) ? <Blank></Blank> : <img className="leagueBadge" src={leagueBadge.badge} onClick={() => moveProfilePage()} alt="leagueBadge" />}
         <span className="nickname contents" onClick={() => moveProfilePage()}>{getLoginUserNickname()}</span>
-        {/* <span className="name contents">{getLoginUser()}</span> */}
         <span className="role yonghaScore contents">{getLoginUserRole()} (공{getLoginUserYonghaScore()})</span>
         <div className="userTagBtn contents">
           <span className="tag">{userTag}</span>

@@ -89,7 +89,7 @@ const StandardList = (props) => {
         }).then(res => {
           const processedData = dataPreprocess(res.data);
           setData(processedData);
-          setStaticData(processedData);
+          setStaticData(deepCopy(processedData));
           setNextId(res.data[category].length);
           setLoading(false);
         });
@@ -254,7 +254,7 @@ const StandardList = (props) => {
   }
 
   const editCancel = () => {
-    setData(deepCopy(staticData));
+    setData(staticData);
   }
 
   const removeRow = (rowIndex) => {
