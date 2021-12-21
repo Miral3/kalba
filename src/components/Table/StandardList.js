@@ -51,8 +51,8 @@ const StyledUpDownArrow = styled(UpDownArrow)`
   padding: 15px;
   display: none;
   tr:hover & {
-    display: ${({ isSomethingDragging }) =>
-    isSomethingDragging ? "none" : "inline"};
+    display: ${({ editMode }) =>
+    !editMode ? "none" : "inline"};
   }
 `;
 
@@ -100,50 +100,51 @@ const StandardList = (props) => {
     fetchData();
   }, [category]);
 
-  const columns = useMemo(() => {
-    const EditableTextCell = (props) => {
-      const { column, row, cell } = props;
-      const value = cell.value;
-      const rowIndex = row.index;
-      const type = column.type;
+  const EditableTextCell = (props) => {
+    const { column, row, cell } = props;
+    const value = cell.value;
+    const rowIndex = row.index;
+    const type = column.type;
 
-      const onChange = (e) => {
-        const { id, className, value } = e.target;
-        data[category][id][1][className] = value;
-        if (className === "maxScore" || className === "maxLevel") {
-          data[category][id][1].value = Math.round(data[category][id][1].maxScore / data[category][id][1].maxLevel * 1000) / 1000;
+    const onChange = (e) => {
+      const { id, className, value } = e.target;
+      data[category][id][1][className] = value;
+      if (className === "maxScore" || className === "maxLevel") {
+        data[category][id][1].value = Math.round(data[category][id][1].maxScore / data[category][id][1].maxLevel * 1000) / 1000;
+      }
+      setData((prevState) => ({ ...prevState, }));
+    };
+
+    return (
+      <>
+        {
+          editMode
+            ? <input value={value} onChange={onChange} id={rowIndex} className={type} />
+            : <>{value}</>
         }
-        setData((prevState) => ({ ...prevState, }));
-      };
+      </>
+    );
+  };
 
-      return (
-        <>
-          {
-            editMode
-              ? <input value={value} onChange={onChange} id={rowIndex} className={type} />
-              : <>{value}</>
-          }
-        </>
-      );
-    };
+  const DescriptionCell = (props) => {
+    return (
+      <Description>
+        <StyledUpDownArrow {...props} />
+        <EditableTextCell {...props} />
+      </Description>
+    )
+  };
 
-    const DescriptionCell = (props) => {
-      return (
-        <Description>
-          {editMode && <StyledUpDownArrow {...props} />}
-          <EditableTextCell {...props} />
-        </Description>
-      )
-    };
+  const valueCell = (props) => {
+    return (
+      <Value>
+        {editMode && <StyledTrashCan {...props} />}
+        {props.row.values.value}
+      </Value>
+    );
+  };
 
-    const valueCell = (props) => {
-      return (
-        <Value>
-          {editMode && <StyledTrashCan {...props} />}
-          {props.row.values.value}
-        </Value>
-      );
-    };
+  const columns = useMemo(() => {
     return [
       {
         accessor: "korean",
@@ -170,7 +171,7 @@ const StandardList = (props) => {
         Cell: valueCell,
       }
     ];
-  }, [category, editMode, data]);
+  }, [editMode]);
 
   const dataPreprocess = (data) => {
     const classNameArr = ["heroes", "pets", "units", "spells", "siegeMachines"];

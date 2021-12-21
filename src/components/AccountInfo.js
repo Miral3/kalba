@@ -41,6 +41,11 @@ const Container = styled.div`
     .nickname {
       cursor: pointer;
     }
+    .nickname {
+      &:hover {
+        border-bottom: ${({ theme }) => theme.borderColors.listName};
+      }
+    }
     .contents {
       padding-bottom: 3px;
     }
@@ -94,8 +99,8 @@ const AccountInfo = () => {
   return (
     <Container>
       <div className="userInfo">
-        {isEmpty(leagueBadge) ? <Blank></Blank> : <img className="leagueBadge" src={leagueBadge.badge} onClick={() => moveProfilePage()} alt="leagueBadge" />}
-        <span className="nickname contents" onClick={() => moveProfilePage()}>{getLoginUserNickname()}</span>
+        {isEmpty(leagueBadge) ? <Blank></Blank> : <img className="leagueBadge" src={leagueBadge.badge} onClick={() => moveProfilePage()} alt="leagueBadge" title="프로필로 이동" />}
+        <span className="nickname contents" onClick={() => moveProfilePage()} title="프로필로 이동">{getLoginUserNickname()}</span>
         <span className="role yonghaScore contents">{getLoginUserRole()} (공{getLoginUserYonghaScore()})</span>
         <div className="userTagBtn contents">
           <span className="tag">{userTag}</span>

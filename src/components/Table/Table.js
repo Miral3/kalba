@@ -82,7 +82,7 @@ const Tr = styled.tr`
 
 const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+  const { getTableProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data, removeRow, reorderData }, useGlobalFilter, useSortBy);
 
   const handleDragEnd = (result) => {
@@ -94,70 +94,7 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
 
     reorderData(source.index, destination.index);
   }
-
-  const TbodyContents = () => {
-    if (!editMode) {
-      return (
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} >
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>
-                    {cell.render("Cell")}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      )
-    } else {
-      return (
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId="table-body">
-            {(provided, snapshot) => (
-              <tbody ref={provided.innerRef} {...provided.droppableProps}>
-                {rows.map((row, index) => {
-                  prepareRow(row);
-                  return (
-                    <Draggable
-                      draggableId={row.id}
-                      key={row.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => {
-                        return (
-                          <Tr
-                            ref={provided.innerRef}
-                            isDragging={snapshot.isDragging}
-                            {...provided.draggableProps}
-                            // {...provided.dragHandleProps}
-                            {...row.getRowProps()}
-                          >
-                            {row.cells.map((cell) => (
-                              <td className="editMode" {...cell.getCellProps()}>
-                                {cell.render("Cell", {
-                                  dragHandleProps: provided.dragHandleProps,
-                                  isSomethingDragging: snapshot.isDraggingOver
-                                })}
-                              </td>
-                            ))}
-                          </Tr>
-                        );
-                      }}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </tbody>
-            )}
-          </Droppable>
-        </DragDropContext>
-      )
-    }
-  }
+  console.log(editMode);
   return (
     <Container>
       <div className="tableBlock">
@@ -173,7 +110,47 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
               </tr>
             ))}
           </thead>
-          <TbodyContents />
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="table-body">
+              {(provided, snapshot) => (
+                <tbody ref={provided.innerRef} {...provided.droppableProps}>
+                  {rows.map((row, index) => {
+                    prepareRow(row);
+                    return (
+                      <Draggable
+                        draggableId={row.id}
+                        key={row.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => {
+                          return (
+                            <Tr
+                              ref={provided.innerRef}
+                              isDragging={snapshot.isDragging}
+                              {...provided.draggableProps}
+                              // {...provided.dragHandleProps}
+                              {...row.getRowProps()}
+                            >
+                              {row.cells.map((cell) => (
+                                <td className="editMode" {...cell.getCellProps()}>
+                                  {cell.render("Cell", {
+                                    dragHandleProps: provided.dragHandleProps,
+                                    isSomethingDragging: snapshot.isDraggingOver,
+                                    editMode: editMode
+                                  })}
+                                </td>
+                              ))}
+                            </Tr>
+                          );
+                        }}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </tbody>
+              )}
+            </Droppable>
+          </DragDropContext>
         </table>
       </div>
     </Container>
