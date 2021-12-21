@@ -94,7 +94,7 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
 
     reorderData(source.index, destination.index);
   }
-  console.log(editMode);
+
   return (
     <Container>
       <div className="tableBlock">
