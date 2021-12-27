@@ -53,8 +53,6 @@ const StyledUpDownArrow = styled(UpDownArrow)`
   tr:hover & {
     display: ${({ isSomethingDragging }) =>
     isSomethingDragging ? "none" : "inline"};
-    color: ${({ editMode }) =>
-    editMode ? "red" : "blue"};
   }
 `;
 
@@ -107,22 +105,29 @@ const StandardList = (props) => {
       const { column, row, cell } = props;
       const value = cell.value;
       const rowIndex = row.index;
-      const type = column.type;
+      const columnId = column.id;
 
       const onChange = (e) => {
-        const { id, className, value } = e.target;
-        data[category][id][1][className] = value;
-        if (className === "maxScore" || className === "maxLevel") {
-          data[category][id][1].value = Math.round(data[category][id][1].maxScore / data[category][id][1].maxLevel * 1000) / 1000;
+        const { value } = e.target;
+        data[category][rowIndex][1][columnId] = value;
+        if (columnId === "maxScore" || columnId === "maxLevel") {
+          data[category][rowIndex][1].value = Math.round(data[category][rowIndex][1].maxScore / data[category][rowIndex][1].maxLevel * 1000) / 1000;
         }
+
         setData((prevState) => ({ ...prevState, }));
+        // setData(prev => ({
+        //   ...prev,
+        //   [category]: { ...prev[category] },
+        //   [rowIndex]: e.target.rowIndex,
+
+        // }));
       };
 
       return (
         <>
           {
             editMode
-              ? <input value={value} onChange={onChange} id={rowIndex} className={type} />
+              ? <input value={value} onChange={onChange} className={columnId} />
               : <>{value}</>
           }
         </>
@@ -130,10 +135,9 @@ const StandardList = (props) => {
     };
 
     const DescriptionCell = (props) => {
-      console.log(props.editMode);
       return (
         <Description>
-          <StyledUpDownArrow {...props} />
+          {editMode && <StyledUpDownArrow {...props} />}
           <EditableTextCell {...props} />
         </Description>
       )
@@ -168,9 +172,10 @@ const StandardList = (props) => {
         Cell: EditableTextCell,
       },
       {
-        accessor: "value",
+        accessor: (row) => Math.round(row.maxScore / row.maxLevel * 1000) / 1000,
         Header: "비례 점수",
         type: "value",
+        id: "value",
         Cell: valueCell,
       }
     ];
@@ -237,7 +242,7 @@ const StandardList = (props) => {
   }
 
   const handleEditMode = () => {
-    setEditMode(!editMode);
+    setEditMode(true);
   }
 
   const handleSubmit = async (form) => {
@@ -258,7 +263,7 @@ const StandardList = (props) => {
   }
 
   const editCancel = () => {
-    setData(staticData);
+    setData(deepCopy(staticData));
     setEditMode(false);
   }
 
@@ -281,7 +286,7 @@ const StandardList = (props) => {
   if (loading) {
     return <div></div>
   }
-
+  console.log(data);
   return (
     <Container>
       {modalOn && <Modal handleCancel={handleCancel} handleSubmit={handleSubmit} />}

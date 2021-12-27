@@ -121,6 +121,7 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
                         draggableId={row.id}
                         key={row.id}
                         index={index}
+                        isDragDisabled={editMode ? false : true}
                       >
                         {(provided, snapshot) => {
                           return (
