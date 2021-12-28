@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../../layouts/Main/Header';
 import { LoginButton } from "../../components/Button";
-import { isLogin } from "../../tools/tools";
+import { isLogin, getLoginUserTag } from "../../tools/tools";
 import AccountInfo from "../../components/AccountInfo";
 
 import styled from "styled-components";
@@ -18,6 +19,8 @@ const LoginStateWrapper = styled.div`
 
 const HeaderContainer = ({ visible }) => {
   const el = useRef();
+  const history = useHistory();
+  const linkTag = getLoginUserTag().substr(1);
   const [showProfile, setShowProfile] = useState(false);
   const onClick = () => setShowProfile(!showProfile);
 
@@ -25,6 +28,11 @@ const HeaderContainer = ({ visible }) => {
     if (el.current && !el.current.contains(e.target)) {
       setShowProfile(false);
     }
+  }
+
+  const moveProfilePage = () => {
+    setShowProfile(false);
+    history.push(`/profile/${linkTag}`);
   }
 
   useEffect(() => {
@@ -41,7 +49,7 @@ const HeaderContainer = ({ visible }) => {
       {isLogin() ?
         <LoginStateWrapper ref={el}>
           <i className="fas fa-user-circle" onClick={onClick} />
-          {showProfile ? <AccountInfo /> : <div></div>}
+          {showProfile ? <AccountInfo moveProfilePage={moveProfilePage} /> : <div></div>}
         </LoginStateWrapper> :
         <LoginButton children="로그인" />}
     </Header>

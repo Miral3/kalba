@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { useHistory } from 'react-router-dom';
 import { getLoginUserNickname, isEmpty, getLoginUserTag, copyText, logout, getLoginUserRole, getLoginUserYonghaScore } from "../tools/tools";
 import { LogoutButton } from "../components/Button";
 
@@ -67,10 +66,9 @@ const Blank = styled.div`
   height: 130px;
 `
 
-const AccountInfo = () => {
+const AccountInfo = ({ moveProfilePage }) => {
   const userTag = getLoginUserTag();
-  const history = useHistory();
-  const linkTag = getLoginUserTag().substr(1);
+
   const [leagueBadge, setLeagueBadge] = useState(null);
 
   useEffect(() => {
@@ -91,10 +89,6 @@ const AccountInfo = () => {
     };
     fetchData();
   }, [userTag]);
-
-  const moveProfilePage = () => {
-    history.push(`/profile/${linkTag}`);
-  }
 
   return (
     <Container>
