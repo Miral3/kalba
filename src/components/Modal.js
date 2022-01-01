@@ -74,7 +74,7 @@ const FormContainer = styled.div`
     }
   }
 `
-const Modal = ({ handleCancel, handleSubmit }) => {
+const Modal = ({ handleModal, handleSubmit }) => {
   const [form, setForm] = useState(
     {
       englishName: '',
@@ -92,7 +92,7 @@ const Modal = ({ handleCancel, handleSubmit }) => {
   };
 
   const onCancel = () => {
-    handleCancel();
+    handleModal();
   }
 
   const onSubmit = (e) => {

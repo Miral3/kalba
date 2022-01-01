@@ -11,10 +11,10 @@ import styled from 'styled-components';
 const Container = styled.div`
 `;
 
-const TrashCan = ({ removeRow, row, className }) => (
+const TrashCan = ({ handleRemove, row, className }) => (
   <span
     className={className}
-    onClick={() => removeRow(row.index)}
+    onClick={() => handleRemove(row.index)}
     role="img"
     aria-label="delete"
   >
@@ -87,10 +87,10 @@ const StandardList = (props) => {
             "Content-Type": "application/json",
           }
         }).then(res => {
-          const processedData = dataPreprocess(res.data);
-          setData(processedData);
-          setStaticData(deepCopy(processedData));
-          setNextId(res.data[category].length);
+          const originData = res.data[category];
+          setData(originData);
+          setStaticData(deepCopy(originData));
+          setNextId(originData.length);
           setLoading(false);
         });
       } catch (e) {
@@ -109,20 +109,18 @@ const StandardList = (props) => {
 
       const onChange = (e) => {
         const { value } = e.target;
-        data[category][rowIndex][1][columnId] = value;
-        if (columnId === "maxScore" || columnId === "maxLevel") {
-          data[category][rowIndex][1].value = Math.round(data[category][rowIndex][1].maxScore / data[category][rowIndex][1].maxLevel * 1000) / 1000;
-        }
-
-        setData((prevState) => ({ ...prevState, }));
-        // setData(prev => ({
-        //   ...prev,
-        //   [category]: { ...prev[category] },
-        //   [rowIndex]: e.target.rowIndex,
-
-        // }));
+        setData((prev) =>
+          prev.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...prev[rowIndex],
+                [columnId]: value
+              };
+            }
+            return row;
+          })
+        );
       };
-
       return (
         <>
           {
@@ -181,39 +179,33 @@ const StandardList = (props) => {
     ];
   }, [editMode]);
 
-  const dataPreprocess = (data) => {
-    const classNameArr = ["heroes", "pets", "units", "spells", "siegeMachines"];
-    for (let i = 0; i < classNameArr.length; i++) {
-      data[classNameArr[i]] = Object.entries(data[classNameArr[i]]);
-      data[classNameArr[i]].sort((a, b) => {
-        return a[1].index - b[1].index;
-      });
-    }
-    return data;
-  }
-
-  const set = () => {
-    return data[category].map((el) => ({
-      englishName: el[0],
-      index: el[1].index,
-      korean: el[1].korean,
-      maxScore: el[1].maxScore,
-      maxLevel: el[1].maxLevel,
-      value: el[1].value,
-    }));
-  }
-
   const addRow = () => {
-    setModalOn(true);
+    handleModal();
+  }
+
+  const handleSubmit = async (form) => {
+    const calculation = Math.round(form.maxScore / form.maxLevel * 1000) / 1000;
+    setData(prev => prev.concat({
+      english: form.englishName,
+      index: nextId,
+      korean: form.korean,
+      maxScore: form.maxScore,
+      maxLevel: form.maxLevel,
+      value: calculation,
+    }))
+    setNextId(nextId + 1);
+    handleModal();
+    // await handleSave();
+  }
+
+  const handleModal = () => {
+    setModalOn(!modalOn);
   }
 
   const handleSave = async () => {
     await axios.put(
       '/coc/clan/formula',
-      {
-        name: category,
-        formulaDataObject: getFormulaDataObject()
-      },
+      getFormulaDataObject(),
       {
         headers: {
           "Content-Type": "application/json"
@@ -231,78 +223,50 @@ const StandardList = (props) => {
 
   const getFormulaDataObject = () => {
     let obj = {};
-    for (let i = 0; i < data[category].length; i++) {
-      obj[data[category][i][0]] = data[category][i][1];
-    }
+    obj[category] = data;
     return obj;
   }
 
-  const handleCancel = () => {
-    setModalOn(false);
-  }
-
   const handleEditMode = () => {
-    setEditMode(true);
+    setEditMode(!editMode);
   }
 
-  const handleSubmit = async (form) => {
-    const calculation = Math.round(form.maxScore / form.maxLevel * 1000) / 1000;
-    data[category].push(
-      [form.englishName,
-      {
-        index: nextId,
-        korean: form.korean,
-        maxScore: form.maxScore,
-        maxLevel: form.maxLevel,
-        value: calculation,
-      }]);
-    setNextId(nextId + 1);
-    setData((prevState) => ({ ...prevState, }));
-    setModalOn(false);
-    // await handleSave();
-  }
-
-  const editCancel = () => {
+  const handleEditCancel = () => {
     setData(deepCopy(staticData));
-    setEditMode(false);
+    handleEditMode();
   }
 
-  const removeRow = (rowIndex) => {
-    data[category].splice(rowIndex, 1);
-    setData((prevState) => ({ ...prevState, }));
+  const handleRemove = (rowIndex) => {
+    setData((prev) => prev.filter((row, index) => index !== rowIndex));
   };
 
-  const reorderData = (startIndex, endIndex) => {
-    const newData = data[category];
+  const handleReorderData = (startIndex, endIndex) => {
+    const newData = [...data];
     const [movedRow] = newData.splice(startIndex, 1);
     newData.splice(endIndex, 0, movedRow);
-
-    [data[category][startIndex][1].index, data[category][endIndex][1].index]
-      = [data[category][endIndex][1].index, data[category][startIndex][1].index]
-
-    setData((prevState) => ({ ...prevState, }));
+    setData(newData);
   }
 
   if (loading) {
     return <div></div>
   }
-  console.log(data);
+
   return (
     <Container>
-      {modalOn && <Modal handleCancel={handleCancel} handleSubmit={handleSubmit} />}
-      <Table
+      {modalOn && <Modal handleModal={handleModal} handleSubmit={handleSubmit} />}
+      {data && <Table
         columns={columns}
-        data={set()}
-        removeRow={removeRow}
-        reorderData={reorderData}
+        data={data}
+        handleRemove={handleRemove}
+        handleReorderData={handleReorderData}
         editMode={editMode}
-      />
+      />}
       {props.admin && <EditBtn
         handleEditMode={handleEditMode}
         editMode={editMode}
         handleSave={handleSave}
         addRow={addRow}
-        editCancel={editCancel}
+        handleEditCancel={handleEditCancel}
       />}
     </Container>
   )

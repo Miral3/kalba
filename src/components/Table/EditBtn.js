@@ -56,7 +56,7 @@ const Container = styled.div`
   }
 `;
 
-const EditBtn = ({ handleEditMode, editMode, handleSave, addRow, editCancel }) => {
+const EditBtn = ({ handleEditMode, editMode, handleSave, addRow, handleEditCancel }) => {
 
   const handleClick = (type) => {
     if (type !== 'add') {
@@ -69,7 +69,7 @@ const EditBtn = ({ handleEditMode, editMode, handleSave, addRow, editCancel }) =
       addRow();
     }
     if (type === 'cancel') {
-      editCancel();
+      handleEditCancel();
     }
   }
 

@@ -80,10 +80,9 @@ const Tr = styled.tr`
   display: ${({ isDragging }) => (isDragging ? "table" : "")};
 `
 
-const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
-
+const Table = ({ columns, data, handleRemove, handleReorderData, editMode, updateData }) => {
   const { getTableProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data, removeRow, reorderData }, useGlobalFilter, useSortBy);
+    useTable({ columns, data, handleRemove, handleReorderData, updateData }, useGlobalFilter, useSortBy);
 
   const handleDragEnd = (result) => {
     const { source, destination } = result;
@@ -92,7 +91,7 @@ const Table = ({ columns, data, removeRow, reorderData, editMode }) => {
       return;
     }
 
-    reorderData(source.index, destination.index);
+    handleReorderData(source.index, destination.index);
   }
 
   return (
