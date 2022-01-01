@@ -20,7 +20,7 @@ const LoginStateWrapper = styled.div`
 const HeaderContainer = ({ visible }) => {
   const el = useRef();
   const history = useHistory();
-  const linkTag = getLoginUserTag().substr(1);
+  const linkTag = getLoginUserTag() ? getLoginUserTag().substr(1) : null;
   const [showProfile, setShowProfile] = useState(false);
   const onClick = () => setShowProfile(!showProfile);
 
