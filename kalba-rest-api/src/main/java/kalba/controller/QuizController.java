@@ -1,6 +1,7 @@
 package kalba.controller;
 
 import kalba.models.account.*;
+import kalba.models.coc.quiz.MarkingData;
 import kalba.models.coc.quiz.Quiz;
 import kalba.models.coc.quiz.QuizAnswerSheet;
 import kalba.models.coc.quiz.QuizDto;
@@ -34,18 +35,18 @@ public class QuizController {
     }
 
     @PostMapping("/mark")
-    public ResponseEntity<?> markingQuiz(@RequestBody QuizAnswerSheet quizAnswerSheet){
-        int score=quizService.markingQuiz(quizAnswerSheet);
-        if(score==-1){
+    public ResponseEntity<?> markingQuiz(@RequestBody QuizAnswerSheet quizAnswerSheet) {
+        MarkingData result = quizService.markingQuiz(quizAnswerSheet);
+        if (result.getScore() == -1) {
             return ResponseEntity.badRequest().body(Map.of("message", "bad request"));
         } else {
-            return ResponseEntity.ok(Map.of("score", score));
+            return ResponseEntity.ok(result);
         }
     }
 
     @GetMapping("/member/state")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getMemberQuizState(){
+    public ResponseEntity<?> getMemberQuizState() {
         return ResponseEntity.ok(quizService.findAllState());
     }
 }

@@ -8,14 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ReadConfig {
     public static final ReadConfig config = fromFile();
-    ;
-    public boolean isLocal;
-    public String localToken;
-    public String serverToken;
     public List<Object> quizAnswer;
-//    public Object quizAnswer;
 
     private static ReadConfig fromFile() {
         try {
@@ -30,21 +26,5 @@ public class ReadConfig {
             String message = "config.yaml" + " 파일을 정상적으로 읽지 못하였습니다." + "config.yaml" + "\n" + e.getMessage();
             throw new RuntimeException(message);
         }
-    }
-
-    public static List<int[]> readQuizAnswer(List<Object> quizAnswerObjVal) {
-        List<int[]> quizAnswer = new ArrayList<>();
-        for (Object o : quizAnswerObjVal) {
-            quizAnswer.add(stringArrToIntArr(o.toString().split(",")));
-        }
-        return quizAnswer;
-    }
-
-    private static int[] stringArrToIntArr(String[] arr) {
-        int[] ret = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            ret[i] = Integer.parseInt(arr[i]);
-        }
-        return ret;
     }
 }

@@ -171,6 +171,7 @@ const Quiz = () => {
   const [data, setData] = useState([]);
   const [checkList, setCheckList] = useState([]);
   const [score, setScore] = useState(-1);
+  const [wrongAnswer, setWrongAnswer] = useState("");
   const history = useHistory();
 
   useEffect(() => {
@@ -245,6 +246,7 @@ const Quiz = () => {
       }
     }).then(res => {
       if (res.status === 200 && res.data.score !== undefined) {
+        setWrongAnswer(wrongAnswerListToString(res.data.wrongAnswerList))
         setScore(res.data.score);
       } else {
         alert("채점중 에러가 발생하였습니다.");
@@ -370,6 +372,15 @@ const Quiz = () => {
     return score >= 100;
   }
 
+  const wrongAnswerListToString = (wrongAnswerList) => {
+    let ret = "";
+    for(let i = 0; i < wrongAnswerList.length - 1; i++){
+      ret += wrongAnswerList[i]+", ";
+    }
+    ret += wrongAnswerList[wrongAnswerList.length-1];
+    return ret;
+  }
+
   const createResult = () => {
     markQuiz();
     isValidateLoginState();
@@ -387,7 +398,7 @@ const Quiz = () => {
               <span className="name">{name}</span>
               <span> 님의 점수는 </span>
               <span className="score">{score}</span>
-              {isPassScore(score) ? <span>점으로 통과하셨습니다!</span> : <span>점으로<br />아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
+              {isPassScore(score) ? <span>점으로 통과하셨습니다!</span> : <span>점으로<br />아쉽게도 커트라인을 넘기지 못하였습니다.<br />틀린 문제는 {wrongAnswer} 입니다.</span>}
             </div>
             {isPassScore(score) ? <button className="reset" onClick={() => history.push("/")}>메인으로</button> : <button className="reset" onClick={() => reset()}>다시풀기</button>}
           </div>
