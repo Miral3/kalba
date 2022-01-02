@@ -1,25 +1,23 @@
 package kalba.service;
 
 import kalba.models.account.AccountQuizAndState;
-import kalba.models.account.Name;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Ranking;
 import kalba.models.coc.clan.Statistic;
-import kalba.models.coc.yongha.Formula;
-import kalba.models.coc.yongha.FormulaData;
-import kalba.models.coc.yongha.FormulaUpdateInfo;
+import kalba.models.coc.yongha.*;
 import kalba.repository.AccountRepository;
 import kalba.repository.StatisticMongoRepository;
 import kalba.util.MemberDataManager;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ClanMemberService {
     private final StatisticMongoRepository statisticMongoRepository;
     private final MemberDataManager memberDataManager;
     private final AccountRepository accountRepository;
+    private static final String[] FORMULA_CLASS_NAME = {"units", "siegeMachines", "spells", "heroes", "pets"};
 
     public Optional<Statistic> findByName(String name) {
         return statisticMongoRepository.findByName(name);
@@ -54,7 +52,7 @@ public class ClanMemberService {
     }
 
     public Optional<Formula> findYonghaScoreFormula() {
-        return statisticMongoRepository.findYonghaScoreFormula();
+        return statisticMongoRepository.findYonghaScoreFormula().map(this::formulaForMongoDBToFormula);
     }
 
     public boolean forceUpdate(String clanTag) {
@@ -89,11 +87,55 @@ public class ClanMemberService {
         return accountRepository.updateMemberAccountQuizAndStateList(list);
     }
 
-    public boolean updateYonghaScoreFormula(FormulaUpdateInfo formulaUpdateInfo) {
-        if (formulaUpdateInfo.validateFormulaName()) {
-            return statisticMongoRepository.updateYonghaScoreFormula(formulaUpdateInfo);
-        } else {
-            return false;
+    public boolean updateYonghaScoreFormula(Formula formulaUpdateInfo) {
+        boolean changed = false;
+        for (String name : FORMULA_CLASS_NAME) {
+            if (formulaUpdateInfo.isEmpty(name)) {
+                statisticMongoRepository.updateYonghaScoreFormula(name, formulaDataListToMap(formulaUpdateInfo.classNameToFormula(name)));
+                changed = true;
+            }
         }
+        return changed;
+    }
+
+    private Formula formulaForMongoDBToFormula(FormulaForMongoDB formula) {
+        return Formula.builder()
+                .heroes(formulaDataMapToList(formula.getHeroes()))
+                .pets(formulaDataMapToList(formula.getPets()))
+                .units(formulaDataMapToList(formula.getUnits()))
+                .spells(formulaDataMapToList(formula.getSpells()))
+                .siegeMachines(formulaDataMapToList(formula.getSiegeMachines()))
+                .build();
+    }
+
+    private List<FormulaData> formulaDataMapToList(LinkedHashMap<String, FormulaDataForMongoDB> map) {
+        List<FormulaData> list = new LinkedList<>();
+        for (String english : map.keySet()) {
+            FormulaDataForMongoDB data = map.get(english);
+            list.add(FormulaData.builder()
+                    .english(english)
+                    .index(data.getIndex())
+                    .korean(data.getKorean())
+                    .value(data.getValue())
+                    .maxScore(data.getMaxScore())
+                    .maxLevel(data.getMaxLevel())
+                    .build());
+        }
+        return list;
+    }
+
+    private Map<String, FormulaDataForMongoDB> formulaDataListToMap(List<FormulaData> list) {
+        LinkedHashMap<String, FormulaDataForMongoDB> map = new LinkedHashMap<>();
+        for (FormulaData data : list) {
+            map.put(data.getEnglish(),
+                    FormulaDataForMongoDB.builder()
+                            .index(data.getIndex())
+                            .korean(data.getKorean())
+                            .value(data.getValue())
+                            .maxScore(data.getMaxScore())
+                            .maxLevel(data.getMaxLevel()).build()
+            );
+        }
+        return map;
     }
 }

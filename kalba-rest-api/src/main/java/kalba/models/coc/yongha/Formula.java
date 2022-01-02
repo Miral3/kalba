@@ -5,16 +5,40 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.LinkedHashMap;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Formula {
-    LinkedHashMap<String, FormulaData> heroes;
-    LinkedHashMap<String, FormulaData> pets;
-    LinkedHashMap<String, FormulaData> units;
-    LinkedHashMap<String, FormulaData> spells;
-    LinkedHashMap<String, FormulaData> siegeMachines;
+    List<FormulaData> heroes;
+    List<FormulaData> pets;
+    List<FormulaData> units;
+    List<FormulaData> spells;
+    List<FormulaData> siegeMachines;
+
+    public boolean isEmpty(String className) {
+        boolean ret = false;
+        switch (className) {
+            case "heroes" -> ret = heroes != null;
+            case "pets" -> ret = pets != null;
+            case "units" -> ret = units != null;
+            case "spells" -> ret = spells != null;
+            case "siegeMachines" -> ret = siegeMachines != null;
+        }
+        return ret;
+    }
+
+    public List<FormulaData> classNameToFormula(String className) {
+        List<FormulaData> ret = null;
+        switch (className) {
+            case "heroes" -> ret = heroes;
+            case "pets" -> ret = pets;
+            case "units" -> ret = units;
+            case "spells" -> ret = spells;
+            case "siegeMachines" -> ret = siegeMachines;
+        }
+        return ret;
+    }
 }

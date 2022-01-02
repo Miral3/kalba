@@ -2,8 +2,8 @@ package kalba.repository;
 
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Statistic;
-import kalba.models.coc.yongha.Formula;
-import kalba.models.coc.yongha.FormulaUpdateInfo;
+import kalba.models.coc.yongha.FormulaForMongoDB;
+import kalba.models.coc.yongha.FormulaDataForMongoDB;
 import kalba.util.MemberDataManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -57,13 +57,13 @@ public class StatisticMongoRepository {
         mongoTemplate.upsert(new Query(Criteria.where("tag").is(clanInfo.get("tag"))), clanInfoUpdate(clanInfo), "clan");
     }
 
-    public Optional<Formula> findYonghaScoreFormula() {
-        return mongoTemplate.findAll(Formula.class, "formula").stream().findAny();
+    public Optional<FormulaForMongoDB> findYonghaScoreFormula() {
+        return mongoTemplate.findAll(FormulaForMongoDB.class, "formula").stream().findAny();
     }
 
-    public boolean updateYonghaScoreFormula(FormulaUpdateInfo formulaUpdateInfo) {
+    public boolean updateYonghaScoreFormula(String formulaClassName, Map<String, FormulaDataForMongoDB> formulaDataMap) {
         try {
-            mongoTemplate.upsert(new Query(), new Update().set(formulaUpdateInfo.getName(), formulaUpdateInfo.getFormulaDataObject()), "formula");
+            mongoTemplate.upsert(new Query(), new Update().set(formulaClassName, formulaDataMap), "formula");
         } catch (Exception e) {
             return false;
         }

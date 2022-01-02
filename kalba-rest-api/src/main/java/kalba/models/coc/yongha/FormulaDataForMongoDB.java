@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FormulaData {
-    String english;
+@Builder
+public class FormulaDataForMongoDB {
     int index;
     String korean;
     double value;

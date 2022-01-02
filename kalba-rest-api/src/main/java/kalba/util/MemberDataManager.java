@@ -3,7 +3,7 @@ package kalba.util;
 import kalba.models.coc.clan.League;
 import kalba.models.coc.clan.PlayerLabel;
 import kalba.models.coc.clan.Statistic;
-import kalba.models.coc.yongha.FormulaData;
+import kalba.models.coc.yongha.FormulaDataForMongoDB;
 import kalba.repository.StatisticMongoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MemberDataManager {
     private final StatisticMongoRepository statisticMongoRepository;
-    private static Map<String, FormulaData> formula;
+    private static Map<String, FormulaDataForMongoDB> formula;
     public static final Map<String, AtomicBoolean> LOADING_MAP = new ConcurrentHashMap<>();
     private static String token;
 
@@ -109,7 +109,7 @@ public class MemberDataManager {
         }
         List<LinkedHashMap<Object, Object>> memberList = (ArrayList<LinkedHashMap<Object, Object>>) memberListObj;
         List<Statistic> statisticList = Collections.synchronizedList(new LinkedList<>());
-        Map<String, FormulaData> formulaAllInOne = new HashMap<>();
+        Map<String, FormulaDataForMongoDB> formulaAllInOne = new HashMap<>();
         statisticMongoRepository.findYonghaScoreFormula().ifPresent(formula -> {
             formulaAllInOne.putAll(formula.getHeroes());
             formulaAllInOne.putAll(formula.getPets());
@@ -190,7 +190,7 @@ public class MemberDataManager {
     @AllArgsConstructor
     private static class YonghaScoreThread extends Thread {
         Statistic statistic;
-        Map<String, FormulaData> formula;
+        Map<String, FormulaDataForMongoDB> formula;
 
         public void run() {
             statistic.setYonghaScore((int) Math.round(calYonghaScore(statistic.getTag())));

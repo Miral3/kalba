@@ -5,8 +5,7 @@ import kalba.models.account.Name;
 import kalba.models.account.Tag;
 import kalba.models.coc.clan.ClanInfo;
 import kalba.models.coc.clan.Ranking;
-import kalba.models.coc.clan.Statistic;
-import kalba.models.coc.yongha.FormulaUpdateInfo;
+import kalba.models.coc.yongha.Formula;
 import kalba.service.ClanMemberService;
 import kalba.models.coc.clan.ClanTag;
 import lombok.AllArgsConstructor;
@@ -85,6 +84,16 @@ public class ClanController {
     }
 
     @ResponseBody
+    @PutMapping("/formula")
+    public ResponseEntity<?> updateYonghaScoreFormula(@RequestBody Formula formulaUpdateInfo) {
+        if (clanMemberService.updateYonghaScoreFormula(formulaUpdateInfo)) {
+            return ResponseEntity.ok(Map.of("message", "변경 사항 저장에 성공하였습니다."));
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ResponseBody
     @PostMapping("/member/state")
     public ResponseEntity<?> getAllMemberAccountState(@RequestBody ClanTag clanTag) {
         return ResponseEntity.ok(clanMemberService.getMemberStateList(clanTag.getTag()));
@@ -101,12 +110,10 @@ public class ClanController {
     }
 
     @ResponseBody
-    @PutMapping("/formula")
-    public ResponseEntity<?> updateYonghaScoreFormula(@RequestBody FormulaUpdateInfo formulaUpdateInfo) {
-        if (clanMemberService.updateYonghaScoreFormula(formulaUpdateInfo)) {
-            return ResponseEntity.ok(Map.of("message", "변경 사항 저장에 성공하였습니다."));
-        } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PostMapping("/member/badge")
+    public ResponseEntity<?> getUserBadge(@RequestBody Tag tag) {
+        return clanMemberService.findByTag(tag.getTag())
+                .<ResponseEntity<?>>map((statistic) -> ResponseEntity.ok(Map.of("badge", statistic.getLeague().getIconMedium())))
+                .orElseGet(() -> new ResponseEntity<>(Map.of("message", "non existent tag"), HttpStatus.NO_CONTENT));
     }
 }
