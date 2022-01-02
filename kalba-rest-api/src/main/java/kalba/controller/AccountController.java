@@ -1,14 +1,12 @@
 package kalba.controller;
 
 import kalba.models.account.*;
-import kalba.models.coc.clan.ClanTag;
 import kalba.service.AccountService;
 import kalba.service.JwtUserDetailsService;
 import kalba.util.JwtTokenUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,9 +20,11 @@ import java.net.URI;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/account")
-@AllArgsConstructor
 public class AccountController {
+    private static final String NOT_EXIST_USER = "존재하는 아이디입니다.";
+
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -45,7 +45,7 @@ public class AccountController {
         } else {
             String msg;
             if (result == -1) {
-                msg = "존재하는 아이디입니다.";
+                msg = NOT_EXIST_USER;
             } else if (result == -2) {
                 msg = "해당 태그로 가입된 아이디가 존재합니다.";
             } else {

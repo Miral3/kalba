@@ -1,7 +1,5 @@
 package kalba.util;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +14,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class JwtTokenUtil implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 6185487329071680842L;
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-
+public class JwtTokenUtil {
     @Value("${spring.jwt.secret}")
     private String secret;
 
@@ -53,12 +47,11 @@ public class JwtTokenUtil implements Serializable {
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+//                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return getUsernameFromToken(token).equals(userDetails.getUsername());
     }
 }

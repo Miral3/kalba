@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/admin
+      database: kalba
+      authentication-database: admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kalba?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: root
+  jwt:
+    secret: keykeykey
+  kalba:
+    token: coc_api_token

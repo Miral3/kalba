@@ -1,6 +1,5 @@
 package kalba.config;
 
-import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import kalba.repository.*;
 import kalba.service.AccountService;
@@ -26,6 +25,8 @@ public class SpringConfig {
     private String mongoDBUri;
     @Value("${spring.data.mongodb.database}")
     private String mongoDBDatabase;
+    @Value("${spring.kalba.token}")
+    private String token;
 
     @Bean
     public AccountService accountService() {
@@ -76,6 +77,6 @@ public class SpringConfig {
 
     @Bean
     public MemberDataManager memberDataManager() {
-        return new MemberDataManager(statisticMongoRepository());
+        return new MemberDataManager(statisticMongoRepository(), token);
     }
 }

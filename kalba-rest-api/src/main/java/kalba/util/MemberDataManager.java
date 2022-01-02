@@ -1,6 +1,5 @@
 package kalba.util;
 
-import kalba.config.ReadConfig;
 import kalba.models.coc.clan.League;
 import kalba.models.coc.clan.PlayerLabel;
 import kalba.models.coc.clan.Statistic;
@@ -24,21 +23,22 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MemberDataManager {
     private final StatisticMongoRepository statisticMongoRepository;
     private static Map<String, FormulaData> formula;
-    public static final Map<String, AtomicBoolean> loadingMap = new ConcurrentHashMap<>();
+    public static final Map<String, AtomicBoolean> LOADING_MAP = new ConcurrentHashMap<>();
+    private static String token;
 
-    public MemberDataManager(StatisticMongoRepository statisticMongoRepository) {
+    public MemberDataManager(StatisticMongoRepository statisticMongoRepository, String token) {
         this.statisticMongoRepository = statisticMongoRepository;
+        MemberDataManager.token = token;
     }
 
     private final Set<String> clanTagSet = ConcurrentHashMap.newKeySet();
-    private static final String token = (ReadConfig.config.isLocal ? ReadConfig.config.localToken : ReadConfig.config.serverToken);
 
     public Set<String> getClanTagSet() {
         return clanTagSet;
     }
 
     public void addClanTag(String clanTag) {
-        loadingMap.put(clanTag, new AtomicBoolean(false));
+        LOADING_MAP.put(clanTag, new AtomicBoolean(false));
         clanTagSet.add(clanTag);
     }
 
@@ -49,10 +49,10 @@ public class MemberDataManager {
     }
 
     public boolean updateClanInfo(String clanCode) {
-        if (loadingMap.get(clanCode).get()) {
+        if (LOADING_MAP.get(clanCode).get()) {
             return false;
         }
-        loadingMap.get(clanCode).set(true);
+        LOADING_MAP.get(clanCode).set(true);
         Map<Object, Object> clanInfo = getClanInfo(clanCode);
         if (clanInfo.size() == 0) {
             return false;
@@ -60,19 +60,19 @@ public class MemberDataManager {
         statisticMongoRepository.updateClanInfo(clanInfo);
         List<Statistic> statisticList = getClanMemberList(clanInfo);
         statisticList.sort(Comparator.comparing(Statistic::getYonghaScore).reversed());
-        int idx=1;
-        for(Statistic statistic:statisticList){
+        int idx = 1;
+        for (Statistic statistic : statisticList) {
             statistic.setYonghaScoreRank(idx);
             idx++;
         }
-        idx=1;
+        idx = 1;
         statisticList.sort(Comparator.comparing(Statistic::getDonations).reversed());
-        for(Statistic statistic:statisticList){
+        for (Statistic statistic : statisticList) {
             statistic.setDonationRank(idx);
             idx++;
         }
         statisticMongoRepository.updateClanMemberStatistic(statisticList, clanCode);
-        loadingMap.get(clanCode).set(false);
+        LOADING_MAP.get(clanCode).set(false);
         return true;
     }
 
