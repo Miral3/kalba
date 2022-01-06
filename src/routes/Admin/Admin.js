@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiUser, BiTable } from "react-icons/bi";
 
 import Sidebar from '../../components/Sidebar/Sidebar'
 import UserList from '../../components/UserList';
@@ -15,7 +16,9 @@ const Container = styled.div`
 `;
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow: hidden;
+    @media (max-width: 1330px) {
+      overflow: hidden;
+    }
   }
 `;
 const Contents = styled.div`
@@ -23,7 +26,6 @@ const Contents = styled.div`
   .contents {
     display: flex;
     flex-direction: column;
-    /* padding-left: 15px; */
     position: relative;
   }
   .icon {  
@@ -31,7 +33,7 @@ const Contents = styled.div`
     padding: 15px 0;
     .burger {
       margin-left: 15px;
-      font-size: 30px;
+      font-size: 24px;
       cursor: pointer;
     }
   }
@@ -56,8 +58,8 @@ const Admin = ({ match }) => {
   }
 
   const menus = [
-    { name: 'management', text: '관리' },
-    { name: `standardTable/${categorySelect}`, text: '기준표' }
+    { name: 'management', text: '관리', icon: <BiUser /> },
+    { name: `standardTable/${categorySelect}`, text: '기준표', icon: <BiTable /> }
   ];
 
   const selectCategory = (props) => {
@@ -77,7 +79,6 @@ const Admin = ({ match }) => {
       </div>
     } else if (type === 'standardTable') {
       return <div>
-        {/* <InputForm /> */}
         <Categories items={items} type="admin/standardTable" any="heroes" />
         <StandardList admin={true} category={props.categorySelect} />
       </div>
