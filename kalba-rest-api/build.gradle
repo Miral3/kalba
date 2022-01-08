@@ -6,7 +6,6 @@ plugins {
 
 group 'dev.potion'
 version '2.0'
-sourceCompatibility = '14'
 
 repositories {
     mavenCentral()
