@@ -39,20 +39,9 @@ public class AccountController {
                 .password(passwordEncoder.encode(registerForm.getPassword()))
                 .role("USER")
                 .build();
-        int result = accountService.register(account);
-        if (result > 0) {
-            return ResponseEntity.created(URI.create("/account/" + account.getId())).body(Map.of("message", "success"));
-        } else {
-            String msg;
-            if (result == -1) {
-                msg = NOT_EXIST_USER;
-            } else if (result == -2) {
-                msg = "해당 태그로 가입된 아이디가 존재합니다.";
-            } else {
-                msg = "예상하지 못한 에러가 발생하였습니다.";
-            }
-            return new ResponseEntity<>(Map.of("message", msg), HttpStatus.CONFLICT);
-        }
+
+        int accountId = accountService.register(account);
+        return ResponseEntity.created(URI.create("/account/" + accountId)).body(Map.of("message", "success"));
     }
 
     @PostMapping("/login")
