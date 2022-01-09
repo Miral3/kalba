@@ -12,6 +12,7 @@ const QuizResultPage = ({ checkList, reset }) => {
   const [score, setScore] = useState(-1);
   const [wrongAnswer, setWrongAnswer] = useState("");
   const history = useHistory();
+  // const temp = new Array(checkList.length).fill(false);
 
   useEffect(() => {
     markQuiz();
@@ -19,7 +20,8 @@ const QuizResultPage = ({ checkList, reset }) => {
     if (isPassScore(score)) {
       savePassedUserInDB(score);
     }
-  });
+    // eslint-disable-next-line
+  }, []);
 
   const checkListToAnswerSheet = () => {
     let sheet = [];
@@ -47,6 +49,7 @@ const QuizResultPage = ({ checkList, reset }) => {
     }).then(res => {
       if (res.status === 200 && res.data.score !== undefined) {
         setWrongAnswer(wrongAnswerListToString(res.data.wrongAnswerList));
+        // test(res.data.wrongAnswerList);
         setScore(res.data.score);
       } else {
         alert("채점중 에러가 발생하였습니다.");
@@ -69,6 +72,16 @@ const QuizResultPage = ({ checkList, reset }) => {
     ret += wrongAnswerList[wrongAnswerList.length - 1];
     return ret;
   }
+
+  // const test = (wrongAnswerList) => {
+  //   const a = temp.map((val, idx) => {
+  //     if (wrongAnswerList.includes(idx + 1)) {
+  //       val = !val;
+  //     }
+  //     return val;
+  //   });
+  //   console.log(a);
+  // }
 
   const savePassedUserInDB = (score) => {
     axios.post(
