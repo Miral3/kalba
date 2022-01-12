@@ -24,6 +24,29 @@ const QuizQuestionPage = ({ handleStart }) => {
   const [idx, setIdx] = useState(0);
   const [data, setData] = useState([]);
   const [checkList, setCheckList] = useState([]);
+  const buttonIcons = [
+    {
+      icon: <OneOutlinedIcon />,
+      checkedIcon: <OneRoundedIcon />,
+    },
+    {
+      icon: <TwoOutlinedIcon />,
+      checkedIcon: <TwoRoundedIcon />,
+    },
+    {
+      icon: <ThreeOutlinedIcon />,
+      checkedIcon: <ThreeRoundedIcon />,
+    },
+    {
+      icon: <FourOutlinedIcon />,
+      checkedIcon: <FourRoundedIcon />,
+    },
+    {
+      icon: <FiveOutlinedIcon />,
+      checkedIcon: <FiveRoundedIcon />,
+    },
+  ];
+
 
   useEffect(() => {
     setData(quizData);
@@ -95,56 +118,18 @@ const QuizQuestionPage = ({ handleStart }) => {
               {highlightText(data[idx].question)}
             </span>
             <ul className="options">
-              <li className="option">
-                <FormControlLabel
-                  className="checkbox" control={<Checkbox checked={checkList[idx][0]}
-                    onClick={() => handleChange(0)} icon={<OneOutlinedIcon />} checkedIcon={<OneRoundedIcon />}
-                  />}
-                />
-                <span className="contents">
-                  {data[idx].answerOptions[0]}
-                </span>
-              </li>
-              <li className="option">
-                <FormControlLabel
-                  className="checkbox" control={<Checkbox checked={checkList[idx][1]}
-                    onClick={() => handleChange(1)} icon={<TwoOutlinedIcon />} checkedIcon={<TwoRoundedIcon />}
-                  />}
-                />
-                <span className="contents">
-                  {data[idx].answerOptions[1]}
-                </span>
-              </li>
-              <li className="option">
-                <FormControlLabel
-                  className="checkbox" control={<Checkbox checked={checkList[idx][2]}
-                    onClick={() => handleChange(2)} icon={<ThreeOutlinedIcon />} checkedIcon={<ThreeRoundedIcon />}
-                  />}
-                />
-                <span className="contents">
-                  {data[idx].answerOptions[2]}
-                </span>
-              </li>
-              <li className="option">
-                <FormControlLabel
-                  className="checkbox" control={<Checkbox checked={checkList[idx][3]}
-                    onClick={() => handleChange(3)} icon={<FourOutlinedIcon />} checkedIcon={<FourRoundedIcon />}
-                  />}
-                />
-                <span className="contents">
-                  {data[idx].answerOptions[3]}
-                </span>
-              </li>
-              <li className="option">
-                <FormControlLabel
-                  className="checkbox" control={<Checkbox checked={checkList[idx][4]}
-                    onClick={() => handleChange(4)} icon={<FiveOutlinedIcon />} checkedIcon={<FiveRoundedIcon />}
-                  />}
-                />
-                <span className="contents">
-                  {data[idx].answerOptions[4]}
-                </span>
-              </li>
+              {buttonIcons.map((icon, num) => (
+                <li className="option">
+                  <FormControlLabel
+                    className="checkbox" control={<Checkbox checked={checkList[idx][num]}
+                      onClick={() => handleChange(num)} icon={icon.icon} checkedIcon={icon.checkedIcon}
+                    />}
+                  />
+                  <span className="contents">
+                    {data[idx].answerOptions[num]}
+                  </span>
+                </li>
+              ))}
             </ul>
             <div className="buttons">
               {idx >= 1 && <GoArrowLeft className="previous" onClick={() => onButtonClick("prev")} />}
