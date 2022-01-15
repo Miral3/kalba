@@ -10,16 +10,14 @@ const QuizResultPage = ({ checkList, reset }) => {
   const name = getLoginUserNickname();
   const accountName = getLoginUser();
   const [score, setScore] = useState(-1);
-  const [wrongAnswer, setWrongAnswer] = useState("");
   const history = useHistory();
-  // const temp = new Array(checkList.length).fill(false);
+  const [wrongAnswer, setWrongAnswer] = useState([]);
+  const [resultPage, setResultPage] = useState(false);
 
   useEffect(() => {
+    setWrongAnswer(new Array(checkList.length).fill(true));
     markQuiz();
     isValidateLoginState();
-    if (isPassScore(score)) {
-      savePassedUserInDB(score);
-    }
     // eslint-disable-next-line
   }, []);
 
@@ -48,9 +46,11 @@ const QuizResultPage = ({ checkList, reset }) => {
       }
     }).then(res => {
       if (res.status === 200 && res.data.score !== undefined) {
-        setWrongAnswer(wrongAnswerListToString(res.data.wrongAnswerList));
-        // test(res.data.wrongAnswerList);
+        checkWrongAnswer(res.data.wrongAnswerList);
         setScore(res.data.score);
+        if (isPassScore(res.data.score)) {
+          savePassedUserInDB(res.data.score);
+        }
       } else {
         alert("채점중 에러가 발생하였습니다.");
       }
@@ -64,24 +64,9 @@ const QuizResultPage = ({ checkList, reset }) => {
     return score >= 100;
   }
 
-  const wrongAnswerListToString = (wrongAnswerList) => {
-    let ret = "";
-    for (let i = 0; i < wrongAnswerList.length - 1; i++) {
-      ret += wrongAnswerList[i] + ", ";
-    }
-    ret += wrongAnswerList[wrongAnswerList.length - 1];
-    return ret;
+  const checkWrongAnswer = (wrongAnswerList) => {
+    setWrongAnswer(prev => prev.map((item, idx) => wrongAnswerList.includes(idx + 1) ? !item : item));
   }
-
-  // const test = (wrongAnswerList) => {
-  //   const a = temp.map((val, idx) => {
-  //     if (wrongAnswerList.includes(idx + 1)) {
-  //       val = !val;
-  //     }
-  //     return val;
-  //   });
-  //   console.log(a);
-  // }
 
   const savePassedUserInDB = (score) => {
     axios.post(
@@ -129,23 +114,79 @@ const QuizResultPage = ({ checkList, reset }) => {
     history.push("/");
   }
 
+  const displayResult = () => {
+    return (
+      <div className='result'>
+        <div className='left list'>
+          <ul>
+            {wrongAnswer.slice(0, 5).map((el, idx) => (
+              <li key={idx}>
+                <span className='number'>{idx + 1}: </span>
+                <span>{el ? 'O' : 'X'}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className='right list'>
+          <ul>
+            {wrongAnswer.slice(5, 10).map((el, idx) => (
+              <li key={idx}>
+                <span className='number'>{idx + 5}: </span>
+                <span>{el ? 'O' : 'X'}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
+
+  const handleResultPage = () => {
+    setResultPage(!resultPage);
+  }
+
   return (
     <>
-      {score === -1 ? (
-        <div className="resultBlock"><span className="thanks">채점중....</span>
-        </div>)
-        : (
-          <div className="resultBlock">
-            <span className="thanks">수고하셨습니다.</span>
-            <div className="info">
-              <span className="name">{name}</span>
-              <span> 님의 점수는 </span>
-              <span className="score">{score}</span>
-              {isPassScore(score) ? <span>점으로 통과하셨습니다!</span> : <span>점으로<br />아쉽게도 커트라인을 넘기지 못하였습니다.<br />틀린 문제는 {wrongAnswer} 입니다.</span>}
+      {
+        score === -1 ?
+          (<div className="resultBlock"><span className="thanks">채점중....</span></div>)
+          :
+          (<div className="resultBlock">
+            {
+              !resultPage ?
+                <div className="info">
+                  <div className="thanks">
+                    <span >수고하셨습니다.</span>
+                  </div>
+                  <div>
+                    <span className="name">{name}</span>
+                    <span> 님의 점수는 </span>
+                    <span className="score">{score}</span>
+                    <span>점으로</span>
+                  </div>
+                  <div>
+                    {isPassScore(score) ?
+                      <span>점으로 통과하셨습니다!</span> :
+                      <span>아쉽게도 커트라인을 넘기지 못하였습니다.</span>}
+                  </div>
+                </div>
+                :
+                displayResult()
+            }
+            <div className='buttonBlock'>
+              {isPassScore(score) ?
+                <div className="success">
+                  <button className="button" onClick={() => history.push("/")}>메인으로</button>
+                </div>
+                :
+                <div className="fail">
+                  <button className="button" onClick={() => reset()}>다시풀기</button>
+                  {!resultPage && <button className="button" onClick={() => handleResultPage()}>오답노트</button>}
+                </div>
+              }
             </div>
-            {isPassScore(score) ? <button className="reset" onClick={() => history.push("/")}>메인으로</button> : <button className="reset" onClick={() => reset()}>다시풀기</button>}
           </div>
-        )
+          )
       }
       <span className="questioner">출제자: 달달</span>
     </>

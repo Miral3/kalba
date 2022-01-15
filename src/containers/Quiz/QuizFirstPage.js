@@ -71,7 +71,7 @@ const QuizFirstPage = ({ handleStart }) => {
       <span className="head">칼바클랜 공지 퀴즈</span>
       {
         passState ?
-          <span className="body">{name}님은 이미 통과하였습니다.<br />다시 풀이하시겠습니까?</span> :
+          <span className="body">{name}님은 이미 통과하였습니다.<br />다시 풀으시겠습니까?</span> :
           <span className="body">{name}님 반갑습니다.</span>
       }
       <div className="button">

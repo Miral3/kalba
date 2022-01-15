@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 /* Styled */
 import { GoArrowLeft, GoArrowRight } from "react-icons/go"
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import OneOutlinedIcon from '@material-ui/icons/LooksOneOutlined';
 import OneRoundedIcon from '@material-ui/icons/LooksOneRounded';
 import TwoOutlinedIcon from '@material-ui/icons/LooksTwoOutlined';
@@ -19,6 +17,7 @@ import FiveRoundedIcon from '@material-ui/icons/Looks5Rounded';
 /* Sub Components */
 import quizData from './quizdata';
 import QuizResultPage from './QuizResultPage';
+import NumberCheckBox from '../../components/NumberCheckBox/NumberCheckBox';
 
 const QuizQuestionPage = ({ handleStart }) => {
   const [idx, setIdx] = useState(0);
@@ -77,7 +76,8 @@ const QuizQuestionPage = ({ handleStart }) => {
     if (textSplitted.length % 2 === 1) {
       return <>
         {textSplitted.map((txt, idx) => (idx % 2 === 1 ?
-          <ins key={txt.toString()}><b>{txt}</b></ins> : <span key={txt.toString()}>{boldText(txt)}</span>))}
+          <span className='underline bold' key={txt.toString()}>{txt}</span> :
+          <span key={txt.toString()}>{boldText(txt)}</span>))}
       </>
     } else {
       return boldText(text);
@@ -89,7 +89,8 @@ const QuizQuestionPage = ({ handleStart }) => {
     if (textSplitted.length % 2 === 1) {
       return <>
         {textSplitted.map((txt, idx) => (idx % 2 === 1 ?
-          <b key={txt.toString()}>{txt}</b> : <span key={txt.toString()}>{txt}</span>))}
+          <span className='bold' key={txt.toString()}>{txt}</span> :
+          <span key={txt.toString()}>{txt}</span>))}
       </>
     } else {
       return text;
@@ -114,17 +115,13 @@ const QuizQuestionPage = ({ handleStart }) => {
             <span >남은 문항 수: {data.length - (idx + 1)}</span>
           </div>
           <div className="quizBlock">
-            <span className="question">
+            <div className="question">
               {highlightText(data[idx].question)}
-            </span>
+            </div>
             <ul className="options">
               {buttonIcons.map((icon, num) => (
-                <li className="option">
-                  <FormControlLabel
-                    className="checkbox" control={<Checkbox checked={checkList[idx][num]}
-                      onClick={() => handleChange(num)} icon={icon.icon} checkedIcon={icon.checkedIcon}
-                    />}
-                  />
+                <li className="option" key={num}>
+                  <NumberCheckBox className='checkbox' handleChange={handleChange} num={num} icon={icon} checked={checkList[idx][num]} />
                   <span className="contents">
                     {data[idx].answerOptions[num]}
                   </span>
