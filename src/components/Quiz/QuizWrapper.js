@@ -22,7 +22,7 @@ const Contents = styled.div`
   border-radius: 20px;
   padding: 20px;
   width: 600px;
-  height: 360px;
+  height: 380px;
   word-break: keep-all;
   font-family: "cocLight";
   @media (max-width: 600px) {
@@ -88,7 +88,7 @@ const Contents = styled.div`
     }
     .options {
       width: 100%;
-      height: 160px;
+      height: 180px;
       margin: 0;
       @media (max-width: 600px) {
         height: 250px;
