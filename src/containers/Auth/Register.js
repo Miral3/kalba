@@ -52,8 +52,18 @@ const Register = ({ AuthActions, nickname, tag, name, password, passwordConfirm 
     }
   }
 
+  const checkInputData = () => {
+    if (isEmpty(registerForm["tag"]) || isEmpty(registerForm["name"]) || isEmpty(registerForm["password"])
+      || isEmpty(registerForm["passwordConfirm"])) {
+      return false;
+    }
+    return true;
+  }
+
   const register = async () => {
-    if (registerForm["password"] !== registerForm["passwordConfirm"]) {
+    if (!checkInputData()) {
+      alert("빈 칸이 존재합니다.");
+    } else if (registerForm["password"] !== registerForm["passwordConfirm"]) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       registerForm["nickname"] = undefined;
