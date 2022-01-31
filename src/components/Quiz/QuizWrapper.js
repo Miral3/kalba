@@ -156,7 +156,7 @@ const Contents = styled.div`
       .left,
       .right {
         li {
-          width: 60px;
+          width: 80px;
         }
         text-align: right;
         width: 100%;

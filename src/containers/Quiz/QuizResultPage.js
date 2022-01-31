@@ -131,7 +131,7 @@ const QuizResultPage = ({ checkList, reset }) => {
           <ul>
             {wrongAnswer.slice(5, 10).map((el, idx) => (
               <li key={idx}>
-                <span className='number'>{idx + 5}: </span>
+                <span className='number'>{idx + 6}: </span>
                 <span>{el ? 'O' : 'X'}</span>
               </li>
             ))}
