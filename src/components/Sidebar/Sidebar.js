@@ -125,7 +125,7 @@ const Sidebar = ({ open, menus, type, any, handleSidebar }) => {
               open={open}
             >
               <div className="item">
-                <icon className='icon'>{menu.icon}</icon>
+                <i className='icon'>{menu.icon}</i>
                 <span className='text'>{menu.text}</span>
               </div>
             </Contents>

@@ -90,16 +90,6 @@ const HeaderBlock = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
     font-size: 16px;
   }
-  .insert {
-    float: right;
-    width: auto;
-    margin-left: 10px;
-    margin-right: 3rem;
-    @media (min-width: 768px) {
-      width: auto;
-      margin-right: 20px;
-    }
-  }
   .login {
     position: absolute;
     top: 15px;
@@ -109,6 +99,10 @@ const HeaderBlock = styled.div`
 
 const Header = ({ children }) => {
   const [admin, setAdmin] = useState(false);
+  const [data, setData] = useState([]);
+  const [keyword, setKeyword] = useState();
+  const [tag, setTag] = useState();
+  const [results, setResults] = useState([]);
   const history = useHistory();
   const token = getLoginToken();
 
@@ -124,6 +118,58 @@ const Header = ({ children }) => {
     { label: "퀴즈", href: "/Quiz" },
     { label: "관리자페이지", href: "/admin/management" },
   ];
+
+  const onInsert = async () => {
+    try {
+      const response = await axios.post(
+        '/coc/clan/member/name', {
+        tag: tag
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if (response.status === 200) {
+        history.push('/profile/' + tag.substr(1));
+      }
+      else if (response.status === 204) {
+        alert("이름을 다시 한번 확인해주세요.");
+        return;
+      }
+    } catch (err) {
+      alert("예상하지 못한 에러가 발생하였습니다. 다시 한번 시도해주세요.");
+      return;
+    }
+  }
+
+  const updateField = (field, value, update = true) => {
+    if (update) {
+      onSearch(value);
+    }
+    if (field === 'keyword') {
+      setKeyword(value);
+    }
+    if (field === 'tag') {
+      setTag(value);
+    }
+    if (field === 'results') {
+      setResults(value);
+    }
+  };
+
+  const onSearch = text => {
+    const results = data.filter(item => true === matchName(item.name, text));
+    setResults({ results });
+  };
+
+  const matchName = (name, keyword) => {
+    name = name.toLowerCase();
+    if (keyword === '') {
+      return false;
+    }
+
+    return name.includes(keyword.toString().toLowerCase());
+  }
 
   useEffect(() => {
     const isAdmin = async () => {
@@ -142,20 +188,24 @@ const Header = ({ children }) => {
     isAdmin();
   }, [token]);
 
-  const onInsert = async (name) => {
-    await axios.post(
-      '/coc/clan/member/tag', {
-      name: name
-    }, {
-      headers: {
-        "Content-Type": "application/json"
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.post(
+          `/coc/clan/rank`, {
+          tag: "%232Y2Y9YCUU"
+        }, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+        setData(res.data);
+      } catch (e) {
+        console.log(e);
       }
-    }).then(res => {
-      history.push('/profile/' + res.data.tag.substr(1));
-    }).catch(e => {
-      alert("이름을 다시 한번 확인해주세요.");
-    });
-  }
+    };
+    fetchData();
+  }, []);
 
   return (
     <HeaderBlock>
@@ -164,15 +214,18 @@ const Header = ({ children }) => {
           <a href="/"><h1>Kalba</h1></a>
           <p>칼없는 바바리안</p>
         </div>
-        <div className="insert">
-          <HeaderInsert onInsert={onInsert} />
-        </div>
+        <HeaderInsert
+          onInsert={onInsert}
+          keyword={keyword}
+          results={results}
+          updateField={updateField}
+        />
       </div>
       <div className="login">
         {children}
       </div>
       <div className="category">
-        < HeaderNav items={admin ? adminItems : userItems} />
+        <HeaderNav items={admin ? adminItems : userItems} />
       </div>
     </HeaderBlock>
   );
