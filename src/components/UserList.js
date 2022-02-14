@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Thead from './Thead';
 import Tbody from './Tbody';
 import axios from 'axios';
+import { useSortableData } from './Hooks/useSortableData';
 
 const Container = styled.div`
   height: auto !important;
@@ -34,6 +35,7 @@ const Container = styled.div`
     font-weight: normal;
     padding: 12px 0;
     font-size: 13px;
+    cursor: pointer;
     }
     .rank {
       display: table-cell;
@@ -64,9 +66,10 @@ const Container = styled.div`
 `;
 
 const UserList = ({ admin, type }) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [checked] = useState({ "checkedAttackState": new Set(), "checkedWarningState": new Set() });
   const [loading, setLoading] = useState(false);
+  const { items, requestSort, sortConfig } = useSortableData(data, type);
 
   useEffect(() => {
     let url;
@@ -119,8 +122,8 @@ const UserList = ({ admin, type }) => {
   return (
     <Container>
       <table id="save-target">
-        <Thead type={type} />
-        <Tbody type={type} data={data} loading={loading} checked={checked} admin={admin} />
+        <Thead type={type} requestSort={requestSort} sortConfig={sortConfig} />
+        {data && <Tbody type={type} items={items} loading={loading} checked={checked} admin={admin} />}
       </table>
     </Container>
   );

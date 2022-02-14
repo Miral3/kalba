@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -79,14 +79,9 @@ const Tr = styled.tr`
 
 
 const Tbody = (props) => {
-  const [data, setData] = useState(props.data);
-  const [type, setType] = useState(props.type);
+  const type = props.type;
   const [checkedAttackState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedAttackState);
   const [checkedWarningState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedWarningState);
-
-  useEffect(() => setType(props.type), [props.type]);
-  useEffect(() => setData(props.data), [props.data]);
-
   const rankData = {
     cutLine: 11,
     coLeaderCnt: 4,
@@ -185,37 +180,17 @@ const Tbody = (props) => {
     }
   }
 
-  let length = 50;
-  if (props.list === 'ranking') {
-    length = 10;
-  }
-
-  const blank = new Array(length).fill(0);
-  if (props.loading || !props.data) {
-    return <Container>
-      {blank.map((data, idx) => (
-        <Tr key={idx} className={`blank ${type}`}>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </Tr>
-      ))}
-    </Container>
-  }
-
   return (
     <Container>
       {props.list === 'ranking' ?
-        data.slice(0, 10).map((info, idx) => (
-          <Tr key={info.tag}>
-            {tdByType(idx + 1, info, rankData)}
+        props.items.slice(0, 10).map((item, idx) => (
+          <Tr key={item.tag}>
+            {tdByType(idx + 1, item, rankData)}
           </Tr>
         )) :
-        data.map((info, idx) => (
-          <Tr key={info.tag}>
-            {tdByType(idx + 1, info, rankData)}
+        props.items.map((item, idx) => (
+          <Tr key={item.tag}>
+            {tdByType(idx + 1, item, rankData)}
           </Tr>
         ))
       }

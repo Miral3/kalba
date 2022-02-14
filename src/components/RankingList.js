@@ -8,6 +8,7 @@ import Thead from './Thead';
 import Tbody from './Tbody';
 import { getLeagueDate, getPromotionDate, prettierTime, calRemainTime, useInterval } from '../tools/tools';
 import axios from 'axios';
+import { useSortableData } from './Hooks/useSortableData';
 
 const Container = styled.div`
   width: 100%;
@@ -78,6 +79,7 @@ const Container = styled.div`
     font-weight: normal;
     padding: 12px 0;
     font-size: 13px;
+    cursor: pointer;
     }
     .rank {
       display: table-cell;
@@ -134,10 +136,11 @@ const Count = (type) => {
 }
 
 const RankingList = ({ title, type }) => {
-  const [rankingData, setRankingData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const { items, requestSort, sortConfig } = useSortableData(data);
 
   const onClick = async () => {
     try {
@@ -181,7 +184,7 @@ const RankingList = ({ title, type }) => {
             data[rank.yonghaScoreRank - 1] = rank;
           }
         }
-        setRankingData(data);
+        setData(data);
       } catch (e) {
         console.log(e);
       }
@@ -191,6 +194,7 @@ const RankingList = ({ title, type }) => {
     // eslint-disable-next-line
   }, [toggle]);
 
+  console.log(data);
   return (
     <Container>
       <div className="header">
@@ -209,8 +213,8 @@ const RankingList = ({ title, type }) => {
         </div>
       </div>
       <table>
-        <Thead type={type} />
-        <Tbody type={type} data={rankingData} loading={loading} list="ranking" />
+        <Thead type={type} requestSort={requestSort} sortConfig={sortConfig} />
+        {data && <Tbody type={type} items={items} loading={loading} list="ranking" />}
       </table>
     </Container>
   );
