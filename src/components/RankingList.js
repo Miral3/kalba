@@ -8,7 +8,7 @@ import Thead from './Thead';
 import Tbody from './Tbody';
 import { getLeagueDate, getPromotionDate, prettierTime, calRemainTime, useInterval } from '../tools/tools';
 import axios from 'axios';
-import { useSortableData } from './Hooks/useSortableData';
+
 
 const Container = styled.div`
   width: 100%;
@@ -79,7 +79,7 @@ const Container = styled.div`
     font-weight: normal;
     padding: 12px 0;
     font-size: 13px;
-    cursor: pointer;
+    /* cursor: pointer; */
     }
     .rank {
       display: table-cell;
@@ -140,7 +140,6 @@ const RankingList = ({ title, type }) => {
   const [loading, setLoading] = useState(false);
   const [loading2, setLoading2] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const { items, requestSort, sortConfig } = useSortableData(data);
 
   const onClick = async () => {
     try {
@@ -194,7 +193,6 @@ const RankingList = ({ title, type }) => {
     // eslint-disable-next-line
   }, [toggle]);
 
-  console.log(data);
   return (
     <Container>
       <div className="header">
@@ -213,8 +211,8 @@ const RankingList = ({ title, type }) => {
         </div>
       </div>
       <table>
-        <Thead type={type} requestSort={requestSort} sortConfig={sortConfig} />
-        {data && <Tbody type={type} items={items} loading={loading} list="ranking" />}
+        <Thead type={type} />
+        {data && <Tbody type={type} data={data} loading={loading} list="ranking" />}
       </table>
     </Container>
   );

@@ -79,6 +79,7 @@ const Tr = styled.tr`
 
 
 const Tbody = (props) => {
+  const data = props.data;
   const type = props.type;
   const [checkedAttackState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedAttackState);
   const [checkedWarningState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedWarningState);
@@ -183,12 +184,12 @@ const Tbody = (props) => {
   return (
     <Container>
       {props.list === 'ranking' ?
-        props.items.slice(0, 10).map((item, idx) => (
+        data.slice(0, 10).map((item, idx) => (
           <Tr key={item.tag}>
             {tdByType(idx + 1, item, rankData)}
           </Tr>
         )) :
-        props.items.map((item, idx) => (
+        data.map((item, idx) => (
           <Tr key={item.tag}>
             {tdByType(idx + 1, item, rankData)}
           </Tr>
