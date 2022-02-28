@@ -83,10 +83,11 @@ const Tbody = (props) => {
   const type = props.type;
   const [checkedAttackState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedAttackState);
   const [checkedWarningState] = useState(isEmpty(props.checked) ? new Set() : props.checked.checkedWarningState);
+  // 추후에 exclusionList 참고해서 cutLine, coLeaderCnt, adminCnt감소
   const rankData = {
-    cutLine: 11,
-    coLeaderCnt: 4,
-    adminCnt: 7
+    cutLine: 13, // 14 
+    coLeaderCnt: 5, // 6
+    adminCnt: 8 // 8
   }
 
   const handleChange = (e) => {
@@ -131,7 +132,6 @@ const Tbody = (props) => {
 
   const tdByType = (idx, val) => {
     const linkTagArg = val.tag.substr(1);
-
     if (type === 'memberState') {
       return <>
         <td className="rank">{idx}</td>
@@ -172,7 +172,7 @@ const Tbody = (props) => {
             return <>
               <td className="donations side">{val.donations}</td>
               <td className="currentRole side">{translateRole(val.role)}</td>
-              <td className="expectedRole side">{expectedRole(val.role, idx, val.donations, rankData)}</td>
+              <td className="expectedRole side">{expectedRole(val.role, idx, val.donations, rankData, val.tag)}</td>
             </>
           }
         })()

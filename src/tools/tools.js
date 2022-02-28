@@ -31,7 +31,25 @@ export function isMobile() {
   return /iPhone|iPad|iPod|Android|BlackBerry|Windows Phone|webOS/i.test(navigator.userAgent);
 }
 
-export function expectedRole(role, idx, donations, rankData) {
+export function expectedRole(role, idx, donations, rankData, tag) {
+  // 나중에 db에서 불러오도록 수정
+  const exclusionList = [
+    {
+      name: "Miral",
+      tag: "#LJLLLQLQR",
+      staticRole: "coLeader"
+    }
+  ]
+
+  for (const val of exclusionList) {
+    if (val.tag === tag) {
+      if (idx <= rankData.cutLine) {
+        rankData.cutLine++;
+      }
+      return '-'
+    }
+  }
+
   if (idx <= rankData.cutLine && donations >= 1000) {
     if (role === 'member') {
       if (rankData.adminCnt > 0) {
