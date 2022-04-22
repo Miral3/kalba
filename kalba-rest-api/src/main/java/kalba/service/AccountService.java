@@ -1,16 +1,14 @@
 package kalba.service;
 
+import kalba.common.exception.AccountConflictException;
 import kalba.models.account.Account;
 import kalba.models.account.AccountInfo;
-import kalba.models.account.AccountQuizAndState;
-import kalba.models.coc.clan.Statistic;
 import kalba.repository.AccountRepository;
-import kalba.repository.QuizRepository;
-import kalba.repository.StatisticMongoRepository;
 import lombok.AllArgsConstructor;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @AllArgsConstructor
@@ -18,13 +16,12 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public int register(Account account) {
-        if (validateDuplicateName(account)) {
-            return -1; // 중복 계정 이름 있음
-        } else if (validateDuplicateTag(account)) {
-            return -2; // 중복 태그 있음
+        if (validateDuplicateName(account) || validateDuplicateTag(account)) {
+            throw new AccountConflictException(); // 중복 계정 이름 있음, 중복 태그 있음
         }
-        accountRepository.register(account);
-        return account.getId();
+
+        Account registeredAccount = accountRepository.register(account);
+        return registeredAccount.getId();
     }
 
     private boolean validateDuplicateName(Account account) {
