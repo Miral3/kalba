@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "new next folder and files",
+      "command": "mkdir -p src/components/${input:dirName} && touch 'src/components/${input:dirName}/${input:dirName}.jsx' 'src/components/${input:dirName}/${input:dirName}.style.js' 'src/components/${input:dirName}/index.js'",
+      "type": "shell",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "dirName",
+      "description": "Complete my folder name",
+      "default": "component name"
+    }
+  ]
+}
