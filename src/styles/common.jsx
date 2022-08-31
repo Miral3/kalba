@@ -30,6 +30,11 @@ const Common = {
     c: ["11px", "12px"],
     l: ["45px", "35px", "32px"],
   },
+  display: {
+    tablet: "768px",
+    laptop: "1020px",
+    desktop: "1400px",
+  },
 };
 
 export default Common;
