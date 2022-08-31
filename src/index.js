@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Global, css } from "@emotion/react";
+import reset from "emotion-reset";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -7,6 +9,11 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Global
+      styles={css`
+        ${reset}
+      `}
+    />
     <App />
   </React.StrictMode>
 );
