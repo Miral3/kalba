@@ -18,9 +18,9 @@ const defaultProps = {
   type: "base",
 };
 
-const Text = ({ children, size, color, weight, type }) => {
+const Text = ({ children, size, color, weight, type, ...styles }) => {
   return (
-    <S.Text size={size} color={color} weight={weight} type={type}>
+    <S.Text size={size} color={color} weight={weight} type={type} {...styles}>
       {children}
     </S.Text>
   );
