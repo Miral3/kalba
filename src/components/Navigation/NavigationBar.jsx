@@ -7,11 +7,16 @@ const NavigationBar = () => {
   const items = [
     {
       id: 1,
+      name: "메인",
+      url: "/",
+    },
+    {
+      id: 2,
       name: "순위표",
       url: "/leaderboards/donations",
     },
     {
-      id: 2,
+      id: 3,
       name: "기준표",
       url: "/standardTable/heroes",
     },
