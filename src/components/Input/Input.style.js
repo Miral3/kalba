@@ -25,8 +25,8 @@ export const Input = styled.input`
   box-sizing: border-box;
   background-color: ${Common.colors.white[0]};
 
-  ${({ type }) => {
-    switch (type) {
+  ${({ version }) => {
+    switch (version) {
       case "navigation":
         return NavigationInput;
       case "auth":

@@ -4,16 +4,16 @@ import * as S from "./Input.style";
 
 const propTypes = {
   placeholder: PropTypes.string,
-  type: PropTypes.string,
+  version: PropTypes.string,
 };
 
 const defaultProps = {
   placeholder: "",
-  type: "navigation",
+  version: "navigation",
 };
 
-const Input = forwardRef(({ placeholder, type }, ref) => {
-  return <S.Input placeholder={placeholder} type={type} ref={ref} />;
+const Input = forwardRef(({ placeholder, version }, ref) => {
+  return <S.Input placeholder={placeholder} version={version} ref={ref} />;
 });
 
 Input.propTypes = propTypes;
