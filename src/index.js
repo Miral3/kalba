@@ -12,6 +12,9 @@ root.render(
     <Global
       styles={css`
         ${reset}
+        a {
+          text-decoration: none;
+        }
       `}
     />
     <App />
