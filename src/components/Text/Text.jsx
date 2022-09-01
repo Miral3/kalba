@@ -8,19 +8,17 @@ const propTypes = {
   size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   color: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   weight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  type: PropTypes.string,
 };
 
 const defaultProps = {
   size: Common.fontSize.h[2],
   color: Common.colors.black[0],
   weight: "normal",
-  type: "base",
 };
 
-const Text = ({ children, size, color, weight, type, ...styles }) => {
+const Text = ({ children, size, color, weight, ...styles }) => {
   return (
-    <S.Text size={size} color={color} weight={weight} type={type} {...styles}>
+    <S.Text size={size} color={color} weight={weight} {...styles}>
       {children}
     </S.Text>
   );
