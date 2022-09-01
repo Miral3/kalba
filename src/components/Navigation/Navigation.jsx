@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./Navigation.style";
 import Common from "../../styles/common";
-import { Text, Input, Icon } from "../index";
+import { Text, Input, Icon, Button } from "../index";
 import NavigationBar from "./NavigationBar";
 
 const Navigation = () => {
@@ -47,11 +47,13 @@ const Navigation = () => {
             </S.LogoBlock>
           </NavLink>
         </S.LogoContainer>
-        {isLoggedIn ? (
-          <S.Button onClick={handleClickLogoutButton}>로그아웃</S.Button>
-        ) : (
-          <S.Button onClick={handleClickLoginButton}>로그인</S.Button>
-        )}
+        <S.ButtonWrapper>
+          {isLoggedIn ? (
+            <Button onClick={handleClickLogoutButton}>로그아웃</Button>
+          ) : (
+            <Button onClick={handleClickLoginButton}>로그인</Button>
+          )}
+        </S.ButtonWrapper>
         <S.Search>
           <S.SearchInner>
             <Input placeholder="이름 검색" />

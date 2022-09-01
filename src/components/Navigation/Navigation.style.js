@@ -62,29 +62,10 @@ export const LogoBlock = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const ButtonWrapper = styled.div`
   position: absolute;
   top: 8px;
   right: 24px;
-  padding: 8px;
-  border: 0;
-  border-radius: 4px;
-  background-color: ${Common.colors.indigo[1]};
-  font-size: ${Common.fontSize.c[1]};
-  font-weight: 600;
-  color: ${Common.colors.white[0]};
-  transition: all 0.2s ease 0s;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(1.1);
-  }
-
-  @media (min-width: ${Common.display.mobile}) {
-    top: 10px;
-    padding: 10px;
-    font-size: ${Common.fontSize.b[2]};
-  }
 `;
 
 export const Search = styled.div`
