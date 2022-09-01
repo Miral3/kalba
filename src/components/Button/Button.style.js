@@ -16,7 +16,7 @@ const AuthButton = css`
     filter: brightness(1.1);
   }
 
-  @media (min-width: ${Common.display.mobile}) {
+  ${Common.mediaQuery.mobile} {
     top: 10px;
     padding: 10px;
     font-size: ${Common.fontSize.b[2]};

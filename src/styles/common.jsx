@@ -36,6 +36,12 @@ const Common = {
     laptop: "1020px",
     desktop: "1400px",
   },
+  mediaQuery: {
+    mobile: `@media (min-width: 425px)`,
+    tablet: `@media (min-width: 768px)`,
+    laptop: `@media (min-width: 1020px)`,
+    desktop: `@media (min-width: 1400px)`,
+  },
 };
 
 export default Common;

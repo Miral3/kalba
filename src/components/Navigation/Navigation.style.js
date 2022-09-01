@@ -12,7 +12,7 @@ export const Container = styled.div`
   height: 170px;
   background-color: ${Common.colors.indigo[0]};
 
-  @media (min-width: ${Common.display.tablet}) {
+  ${Common.mediaQuery.tablet} {
     height: 200px;
   }
 `;
@@ -22,7 +22,7 @@ export const LogoInsertContainer = styled.div`
   flex-direction: column;
   height: 100px;
 
-  @media (min-width: ${Common.display.tablet}) {
+  ${Common.mediaQuery.tablet} {
     height: 150px;
     flex-direction: row;
     justify-content: space-around;
@@ -43,7 +43,7 @@ export const Logo = styled(Text)`
   color: ${Common.colors.white[0]};
   cursor: pointer;
 
-  @media (min-width: ${Common.display.mobile}) {
+  ${Common.mediaQuery.mobile} {
     font-size: ${Common.fontSize.l[1]};
   }
 `;
@@ -57,7 +57,7 @@ export const LogoBlock = styled.div`
   background-color: ${Common.colors.red[0]};
   cursor: pointer;
 
-  @media (min-width: ${Common.display.mobile}) {
+  ${Common.mediaQuery.mobile} {
     display: block;
   }
 `;
@@ -74,10 +74,8 @@ export const Search = styled.div`
   height: 32px;
   margin: auto;
 
-  @media (min-width: ${Common.display.tablet}) {
+  ${Common.mediaQuery.tablet} {
     width: 260px;
-  }
-  @media (min-width: ${Common.display.tablet}) {
     margin: 0;
   }
 `;
