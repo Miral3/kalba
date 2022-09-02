@@ -50,9 +50,8 @@ export const Logo = styled(Text)`
 
 export const LogoBlock = styled.div`
   display: none;
-  height: 19px;
   margin-left: 12px;
-  padding: 8px;
+  padding: 10px;
   border-radius: 6px;
   background-color: ${Common.colors.red[0]};
   cursor: pointer;
