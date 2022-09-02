@@ -9,6 +9,8 @@ export const Table = styled.table`
 `;
 
 export const Thead = styled.thead`
+  position: sticky;
+  top: 0;
   background-color: ${Common.colors.basic[0]};
   color: ${Common.colors.brown[0]};
 `;
