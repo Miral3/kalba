@@ -5,6 +5,7 @@ export const Category = styled.div`
   width: 100%;
   border: 1px solid ${Common.colors.gray[4]};
   border-top: 2px solid ${Common.colors.red[0]};
+  box-sizing: border-box;
   background-color: ${Common.colors.gray[1]};
 `;
 
