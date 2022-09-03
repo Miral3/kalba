@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
 import { Text } from "../index";
 
-export const Container = styled.div`
+export const Header = styled.header`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -95,7 +95,7 @@ export const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-export const NavigationContainer = styled.nav`
+export const Navigation = styled.nav`
   width: 100%;
   height: 50px;
   margin-top: 20px;

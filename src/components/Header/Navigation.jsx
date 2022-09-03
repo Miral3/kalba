@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import * as S from "./Navigation.style";
+import * as S from "./Header.style";
 
-const NavigationBar = () => {
+const Navigation = () => {
   const [active, setActive] = useState(0);
 
   const items = [
@@ -27,7 +27,7 @@ const NavigationBar = () => {
   };
 
   return (
-    <S.NavigationContainer>
+    <S.Navigation>
       <S.List>
         {items.map((item, idx) => (
           <S.Item key={item.id} onClick={() => handleClickItem(idx)}>
@@ -37,8 +37,8 @@ const NavigationBar = () => {
           </S.Item>
         ))}
       </S.List>
-    </S.NavigationContainer>
+    </S.Navigation>
   );
 };
 
-export default NavigationBar;
+export default Navigation;

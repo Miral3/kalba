@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import * as S from "./Navigation.style";
+import * as S from "./Header.style";
 import Common from "../../styles/common";
 import { Text, Input, Icon, Button } from "../index";
-import NavigationBar from "./NavigationBar";
+import Navigation from "./Navigation";
 
-const Navigation = () => {
+const Header = () => {
   const location = useLocation();
   const { pathname } = location;
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Navigation = () => {
   }
 
   return (
-    <S.Container>
+    <S.Header>
       <S.LogoInsertContainer>
         <S.LogoContainer>
           <NavLink to="/">
@@ -65,9 +65,9 @@ const Navigation = () => {
           </S.SearchInner>
         </S.Search>
       </S.LogoInsertContainer>
-      <NavigationBar />
-    </S.Container>
+      <Navigation />
+    </S.Header>
   );
 };
 
-export default Navigation;
+export default Header;

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Common from "../../styles/common";
 
-export const Category = styled.div`
+export const Category = styled.nav`
   width: 100%;
   border: 1px solid ${Common.colors.gray[4]};
   border-top: 2px solid ${Common.colors.red[0]};
