@@ -4,12 +4,11 @@ import Common from "../../styles/common";
 
 export const Table = styled.table`
   width: 100%;
-  text-align: left;
-  border-collapse: collapse;
+  text-align: center;
 `;
 
 export const Thead = styled.thead`
-  position: sticky;
+  position: ${({ sticky }) => (sticky ? "sticky" : "relative")};
   top: 0;
   background-color: ${Common.colors.basic[0]};
   color: ${Common.colors.brown[0]};
@@ -17,6 +16,13 @@ export const Thead = styled.thead`
 
 export const Tbody = styled.tbody`
   background-color: ${Common.colors.white[0]};
+
+  tr:hover {
+    background-color: ${({ version }) =>
+      version === "leaderboard"
+        ? Common.colors.gray[1]
+        : Common.colors.white[0]};
+  }
 `;
 
 export const Tr = styled.tr`
@@ -24,13 +30,22 @@ export const Tr = styled.tr`
 `;
 
 export const Th = styled.th`
-  height: 32px;
+  height: 40px;
   vertical-align: middle;
   font-size: ${Common.fontSize.b[2]};
 
   &:nth-of-type(1) {
     width: ${({ version }) => (version === "standard" ? "40%" : "auto")};
     padding-left: 12px;
+  }
+  &:nth-of-type(2) {
+    padding-left: ${({ version }) =>
+      version === "leaderboard" ? "16px" : "0"};
+  }
+  &:nth-of-type(1),
+  &:nth-of-type(2) {
+    text-align: ${({ version }) =>
+      version === "leaderboard" ? "left" : "center"};
   }
   &:nth-of-type(3),
   &:nth-of-type(4),
@@ -40,12 +55,18 @@ export const Th = styled.th`
 `;
 
 export const Td = styled.td`
-  height: 32px;
+  height: 40px;
   vertical-align: middle;
   font-size: ${Common.fontSize.b[2]};
 
-  &:first-of-type {
-    padding-left: 12px;
+  &:nth-of-type(1) {
+    padding-left: ${({ version }) =>
+      version === "leaderboard" ? "20px" : "12px"};
+  }
+  &:nth-of-type(1),
+  &:nth-of-type(2) {
+    text-align: ${({ version }) =>
+      version === "leaderboard" ? "left" : "center"};
   }
 `;
 
