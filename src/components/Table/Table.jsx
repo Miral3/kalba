@@ -4,16 +4,20 @@ import * as S from "./Table.style";
 import { Text } from "..";
 
 const propTypes = {
+  children: PropTypes.node,
   data: PropTypes.instanceOf(Array).isRequired,
   columns: PropTypes.instanceOf(Array).isRequired,
   version: PropTypes.string,
+  sticky: PropTypes.bool,
 };
 
 const defaultProps = {
+  children: null,
   version: "leaderboard",
+  sticky: true,
 };
 
-const Table = ({ data, columns, version, ...styles }) => {
+const Table = ({ children, data, columns, version, sticky, ...styles }) => {
   const translateRole = (role) => {
     switch (role) {
       case "leader":
@@ -29,7 +33,8 @@ const Table = ({ data, columns, version, ...styles }) => {
 
   return (
     <S.Table {...styles}>
-      <S.Thead>
+      {children}
+      <S.Thead sticky={sticky}>
         <S.Tr>
           {columns.map((column) => (
             <S.Th key={column.id} version={version}>
@@ -38,13 +43,13 @@ const Table = ({ data, columns, version, ...styles }) => {
           ))}
         </S.Tr>
       </S.Thead>
-      <S.Tbody>
+      <S.Tbody version={version}>
         {data.map((row) => (
           <S.Tr key={row.id}>
             {columns.map((column) => {
               if (version === "leaderboard" && column.accessor === "name") {
                 return (
-                  <S.Td key={column.id}>
+                  <S.Td key={column.id} version={version}>
                     <S.Link to={`/profile/${row.tag}`}>
                       <S.Trophy src={row.league.iconTiny} alt="trophy" />
                       <Text size="13px" weight="bold">
@@ -56,12 +61,16 @@ const Table = ({ data, columns, version, ...styles }) => {
               }
               if (column.accessor === "role") {
                 return (
-                  <S.Td key={column.id}>
+                  <S.Td key={column.id} version={version}>
                     {translateRole(row[column.accessor])}
                   </S.Td>
                 );
               }
-              return <S.Td key={column.id}>{row[column.accessor]}</S.Td>;
+              return (
+                <S.Td key={column.id} version={version}>
+                  {row[column.accessor]}
+                </S.Td>
+              );
             })}
           </S.Tr>
         ))}
