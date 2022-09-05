@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
-import { Text, Input, Icon, Button } from "../index";
-import { Navigation } from "./Components";
+import { Text, Button } from "../index";
+import { Navigation, Search } from "./Components";
 
 const Header = () => {
   const location = useLocation();
@@ -54,16 +54,7 @@ const Header = () => {
             <Button onClick={handleClickLoginButton}>로그인</Button>
           )}
         </S.ButtonWrapper>
-        <S.Search>
-          <S.SearchInner>
-            <Input placeholder="이름 검색" />
-            <S.IconWrapper>
-              <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
-                search
-              </Icon>
-            </S.IconWrapper>
-          </S.SearchInner>
-        </S.Search>
+        <Search />
       </S.LogoInsertContainer>
       <Navigation />
     </S.Header>
