@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
 import { Text, Input, Icon, Button } from "../index";
-import Navigation from "./Navigation";
+import { Navigation } from "./Components";
 
 const Header = () => {
   const location = useLocation();
