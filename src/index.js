@@ -16,9 +16,6 @@ root.render(
         body {
           background-color: ${Common.colors.gray[0]};
         }
-        a {
-          text-decoration: none;
-        }
       `}
     />
     <App />

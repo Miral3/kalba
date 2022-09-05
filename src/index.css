@@ -16,6 +16,10 @@ body {
     "Roboto", "sans-serif";
 }
 
+a {
+  text-decoration: none;
+}
+
 code {
   font-family: "Ubuntu", sans-serif;
 }
