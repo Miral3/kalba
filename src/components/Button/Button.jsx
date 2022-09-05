@@ -17,13 +17,14 @@ const defaultProps = {
   onClick: () => {},
 };
 
-const Button = ({ children, type, disabled, version, onClick }) => {
+const Button = ({ children, type, disabled, version, onClick, ...styles }) => {
   return (
     <S.Button
       type={type}
       disabled={disabled}
       version={version}
       onClick={onClick}
+      {...styles}
     >
       {children}
     </S.Button>
