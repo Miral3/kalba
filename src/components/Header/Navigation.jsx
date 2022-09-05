@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 
 const Navigation = () => {
+  const location = useLocation();
   const [active, setActive] = useState(0);
 
   const items = [
@@ -25,6 +28,12 @@ const Navigation = () => {
   const handleClickItem = (idx) => {
     setActive(idx);
   };
+
+  useEffect(() => {
+    const { pathname } = location;
+    const visitedIdx = items.findIndex((item) => item.url.includes(pathname));
+    setActive(visitedIdx);
+  }, [location]);
 
   return (
     <S.Navigation>
