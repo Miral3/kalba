@@ -32,4 +32,5 @@ export const About = styled(NavLink)`
 
 export const Copyright = styled(Text)`
   font-size: ${Common.fontSize.c[1]};
+  color: ${Common.colors.gray[2]};
 `;
