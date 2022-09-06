@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as S from "./Category.style";
 
@@ -7,16 +8,20 @@ const propTypes = {
 };
 
 const Category = ({ items }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [active, setActive] = useState(0);
 
-  /**
-   *
-   * @todo 클릭했을 때 url 변경기능 추가
-   * e.target.getAttribute("value")
-   */
-  const handleClickItem = (e, idx) => {
+  const handleClickItem = (idx) => {
+    navigate(`${items[idx].url}`);
     setActive(idx);
   };
+
+  useEffect(() => {
+    const { pathname } = location;
+    const visitedIdx = items.findIndex((item) => pathname === item.url);
+    setActive(visitedIdx);
+  }, [location]);
 
   return (
     <S.Category>
@@ -25,7 +30,7 @@ const Category = ({ items }) => {
           <S.Item
             key={item.id}
             value={item.value}
-            onClick={(e) => handleClickItem(e, idx)}
+            onClick={() => handleClickItem(idx)}
             active={active === idx}
           >
             {item.name}
