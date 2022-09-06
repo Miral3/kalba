@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
-import Common from "./styles/common";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { global } from "./styles/global";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,9 +13,7 @@ root.render(
     <Global
       styles={css`
         ${reset}
-        body {
-          background-color: ${Common.colors.gray[0]};
-        }
+        ${global}
       `}
     />
     <App />

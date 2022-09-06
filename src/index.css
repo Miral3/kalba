@@ -5,19 +5,9 @@
   src: url("./font/supercell+NotoSansKR.ttf");
 }
 
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 #root {
   font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", Dotum,
     "Roboto", "sans-serif";
-}
-
-a {
-  text-decoration: none;
 }
 
 code {
