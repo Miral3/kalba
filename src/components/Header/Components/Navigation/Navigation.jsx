@@ -30,7 +30,9 @@ const Navigation = () => {
 
   useEffect(() => {
     const { pathname } = location;
-    const visitedIdx = items.findIndex((item) => item.url.includes(pathname));
+    const visitedIdx = items.findIndex((item) =>
+      item.url.includes(pathname.split("/")[1])
+    );
     setActive(visitedIdx);
   }, [location]);
 
