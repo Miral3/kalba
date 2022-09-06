@@ -6,11 +6,13 @@ export const rankingCategoryItems = [
     id: 1,
     name: "지원량",
     value: "donations",
+    url: "/leaderboards/donations",
   },
   {
     id: 2,
     name: "공격력",
     value: "score",
+    url: "/leaderboards/score",
   },
 ];
 
@@ -19,26 +21,31 @@ export const standardCategoryItems = [
     id: 1,
     name: "영웅",
     value: "heroes",
+    url: "/standardTable/heroes",
   },
   {
     id: 2,
     name: "펫",
     value: "pets",
+    url: "/standardTable/pets",
   },
   {
     id: 3,
     name: "유닛",
     value: "troops",
+    url: "/standardTable/troops",
   },
   {
     id: 4,
     name: "마법",
     value: "spells",
+    url: "/standardTable/spells",
   },
   {
     id: 5,
     name: "시즈머신",
     value: "siegeMachines",
+    url: "/standardTable/siegeMachines",
   },
 ];
 
