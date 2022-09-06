@@ -12,7 +12,7 @@ export const Section = styled.section`
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(auto, 476px));
+  grid-template-columns: repeat(auto-fit, minmax(auto, 540px));
   justify-content: center;
   gap: 24px;
 `;
