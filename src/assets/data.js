@@ -32,8 +32,8 @@ export const standardCategoryItems = [
   {
     id: 3,
     name: "유닛",
-    value: "troops",
-    url: "/standardTable/troops",
+    value: "units",
+    url: "/standardTable/units",
   },
   {
     id: 4,
