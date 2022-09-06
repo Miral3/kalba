@@ -14,7 +14,7 @@ const AutoComplete = forwardRef(({ data, active, visible }, ref) => {
       <S.List ref={ref}>
         {data.map((item, idx) => (
           <S.Item key={item.tag} active={active === idx}>
-            <S.Link to="">
+            <S.Link to={`/profile/${item.tag}`}>
               <S.Name>{item.name}</S.Name>
               <S.Tag> - {item.tag}</S.Tag>
             </S.Link>
