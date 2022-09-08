@@ -8,6 +8,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   version: PropTypes.string,
   onClick: PropTypes.func,
+  hover: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -15,15 +16,25 @@ const defaultProps = {
   disabled: false,
   version: "text",
   onClick: () => {},
+  hover: false,
 };
 
-const Button = ({ children, type, disabled, version, onClick, ...styles }) => {
+const Button = ({
+  children,
+  type,
+  disabled,
+  version,
+  onClick,
+  hover,
+  ...styles
+}) => {
   return (
     <S.Button
       type={type}
       disabled={disabled}
       version={version}
       onClick={onClick}
+      hover={hover}
       {...styles}
     >
       {children}
