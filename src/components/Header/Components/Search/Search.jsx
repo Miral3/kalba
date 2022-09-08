@@ -116,7 +116,7 @@ const Search = () => {
             onChange={handleChangeInput}
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <S.StyledButton version="text" type="submit">
+          <S.StyledButton type="submit">
             <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
               search
             </Icon>

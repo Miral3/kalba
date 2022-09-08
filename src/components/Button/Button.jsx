@@ -13,7 +13,7 @@ const propTypes = {
 const defaultProps = {
   type: "button",
   disabled: false,
-  version: "auth",
+  version: "text",
   onClick: () => {},
 };
 

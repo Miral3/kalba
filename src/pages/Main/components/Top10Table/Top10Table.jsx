@@ -33,8 +33,8 @@ const Top10Table = ({ data, columns, title, timer }) => {
                 {timer}
               </Text>
               <S.ButtonContainer>
-                <S.StyledButton version="text">갱신</S.StyledButton>
-                <S.StyledButton version="text">더보기</S.StyledButton>
+                <S.StyledButton>갱신</S.StyledButton>
+                <S.StyledButton>더보기</S.StyledButton>
               </S.ButtonContainer>
             </div>
           </S.CaptionContainer>
