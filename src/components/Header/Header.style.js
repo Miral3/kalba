@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
 import { Text } from "../index";
 
@@ -60,8 +61,28 @@ export const LogoBlock = styled.div`
   }
 `;
 
-export const ButtonWrapper = styled.div`
+export const AuthWrapper = styled.div`
   position: absolute;
-  top: 8px;
+  top: 18px;
   right: 24px;
+`;
+
+export const LoginLink = styled(NavLink)`
+  padding: 8px;
+  border: 0;
+  border-radius: 4px;
+  background-color: ${Common.colors.indigo[1]};
+  font-size: ${Common.fontSize.c[1]};
+  font-weight: 600;
+  color: ${Common.colors.white[0]};
+  transition: all 0.2s ease 0s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  ${Common.mediaQuery.mobile} {
+    padding: 10px;
+    font-size: ${Common.fontSize.b[2]};
+  }
 `;

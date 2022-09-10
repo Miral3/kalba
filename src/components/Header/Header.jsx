@@ -1,33 +1,47 @@
-import React from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
-import { Text, Button } from "../index";
-import { Navigation, Search } from "./Components";
+import { Text, Button, Icon } from "../index";
+import { Navigation, Search, AccountInfo } from "./Components";
 
 const Header = () => {
   const location = useLocation();
   const { pathname } = location;
-  const navigate = useNavigate();
+  const profileButtonRef = useRef(null);
+  const accountInfoRef = useRef(null);
+  const [accountInfoVisible, setAccountInfoVisible] = useState(false);
   /**
    * @Todo recoil 사용하여 로그인 여부 받아오기
    */
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
-  const handleClickLoginButton = () => {
-    navigate("/auth/login");
+  const handleClickProfile = () => {
+    setAccountInfoVisible(!accountInfoVisible);
   };
 
-  /**
-   * @Todo recoil 사용하여 로그인 여부 변경,
-   * localStorage 토큰 제거
-   */
-  const handleClickLogoutButton = () => {};
+  const handleCloseAccountInfo = (e) => {
+    const accountInfo = accountInfoRef.current;
+    const profileButton = profileButtonRef.current;
+
+    if (!accountInfo || !profileButton) return;
+    if (!accountInfo.contains(e.target) && !profileButton.contains(e.target)) {
+      setAccountInfoVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("click", handleCloseAccountInfo);
+    return () => {
+      window.removeEventListener("click", handleCloseAccountInfo);
+    };
+  }, []);
 
   if (pathname.includes("auth")) {
     return;
   }
 
+  console.log(accountInfoVisible);
   return (
     <S.Header>
       <S.LogoInsertContainer>
@@ -47,13 +61,27 @@ const Header = () => {
             </S.LogoBlock>
           </NavLink>
         </S.LogoContainer>
-        <S.ButtonWrapper>
+        <S.AuthWrapper>
           {isLoggedIn ? (
-            <Button onClick={handleClickLogoutButton}>로그아웃</Button>
+            <>
+              <Button onClick={handleClickProfile} ref={profileButtonRef}>
+                <Icon
+                  size={Common.fontSize.t[0]}
+                  color={Common.colors.white[0]}
+                >
+                  account_circle
+                </Icon>
+              </Button>
+              <AccountInfo
+                visible={accountInfoVisible}
+                setVisible={setAccountInfoVisible}
+                ref={accountInfoRef}
+              />
+            </>
           ) : (
-            <Button onClick={handleClickLoginButton}>로그인</Button>
+            <S.LoginLink to="auth/login">로그인</S.LoginLink>
           )}
-        </S.ButtonWrapper>
+        </S.AuthWrapper>
         <Search />
       </S.LogoInsertContainer>
       <Navigation />
