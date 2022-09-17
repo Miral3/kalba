@@ -6,6 +6,7 @@ const propTypes = {
   placeholder: PropTypes.string,
   version: PropTypes.string,
   name: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
 };
@@ -14,18 +15,20 @@ const defaultProps = {
   placeholder: "",
   version: "navigation",
   name: "",
+  value: "",
   onChange: () => {},
   onKeyDown: () => {},
 };
 
 const Input = forwardRef(
-  ({ placeholder, version, name, onChange, onKeyDown }, ref) => {
+  ({ placeholder, version, name, value, onChange, onKeyDown }, ref) => {
     return (
       <S.Input
         name={name}
         placeholder={placeholder}
         version={version}
         ref={ref}
+        value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
