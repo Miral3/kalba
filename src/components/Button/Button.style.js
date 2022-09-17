@@ -18,7 +18,24 @@ const TextButton = css`
   background-color: transparent;
 `;
 
-const LoginButton = css``;
+const LoginButton = css`
+  padding: 16px;
+  margin-top: 16px;
+  background-color: ${Common.colors.red[0]};
+  font-size: ${Common.fontSize.b[0]};
+  color: ${Common.colors.white[0]};
+  font-weight: bold;
+
+  &:hover {
+    background-color: ${Common.colors.red[1]};
+    box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  }
+
+  &:disabled {
+    background-color: ${Common.colors.gray[4]};
+  }
+`;
+
 const DownloadButton = css``;
 
 const Hover = css`
