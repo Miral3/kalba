@@ -5,6 +5,7 @@ import * as S from "./Input.style";
 const propTypes = {
   placeholder: PropTypes.string,
   version: PropTypes.string,
+  name: PropTypes.string,
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
 };
@@ -12,14 +13,16 @@ const propTypes = {
 const defaultProps = {
   placeholder: "",
   version: "navigation",
+  name: "",
   onChange: () => {},
   onKeyDown: () => {},
 };
 
 const Input = forwardRef(
-  ({ placeholder, version, onChange, onKeyDown }, ref) => {
+  ({ placeholder, version, name, onChange, onKeyDown }, ref) => {
     return (
       <S.Input
+        name={name}
         placeholder={placeholder}
         version={version}
         ref={ref}
