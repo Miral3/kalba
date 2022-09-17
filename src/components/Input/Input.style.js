@@ -12,10 +12,12 @@ const NavigationInput = css`
 `;
 
 const AuthInput = css`
-  padding-bottom: 8px;
+  position: relative;
+  z-index: 2;
+  padding: 0;
   outline: none;
   border: none;
-  border-bottom: 1px solid ${Common.colors.gray[3]};
+  background-color: transparent;
   font-size: ${Common.fontSize.h[2]};
 `;
 
