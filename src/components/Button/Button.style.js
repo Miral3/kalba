@@ -26,7 +26,7 @@ const LoginButton = css`
   color: ${Common.colors.white[0]};
   font-weight: bold;
 
-  &:hover {
+  &:hover:enabled {
     background-color: ${Common.colors.red[1]};
     box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
   }
