@@ -80,5 +80,7 @@ export const InputLabel = styled.label`
 export const Link = styled(Text)`
   margin-top: 16px;
   text-align: right;
-  font-size: ${Common.fontSize.b[0]};
+  font-size: ${Common.fontSize.b[1]};
+  color: ${Common.colors.blue[0]};
+  text-decoration: underline;
 `;
