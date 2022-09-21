@@ -16,13 +16,14 @@ const defaultProps = {
   weight: "normal",
 };
 
-const Icon = ({ children, size, color, weight }) => {
+const Icon = ({ children, size, color, weight, ...styles }) => {
   return (
     <S.Icon
       className="material-symbols-outlined"
       size={size}
       color={color}
       weight={weight}
+      {...styles}
     >
       {children}
     </S.Icon>
