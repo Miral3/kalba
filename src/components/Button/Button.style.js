@@ -33,6 +33,7 @@ const LoginButton = css`
 
   &:disabled {
     background-color: ${Common.colors.gray[4]};
+    cursor: default;
   }
 `;
 
