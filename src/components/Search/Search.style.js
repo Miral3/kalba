@@ -3,7 +3,7 @@ import Common from "../../styles/common";
 import Button from "../Button";
 
 export const Container = styled.div``;
-export const Search = styled.form`
+export const Search = styled.div`
   display: flex;
   width: calc(100% - 50px);
   height: 32px;

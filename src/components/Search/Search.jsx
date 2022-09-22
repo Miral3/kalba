@@ -1,8 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import * as S from "./Search.style";
 import Common from "../../styles/common";
 import { Input, Icon, AutoComplete } from "../index";
+import useSearch from "../../hooks/useSearch";
 
 const propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
@@ -12,103 +14,45 @@ const propTypes = {
 };
 
 const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
+  const navigate = useNavigate();
   const searchRef = useRef(null);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const [autoCompleteData, setAutoCompleteData] = useState([]);
-  const [activeItem, setActiveItem] = useState(-1);
-  const [autoCompleteVisible, setAutoCompleteVisible] = useState(false);
+  const {
+    autoCompleteData,
+    activeItem,
+    autoCompleteVisible,
+    handleSelect,
+    handleFilter,
+    handleKeyDown,
+    resetAutoComplete,
+  } = useSearch({
+    searchRef,
+    inputRef,
+    listRef,
+    data,
+    onSubmit,
+    filterOption,
+    getInnerText,
+  });
 
-  const resetAutoComplete = () => {
-    listRef.current.scrollTo({ top: 0 });
-    setAutoCompleteVisible(false);
-    setActiveItem(-1);
-  };
-
-  const handleSubmitName = (e) => {
-    e.preventDefault();
-    onSubmit(autoCompleteData, activeItem);
-    inputRef.current.value = "";
+  const handleClickItem = (item) => {
     resetAutoComplete();
+    inputRef.current.value = item.name;
+    navigate(`/profile/${item.tag}`);
   };
-
-  const handleChangeInput = () => {
-    const keyword = inputRef.current.value;
-    const filteredData = data.filter((item) => {
-      return filterOption.some(
-        (key) => item[key]?.toLowerCase().indexOf(keyword.toLowerCase()) >= 0
-      );
-    });
-
-    if (!keyword) {
-      setAutoCompleteData([]);
-      resetAutoComplete();
-      return;
-    }
-
-    setAutoCompleteVisible(true);
-    setAutoCompleteData(filteredData);
-  };
-
-  const handleKeyDown = (e) => {
-    const node = listRef.current;
-    const { length } = node.children;
-    if (e.isComposing || !length) {
-      return;
-    }
-
-    const itemHeight = node.children[0].scrollHeight;
-    let idx = 0;
-    let innerText = "";
-    switch (e.key) {
-      case "ArrowUp":
-        idx = activeItem - 1 < 0 ? autoCompleteData.length - 1 : activeItem - 1;
-        setActiveItem(idx);
-        innerText = getInnerText(node, idx);
-        inputRef.current.value = innerText;
-        node.scrollTo({ top: itemHeight * idx });
-        break;
-      case "ArrowDown":
-        idx = activeItem + 1 > autoCompleteData.length - 1 ? 0 : activeItem + 1;
-        setActiveItem(idx);
-        innerText = getInnerText(node, idx);
-        inputRef.current.value = innerText;
-        node.scrollTo({ top: itemHeight * idx });
-        break;
-      case "Escape":
-        resetAutoComplete();
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleCloseAutoComplete = (e) => {
-    const element = searchRef.current;
-    if (!element) return;
-    if (!element.contains(e.target)) {
-      setAutoCompleteVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("click", handleCloseAutoComplete);
-    return () => {
-      window.removeEventListener("click", handleCloseAutoComplete);
-    };
-  }, []);
 
   return (
     <S.Container ref={searchRef}>
-      <S.Search onSubmit={(e) => handleSubmitName(e)}>
+      <S.Search>
         <S.SearchInner>
           <Input
             ref={inputRef}
             placeholder="이름 검색"
-            onChange={handleChangeInput}
+            onChange={handleFilter}
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <S.StyledButton type="submit">
+          <S.StyledButton onClick={handleSelect}>
             <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
               search
             </Icon>
@@ -120,6 +64,7 @@ const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
         data={autoCompleteData}
         active={activeItem}
         visible={autoCompleteVisible}
+        onClick={handleClickItem}
       />
     </S.Container>
   );

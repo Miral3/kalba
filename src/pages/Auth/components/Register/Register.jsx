@@ -1,12 +1,44 @@
 import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
-import { Input, Button, Icon } from "../../../../components";
+import useSearch from "../../../../hooks/useSearch";
+import { Input, Button, Icon, AutoComplete } from "../../../../components";
 import { ErrorText } from "../index";
+import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 
 const Register = () => {
+  const searchRef = useRef(null);
   const inputRef = useRef(null);
+  const listRef = useRef(null);
+  const handleSearch = () => {};
+  const filterOption = ["name", "tag"];
+  const getInnerText = (node, idx) => {
+    return node.children[idx].children[1].innerText.substring(3);
+  };
+  const {
+    autoCompleteData,
+    activeItem,
+    autoCompleteVisible,
+    handleSelect,
+    handleFilter,
+    handleKeyDown,
+    resetAutoComplete,
+  } = useSearch({
+    searchRef,
+    inputRef,
+    listRef,
+    data: members,
+    onSubmit: handleSearch,
+    filterOption,
+    getInnerText,
+  });
+
+  const handleClickItem = (item) => {
+    resetAutoComplete();
+    inputRef.current.value = item.tag;
+  };
+
   const initialValues = {
     tag: "",
     name: "",
@@ -46,19 +78,33 @@ const Register = () => {
       </S.Logo>
       <S.Form onSubmit={handleSubmit}>
         <S.Label>회원가입</S.Label>
-        <S.InputWrapper isFilled={values.tag}>
+        <S.InputWrapper ref={searchRef} isFilled={values.tag}>
           <Input
             ref={inputRef}
             version="auth"
             name="tag"
-            onChange={handleChange}
+            autoComplete="off"
+            onChange={(e) => {
+              handleChange(e);
+              handleFilter();
+            }}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
           <S.InputLabel>태그번호</S.InputLabel>
           <S.IconWrapper>
-            <Icon>search</Icon>
+            <Icon onClick={handleSelect}>search</Icon>
           </S.IconWrapper>
+          <AutoComplete
+            ref={listRef}
+            data={autoCompleteData}
+            active={activeItem}
+            visible={autoCompleteVisible}
+            onClick={handleClickItem}
+          />
         </S.InputWrapper>
-        {errors.tag && <ErrorText value={errors.tag} />}
+        {!values.tag && (
+          <S.Description>닉네임 혹은 태그번호로 검색하세요.</S.Description>
+        )}
         <S.InputWrapper isFilled={values.name}>
           <Input version="auth" name="name" onChange={handleChange} />
           <S.InputLabel>아이디</S.InputLabel>
