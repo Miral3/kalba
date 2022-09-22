@@ -5,14 +5,13 @@ export const Container = styled.nav`
   position: absolute;
   z-index: 3;
   display: ${({ visible }) => (visible ? "block" : "none")};
-  width: calc(100% - 50px);
-  margin: 8px 25px 0 25px;
+  width: 100%;
+  margin-top: 8px;
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 30%) 0px 8px 12px 0px;
   background-color: ${Common.colors.white[0]};
 
   ${Common.mediaQuery.tablet} {
-    width: 260px;
     margin: 0;
     margin-top: 8px;
   }
