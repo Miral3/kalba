@@ -1,17 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as S from "./Search.style";
-import Common from "../../../../styles/common";
-import { Input, Icon } from "../../../index";
-import { AutoComplete } from "..";
-import { members } from "../../../../assets/dummyData";
+import Common from "../../styles/common";
+import { Input, Icon, AutoComplete } from "../index";
 
-const Search = () => {
-  const navigate = useNavigate();
+const propTypes = {
+  data: PropTypes.instanceOf(Array).isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  filterOption: PropTypes.instanceOf(Array).isRequired,
+  getInnerText: PropTypes.func.isRequired,
+};
+
+const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
   const searchRef = useRef(null);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const [autoCompleteName, setAutoCompleteName] = useState([]);
+  const [autoCompleteData, setAutoCompleteData] = useState([]);
   const [activeItem, setActiveItem] = useState(-1);
   const [autoCompleteVisible, setAutoCompleteVisible] = useState(false);
 
@@ -21,41 +25,34 @@ const Search = () => {
     setActiveItem(-1);
   };
 
-  const getInnerText = (node) => {
-    return node.innerText.split("-")[0].replace(/ /g, "");
-  };
-
-  /**
-   * @Todo recoil에서 클랜원 불러와서 비교하기
-   * 존재한다면 프로필 페이지로 이동, 존재하지 않는다면 경고창
-   */
   const handleSubmitName = (e) => {
     e.preventDefault();
-    // console.log(inputRef.current.value);
+    onSubmit(autoCompleteData, activeItem);
     inputRef.current.value = "";
     resetAutoComplete();
   };
 
   const handleChangeInput = () => {
     const keyword = inputRef.current.value;
-    const filterMembers = members.filter(
-      (member) => member.name.toLowerCase().indexOf(keyword) >= 0
-    );
+    const filteredData = data.filter((item) => {
+      return filterOption.some(
+        (key) => item[key]?.toLowerCase().indexOf(keyword.toLowerCase()) >= 0
+      );
+    });
 
     if (!keyword) {
-      setAutoCompleteName([]);
+      setAutoCompleteData([]);
       resetAutoComplete();
       return;
     }
 
     setAutoCompleteVisible(true);
-    setAutoCompleteName(filterMembers);
+    setAutoCompleteData(filteredData);
   };
 
   const handleKeyDown = (e) => {
     const node = listRef.current;
     const { length } = node.children;
-
     if (e.isComposing || !length) {
       return;
     }
@@ -65,23 +62,18 @@ const Search = () => {
     let innerText = "";
     switch (e.key) {
       case "ArrowUp":
-        idx = activeItem - 1 < 0 ? autoCompleteName.length - 1 : activeItem - 1;
+        idx = activeItem - 1 < 0 ? autoCompleteData.length - 1 : activeItem - 1;
         setActiveItem(idx);
-        innerText = getInnerText(node.children[idx]);
+        innerText = getInnerText(node, idx);
         inputRef.current.value = innerText;
         node.scrollTo({ top: itemHeight * idx });
         break;
       case "ArrowDown":
-        idx = activeItem + 1 > autoCompleteName.length - 1 ? 0 : activeItem + 1;
+        idx = activeItem + 1 > autoCompleteData.length - 1 ? 0 : activeItem + 1;
         setActiveItem(idx);
-        innerText = getInnerText(node.children[idx]);
+        innerText = getInnerText(node, idx);
         inputRef.current.value = innerText;
         node.scrollTo({ top: itemHeight * idx });
-        break;
-      case "Enter":
-        if (activeItem === -1) return;
-        navigate(`/profile/${autoCompleteName[activeItem].tag.slice(1)}`);
-        resetAutoComplete();
         break;
       case "Escape":
         resetAutoComplete();
@@ -125,12 +117,14 @@ const Search = () => {
       </S.Search>
       <AutoComplete
         ref={listRef}
-        data={autoCompleteName}
+        data={autoCompleteData}
         active={activeItem}
         visible={autoCompleteVisible}
       />
     </S.Container>
   );
 };
+
+Search.propTypes = propTypes;
 
 export default Search;

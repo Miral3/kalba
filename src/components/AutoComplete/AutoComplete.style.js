@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import Common from "../../../../styles/common";
+import Common from "../../styles/common";
 
 export const Container = styled.nav`
   position: absolute;

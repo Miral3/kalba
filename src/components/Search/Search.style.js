@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Common from "../../../../styles/common";
-import Button from "../../../Button";
+import Common from "../../styles/common";
+import Button from "../Button";
 
 export const Container = styled.div``;
 export const Search = styled.form`
