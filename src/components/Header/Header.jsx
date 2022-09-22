@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
 import { Text, Button, Icon, Search } from "../index";
 import { Navigation, AccountInfo } from "./Components";
-import { members } from "../../assets/dummyData";
 
 const Header = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { pathname } = location;
   const profileButtonRef = useRef(null);
@@ -17,16 +15,6 @@ const Header = () => {
    * @Todo recoil 사용하여 로그인 여부 받아오기
    */
   const isLoggedIn = false;
-  const filterOption = ["name"];
-
-  const getInnerText = (node, idx) => {
-    return node.children[idx].children[0].children[0].innerText;
-  };
-
-  const handleSubmitSearch = (autoCompleteData, activeItem) => {
-    const idx = activeItem === -1 ? 0 : activeItem;
-    navigate(`/profile/${autoCompleteData[idx].tag.slice(1)}`);
-  };
 
   const handleClickProfile = () => {
     setAccountInfoVisible(!accountInfoVisible);
@@ -93,12 +81,7 @@ const Header = () => {
             <S.LoginLink to="auth/login">로그인</S.LoginLink>
           )}
         </S.AuthWrapper>
-        <Search
-          data={members}
-          onSubmit={handleSubmitSearch}
-          filterOption={filterOption}
-          getInnerText={getInnerText}
-        />
+        <Search />
       </S.LogoInsertContainer>
       <Navigation />
     </S.Header>

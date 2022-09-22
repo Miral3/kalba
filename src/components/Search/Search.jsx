@@ -1,23 +1,27 @@
 import React, { useRef } from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Search.style";
 import Common from "../../styles/common";
 import { Input, Icon, AutoComplete } from "../index";
 import useSearch from "../../hooks/useSearch";
+import { members } from "../../assets/dummyData";
 
-const propTypes = {
-  data: PropTypes.instanceOf(Array).isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  filterOption: PropTypes.instanceOf(Array).isRequired,
-  getInnerText: PropTypes.func.isRequired,
-};
-
-const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
+const Search = () => {
   const navigate = useNavigate();
   const searchRef = useRef(null);
   const inputRef = useRef(null);
   const listRef = useRef(null);
+  const filterOption = ["name"];
+
+  const getInnerText = (node, idx) => {
+    return node.children[idx].children[0].innerText;
+  };
+
+  const handleSubmitSearch = (autoCompleteData, activeItem) => {
+    const idx = activeItem === -1 ? 0 : activeItem;
+    inputRef.current.value = autoCompleteData[idx].name;
+    navigate(`/profile/${autoCompleteData[idx].tag.slice(1)}`);
+  };
   const {
     autoCompleteData,
     activeItem,
@@ -30,8 +34,8 @@ const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
     searchRef,
     inputRef,
     listRef,
-    data,
-    onSubmit,
+    data: members,
+    onSubmit: handleSubmitSearch,
     filterOption,
     getInnerText,
   });
@@ -69,7 +73,5 @@ const Search = ({ data, onSubmit, filterOption, getInnerText }) => {
     </S.Container>
   );
 };
-
-Search.propTypes = propTypes;
 
 export default Search;
