@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import { useState, useEffect } from "react";
+import useClickAway from "./useClickAway";
 
 const useSearch = ({
-  searchRef,
   inputRef,
   listRef,
   data,
@@ -13,6 +14,9 @@ const useSearch = ({
   const [autoCompleteData, setAutoCompleteData] = useState([]);
   const [activeItem, setActiveItem] = useState(-1);
   const [autoCompleteVisible, setAutoCompleteVisible] = useState(false);
+  const containerRef = useClickAway(() => {
+    setAutoCompleteVisible(false);
+  });
 
   const resetAutoComplete = () => {
     listRef.current.scrollTo({ top: 0 });
@@ -79,20 +83,20 @@ const useSearch = ({
     }
   };
 
-  const handleCloseAutoComplete = (e) => {
-    const element = searchRef.current;
-    if (!element) return;
-    if (!element.contains(e.target)) {
-      setAutoCompleteVisible(false);
-    }
-  };
+  // const handleCloseAutoComplete = (e) => {
+  //   const element = searchRef.current;
+  //   if (!element) return;
+  //   if (!element.contains(e.target)) {
+  //     setAutoCompleteVisible(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener("click", handleCloseAutoComplete);
-    return () => {
-      window.removeEventListener("click", handleCloseAutoComplete);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("click", handleCloseAutoComplete);
+  //   return () => {
+  //     window.removeEventListener("click", handleCloseAutoComplete);
+  //   };
+  // }, []);
 
   return {
     autoCompleteData,
@@ -102,6 +106,7 @@ const useSearch = ({
     handleFilter,
     handleKeyDown,
     resetAutoComplete,
+    containerRef,
   };
 };
 

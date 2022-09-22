@@ -1,17 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
-import { Input, Button, Icon, AutoComplete } from "../../../../components";
+import {
+  Input,
+  Button,
+  Icon,
+  AutoComplete,
+  Modal,
+} from "../../../../components";
 import { ErrorText } from "../index";
 import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 
 const Register = () => {
-  const searchRef = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const handleSearch = () => {};
+  const handleSearch = (autoCompleteData, activeItem) => {
+    const idx = activeItem === -1 ? 0 : activeItem;
+    inputRef.current.value = autoCompleteData[idx].tag;
+  };
   const filterOption = ["name", "tag"];
   const getInnerText = (node, idx) => {
     return node.children[idx].children[1].innerText.substring(3);
@@ -24,8 +33,8 @@ const Register = () => {
     handleFilter,
     handleKeyDown,
     resetAutoComplete,
+    containerRef,
   } = useSearch({
-    searchRef,
     inputRef,
     listRef,
     data: members,
@@ -73,12 +82,18 @@ const Register = () => {
 
   return (
     <S.Card>
+      <button type="button" onClick={() => setModalVisible(true)}>
+        Show Modal!
+      </button>
+      <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
+        Hello
+      </Modal>
       <S.Logo>
         <NavLink to="/">Kalba</NavLink>
       </S.Logo>
       <S.Form onSubmit={handleSubmit}>
         <S.Label>회원가입</S.Label>
-        <S.InputWrapper ref={searchRef} isFilled={values.tag}>
+        <S.InputWrapper ref={containerRef} isFilled={values.tag}>
           <Input
             ref={inputRef}
             version="auth"

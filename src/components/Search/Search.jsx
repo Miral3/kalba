@@ -8,7 +8,6 @@ import { members } from "../../assets/dummyData";
 
 const Search = () => {
   const navigate = useNavigate();
-  const searchRef = useRef(null);
   const inputRef = useRef(null);
   const listRef = useRef(null);
   const filterOption = ["name"];
@@ -30,8 +29,8 @@ const Search = () => {
     handleFilter,
     handleKeyDown,
     resetAutoComplete,
+    containerRef,
   } = useSearch({
-    searchRef,
     inputRef,
     listRef,
     data: members,
@@ -47,7 +46,7 @@ const Search = () => {
   };
 
   return (
-    <S.Container ref={searchRef}>
+    <S.Container ref={containerRef}>
       <S.Search>
         <S.SearchInner>
           <Input
