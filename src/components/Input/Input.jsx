@@ -7,6 +7,7 @@ const propTypes = {
   version: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
+  autoComplete: PropTypes.string,
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
 };
@@ -16,12 +17,16 @@ const defaultProps = {
   version: "navigation",
   name: "",
   type: "text",
+  autoComplete: "on",
   onChange: () => {},
   onKeyDown: () => {},
 };
 
 const Input = forwardRef(
-  ({ placeholder, version, name, type, onChange, onKeyDown }, ref) => {
+  (
+    { placeholder, version, name, type, autoComplete, onChange, onKeyDown },
+    ref
+  ) => {
     return (
       <S.Input
         name={name}
@@ -29,6 +34,7 @@ const Input = forwardRef(
         version={version}
         ref={ref}
         type={type}
+        autoComplete={autoComplete}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
