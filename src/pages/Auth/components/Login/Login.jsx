@@ -35,12 +35,7 @@ const Login = () => {
       <S.Form onSubmit={handleSubmit}>
         <S.Label>로그인</S.Label>
         <S.InputWrapper isFilled={values.name}>
-          <Input
-            version="auth"
-            name="name"
-            onChange={handleChange}
-            // value={values.name}
-          />
+          <Input version="auth" name="name" onChange={handleChange} />
           <S.InputLabel>아이디</S.InputLabel>
         </S.InputWrapper>
         {errors.name && <ErrorText value={errors.name} />}
@@ -50,7 +45,6 @@ const Login = () => {
             name="password"
             type="password"
             onChange={handleChange}
-            // value={values.password}
           />
           <S.InputLabel>비밀번호</S.InputLabel>
         </S.InputWrapper>

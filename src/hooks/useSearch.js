@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useClickAway from "./useClickAway";
 
 const useSearch = ({
@@ -82,21 +81,6 @@ const useSearch = ({
         break;
     }
   };
-
-  // const handleCloseAutoComplete = (e) => {
-  //   const element = searchRef.current;
-  //   if (!element) return;
-  //   if (!element.contains(e.target)) {
-  //     setAutoCompleteVisible(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("click", handleCloseAutoComplete);
-  //   return () => {
-  //     window.removeEventListener("click", handleCloseAutoComplete);
-  //   };
-  // }, []);
 
   return {
     autoCompleteData,
