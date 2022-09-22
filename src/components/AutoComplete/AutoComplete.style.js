@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
 
 export const Container = styled.nav`
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   display: ${({ visible }) => (visible ? "block" : "none")};
   width: calc(100% - 50px);
   margin: 8px 25px 0 25px;
@@ -30,15 +29,12 @@ export const Item = styled.li`
   padding: 5px 7px;
   background-color: ${({ active }) =>
     active ? Common.colors.gray[1] : Common.colors.white[0]};
+  font-size: ${Common.fontSize.c[1]};
   cursor: pointer;
 
   &:hover {
     background-color: ${Common.colors.gray[1]};
   }
-`;
-
-export const Link = styled(NavLink)`
-  font-size: ${Common.fontSize.c[1]};
 `;
 
 export const Name = styled.strong`
