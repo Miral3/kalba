@@ -123,3 +123,9 @@ export const ErrorText = styled(Text)`
   color: ${Common.colors.red[0]};
   font-weight: 500;
 `;
+
+export const Description = styled(Text)`
+  padding-top: 3px;
+  font-size: ${Common.fontSize.b[2]};
+  color: ${Common.colors.gray[7]};
+`;
