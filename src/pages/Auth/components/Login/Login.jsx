@@ -1,16 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import { Input, Button } from "../../../../components";
 import { ErrorText } from "../index";
 import * as S from "../../Auth.style";
 
 const Login = () => {
+  const navigate = useNavigate();
   const initialValues = {
     name: "",
     password: "",
   };
-  const onSubmit = async () => {};
+  const login = async () => {
+    navigate(`/`);
+  };
   const {
     values,
     errors,
@@ -20,7 +23,7 @@ const Login = () => {
     checkEmptyValue,
   } = useForm({
     initialValues,
-    onSubmit,
+    onSubmit: login,
     validate: () => {
       const newErrors = {};
       return newErrors;

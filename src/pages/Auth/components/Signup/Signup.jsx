@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
 import { Input, Button, Icon, AutoComplete } from "../../../../components";
@@ -9,6 +9,7 @@ import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
   const [verificationData, setVerificationData] = useState({});
   const [isVerification, setIsVerification] = useState(false);
@@ -20,6 +21,7 @@ const Signup = () => {
       name: autoCompleteData[idx].name,
       tag: autoCompleteData[idx].tag,
     });
+    setModalVisible(true);
     inputRef.current.value = autoCompleteData[idx].tag;
   };
   const filterOption = ["name", "tag"];
@@ -47,6 +49,7 @@ const Signup = () => {
   const handleClickItem = (item) => {
     resetAutoComplete();
     setVerificationData({ name: item.name, tag: item.tag });
+    setModalVisible(true);
     inputRef.current.value = item.tag;
   };
 
@@ -56,7 +59,11 @@ const Signup = () => {
     password: "",
     passwordConfirm: "",
   };
-  const login = async () => {};
+  const signup = async () => {
+    // eslint-disable-next-line no-alert
+    alert("회원가입이 완료되었습니다. 로그인을 진행해주세요.");
+    navigate(`/auth/login`);
+  };
   const {
     values,
     errors,
@@ -66,13 +73,11 @@ const Signup = () => {
     checkEmptyValue,
   } = useForm({
     initialValues,
-    login,
-    validate: ({ tag, name, password, passwordConfirm }) => {
+    onSubmit: signup,
+    validate: ({ name, password, passwordConfirm }) => {
       const newErrors = {};
       const nameReg = /^[a-zA-Z0-9-_/-]{6,16}$/;
       const passwordReg = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
-      if (tag && !isVerification)
-        newErrors.tag = "인증되지 않았습니다. 검색을 통해 인증을 진행해주세요";
       if (name && !nameReg.test(name))
         newErrors.name =
           "6~16자의 영소/대문자, 숫자, 특수기호(_),(-)만 가능합니다.";
@@ -86,9 +91,6 @@ const Signup = () => {
 
   return (
     <S.Card>
-      <button type="button" onClick={() => setModalVisible(true)}>
-        Show Modal!
-      </button>
       {modalVisible && (
         <Verification
           data={verificationData}
@@ -129,7 +131,9 @@ const Signup = () => {
         {!values.tag && (
           <S.Description>닉네임 혹은 태그번호로 검색하세요.</S.Description>
         )}
-        {errors.tag && <ErrorText value={errors.tag} />}
+        {values.tag && !isVerification && (
+          <ErrorText value="인증되지 않았습니다. 검색을 통해 인증을 진행해주세요" />
+        )}
         <S.InputWrapper isFilled={values.name}>
           <Input version="auth" name="name" onChange={handleChange} />
           <S.InputLabel>아이디</S.InputLabel>
@@ -159,7 +163,10 @@ const Signup = () => {
           type="submit"
           version="login"
           disabled={
-            checkEmptyValue() || isLoading || Object.keys(errors).length !== 0
+            checkEmptyValue() ||
+            isLoading ||
+            Object.keys(errors).length !== 0 ||
+            !isVerification
           }
         >
           회원가입
