@@ -2,23 +2,24 @@ import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
-import {
-  Input,
-  Button,
-  Icon,
-  AutoComplete,
-  Modal,
-} from "../../../../components";
+import { Input, Button, Icon, AutoComplete } from "../../../../components";
 import { ErrorText } from "../index";
 import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
+import Verification from "../Verification/Verification";
 
-const Register = () => {
+const Signup = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [verificationData, setVerificationData] = useState({});
+  const [isVerification, setIsVerification] = useState(false);
   const inputRef = useRef(null);
   const listRef = useRef(null);
   const handleSearch = (autoCompleteData, activeItem) => {
     const idx = activeItem === -1 ? 0 : activeItem;
+    setVerificationData({
+      name: autoCompleteData[idx].name,
+      tag: autoCompleteData[idx].tag,
+    });
     inputRef.current.value = autoCompleteData[idx].tag;
   };
   const filterOption = ["name", "tag"];
@@ -45,6 +46,7 @@ const Register = () => {
 
   const handleClickItem = (item) => {
     resetAutoComplete();
+    setVerificationData({ name: item.name, tag: item.tag });
     inputRef.current.value = item.tag;
   };
 
@@ -65,10 +67,12 @@ const Register = () => {
   } = useForm({
     initialValues,
     login,
-    validate: ({ name, password, passwordConfirm }) => {
+    validate: ({ tag, name, password, passwordConfirm }) => {
       const newErrors = {};
       const nameReg = /^[a-zA-Z0-9-_/-]{6,16}$/;
       const passwordReg = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+      if (tag && !isVerification)
+        newErrors.tag = "인증되지 않았습니다. 검색을 통해 인증을 진행해주세요";
       if (name && !nameReg.test(name))
         newErrors.name =
           "6~16자의 영소/대문자, 숫자, 특수기호(_),(-)만 가능합니다.";
@@ -85,9 +89,14 @@ const Register = () => {
       <button type="button" onClick={() => setModalVisible(true)}>
         Show Modal!
       </button>
-      <Modal visible={modalVisible} onClose={() => setModalVisible(false)}>
-        Hello
-      </Modal>
+      {modalVisible && (
+        <Verification
+          data={verificationData}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setIsVerification={setIsVerification}
+        />
+      )}
       <S.Logo>
         <NavLink to="/">Kalba</NavLink>
       </S.Logo>
@@ -120,6 +129,7 @@ const Register = () => {
         {!values.tag && (
           <S.Description>닉네임 혹은 태그번호로 검색하세요.</S.Description>
         )}
+        {errors.tag && <ErrorText value={errors.tag} />}
         <S.InputWrapper isFilled={values.name}>
           <Input version="auth" name="name" onChange={handleChange} />
           <S.InputLabel>아이디</S.InputLabel>
@@ -162,4 +172,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Signup;

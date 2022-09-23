@@ -57,7 +57,7 @@ const Login = () => {
           로그인
         </Button>
         <S.Link>
-          <NavLink to="/auth/register">회원가입</NavLink>
+          <NavLink to="/auth/signup">회원가입</NavLink>
         </S.Link>
       </S.Form>
     </S.Card>

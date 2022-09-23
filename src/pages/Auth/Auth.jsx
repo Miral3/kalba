@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Login, Register } from "./components";
+import { Login, Signup } from "./components";
 import * as S from "./Auth.style";
 
 const Auth = () => {
@@ -9,7 +9,7 @@ const Auth = () => {
 
   return (
     <S.Container>
-      {pathname.includes("login") ? <Login /> : <Register />}
+      {pathname.includes("login") ? <Login /> : <Signup />}
     </S.Container>
   );
 };
