@@ -1,5 +1,4 @@
-import React, { useEffect, useMemo } from "react";
-import ReactDom from "react-dom";
+import React from "react";
 import PropTypes from "prop-types";
 import useClickAway from "../../hooks/useClickAway";
 import * as S from "./Modal.style";
@@ -15,22 +14,12 @@ const Modal = ({ children, onClose, visible, ...style }) => {
     onClose();
   });
 
-  const el = useMemo(() => document.createElement("div"), []);
-
-  useEffect(() => {
-    document.body.appendChild(el);
-    return () => {
-      document.body.removeChild(el);
-    };
-  });
-
-  return ReactDom.createPortal(
+  return (
     <S.BackgroundDim visible={visible}>
       <S.ModalContainer ref={ref} {...style}>
         {children}
       </S.ModalContainer>
-    </S.BackgroundDim>,
-    el
+    </S.BackgroundDim>
   );
 };
 
