@@ -49,10 +49,9 @@ const useSearch = ({
   const handleKeyDown = (e) => {
     const node = listRef.current;
     const { length } = node.children;
-    if (e.isComposing || !length) {
+    if (e.nativeEvent.isComposing || !length) {
       return;
     }
-
     const itemHeight = node.children[0].scrollHeight;
     let idx = 0;
     let innerText = "";
