@@ -85,6 +85,7 @@ export const InputLabel = styled.label`
   transition: all 0.2s;
   transition-timing-function: cubic-bezier(0.25, 0.25, 0.75, 0.75);
   color: ${Common.colors.gray[2]};
+  font-weight: 500;
 `;
 
 export const IconWrapper = styled.div`
@@ -92,7 +93,7 @@ export const IconWrapper = styled.div`
   position: absolute;
   right: 0;
   top: 13px;
-  z-index: 2;
+  z-index: 4;
   cursor: pointer;
 
   &:hover::after {
