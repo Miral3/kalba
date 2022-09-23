@@ -25,7 +25,6 @@ const LoginButton = css`
   font-size: ${Common.fontSize.b[0]};
   color: ${Common.colors.white[0]};
   font-weight: bold;
-
   &:hover:enabled {
     background-color: ${Common.colors.red[1]};
     box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
@@ -34,6 +33,19 @@ const LoginButton = css`
   &:disabled {
     background-color: ${Common.colors.gray[4]};
     cursor: default;
+  }
+`;
+
+const ReferenceButton = css`
+  padding: 4px 6px;
+  margin-left: 4px;
+  border-radius: 4px;
+  background-color: ${Common.colors.gray[2]};
+  box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+  vertical-align: middle;
+  transition: 0.5s;
+  &:hover {
+    background-color: ${Common.colors.gray[4]};
   }
 `;
 
@@ -74,6 +86,8 @@ export const Button = styled.button`
         return TextButton;
       case "login":
         return LoginButton;
+      case "reference":
+        return ReferenceButton;
       case "download":
         return DownloadButton;
       default:
