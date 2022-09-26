@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import useClickAway from "../../hooks/useClickAway";
 import * as S from "./Modal.style";
 
 const propTypes = {
   children: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
+  zIndex: PropTypes.number,
 };
 
-const Modal = ({ children, onClose, visible, ...style }) => {
-  const ref = useClickAway(() => {
-    onClose();
-  });
+const defaultProps = {
+  zIndex: 200,
+};
+
+const Modal = ({ children, onClose, visible, zIndex, ...style }) => {
+  const ref = useRef(null);
+
+  const handleClickDim = (e) => {
+    const element = ref.current;
+    if (!element) return;
+
+    if (!element.contains(e.target)) {
+      onClose();
+    }
+  };
 
   return (
-    <S.BackgroundDim visible={visible}>
+    <S.BackgroundDim
+      visible={visible}
+      zIndex={zIndex}
+      onClick={(e) => handleClickDim(e)}
+    >
       <S.ModalContainer ref={ref} {...style}>
         {children}
       </S.ModalContainer>
@@ -24,5 +39,6 @@ const Modal = ({ children, onClose, visible, ...style }) => {
 };
 
 Modal.propTypes = propTypes;
+Modal.defaultProps = defaultProps;
 
 export default Modal;
