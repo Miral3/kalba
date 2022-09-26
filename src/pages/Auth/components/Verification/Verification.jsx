@@ -61,7 +61,7 @@ const Verification = ({
       <S.Card>
         <S.Container>
           <S.Logo>Kalba</S.Logo>
-          <Button onClick={() => setModalVisible(false)}>
+          <Button hover onClick={() => setModalVisible(false)}>
             <Icon>close</Icon>
           </Button>
         </S.Container>
