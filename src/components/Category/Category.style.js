@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
 
-export const Category = styled.nav`
+export const Category = styled.div`
   width: 100%;
   border: 1px solid ${Common.colors.gray[4]};
   border-top: 2px solid ${Common.colors.red[0]};
@@ -9,14 +10,14 @@ export const Category = styled.nav`
   background-color: ${Common.colors.gray[1]};
 `;
 
-export const List = styled.ul`
+export const Nav = styled.nav`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 4px 10px;
 `;
 
-export const Item = styled.li`
+export const Link = styled(NavLink)`
   height: 40px;
   padding: 0 16px;
   border-radius: 4px;
