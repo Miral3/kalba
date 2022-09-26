@@ -13,7 +13,9 @@ export const Container = styled.div`
 `;
 export const Search = styled.div`
   display: flex;
+  border-radius: 4px;
   height: 32px;
+  background-color: ${Common.colors.white[0]};
 `;
 
 export const SearchInner = styled.div`
