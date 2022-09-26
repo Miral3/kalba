@@ -3,14 +3,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
 import { Input, Button, Icon, AutoComplete } from "../../../../components";
-import { ErrorText } from "../index";
+import { ErrorText, Reference } from "../index";
 import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [modalVisible, setModalVisible] = useState(false);
+  const [verificationVisible, setVerificationVisible] = useState(false);
+  const [referenceVisible, setReferenceVisible] = useState(false);
   const [verificationData, setVerificationData] = useState({});
   const [isVerification, setIsVerification] = useState(false);
   const inputRef = useRef(null);
@@ -21,7 +22,7 @@ const Signup = () => {
       name: autoCompleteData[idx].name,
       tag: autoCompleteData[idx].tag,
     });
-    setModalVisible(true);
+    setVerificationVisible(true);
     inputRef.current.value = autoCompleteData[idx].tag;
   };
   const filterOption = ["name", "tag"];
@@ -49,7 +50,7 @@ const Signup = () => {
   const handleClickItem = (item) => {
     resetAutoComplete();
     setVerificationData({ name: item.name, tag: item.tag });
-    setModalVisible(true);
+    setVerificationVisible(true);
     inputRef.current.value = item.tag;
   };
 
@@ -91,12 +92,19 @@ const Signup = () => {
 
   return (
     <S.Card>
-      {modalVisible && (
+      {verificationVisible && (
         <Verification
           data={verificationData}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
+          modalVisible={verificationVisible}
+          setModalVisible={setVerificationVisible}
+          setReferenceVisible={setReferenceVisible}
           setIsVerification={setIsVerification}
+        />
+      )}
+      {referenceVisible && (
+        <Reference
+          modalVisible={referenceVisible}
+          setModalVisible={setReferenceVisible}
         />
       )}
       <S.Logo>
