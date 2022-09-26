@@ -17,7 +17,7 @@ const defaultProps = {
   version: "navigation",
   name: "",
   type: "text",
-  autoComplete: "on",
+  autoComplete: "off",
   onChange: () => {},
   onKeyDown: () => {},
 };
