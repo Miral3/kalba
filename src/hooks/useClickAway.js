@@ -1,7 +1,4 @@
-/* eslint-disable no-restricted-syntax */
 import { useEffect, useRef } from "react";
-
-const events = ["mousedown", "touchstart"];
 
 const useClickAway = (handler) => {
   const ref = useRef(null);
@@ -21,14 +18,10 @@ const useClickAway = (handler) => {
       }
     };
 
-    for (const eventName of events) {
-      document.addEventListener(eventName, handleEvent);
-    }
+    document.addEventListener("click", handleEvent);
 
     return () => {
-      for (const eventName of events) {
-        document.removeEventListener(eventName, handleEvent);
-      }
+      document.removeEventListener("click", handleEvent);
     };
   }, [ref]);
 
