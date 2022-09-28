@@ -6,12 +6,15 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   width: 100%;
-  border-radius: 5px;
   padding: 16px 0;
   border: 3px solid ${Common.colors.purple[0]};
   background: ${Common.gradient[0]};
   font-family: "supercell+NotoSansKR";
   text-shadow: -1px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+
+  ${Common.mediaQuery.tabletS} {
+    border-radius: 5px;
+  }
 
   ${Common.mediaQuery.tablet} {
     justify-content: space-between;
