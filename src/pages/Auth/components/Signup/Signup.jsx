@@ -61,7 +61,6 @@ const Signup = () => {
     passwordConfirm: "",
   };
   const signup = async () => {
-    // eslint-disable-next-line no-alert
     alert("회원가입이 완료되었습니다. 로그인을 진행해주세요.");
     navigate(`/auth/login`);
   };

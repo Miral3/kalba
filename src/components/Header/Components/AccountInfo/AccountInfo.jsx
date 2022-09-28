@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { Text, Button, Icon } from "../../../index";
+import { copyText } from "../../../../utils/copy";
 import Common from "../../../../styles/common";
 import * as S from "./AccountInfo.style";
 
@@ -42,8 +43,12 @@ const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
         </Text>
         <S.TagContainer>
           <Text>{tag}</Text>
-          <Button hover style={{ marginBottom: "3px" }}>
-            <Icon size={Common.fontSize.h[2]}>content_copy</Icon>
+          <Button
+            onClick={() => copyText(tag)}
+            hover
+            style={{ marginBottom: "3px" }}
+          >
+            <Icon size={Common.fontSize.h[2]}>file_copy</Icon>
           </Button>
         </S.TagContainer>
       </S.UserInfoContainer>
