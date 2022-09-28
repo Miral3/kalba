@@ -17,15 +17,15 @@ const Common = {
     brown: ["#5E4A3E"],
     basic: ["#E5E2D6"],
     red: ["#DA2A29", "#E93636", "#FF4500"],
-    purple: ["#6a7497", "#42376c"],
+    purple: ["#6a7497", "#42376c", "#38385A"],
     blue: ["#297fb9"],
   },
-  gradient: {
-    gradient: [
-      "linear-gradient(0deg,#6d779a,#8c96ae)",
-      "linear-gradient(0deg,#49417a,#635c91)",
-    ],
-  },
+  gradient: [
+    "linear-gradient(0deg,#6d779a,#8c96ae)",
+    "linear-gradient(0deg,#49417a,#635c91)",
+    "linear-gradient(to right, #373a46, #8a94ad)",
+    "linear-gradient(to right, #7450ae, #8a94ad)",
+  ],
   fontSize: {
     t: ["36px"],
     h: ["24px", "20px", "15px"],
