@@ -41,6 +41,7 @@ const Common = {
     desktop: "1400px",
   },
   mediaQuery: {
+    mobileS: `@media (min-width: 410px)`,
     mobile: `@media (min-width: 425px)`,
     tabletS: `@media (min-width: 576px)`,
     tablet: `@media (min-width: 768px)`,
