@@ -1,264 +1,277 @@
-export const heroesInfo = [
+const heroesInfo = [
   {
     name: "Barbarian King",
     className: "king",
-    source: "Barbarian_King.png",
+    src: "Barbarian_King.png",
   },
   {
     name: "Archer Queen",
     className: "queen",
-    source: "Archer_Queen.png",
+    src: "Archer_Queen.png",
   },
   {
     name: "Grand Warden",
     className: "warden",
-    source: "Grand_Warden.png",
+    src: "Grand_Warden.png",
   },
   {
     name: "Royal Champion",
     className: "rochamp",
-    source: "Royal_Champion.png",
+    src: "Royal_Champion.png",
   },
 ];
 
-export const petsInfo = [
+const petsInfo = [
   {
     name: "L.A.S.S.I",
     className: "lassi",
-    source: "L.A.S.S.I.png",
+    src: "L.A.S.S.I.png",
   },
   {
     name: "Electro Owl",
     className: "owl",
-    source: "Electro_Owl.png",
+    src: "Electro_Owl.png",
   },
   {
     name: "Mighty Yak",
     className: "yak",
-    source: "Mighty_Yak.png",
+    src: "Mighty_Yak.png",
   },
   {
     name: "Unicorn",
     className: "unicorn",
-    source: "Unicorn.png",
+    src: "Unicorn.png",
   },
 ];
 
-export const troopsInfo = [
+const troopsInfo = [
   {
     name: "Barbarian",
     className: "barbarian",
-    source: "Barbarian.png",
+    src: "Barbarian.png",
   },
   {
     name: "Archer",
     className: "archer",
-    source: "Archer.png",
+    src: "Archer.png",
   },
   {
     name: "Giant",
     className: "giant",
-    source: "Giant.png",
+    src: "Giant.png",
   },
   {
     name: "Goblin",
     className: "goblin",
-    source: "Goblin.png",
+    src: "Goblin.png",
   },
   {
     name: "Wall Breaker",
     className: "wallBreaker",
-    source: "Wall_Breaker.png",
+    src: "Wall_Breaker.png",
   },
   {
     name: "Balloon",
     className: "balloon",
-    source: "Balloon.png",
+    src: "Balloon.png",
   },
   {
     name: "Wizard",
     className: "wizard",
-    source: "Wizard.png",
+    src: "Wizard.png",
   },
   {
     name: "Healer",
     className: "healer",
-    source: "Healer.png",
+    src: "Healer.png",
   },
   {
     name: "Dragon",
     className: "dragon",
-    source: "Dragon.png",
+    src: "Dragon.png",
   },
   {
     name: "P.E.K.K.A",
     className: "pekka",
-    source: "P.E.K.K.A.png",
+    src: "P.E.K.K.A.png",
   },
   {
     name: "Baby Dragon",
     className: "babyDragon",
-    source: "Baby_Dragon.png",
+    src: "Baby_Dragon.png",
   },
   {
     name: "Miner",
     className: "miner",
-    source: "Miner.png",
+    src: "Miner.png",
   },
   {
     name: "Electro Dragon",
     className: "electroDragon",
-    source: "Electro_Dragon.png",
+    src: "Electro_Dragon.png",
   },
   {
     name: "Yeti",
     className: "yeti",
-    source: "Yeti.png",
+    src: "Yeti.png",
   },
   {
     name: "Dragon Rider",
     className: "dragonRider",
-    source: "Dragon_Rider.png",
+    src: "Dragon_Rider.png",
   },
   {
     name: "Minion",
     className: "minion",
-    source: "Minion.png",
+    src: "Minion.png",
   },
   {
     name: "Hog Rider",
     className: "hogRider",
-    source: "Hog_Rider.png",
+    src: "Hog_Rider.png",
   },
   {
     name: "Valkyrie",
     className: "valkyrie",
-    source: "Valkyrie.png",
+    src: "Valkyrie.png",
   },
   {
     name: "Golem",
     className: "golem",
-    source: "Golem.png",
+    src: "Golem.png",
   },
   {
     name: "Witch",
     className: "witch",
-    source: "Witch.png",
+    src: "Witch.png",
   },
   {
     name: "Lava Hound",
     className: "lavaHound",
-    source: "Lava_Hound.png",
+    src: "Lava_Hound.png",
   },
   {
     name: "Bowler",
     className: "bowler",
-    source: "Bowler.png",
+    src: "Bowler.png",
   },
   {
     name: "Ice Golem",
     className: "iceGolem",
-    source: "Ice_Golem.png",
+    src: "Ice_Golem.png",
   },
   {
     name: "Headhunter",
     className: "headHunter",
-    source: "Headhunter.png",
+    src: "Headhunter.png",
   },
 ];
 
-export const spellsInfo = [
+const spellsInfo = [
   {
     name: "Lightning Spell",
     className: "lightning",
-    source: "Lightning_Spell.png",
+    src: "Lightning_Spell.png",
   },
   {
     name: "Healing Spell",
     className: "heal",
-    source: "Healing_Spell.png",
+    src: "Healing_Spell.png",
   },
   {
     name: "Rage Spell",
     className: "rage",
-    source: "Rage_Spell.png",
+    src: "Rage_Spell.png",
   },
   {
     name: "Jump Spell",
     className: "jump",
-    source: "Jump_Spell.png",
+    src: "Jump_Spell.png",
   },
   {
     name: "Freeze Spell",
     className: "freeze",
-    source: "Freeze_Spell.png",
+    src: "Freeze_Spell.png",
   },
   {
     name: "Clone Spell",
     className: "clone",
-    source: "Clone_Spell.png",
+    src: "Clone_Spell.png",
   },
   {
     name: "Invisibility Spell",
     className: "invisibility",
-    source: "Invisibility_Spell.png",
+    src: "Invisibility_Spell.png",
   },
   {
     name: "Poison Spell",
     className: "poison",
-    source: "Poison_Spell.png",
+    src: "Poison_Spell.png",
   },
   {
     name: "Earthquake Spell",
     className: "earthquake",
-    source: "Earthquake_Spell.png",
+    src: "Earthquake_Spell.png",
   },
   {
     name: "Haste Spell",
     className: "haste",
-    source: "Haste_Spell.png",
+    src: "Haste_Spell.png",
   },
   {
     name: "Skeleton Spell",
     className: "skeleton",
-    source: "Skeleton_Spell.png",
+    src: "Skeleton_Spell.png",
   },
   {
     name: "Bat Spell",
     className: "bat",
-    source: "Bat_Spell.png",
+    src: "Bat_Spell.png",
   },
 ];
 
-export const siegeMachinesInfo = [
+const siegeMachinesInfo = [
   {
     name: "Wall Wrecker",
     className: "wallWrecker",
-    source: "Wall_Wrecker.png",
+    src: "Wall_Wrecker.png",
   },
   {
     name: "Battle Blimp",
     className: "battleBlimp",
-    source: "Battle_Blimp.png",
+    src: "Battle_Blimp.png",
   },
   {
     name: "Stone Slammer",
     className: "stoneSlammer",
-    source: "Stone_Slammer.png",
+    src: "Stone_Slammer.png",
   },
   {
     name: "Siege Barracks",
     className: "siegeBarracks",
-    source: "Siege_Barracks.png",
+    src: "Siege_Barracks.png",
   },
   {
     name: "Log Launcher",
     className: "logLauncher",
-    source: "Log_Launcher.png",
+    src: "Log_Launcher.png",
   },
   {
     name: "Flame Flinger",
     className: "flameFlinger",
-    source: "Flame_Flinger.png",
+    src: "Flame_Flinger.png",
+  },
+];
+
+export const units = [
+  { type: "영웅", value: "heroes", src: "coc_Heroes", info: heroesInfo },
+  { type: "펫", value: "troops", src: "coc_Pets", info: petsInfo },
+  { type: "병력", value: "troops", src: "coc_Troops", info: troopsInfo },
+  { type: "마법", value: "spells", src: "coc_Spells", info: spellsInfo },
+  {
+    type: "시즈 머신",
+    value: "troops",
+    src: "coc_Siege_Machines",
+    info: siegeMachinesInfo,
   },
 ];
