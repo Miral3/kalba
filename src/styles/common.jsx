@@ -17,8 +17,9 @@ const Common = {
     brown: ["#5E4A3E"],
     basic: ["#E5E2D6"],
     red: ["#DA2A29", "#E93636", "#FF4500"],
-    purple: ["#6a7497", "#42376c", "#38385A"],
+    purple: ["#6a7497", "#42376c", "#38385A", "#212032", "#49485f"],
     blue: ["#297fb9"],
+    yellow: ["#e5c133"],
   },
   gradient: [
     "linear-gradient(0deg,#6d779a,#8c96ae)",
