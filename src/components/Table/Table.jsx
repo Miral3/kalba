@@ -50,7 +50,7 @@ const Table = ({ children, data, columns, version, sticky, ...styles }) => {
               if (version === "leaderboard" && column.accessor === "name") {
                 return (
                   <S.Td key={column.id} version={version}>
-                    <S.Link to={`/profile/${row.tag}`}>
+                    <S.Link to={`/profile/${row.tag.substr(1)}`}>
                       <S.Trophy src={row.league.iconTiny} alt="trophy" />
                       <Text size="13px" weight="bold">
                         {row[column.accessor]}

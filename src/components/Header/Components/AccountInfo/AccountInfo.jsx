@@ -19,7 +19,7 @@ const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
     "https://api-assets.clashofclans.com/leagues/288/4wtS1stWZQ-1VJ5HaCuDPfdhTWjeZs_jPar_YPzK6Lg.png";
   const BASE_BADGE =
     "https://api-assets.clashofclans.com/leagues/72/e--YMyIexEQQhE4imLoJcwhYn6Uy8KqlgyY3_kFV6t4.png";
-  const tag = "#LJLLLQLQR";
+  const tag = "#LJLLLQLQR".substr(1);
   const nickname = "Miral";
   const role = "공대";
   const yongaScore = 1275;

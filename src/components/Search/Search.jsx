@@ -19,7 +19,7 @@ const Search = () => {
   const handleSubmitSearch = (autoCompleteData, activeItem) => {
     const idx = activeItem === -1 ? 0 : activeItem;
     inputRef.current.value = autoCompleteData[idx].name;
-    navigate(`/profile/${autoCompleteData[idx].tag.slice(1)}`);
+    navigate(`/profile/${autoCompleteData[idx].tag.substr(1)}`);
   };
   const {
     autoCompleteData,
@@ -42,7 +42,7 @@ const Search = () => {
   const handleClickItem = (item) => {
     resetAutoComplete();
     inputRef.current.value = item.name;
-    navigate(`/profile/${item.tag}`);
+    navigate(`/profile/${item.tag.substr(1)}`);
   };
 
   return (
