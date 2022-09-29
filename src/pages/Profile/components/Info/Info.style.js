@@ -15,10 +15,6 @@ export const Container = styled.div`
   ${Common.mediaQuery.tabletS} {
     border-radius: 5px;
   }
-
-  ${Common.mediaQuery.tablet} {
-    justify-content: space-between;
-  }
 `;
 
 export const UserInfo = styled.div`
