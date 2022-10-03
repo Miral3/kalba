@@ -10,7 +10,7 @@ const Search = () => {
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const filterOption = ["name"];
+  const filterOption = ["name", "tag"];
 
   const getInnerText = (node, idx) => {
     return node.children[idx].children[0].innerText;
@@ -21,6 +21,7 @@ const Search = () => {
     inputRef.current.value = autoCompleteData[idx].name;
     navigate(`/profile/${autoCompleteData[idx].tag.substr(1)}`);
   };
+
   const {
     autoCompleteData,
     activeItem,
