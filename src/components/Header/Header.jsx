@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
-import { Text, Button, Icon, Search } from "../index";
+import { Text, Button, Search } from "../index";
 import { Navigation, AccountInfo } from "./Components";
 
 const Header = () => {
@@ -60,16 +60,13 @@ const Header = () => {
             </S.LogoBlock>
           </NavLink>
         </S.LogoContainer>
-        <S.AuthWrapper>
+        <S.AuthWrapper isLoggedIn={isLoggedIn}>
           {isLoggedIn ? (
             <>
               <Button onClick={handleClickProfile} ref={profileButtonRef}>
-                <Icon
-                  size={Common.fontSize.t[0]}
-                  color={Common.colors.white[0]}
-                >
+                <S.Profile className="material-symbols-outlined">
                   account_circle
-                </Icon>
+                </S.Profile>
               </Button>
               <AccountInfo
                 visible={accountInfoVisible}

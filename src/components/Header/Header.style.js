@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
-import { Text } from "../index";
+import { Text, Icon } from "../index";
 
 export const Header = styled.header`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   width: 100%;
-  height: 170px;
+  height: 156px;
   background-color: ${Common.colors.indigo[0]};
+
+  ${Common.mediaQuery.mobile} {
+    height: 166px;
+  }
 
   ${Common.mediaQuery.tablet} {
     height: 200px;
@@ -20,20 +23,26 @@ export const Header = styled.header`
 export const LogoInsertContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100px;
+  margin-bottom: 16px;
 
   ${Common.mediaQuery.tablet} {
-    height: 150px;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    height: 150px;
+    margin: 0;
   }
 `;
 
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  height: 26px;
   margin: 16px 24px;
+
+  ${Common.mediaQuery.mobile} {
+    height: auto;
+  }
 `;
 
 export const Logo = styled(Text)`
@@ -63,8 +72,21 @@ export const LogoBlock = styled.div`
 
 export const AuthWrapper = styled.div`
   position: absolute;
-  top: 18px;
+  top: ${({ isLoggedIn }) => (isLoggedIn ? "14px" : "18px")};
   right: 24px;
+
+  ${Common.mediaQuery.mobile} {
+    ${({ isLoggedIn }) => (isLoggedIn ? "16px" : "24px")};
+  }
+`;
+
+export const Profile = styled(Icon)`
+  font-size: ${Common.fontSize.l[2]};
+  color: ${Common.colors.white[0]};
+
+  ${Common.mediaQuery.mobile} {
+    font-size: ${Common.fontSize.t[0]};
+  }
 `;
 
 export const LoginLink = styled(NavLink)`

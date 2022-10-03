@@ -5,7 +5,6 @@ import Common from "../../../../styles/common";
 export const Navigation = styled.nav`
   width: 100%;
   height: 50px;
-  margin-top: 20px;
   background-color: ${Common.colors.indigo[1]};
 `;
 
