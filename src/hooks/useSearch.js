@@ -77,6 +77,7 @@ const useSearch = ({
         resetAutoComplete();
         break;
       default:
+        setActiveItem(-1);
         break;
     }
   };
