@@ -1,6 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Table, Text } from "../../../../components";
+import { Table, Text, Button } from "../../../../components";
 import * as S from "./Top10Table.style";
 import Common from "../../../../styles/common";
 
@@ -12,6 +12,8 @@ const propTypes = {
 };
 
 const Top10Table = ({ data, columns, title, timer }) => {
+  const type = title.includes("지원") ? "donations" : "score";
+
   return (
     <S.Container>
       <Table columns={columns} data={data} sticky={false}>
@@ -33,8 +35,8 @@ const Top10Table = ({ data, columns, title, timer }) => {
                 {timer}
               </Text>
               <S.ButtonContainer>
-                <S.StyledButton>갱신</S.StyledButton>
-                <S.StyledButton>더보기</S.StyledButton>
+                <Button>갱신</Button>
+                <S.Link to={`/leaderboards/${type}`}>더보기</S.Link>
               </S.ButtonContainer>
             </div>
           </S.CaptionContainer>

@@ -16,6 +16,9 @@ const TextButton = css`
   margin: 0;
   padding: 0;
   background-color: transparent;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
 `;
 
 const LoginButton = css`
