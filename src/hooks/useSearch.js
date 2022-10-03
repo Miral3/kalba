@@ -24,7 +24,7 @@ const useSearch = ({
   };
 
   const handleSelect = () => {
-    onSubmit(autoCompleteData, activeItem);
+    onSubmit();
     resetAutoComplete();
   };
 

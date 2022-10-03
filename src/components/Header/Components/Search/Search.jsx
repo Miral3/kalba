@@ -16,10 +16,23 @@ const Search = () => {
     return node.children[idx].children[0].innerText;
   };
 
-  const handleSubmitSearch = (autoCompleteData, activeItem) => {
-    const idx = activeItem === -1 ? 0 : activeItem;
-    inputRef.current.value = autoCompleteData[idx].name;
-    navigate(`/profile/${autoCompleteData[idx].tag.substr(1)}`);
+  const findUser = () => {
+    const value = inputRef.current.value.toLowerCase();
+    return members.find(
+      (member) =>
+        member.name.toLowerCase() === value ||
+        member.tag.toLowerCase() === value
+    );
+  };
+
+  const handleSubmitSearch = () => {
+    const searchedUser = findUser();
+    inputRef.current.value = "";
+    if (!searchedUser) {
+      alert("존재하지 않는 멤버 입니다. 이름 혹은 태그를 다시 확인해주세요");
+      return;
+    }
+    navigate(`/profile/${searchedUser.tag.substr(1)}`);
   };
 
   const {

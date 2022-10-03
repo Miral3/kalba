@@ -16,19 +16,35 @@ const Signup = () => {
   const [isVerification, setIsVerification] = useState(false);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const handleSearch = (autoCompleteData, activeItem) => {
-    const idx = activeItem === -1 ? 0 : activeItem;
-    setVerificationData({
-      name: autoCompleteData[idx].name,
-      tag: autoCompleteData[idx].tag,
-    });
-    setVerificationVisible(true);
-    inputRef.current.value = autoCompleteData[idx].tag;
-  };
   const filterOption = ["name", "tag"];
+
   const getInnerText = (node, idx) => {
     return node.children[idx].children[1].innerText.substring(3);
   };
+
+  const findUser = () => {
+    const value = inputRef.current.value.toLowerCase();
+    return members.find(
+      (member) =>
+        member.name.toLowerCase() === value ||
+        member.tag.toLowerCase() === value
+    );
+  };
+
+  const handleSearch = () => {
+    const searchedUser = findUser();
+    if (!searchedUser) {
+      alert("존재하지 않는 멤버 입니다. 이름 혹은 태그를 다시 확인해주세요");
+      return;
+    }
+    setVerificationData({
+      name: searchedUser.name,
+      tag: searchedUser.tag,
+    });
+    setVerificationVisible(true);
+    inputRef.current.value = searchedUser.tag;
+  };
+
   const {
     autoCompleteData,
     activeItem,
@@ -60,10 +76,12 @@ const Signup = () => {
     password: "",
     passwordConfirm: "",
   };
+
   const signup = async () => {
     alert("회원가입이 완료되었습니다. 로그인을 진행해주세요.");
     navigate(`/auth/login`);
   };
+
   const {
     values,
     errors,
