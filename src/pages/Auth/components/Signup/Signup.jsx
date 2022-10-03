@@ -135,6 +135,7 @@ const Signup = () => {
             version="auth"
             name="tag"
             autoComplete="off"
+            disabled={isVerification}
             onChange={(e) => {
               handleChange(e);
               handleFilter();

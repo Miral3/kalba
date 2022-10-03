@@ -8,6 +8,7 @@ const propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   autoComplete: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
 };
@@ -18,13 +19,23 @@ const defaultProps = {
   name: "",
   type: "text",
   autoComplete: "off",
+  disabled: false,
   onChange: () => {},
   onKeyDown: () => {},
 };
 
 const Input = forwardRef(
   (
-    { placeholder, version, name, type, autoComplete, onChange, onKeyDown },
+    {
+      placeholder,
+      version,
+      name,
+      type,
+      autoComplete,
+      disabled,
+      onChange,
+      onKeyDown,
+    },
     ref
   ) => {
     return (
@@ -35,6 +46,7 @@ const Input = forwardRef(
         ref={ref}
         type={type}
         autoComplete={autoComplete}
+        disabled={disabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
