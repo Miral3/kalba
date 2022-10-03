@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import * as S from "./Search.style";
-import Common from "../../styles/common";
-import { Input, Icon, AutoComplete } from "../index";
-import useSearch from "../../hooks/useSearch";
-import { members } from "../../assets/dummyData";
+import Common from "../../../../styles/common";
+import { Input, Icon, AutoComplete } from "../../../index";
+import useSearch from "../../../../hooks/useSearch";
+import { members } from "../../../../assets/dummyData";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Search = () => {
         <S.SearchInner>
           <Input
             ref={inputRef}
-            placeholder="이름 검색"
+            placeholder="이름, 태그번호 검색"
             onChange={handleFilter}
             onKeyDown={(e) => handleKeyDown(e)}
           />

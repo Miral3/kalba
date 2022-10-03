@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
-import { Text, Button, Search } from "../index";
-import { Navigation, AccountInfo } from "./Components";
+import { Text, Button } from "../index";
+import { Navigation, AccountInfo, Search } from "./Components";
 
 const Header = () => {
   const location = useLocation();
