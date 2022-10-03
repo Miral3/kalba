@@ -6,7 +6,7 @@ export const Container = styled.nav`
   z-index: 3;
   display: ${({ visible }) => (visible ? "block" : "none")};
   width: 100%;
-  margin-top: 8px;
+  margin-top: 5px;
   border-radius: 4px;
   box-shadow: rgb(0 0 0 / 30%) 0px 8px 12px 0px;
   background-color: ${Common.colors.white[0]};
