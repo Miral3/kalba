@@ -14,9 +14,10 @@ export const CaptionContainer = styled.div`
   padding: 12px 16px;
 `;
 
-export const ButtonContainer = styled.div`
+export const ActionContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 32px;
   padding-top: 8px;
   font-size: ${Common.fontSize.b[1]};

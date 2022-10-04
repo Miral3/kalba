@@ -1,5 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
+import { NavLink } from "react-router-dom";
 import { Table, Text, Button } from "../../../../components";
 import * as S from "./Top10Table.style";
 import Common from "../../../../styles/common";
@@ -34,10 +35,10 @@ const Top10Table = ({ data, columns, title, timer }) => {
               >
                 {timer}
               </Text>
-              <S.ButtonContainer>
+              <S.ActionContainer>
                 <Button>갱신</Button>
-                <S.Link to={`/leaderboards/${type}`}>더보기</S.Link>
-              </S.ButtonContainer>
+                <NavLink to={`/leaderboards/${type}`}>더보기</NavLink>
+              </S.ActionContainer>
             </div>
           </S.CaptionContainer>
         </S.Caption>
