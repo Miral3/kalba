@@ -8,13 +8,14 @@ import { Navigation, AccountInfo, Search } from "./Components";
 const Header = () => {
   const location = useLocation();
   const { pathname } = location;
+  const isAdminPage = pathname.includes("admin");
   const profileButtonRef = useRef(null);
   const accountInfoRef = useRef(null);
   const [accountInfoVisible, setAccountInfoVisible] = useState(false);
   /**
    * @Todo recoil 사용하여 로그인 여부 받아오기
    */
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   const handleClickProfile = () => {
     setAccountInfoVisible(!accountInfoVisible);
@@ -42,9 +43,14 @@ const Header = () => {
   }
 
   return (
-    <S.Header>
-      <S.LogoInsertContainer>
+    <S.Header isAdminPage={isAdminPage}>
+      <S.LogoInsertContainer isAdminPage={isAdminPage}>
         <S.LogoContainer>
+          {isAdminPage && (
+            <Button>
+              <S.Menu className="material-symbols-outlined">menu</S.Menu>
+            </Button>
+          )}
           <NavLink to="/">
             <S.Logo>Kalba</S.Logo>
           </NavLink>
@@ -78,9 +84,9 @@ const Header = () => {
             <S.LoginLink to="auth/login">로그인</S.LoginLink>
           )}
         </S.AuthWrapper>
-        <Search />
+        {!isAdminPage && <Search />}
       </S.LogoInsertContainer>
-      <Navigation />
+      {!isAdminPage && <Navigation />}
     </S.Header>
   );
 };

@@ -8,28 +8,20 @@ export const Header = styled.header`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 156px;
   background-color: ${Common.colors.indigo[0]};
-
-  ${Common.mediaQuery.mobile} {
-    height: 166px;
-  }
-
-  ${Common.mediaQuery.tablet} {
-    height: 200px;
-  }
 `;
 
 export const LogoInsertContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: ${({ isAdminPage }) => (isAdminPage ? 0 : "16px")};
 
   ${Common.mediaQuery.tablet} {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: ${({ isAdminPage }) =>
+      isAdminPage ? "stretch" : "space-around"};
     align-items: center;
-    height: 150px;
+    height: ${({ isAdminPage }) => (isAdminPage ? "auto" : "120px")};
     margin: 0;
   }
 `;
@@ -45,6 +37,12 @@ export const LogoContainer = styled.div`
   }
 `;
 
+export const Menu = styled(Icon)`
+  margin-right: 24px;
+  font-size: ${Common.fontSize.l[2]};
+  color: ${Common.colors.white[0]};
+`;
+
 export const Logo = styled(Text)`
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
@@ -53,7 +51,7 @@ export const Logo = styled(Text)`
   cursor: pointer;
 
   ${Common.mediaQuery.mobile} {
-    font-size: ${Common.fontSize.l[1]};
+    font-size: ${Common.fontSize.t[1]};
   }
 `;
 

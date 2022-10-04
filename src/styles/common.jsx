@@ -28,7 +28,7 @@ const Common = {
     "linear-gradient(to right, #7450ae, #8a94ad)",
   ],
   fontSize: {
-    t: ["36px"],
+    t: ["36px", "28px"],
     h: ["24px", "20px", "15px"],
     b: ["18px", "16px", "13px"],
     c: ["11px", "12px"],
