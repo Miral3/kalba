@@ -38,7 +38,6 @@ export const LogoContainer = styled.div`
 `;
 
 export const Menu = styled(Icon)`
-  margin-right: 24px;
   font-size: ${Common.fontSize.l[2]};
   color: ${Common.colors.white[0]};
 `;
@@ -58,7 +57,7 @@ export const Logo = styled(Text)`
 export const LogoBlock = styled.div`
   display: none;
   margin-left: 12px;
-  padding: 10px;
+  padding: 8px;
   border-radius: 6px;
   background-color: ${Common.colors.red[0]};
   cursor: pointer;

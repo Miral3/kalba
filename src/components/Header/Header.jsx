@@ -1,11 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
 import { Text, Button } from "../index";
 import { Navigation, AccountInfo, Search } from "./Components";
 
-const Header = () => {
+const propTypes = {
+  onOpen: PropTypes.func.isRequired,
+};
+
+const Header = ({ onOpen }) => {
   const location = useLocation();
   const { pathname } = location;
   const isAdminPage = pathname.includes("admin");
@@ -15,7 +20,7 @@ const Header = () => {
   /**
    * @Todo recoil 사용하여 로그인 여부 받아오기
    */
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   const handleClickProfile = () => {
     setAccountInfoVisible(!accountInfoVisible);
@@ -47,7 +52,11 @@ const Header = () => {
       <S.LogoInsertContainer isAdminPage={isAdminPage}>
         <S.LogoContainer>
           {isAdminPage && (
-            <Button>
+            <Button
+              onClick={() => onOpen()}
+              hover
+              style={{ marginRight: "24px" }}
+            >
               <S.Menu className="material-symbols-outlined">menu</S.Menu>
             </Button>
           )}
@@ -90,5 +99,7 @@ const Header = () => {
     </S.Header>
   );
 };
+
+Header.propTypes = propTypes;
 
 export default Header;
