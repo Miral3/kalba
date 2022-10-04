@@ -29,12 +29,8 @@ export const LogoInsertContainer = styled.div`
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 26px;
+  height: auto;
   margin: 16px 24px;
-
-  ${Common.mediaQuery.mobile} {
-    height: auto;
-  }
 `;
 
 export const Menu = styled(Icon)`
