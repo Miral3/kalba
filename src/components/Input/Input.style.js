@@ -3,14 +3,13 @@ import styled from "@emotion/styled";
 import Common from "../../styles/common";
 
 const NavigationInput = css`
+  width: calc(100% / 0.75);
+  height: calc(100% / 0.75);
   padding: 5px 7px 5px 12px;
   outline: none;
   border: none;
-
-  &[type="text"] {
-    transform: scale(0.75);
-    transform-origin: left;
-  }
+  transform: scale(0.75);
+  transform-origin: top left;
 `;
 
 const AuthInput = css`

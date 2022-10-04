@@ -62,19 +62,19 @@ const Search = () => {
   return (
     <S.Container ref={containerRef}>
       <S.Search>
-        <S.SearchInner>
+        <S.InputWrapper>
           <Input
             ref={inputRef}
             placeholder="이름, 태그번호 검색"
             onChange={handleFilter}
             onKeyDown={(e) => handleKeyDown(e)}
           />
-          <S.StyledButton onClick={handleSelect}>
-            <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
-              search
-            </Icon>
-          </S.StyledButton>
-        </S.SearchInner>
+        </S.InputWrapper>
+        <S.StyledButton onClick={handleSelect}>
+          <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
+            search
+          </Icon>
+        </S.StyledButton>
       </S.Search>
       <AutoComplete
         ref={listRef}
