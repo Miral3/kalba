@@ -49,6 +49,64 @@ export const standardCategoryItems = [
   },
 ];
 
+export const adminSidebarItems = [
+  {
+    id: 1,
+    name: "관리",
+    value: "management",
+    url: "/admin/management",
+    icon: "manage_accounts",
+  },
+  {
+    id: 2,
+    name: "기준표",
+    value: "standard",
+    url: "/admin/standardTable/heroes",
+    icon: "table",
+  },
+];
+
+export const defaultNavigationItems = [
+  {
+    id: 1,
+    name: "메인",
+    url: "/",
+  },
+  {
+    id: 2,
+    name: "순위표",
+    url: "/leaderboards/donations",
+  },
+  {
+    id: 3,
+    name: "기준표",
+    url: "/standardTable/heroes",
+  },
+];
+
+export const adminNavigationItems = [
+  {
+    id: 1,
+    name: "메인",
+    url: "/",
+  },
+  {
+    id: 2,
+    name: "순위표",
+    url: "/leaderboards/donations",
+  },
+  {
+    id: 3,
+    name: "기준표",
+    url: "/standardTable/heroes",
+  },
+  {
+    id: 4,
+    name: "관리자 페이지",
+    url: "/admin/management",
+  },
+];
+
 export const donationsRankingTableColumns = [
   {
     id: 1,

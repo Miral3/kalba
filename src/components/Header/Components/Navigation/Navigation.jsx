@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  defaultNavigationItems,
+  adminNavigationItems,
+} from "../../../../assets/data";
 import * as S from "./Navigation.style";
 
 const Navigation = () => {
   const location = useLocation();
+  /**
+   * @Todo recoil로 받아오기
+   */
+  const isAdmin = true;
   const [active, setActive] = useState(0);
-
-  const items = [
-    {
-      id: 1,
-      name: "메인",
-      url: "/",
-    },
-    {
-      id: 2,
-      name: "순위표",
-      url: "/leaderboards/donations",
-    },
-    {
-      id: 3,
-      name: "기준표",
-      url: "/standardTable/heroes",
-    },
-  ];
+  const [items, setItems] = useState(
+    isAdmin ? adminNavigationItems : defaultNavigationItems
+  );
 
   const handleClickItem = (idx) => {
     setActive(idx);
@@ -35,6 +28,11 @@ const Navigation = () => {
     );
     setActive(visitedIdx);
   }, [location]);
+
+  useEffect(() => {
+    const nextItems = isAdmin ? adminNavigationItems : defaultNavigationItems;
+    setItems(nextItems);
+  }, [isAdmin]);
 
   return (
     <S.Navigation>
