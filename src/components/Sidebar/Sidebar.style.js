@@ -35,12 +35,11 @@ export const Header = styled.div`
   margin: 16px 24px;
 `;
 
-export const Logo = styled(Text)`
+export const Logo = styled(NavLink)`
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
   color: ${Common.colors.white[0]};
-  cursor: pointer;
 
   ${Common.mediaQuery.mobile} {
     font-size: ${Common.fontSize.t[1]};

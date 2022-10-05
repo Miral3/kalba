@@ -43,7 +43,7 @@ const Sidebar = ({ items, onClose, visible, ...style }) => {
           >
             <S.Menu className="material-symbols-outlined">menu</S.Menu>
           </Button>
-          <S.Logo>Kalba</S.Logo>
+          <S.Logo to="/">Kalba</S.Logo>
         </S.Header>
         <S.Nav>
           {items.map((item, idx) => (
