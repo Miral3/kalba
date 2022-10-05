@@ -10,12 +10,12 @@ export const global = css`
   }
 
   main {
-    min-height: calc(100vh - 270px);
+    min-height: calc(100vh - 262px);
   }
 
   @media (min-width: 768px) {
     main {
-      min-height: calc(100vh - 300px);
+      min-height: calc(100vh - 270px);
     }
   }
 
