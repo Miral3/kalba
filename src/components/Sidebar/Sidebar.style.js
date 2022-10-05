@@ -11,16 +11,22 @@ export const BackgroundDim = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: ${({ zIndex }) => zIndex};
+  z-index: 200;
 `;
 
 export const Container = styled.div`
   position: fixed;
+  top: 0;
+  left: 0;
   width: auto;
   height: 100vh;
   background-color: ${Common.colors.indigo[5]};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
+  transform: ${({ visible }) =>
+    visible ? "translate3d(0, 0, 0)" : "translate3d(-100%, 0, 0)"};
+  transition-duration: 200ms;
+  z-index: 201;
 `;
 
 export const Header = styled.div`

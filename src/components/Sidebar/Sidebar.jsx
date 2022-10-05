@@ -8,14 +8,9 @@ const propTypes = {
   items: PropTypes.instanceOf(Array).isRequired,
   onClose: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
-  zIndex: PropTypes.number,
 };
 
-const defaultProps = {
-  zIndex: 200,
-};
-
-const Sidebar = ({ items, onClose, visible, zIndex, ...style }) => {
+const Sidebar = ({ items, onClose, visible, ...style }) => {
   const location = useLocation();
   const [active, setActive] = useState(0);
   const ref = useRef(null);
@@ -30,18 +25,16 @@ const Sidebar = ({ items, onClose, visible, zIndex, ...style }) => {
   };
 
   useEffect(() => {
+    onClose();
     const { pathname } = location;
     const visitedIdx = items.findIndex((item) => pathname === item.url);
     setActive(visitedIdx);
   }, [location]);
 
   return (
-    <S.BackgroundDim
-      visible={visible}
-      zIndex={zIndex}
-      onClick={(e) => handleClickDim(e)}
-    >
-      <S.Container ref={ref} {...style}>
+    <>
+      <S.BackgroundDim visible={visible} onClick={(e) => handleClickDim(e)} />
+      <S.Container visible={visible} ref={ref} {...style}>
         <S.Header>
           <Button
             onClick={() => onClose()}
@@ -68,11 +61,10 @@ const Sidebar = ({ items, onClose, visible, zIndex, ...style }) => {
           ))}
         </S.Nav>
       </S.Container>
-    </S.BackgroundDim>
+    </>
   );
 };
 
 Sidebar.propTypes = propTypes;
-Sidebar.defaultProps = defaultProps;
 
 export default Sidebar;
