@@ -25,7 +25,7 @@ const Category = ({ items }) => {
             key={item.id}
             to={items[idx].url}
             value={item.value}
-            active={active === idx}
+            active={active === idx ? 1 : 0}
           >
             {item.name}
           </S.Link>

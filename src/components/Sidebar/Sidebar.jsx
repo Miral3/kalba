@@ -51,7 +51,7 @@ const Sidebar = ({ items, onClose, visible, ...style }) => {
               key={item.id}
               to={items[idx].url}
               value={item.value}
-              active={active === idx}
+              active={active === idx ? 1 : 0}
             >
               <S.StyledIcon className="material-symbols-outlined">
                 {item.icon}
