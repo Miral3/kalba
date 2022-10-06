@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { standardCategoryItems, standardTableColumns } from "../../assets/data";
 import { Category, Table } from "../../components";
 import { formula } from "../../assets/dummyData";
@@ -9,7 +9,7 @@ const StandardTable = () => {
   const [loading, setLoading] = useState(true);
   const [standardData, setStandardData] = useState({});
   const [tableData, setTableData] = useState([]);
-  const location = useLocation();
+  const { category } = useParams();
 
   useEffect(() => {
     const res = { ...formula };
@@ -20,11 +20,8 @@ const StandardTable = () => {
 
   useEffect(() => {
     if (tableData.length === 0) return;
-
-    const { pathname } = location;
-    const name = pathname.split("/")[2];
-    setTableData(standardData[name]);
-  }, [location]);
+    setTableData(standardData[category]);
+  }, [category]);
 
   if (loading) {
     return;

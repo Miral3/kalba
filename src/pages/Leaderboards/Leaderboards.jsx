@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
@@ -13,7 +13,7 @@ const Leaderboards = () => {
   const [loading, setLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [tableColumns, setTableColumns] = useState([]);
-  const location = useLocation();
+  const { category } = useParams();
 
   useEffect(() => {
     const res = [...userInfo];
@@ -25,22 +25,20 @@ const Leaderboards = () => {
   useEffect(() => {
     if (tableData.length === 0) return;
 
-    const { pathname } = location;
-
-    if (pathname.includes("donations")) {
+    if (category === "donations") {
       const nextTableData = tableData.sort(
         (a, b) => a.donationRank - b.donationRank
       );
       setTableData(nextTableData);
       setTableColumns(donationsRankingTableColumns);
-    } else if (pathname.includes("score")) {
+    } else if (category === "score") {
       const nextTableData = tableData.sort(
         (a, b) => a.yonghaScoreRank - b.yonghaScoreRank
       );
       setTableData(nextTableData);
       setTableColumns(attackPowerRankingTableColumns);
     }
-  }, [location]);
+  }, [category]);
 
   if (loading) {
     return;
