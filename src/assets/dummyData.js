@@ -1005,7 +1005,7 @@ export const formula = {
   pets: [
     {
       english: "Electro Owl",
-      index: 1,
+      index: 0,
       korean: "일렉트로 아울",
       value: 3,
       maxScore: 30,
@@ -1013,7 +1013,7 @@ export const formula = {
     },
     {
       english: "Mighty Yak",
-      index: 2,
+      index: 1,
       korean: "마이티 야크",
       value: 3,
       maxScore: 30,
@@ -1021,7 +1021,7 @@ export const formula = {
     },
     {
       english: "Unicorn",
-      index: 3,
+      index: 2,
       korean: "유니콘",
       value: 3,
       maxScore: 30,
@@ -1029,7 +1029,7 @@ export const formula = {
     },
     {
       english: "L.A.S.S.I",
-      index: 0,
+      index: 3,
       korean: "L.A.S.S.I",
       value: 3,
       maxScore: 30,
@@ -2986,3 +2986,86 @@ export const profile = {
   yonghaScoreRank: 7,
   donationRank: 21,
 };
+
+export const accountInfo = [
+  {
+    name: "tempId1",
+    tag: "#2J20228CG",
+    nickname: "천사",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId2",
+    tag: "#CPLLJLPC",
+    nickname: "별별",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId3",
+    tag: "#28PU8YR20",
+    nickname: "PC-AIR",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId4",
+    tag: "#GCY2G8CQ",
+    nickname: "손재경",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId5",
+    tag: "#8QCQVLGP",
+    nickname: "달달",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId6",
+    tag: "#28GCUUCUR",
+    nickname: "city of joy",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId7",
+    tag: "#8L2CLP9V9",
+    nickname: "혀니",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId8",
+    tag: "#U2R9VC0C",
+    nickname: "내꺼",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId9",
+    tag: "#QRCQVP8UQ",
+    nickname: "카즈",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+  {
+    name: "tempId10",
+    tag: "#QJ29VY008",
+    nickname: "킷틍윤",
+    signupState: true,
+    attackState: false,
+    warningState: false,
+  },
+];

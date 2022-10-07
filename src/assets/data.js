@@ -49,6 +49,39 @@ export const standardCategoryItems = [
   },
 ];
 
+export const editableStandardCategoryItems = [
+  {
+    id: 1,
+    name: "영웅",
+    value: "heroes",
+    url: "/admin/standardTable/heroes",
+  },
+  {
+    id: 2,
+    name: "펫",
+    value: "pets",
+    url: "/admin/standardTable/pets",
+  },
+  {
+    id: 3,
+    name: "유닛",
+    value: "units",
+    url: "/admin/standardTable/units",
+  },
+  {
+    id: 4,
+    name: "마법",
+    value: "spells",
+    url: "/admin/standardTable/spells",
+  },
+  {
+    id: 5,
+    name: "시즈머신",
+    value: "siegeMachines",
+    url: "/admin/standardTable/siegeMachines",
+  },
+];
+
 export const adminSidebarItems = [
   {
     id: 1,
@@ -134,6 +167,7 @@ export const donationsRankingTableColumns = [
     accessor: "role",
   },
 ];
+
 export const attackPowerRankingTableColumns = [
   {
     id: 1,
@@ -161,6 +195,7 @@ export const attackPowerRankingTableColumns = [
     accessor: "yonghaScore",
   },
 ];
+
 export const standardTableColumns = [
   {
     id: 1,
@@ -181,5 +216,28 @@ export const standardTableColumns = [
     id: 4,
     header: "비례 점수",
     accessor: "value",
+  },
+];
+
+export const managementTableColumns = [
+  {
+    id: 1,
+    header: "이름",
+    accessor: "nickname",
+  },
+  {
+    id: 2,
+    header: "회원가입",
+    accessor: "signupState",
+  },
+  {
+    id: 3,
+    header: "미공",
+    accessor: "attackState",
+  },
+  {
+    id: 4,
+    header: "경고",
+    accessor: "warningState",
   },
 ];
