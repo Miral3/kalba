@@ -2,8 +2,14 @@ import React, { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
-import { Input, Button, Icon, AutoComplete } from "../../../../components";
-import { ErrorText, Reference } from "../index";
+import {
+  Input,
+  Button,
+  Icon,
+  AutoComplete,
+  ErrorText,
+} from "../../../../components";
+import { Reference } from "../index";
 import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";

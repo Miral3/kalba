@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "../../../../components";
-import Common from "../../../../styles/common";
+import { Icon } from "..";
+import Common from "../../styles/common";
 import * as S from "./ErrorText.style";
 
 const propTypes = {

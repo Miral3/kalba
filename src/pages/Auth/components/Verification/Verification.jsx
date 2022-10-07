@@ -1,7 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Button, Icon, Input, Modal } from "../../../../components";
-import { ErrorText } from "../index";
+import { Button, Icon, Input, Modal, ErrorText } from "../../../../components";
 import useForm from "../../../../hooks/useForm";
 import * as S from "./Verification.style";
 import Common from "../../../../styles/common";

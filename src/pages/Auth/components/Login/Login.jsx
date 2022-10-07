@@ -1,8 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
-import { Input, Button } from "../../../../components";
-import { ErrorText } from "../index";
+import { Input, Button, ErrorText } from "../../../../components";
 import * as S from "../../Auth.style";
 
 const Login = () => {

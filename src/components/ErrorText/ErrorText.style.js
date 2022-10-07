@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { Text } from "../../../../components";
-import Common from "../../../../styles/common";
+import { Text } from "..";
+import Common from "../../styles/common";
 
 export const ErrorText = styled(Text)`
   display: flex;
