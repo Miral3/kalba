@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
+import { Icon } from "../index";
 import Common from "../../styles/common";
 
 export const Table = styled.table`
@@ -35,7 +36,7 @@ export const Th = styled.th`
   font-size: ${Common.fontSize.b[2]};
 
   &:nth-of-type(1) {
-    width: ${({ version }) => (version === "standard" ? "40%" : "auto")};
+    width: ${({ version }) => (version === "leaderboard" ? "auto" : "40%")};
     padding-left: 12px;
   }
   &:nth-of-type(2) {
@@ -79,4 +80,8 @@ export const Trophy = styled.img`
   width: 25px;
   height: 25px;
   padding-right: 8px;
+`;
+
+export const Delete = styled(Icon)`
+  font-size: ${Common.fontSize.h[1]};
 `;
