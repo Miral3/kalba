@@ -22,16 +22,28 @@ const App = () => {
           <Route path="/leaderboards/:category" element={<Leaderboards />} />
           <Route path="/standardTable/:category" element={<StandardTable />} />
           <Route path="/auth/:category" element={<Auth />} />
-          <Route path="/profile/:category" element={<Profile />} />
+          <Route path="/profile/:tag" element={<Profile />} />
           <Route
-            path="/admin/*"
+            path="/admin/:type"
             element={
               <Admin
                 onClose={() => setSidebarVisible(false)}
                 visible={sidebarVisible}
               />
             }
-          />
+          >
+            <Route
+              path="/admin/:type:category"
+              element={
+                <Admin
+                  onClose={() => setSidebarVisible(false)}
+                  visible={sidebarVisible}
+                />
+              }
+            >
+              /
+            </Route>
+          </Route>
           <Route path="*" element={<h1>NotFound</h1>} />
         </Routes>
         <Footer />
