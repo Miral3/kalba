@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 
   ${Common.mediaQuery.tablet} {
     align-items: center;
