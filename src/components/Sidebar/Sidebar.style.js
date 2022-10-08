@@ -20,7 +20,7 @@ export const Container = styled.div`
   left: 0;
   width: auto;
   height: 100vh;
-  background-color: ${Common.colors.indigo[5]};
+  background-color: ${Common.colors.indigo[0]};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   transform: ${({ visible }) =>
@@ -63,7 +63,7 @@ export const Link = styled(NavLink)`
   gap: 8px;
   padding: 8px 24px;
   background-color: ${({ active }) =>
-    active ? Common.colors.red[0] : Common.colors.indigo[5]};
+    active ? Common.colors.red[0] : Common.colors.indigo[0]};
   &:hover {
     background-color: ${Common.colors.red[0]};
   }
