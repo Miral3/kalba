@@ -9,6 +9,7 @@ import {
   Profile,
   Admin,
   NotFound,
+  About,
 } from "./pages";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/standardTable/:category" element={<StandardTable />} />
           <Route path="/auth/:category" element={<Auth />} />
           <Route path="/profile/:tag" element={<Profile />} />
+          <Route path="/about" element={<About />} />
           <Route
             path="/admin/:type"
             element={
