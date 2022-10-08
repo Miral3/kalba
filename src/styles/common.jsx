@@ -19,7 +19,7 @@ const Common = {
     basic: ["#E5E2D6"],
     red: ["#DA2A29", "#E93636", "#FF4500"],
     purple: ["#6a7497", "#42376c", "#38385A", "#212032", "#49485f"],
-    blue: ["#297fb9"],
+    blue: ["#297fb9", "#4b7bec"],
     yellow: ["#e5c133"],
   },
   gradient: [
