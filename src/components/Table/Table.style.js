@@ -36,8 +36,9 @@ export const Th = styled.th`
   font-size: ${Common.fontSize.b[2]};
 
   &:nth-of-type(1) {
-    width: ${({ version }) => (version === "leaderboard" ? "auto" : "40%")};
-    padding-left: 12px;
+    width: ${({ version }) => (version === "leaderboard" ? "auto" : "35%")};
+    padding-left: ${({ version }) =>
+      version === "leaderboard" ? "12px" : "0"};
   }
   &:nth-of-type(2) {
     padding-left: ${({ version }) =>
@@ -62,7 +63,7 @@ export const Td = styled.td`
 
   &:nth-of-type(1) {
     padding-left: ${({ version }) =>
-      version === "leaderboard" ? "20px" : "12px"};
+      version === "leaderboard" ? "20px" : "0"};
   }
   &:nth-of-type(1),
   &:nth-of-type(2) {
