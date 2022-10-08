@@ -8,6 +8,7 @@ import {
   Auth,
   Profile,
   Admin,
+  NotFound,
 } from "./pages";
 
 const App = () => {
@@ -44,7 +45,7 @@ const App = () => {
               /
             </Route>
           </Route>
-          <Route path="*" element={<h1>NotFound</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>
