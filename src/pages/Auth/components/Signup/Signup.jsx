@@ -2,13 +2,7 @@ import React, { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
-import {
-  Input,
-  Button,
-  Icon,
-  AutoComplete,
-  ErrorText,
-} from "../../../../components";
+import { Input, Button, AutoComplete, ErrorText } from "../../../../components";
 import { Reference } from "../index";
 import { members } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
@@ -150,7 +144,12 @@ const Signup = () => {
           />
           <S.InputLabel>태그번호</S.InputLabel>
           <S.IconWrapper>
-            <Icon onClick={handleSelect}>search</Icon>
+            <S.Search
+              className="material-symbols-outlined"
+              onClick={handleSelect}
+            >
+              search
+            </S.Search>
           </S.IconWrapper>
           <AutoComplete
             ref={listRef}

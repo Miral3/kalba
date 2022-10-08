@@ -2,14 +2,14 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Common from "../../styles/common";
 
-const LogoutButton = css`
+const LogoutButton = ({ theme }) => css`
   padding: 10px 16px;
-  border: 1px solid ${Common.colors.gray[3]};
+  border: ${theme.border.logoutBtn};
   border-radius: 4px;
-  background-color: ${Common.colors.gray[0]};
+  background-color: ${theme.bg.logoutBtn};
   font-size: ${Common.fontSize.b[2]};
   font-weight: 600;
-  color: ${Common.colors.black[0]};
+  color: ${theme.text.logoutBtn};
 `;
 
 const TextButton = css`
@@ -21,7 +21,7 @@ const TextButton = css`
   color: inherit;
 `;
 
-const LoginButton = css`
+const LoginButton = ({ theme }) => css`
   padding: 16px;
   margin-top: 16px;
   background-color: ${Common.colors.red[0]};
@@ -34,7 +34,8 @@ const LoginButton = css`
   }
 
   &:disabled {
-    background-color: ${Common.colors.gray[4]};
+    background-color: ${theme.bg.disabledBtn};
+    color: ${theme.text.disabledBtn};
     cursor: default;
   }
 `;

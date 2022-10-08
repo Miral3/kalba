@@ -8,9 +8,11 @@ import { Navigation, AccountInfo, Search } from "./Components";
 
 const propTypes = {
   onOpen: PropTypes.func.isRequired,
+  isDark: PropTypes.bool.isRequired,
+  setIsDark: PropTypes.func.isRequired,
 };
 
-const Header = ({ onOpen }) => {
+const Header = ({ onOpen, isDark, setIsDark }) => {
   const location = useLocation();
   const { pathname } = location;
   const isAdminPage = pathname.includes("admin");
@@ -76,6 +78,11 @@ const Header = ({ onOpen }) => {
           </NavLink>
         </S.LogoContainer>
         <S.AuthWrapper isLoggedIn={isLoggedIn}>
+          <Button onClick={() => setIsDark(!isDark)}>
+            <S.Mode className="material-symbols-outlined">
+              {isDark ? "dark_mode" : "light_mode"}
+            </S.Mode>
+          </Button>
           {isLoggedIn ? (
             <>
               <Button onClick={handleClickProfile} ref={profileButtonRef}>

@@ -4,7 +4,7 @@ import Common from "../../../../styles/common";
 export const Container = styled.div``;
 
 export const Caption = styled.caption`
-  background-color: ${Common.colors.brown[0]};
+  background-color: ${({ theme }) => theme.bg.caption};
   color: ${Common.colors.white[0]};
 `;
 

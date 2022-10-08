@@ -6,7 +6,7 @@ import Common from "../../../../styles/common";
 export const Card = styled.div`
   width: calc(100vw - 32px);
   height: calc(100vh - 32px);
-  background-color: ${Common.colors.white[0]};
+  background-color: ${({ theme }) => theme.bg.modal};
   margin: 10px 8px 16px 8px;
 
   ${Common.mediaQuery.tabletS} {
@@ -25,7 +25,12 @@ export const Logo = styled.h1`
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
-  color: ${Common.colors.red[0]};
+  color: ${({ theme }) => theme.text.logo};
+`;
+
+export const Close = styled.span`
+  font-size: ${Common.fontSize.h[0]};
+  color: ${({ theme }) => theme.text.text};
 `;
 
 export const Form = styled.form`
@@ -47,7 +52,7 @@ export const Content = styled.p`
   padding: 16px;
   margin-top: 12px;
   margin-bottom: 16px;
-  background-color: ${Common.colors.gray[8]};
+  background-color: ${({ theme }) => theme.bg.description};
   line-height: 20px;
 
   ${Common.mediaQuery.tabletS} {
@@ -58,7 +63,7 @@ export const Content = styled.p`
 export const Description = styled(Text)`
   font-size: ${Common.fontSize.b[2]};
   font-weight: 500;
-  color: ${Common.colors.black[3]};
+  color: ${({ theme }) => theme.text.description};
 
   ${Common.mediaQuery.tabletS} {
     font-size: ${Common.fontSize.b[1]};

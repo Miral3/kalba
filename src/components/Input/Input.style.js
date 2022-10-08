@@ -19,6 +19,7 @@ const AuthInput = css`
   outline: none;
   border: none;
   background-color: transparent;
+  color: inherit;
 `;
 
 export const Input = styled.input`

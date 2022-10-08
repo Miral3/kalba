@@ -11,23 +11,22 @@ export const Table = styled.table`
 export const Thead = styled.thead`
   position: ${({ sticky }) => (sticky ? "sticky" : "relative")};
   top: 0;
-  background-color: ${Common.colors.basic[0]};
-  color: ${Common.colors.brown[0]};
+  background-color: ${({ theme }) => theme.bg.thead};
+  color: ${({ theme }) => theme.text.thead};
 `;
 
 export const Tbody = styled.tbody`
-  background-color: ${Common.colors.white[0]};
+  background-color: ${({ theme }) => theme.bg.tbody};
+  color: ${({ theme }) => theme.text.tbody};
 
   tr:hover {
-    background-color: ${({ version }) =>
-      version === "leaderboard"
-        ? Common.colors.gray[1]
-        : Common.colors.white[0]};
+    background-color: ${({ version, theme }) =>
+      version === "leaderboard" ? theme.hover.tbody : theme.bg.tbody};
   }
 `;
 
 export const Tr = styled.tr`
-  border: 1px solid ${Common.colors.gray[3]};
+  border: ${({ theme }) => theme.border.tr};
 `;
 
 export const Th = styled.th`
@@ -85,4 +84,5 @@ export const Trophy = styled.img`
 
 export const Delete = styled(Icon)`
   font-size: ${Common.fontSize.h[1]};
+  color: ${({ theme }) => theme.text.tbody};
 `;

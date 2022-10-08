@@ -56,6 +56,7 @@ export const LogoBlock = styled.div`
   padding: 8px;
   border-radius: 6px;
   background-color: ${Common.colors.red[0]};
+  color: ${Common.colors.white[0]};
   cursor: pointer;
 
   ${Common.mediaQuery.mobile} {
@@ -67,15 +68,28 @@ export const AuthWrapper = styled.div`
   position: absolute;
   top: ${({ isLoggedIn }) => (isLoggedIn ? "14px" : "18px")};
   right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
 
   ${Common.mediaQuery.mobile} {
     ${({ isLoggedIn }) => (isLoggedIn ? "16px" : "24px")};
   }
 `;
 
+export const Mode = styled(Icon)`
+  font-size: ${Common.fontSize.t[1]};
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+  color: ${Common.colors.white[1]};
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+`;
+
 export const Profile = styled(Icon)`
   font-size: ${Common.fontSize.l[2]};
-  color: ${Common.colors.white[0]};
+  color: ${Common.colors.white[1]};
 
   ${Common.mediaQuery.mobile} {
     font-size: ${Common.fontSize.t[0]};

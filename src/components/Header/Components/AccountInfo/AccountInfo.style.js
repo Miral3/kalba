@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
-import Common from "../../../../styles/common";
 
 export const Container = styled.div`
   position: absolute;
@@ -15,7 +14,8 @@ export const Container = styled.div`
   height: 285px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgb(0 0 0 / 20%);
-  background-color: ${Common.colors.gray[0]};
+  background-color: ${({ theme }) => theme.bg.container};
+  color: ${({ theme }) => theme.text.tbody};
 `;
 
 export const UserInfoContainer = styled.div`
@@ -32,7 +32,6 @@ export const Image = styled.img`
 `;
 
 export const Link = styled(NavLink)`
-  color: ${Common.colors.black[0]};
   font-weight: 600;
 `;
 
@@ -47,5 +46,5 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   width: 100%;
   padding: 16px 0;
-  border-top: 1px solid ${Common.colors.gray[3]};
+  border-top: ${({ theme }) => theme.border.tr};
 `;

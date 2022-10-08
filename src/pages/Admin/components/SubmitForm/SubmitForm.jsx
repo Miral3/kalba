@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Button, Icon, Input, Modal, ErrorText } from "../../../../components";
+import { Button, Input, Modal, ErrorText } from "../../../../components";
 import useForm from "../../../../hooks/useForm";
 import * as S from "./SubmitForm.style";
 
@@ -71,7 +71,7 @@ const SubmitForm = ({
         <S.Container>
           <S.Logo>Kalba</S.Logo>
           <Button hover onClick={() => setModalVisible(false)}>
-            <Icon>close</Icon>
+            <S.Close className="material-symbols-outlined">close</S.Close>
           </Button>
         </S.Container>
         <S.Form onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ import Common from "../../../../styles/common";
 export const Card = styled.div`
   width: calc(100vw - 32px);
   height: calc(100vh - 32px);
-  background-color: ${Common.colors.white[0]};
+  background-color: ${({ theme }) => theme.bg.modal};
   margin: 10px 8px 16px 8px;
   ${Common.mediaQuery.tabletS} {
     width: 500px;
@@ -21,7 +21,12 @@ export const Logo = styled.h1`
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
-  color: ${Common.colors.red[0]};
+  color: ${({ theme }) => theme.text.logo};
+`;
+
+export const Close = styled.span`
+  font-size: ${Common.fontSize.h[0]};
+  color: ${({ theme }) => theme.text.text};
 `;
 
 export const Content = styled.div`

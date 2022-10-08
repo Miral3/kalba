@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Common from "../../styles/common";
 
 export const BackgroundDim = styled.div`
   position: fixed;
@@ -18,7 +17,7 @@ export const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 8px;
-  background-color: ${Common.colors.white[0]};
+  background-color: ${({ theme }) => theme.bg.modal};
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 `;

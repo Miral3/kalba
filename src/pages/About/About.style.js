@@ -25,7 +25,7 @@ export const Content = styled.div`
 export const Avatar = styled.img`
   width: 60%;
   margin-bottom: 8px;
-  border: 2px solid ${Common.colors.gray[3]};
+  border: ${({ theme }) => theme.border.avatar};
   border-radius: 50%;
 
   ${Common.mediaQuery.mobile} {

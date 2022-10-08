@@ -4,16 +4,17 @@ import Common from "../../styles/common";
 
 export const Category = styled.div`
   width: 100%;
-  border: 1px solid ${Common.colors.gray[4]};
+  border: ${({ theme }) => theme.border.category};
   border-top: 2px solid ${Common.colors.red[0]};
   box-sizing: border-box;
-  background-color: ${Common.colors.gray[1]};
+  background-color: ${({ theme }) => theme.bg.container};
 `;
 
 export const Nav = styled.nav`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 8px;
   padding: 4px 10px;
 `;
 
@@ -21,13 +22,18 @@ export const Link = styled(NavLink)`
   height: 40px;
   padding: 0 16px;
   border-radius: 4px;
-  background-color: ${({ active }) =>
-    active ? Common.colors.red[0] : Common.colors.gray[1]};
+  background-color: ${({ active, theme }) =>
+    active ? Common.colors.red[0] : theme.bg.container};
   line-height: 40px;
   font-size: 12px;
   font-weight: bold;
-  color: ${({ active }) =>
-    active ? Common.colors.white[0] : Common.colors.black[0]};
+  color: ${({ active, theme }) =>
+    active ? Common.colors.white[0] : theme.text.text};
   text-align: center;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${({ active, theme }) =>
+      active ? Common.colors.red[0] : theme.hover.categoryItem};
+  }
 `;

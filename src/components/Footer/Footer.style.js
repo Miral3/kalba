@@ -9,14 +9,14 @@ export const Footer = styled.footer`
   justify-content: center;
   align-items: center;
   height: 100px;
-  background-color: ${Common.colors.gray[1]};
+  background-color: ${({ theme }) => theme.bg.footer};
 `;
 
 export const Logo = styled(NavLink)`
   font-size: ${Common.fontSize.h[1]};
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
-  color: ${Common.colors.black[0]};
+  color: ${({ theme }) => theme.text.text};
 `;
 
 export const Content = styled.div`

@@ -17,7 +17,7 @@ export const Container = styled.div`
 export const Card = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${Common.colors.white[0]};
+  background-color: ${({ theme }) => theme.bg.modal};
   padding: 0 24px;
 
   ${Common.mediaQuery.tablet} {
@@ -33,7 +33,7 @@ export const Logo = styled.h1`
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
-  color: ${Common.colors.red[0]};
+  color: ${({ theme }) => theme.text.logo};
 
   ${Common.mediaQuery.tablet} {
     font-size: ${Common.fontSize.l[2]};
@@ -92,8 +92,9 @@ export const IconWrapper = styled.div`
   width: 64px;
   position: absolute;
   right: 0;
-  top: 13px;
+  top: 10px;
   z-index: 4;
+  text-align: center;
   cursor: pointer;
 
   &:hover::after {
@@ -107,6 +108,11 @@ export const IconWrapper = styled.div`
     background-color: #313131;
     color: ${Common.colors.white[0]};
   }
+`;
+
+export const Search = styled.span`
+  font-size: ${Common.fontSize.h[0]};
+  color: ${({ theme }) => theme.text.text};
 `;
 
 export const Link = styled(Text)`

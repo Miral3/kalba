@@ -1,6 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Button, Icon, Modal, Text } from "../../../../components";
+import { Button, Modal, Text } from "../../../../components";
 import * as S from "./Reference.style";
 
 const propTypes = {
@@ -21,7 +21,7 @@ const Reference = ({ modalVisible, setModalVisible }) => {
         <S.Container>
           <S.Logo>Kalba</S.Logo>
           <Button hover onClick={() => setModalVisible(false)}>
-            <Icon>close</Icon>
+            <S.Close className="material-symbols-outlined">close</S.Close>
           </Button>
         </S.Container>
         <S.Content>

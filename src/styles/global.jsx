@@ -1,13 +1,12 @@
 import React from "react";
 import { Global, css } from "@emotion/react";
 import reset from "emotion-reset";
-import Common from "./common";
 
-const style = css`
+const style = (theme) => css`
   body {
     margin: 0;
-    color: ${Common.colors.black[0]};
-    background-color: ${Common.colors.gray[0]};
+    color: ${theme.text.text};
+    background-color: ${theme.bg.body};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
