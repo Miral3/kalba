@@ -1,7 +1,7 @@
 const Common = {
   colors: {
     black: ["#000000", "#1C1C20", "#171715", "#555B60", "#505050"],
-    white: ["#FFFFFF"],
+    white: ["#FFFFFF", "#ececec;"],
     gray: [
       "#F5F5F5",
       "#F0F0F0",
