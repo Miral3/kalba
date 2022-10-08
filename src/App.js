@@ -11,6 +11,7 @@ import {
   NotFound,
   About,
 } from "./pages";
+import GlobalStyle from "./styles/global";
 
 const App = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <div>
       <Router>
+        <GlobalStyle />
         <Header onOpen={() => setSidebarVisible(true)} />
         <Routes>
           <Route path="/" element={<Main />} />

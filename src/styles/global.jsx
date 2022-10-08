@@ -1,9 +1,12 @@
-import { css } from "@emotion/react";
+import React from "react";
+import { Global, css } from "@emotion/react";
+import reset from "emotion-reset";
 import Common from "./common";
 
-export const global = css`
+const style = css`
   body {
     margin: 0;
+    color: ${Common.colors.black[0]};
     background-color: ${Common.colors.gray[0]};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,4 +26,12 @@ export const global = css`
     text-decoration: none;
     color: inherit;
   }
+
+  ${reset}
 `;
+
+const GlobalStyle = () => {
+  return <Global styles={style} />;
+};
+
+export default GlobalStyle;
