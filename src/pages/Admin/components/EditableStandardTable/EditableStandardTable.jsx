@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   editableStandardCategoryItems,
   standardTableColumns,
@@ -16,6 +16,7 @@ const EditableStandardTable = () => {
   const [editMode, setEditMode] = useState(false);
   const [submitFormVisible, setSubmitFormVisible] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const navigate = useNavigate();
   const { category } = useParams();
 
   const handleClickEditMode = (state) => {
@@ -82,6 +83,14 @@ const EditableStandardTable = () => {
     setEditMode(false);
     setIsInitialized(true);
   };
+
+  useEffect(() => {
+    if (
+      !editableStandardCategoryItems.find((item) => item.value === category)
+    ) {
+      navigate("/404-not-found");
+    }
+  }, []);
 
   useEffect(() => {
     const res = { ...formula };

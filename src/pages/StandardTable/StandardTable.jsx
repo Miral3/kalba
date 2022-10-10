@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { standardCategoryItems, standardTableColumns } from "../../assets/data";
 import { Category, Table } from "../../components";
 import { formula } from "../../assets/dummyData";
@@ -9,7 +9,14 @@ const StandardTable = () => {
   const [loading, setLoading] = useState(true);
   const [standardData, setStandardData] = useState({});
   const [tableData, setTableData] = useState([]);
+  const navigate = useNavigate();
   const { category } = useParams();
+
+  useEffect(() => {
+    if (!standardCategoryItems.find((item) => item.value === category)) {
+      navigate("/404-not-found");
+    }
+  }, []);
 
   useEffect(() => {
     const res = { ...formula };

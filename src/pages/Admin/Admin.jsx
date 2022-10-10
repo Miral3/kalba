@@ -18,6 +18,12 @@ const Admin = ({ onClose, visible }) => {
   const isAdmin = true;
 
   useEffect(() => {
+    if (!["management", "standardTable"].find((item) => item === type)) {
+      navigate("/404-not-found");
+    }
+  }, []);
+
+  useEffect(() => {
     if (!isAdmin) {
       alert("잘못된 접근 입니다.");
       navigate("/");

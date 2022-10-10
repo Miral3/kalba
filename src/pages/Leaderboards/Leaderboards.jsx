@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
@@ -13,7 +13,14 @@ const Leaderboards = () => {
   const [loading, setLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [tableColumns, setTableColumns] = useState([]);
+  const navigate = useNavigate();
   const { category } = useParams();
+
+  useEffect(() => {
+    if (!rankingCategoryItems.find((item) => item.value === category)) {
+      navigate("/404-not-found");
+    }
+  }, []);
 
   useEffect(() => {
     const res = [...userInfo];
