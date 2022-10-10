@@ -46,18 +46,14 @@ const Management = () => {
   }
 
   return (
-    <S.Main>
-      <S.Section>
-        <S.Container>
-          <Table
-            version="management"
-            columns={managementTableColumns}
-            data={tableData}
-            handleChangeState={handleChangeState}
-          />
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Container>
+      <Table
+        version="management"
+        columns={managementTableColumns}
+        data={tableData}
+        handleChangeState={handleChangeState}
+      />
+    </S.Container>
   );
 };
 

@@ -120,52 +120,48 @@ const EditableStandardTable = () => {
   }
 
   return (
-    <S.Main>
-      <S.Section>
-        <S.Container>
-          {submitFormVisible && (
-            <SubmitForm
-              nextIndex={tableData.length + 1}
-              modalVisible={submitFormVisible}
-              setModalVisible={setSubmitFormVisible}
-              handleAddTableData={handleAddTableData}
-            />
-          )}
-          <Category items={editableStandardCategoryItems} />
-          <Table
-            columns={standardTableColumns}
-            data={tableData}
-            version="editableStandard"
-            editMode={editMode}
-            handleInputTableData={handleInputTableData}
-            handleDeleteTableData={handleDeleteTableData}
-          />
-          <S.Actions>
-            {!editMode && (
-              <S.StyledButton onClick={() => handleClickEditMode(true)}>
-                수정
-              </S.StyledButton>
-            )}
-            {editMode && (
-              <>
-                <S.StyledButton
-                  dir="left"
-                  onClick={() => setSubmitFormVisible(true)}
-                >
-                  추가
-                </S.StyledButton>
-                <S.StyledButton onClick={() => handleSaveTableData()}>
-                  저장
-                </S.StyledButton>
-                <S.StyledButton onClick={() => handleCancelEdit()}>
-                  취소
-                </S.StyledButton>
-              </>
-            )}
-          </S.Actions>
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Container>
+      {submitFormVisible && (
+        <SubmitForm
+          nextIndex={tableData.length + 1}
+          modalVisible={submitFormVisible}
+          setModalVisible={setSubmitFormVisible}
+          handleAddTableData={handleAddTableData}
+        />
+      )}
+      <Category items={editableStandardCategoryItems} />
+      <Table
+        columns={standardTableColumns}
+        data={tableData}
+        version="editableStandard"
+        editMode={editMode}
+        handleInputTableData={handleInputTableData}
+        handleDeleteTableData={handleDeleteTableData}
+      />
+      <S.Actions>
+        {!editMode && (
+          <S.StyledButton onClick={() => handleClickEditMode(true)}>
+            수정
+          </S.StyledButton>
+        )}
+        {editMode && (
+          <>
+            <S.StyledButton
+              dir="left"
+              onClick={() => setSubmitFormVisible(true)}
+            >
+              추가
+            </S.StyledButton>
+            <S.StyledButton onClick={() => handleSaveTableData()}>
+              저장
+            </S.StyledButton>
+            <S.StyledButton onClick={() => handleCancelEdit()}>
+              취소
+            </S.StyledButton>
+          </>
+        )}
+      </S.Actions>
+    </S.Container>
   );
 };
 

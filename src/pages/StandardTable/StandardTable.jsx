@@ -34,18 +34,16 @@ const StandardTable = () => {
     return;
   }
   return (
-    <S.Main>
-      <S.Section>
-        <S.Container>
-          <Category items={standardCategoryItems} />
-          <Table
-            columns={standardTableColumns}
-            data={tableData}
-            version="standard"
-          />
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Section>
+      <S.Container>
+        <Category items={standardCategoryItems} />
+        <Table
+          columns={standardTableColumns}
+          data={tableData}
+          version="standard"
+        />
+      </S.Container>
+    </S.Section>
   );
 };
 

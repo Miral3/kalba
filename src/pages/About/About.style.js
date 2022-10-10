@@ -2,10 +2,6 @@ import styled from "@emotion/styled";
 import Common from "../../styles/common";
 import { Text } from "../../components";
 
-export const Main = styled.main`
-  width: 100%;
-`;
-
 export const Section = styled.section`
   padding-top: 24px;
   padding-bottom: 80px;

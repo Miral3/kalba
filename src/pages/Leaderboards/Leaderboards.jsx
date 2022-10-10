@@ -51,14 +51,12 @@ const Leaderboards = () => {
     return;
   }
   return (
-    <S.Main>
-      <S.Section>
-        <S.Container>
-          <Category items={rankingCategoryItems} />
-          <Table columns={tableColumns} data={tableData} />
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Section>
+      <S.Container>
+        <Category items={rankingCategoryItems} />
+        <Table columns={tableColumns} data={tableData} />
+      </S.Container>
+    </S.Section>
   );
 };
 

@@ -1,15 +1,10 @@
 import styled from "@emotion/styled";
 import Common from "../../styles/common";
 
-export const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 164px);
-`;
-
 export const Section = styled.section`
   display: flex;
   justify-content: center;
+  min-height: calc(100vh - 268px);
   padding-top: 24px;
   padding-bottom: 80px;
 `;

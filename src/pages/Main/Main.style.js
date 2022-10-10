@@ -1,11 +1,8 @@
 import styled from "@emotion/styled";
 
-export const Main = styled.main`
+export const Section = styled.section`
   display: flex;
   flex-direction: column;
-`;
-
-export const Section = styled.section`
   padding-top: 24px;
   padding-bottom: 80px;
 `;

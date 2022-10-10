@@ -2,11 +2,6 @@ import styled from "@emotion/styled";
 import { Text } from "../../components";
 import Common from "../../styles/common";
 
-export const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const Section = styled.section`
   display: flex;
   justify-content: center;

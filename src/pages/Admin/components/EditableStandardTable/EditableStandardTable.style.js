@@ -2,18 +2,6 @@ import styled from "@emotion/styled";
 import Common from "../../../../styles/common";
 import { Button } from "../../../../components";
 
-export const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const Section = styled.section`
-  display: flex;
-  justify-content: center;
-  padding-top: 24px;
-  padding-bottom: 80px;
-`;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

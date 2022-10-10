@@ -35,15 +35,13 @@ const Profile = () => {
 
   if (loading) return;
   return (
-    <S.Main>
-      <S.Section>
-        <S.Container>
-          <Info data={userInfo} />
-          <Rank data={userInfo} />
-          <Units data={userInfo} />
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Section>
+      <S.Container>
+        <Info data={userInfo} />
+        <Rank data={userInfo} />
+        <Units data={userInfo} />
+      </S.Container>
+    </S.Section>
   );
 };
 

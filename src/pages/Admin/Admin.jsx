@@ -31,18 +31,16 @@ const Admin = ({ onClose, visible }) => {
   }, [isAdmin]);
 
   return (
-    <S.Main>
-      <S.Section>
-        <Sidebar
-          items={adminSidebarItems}
-          onClose={() => onClose()}
-          visible={visible}
-        />
-        <S.Container>
-          {type === "management" ? <Management /> : <EditableStandardTable />}
-        </S.Container>
-      </S.Section>
-    </S.Main>
+    <S.Section>
+      <Sidebar
+        items={adminSidebarItems}
+        onClose={() => onClose()}
+        visible={visible}
+      />
+      <S.Container>
+        {type === "management" ? <Management /> : <EditableStandardTable />}
+      </S.Container>
+    </S.Section>
   );
 };
 
