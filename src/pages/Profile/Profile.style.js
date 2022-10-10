@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Text } from "../../components";
 import Common from "../../styles/common";
 
 export const Main = styled.main`
@@ -29,5 +30,16 @@ export const Container = styled.div`
   }
   ${Common.mediaQuery.tablet} {
     width: 680px;
+  }
+`;
+
+export const StyledText = styled(Text)`
+  font-size: ${Common.fontSize.c[0]};
+  font-weight: 600;
+  line-height: 13px;
+
+  ${Common.mediaQuery.mobile} {
+    font-size: ${Common.fontSize.b[0]};
+    line-height: 21px;
   }
 `;
