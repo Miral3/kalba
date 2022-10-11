@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 16px;
+  padding: 8px 16px;
   border: 3px solid ${Common.colors.purple[0]};
   background: ${Common.gradient[0]};
   font-family: "supercell+appLight";
@@ -39,9 +39,8 @@ export const TownHall = styled.img`
   width: 150px;
   padding: 24px 0;
   ${Common.mediaQuery.tablet} {
-    width: 130px;
+    width: 140px;
     height: 158px;
-    padding: 0;
   }
 `;
 
