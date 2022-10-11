@@ -2466,29 +2466,29 @@ export const profile = {
   tag: "#LJLLLQLQR",
   name: "Miral",
   role: "coLeader",
-  expLevel: 205,
-  trophies: 3005,
-  versusTrophies: 4595,
+  expLevel: 206,
+  trophies: 2178,
+  versusTrophies: 4603,
   clanName: "칼 없는 바바리안",
   badgeUrls: {
     medium:
       "https://api-assets.clashofclans.com/badges/512/kBkfXdQxnIeKWoV-wLXGfk7VPG7_B5Lk-jDd2tN7u-8.png",
   },
-  clanRank: 27,
-  previousClanRank: 24,
-  donations: 0,
-  donationsReceived: 0,
+  clanRank: 38,
+  previousClanRank: 37,
+  donations: 328,
+  donationsReceived: 759,
   league: {
-    id: 29000015,
-    name: "Master League I",
+    id: 29000011,
+    name: "Crystal League II",
     iconTiny:
-      "https://api-assets.clashofclans.com/leagues/36/olUfFb1wscIH8hqECAdWbdB6jPm9R8zzEyHIzyBgRXc.png",
+      "https://api-assets.clashofclans.com/leagues/36/jhP36EhAA9n1ADafdQtCP-ztEAQjoRpY7cT8sU7SW8A.png",
     iconSmall:
-      "https://api-assets.clashofclans.com/leagues/72/olUfFb1wscIH8hqECAdWbdB6jPm9R8zzEyHIzyBgRXc.png",
+      "https://api-assets.clashofclans.com/leagues/72/jhP36EhAA9n1ADafdQtCP-ztEAQjoRpY7cT8sU7SW8A.png",
     iconMedium:
-      "https://api-assets.clashofclans.com/leagues/288/olUfFb1wscIH8hqECAdWbdB6jPm9R8zzEyHIzyBgRXc.png",
+      "https://api-assets.clashofclans.com/leagues/288/jhP36EhAA9n1ADafdQtCP-ztEAQjoRpY7cT8sU7SW8A.png",
   },
-  yonghaScore: 1275,
+  yonghaScore: 1291,
   townHallLevel: 14,
   labels: [
     {
@@ -2517,18 +2517,18 @@ export const profile = {
     },
   ],
   bestTrophies: 3747,
-  warStars: 662,
+  warStars: 681,
   troops: [
     {
       name: "Barbarian",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
       name: "Archer",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
@@ -2540,13 +2540,13 @@ export const profile = {
     {
       name: "Giant",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
       name: "Wall Breaker",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
@@ -2558,7 +2558,7 @@ export const profile = {
     {
       name: "Wizard",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
@@ -2582,7 +2582,7 @@ export const profile = {
     {
       name: "Minion",
       level: 10,
-      maxLevel: 10,
+      maxLevel: 11,
       village: "home",
     },
     {
@@ -2600,13 +2600,13 @@ export const profile = {
     {
       name: "Golem",
       level: 11,
-      maxLevel: 11,
+      maxLevel: 12,
       village: "home",
     },
     {
       name: "Witch",
       level: 5,
-      maxLevel: 5,
+      maxLevel: 6,
       village: "home",
     },
     {
@@ -2629,32 +2629,32 @@ export const profile = {
     },
     {
       name: "Miner",
-      level: 8,
-      maxLevel: 8,
+      level: 9,
+      maxLevel: 9,
       village: "home",
     },
     {
       name: "Super Barbarian",
       level: 1,
-      maxLevel: 3,
+      maxLevel: 4,
       village: "home",
     },
     {
       name: "Super Archer",
       level: 1,
-      maxLevel: 3,
+      maxLevel: 4,
       village: "home",
     },
     {
       name: "Super Wall Breaker",
       level: 1,
-      maxLevel: 4,
+      maxLevel: 5,
       village: "home",
     },
     {
       name: "Super Giant",
       level: 1,
-      maxLevel: 2,
+      maxLevel: 3,
       village: "home",
     },
     {
@@ -2756,8 +2756,8 @@ export const profile = {
     },
     {
       name: "Electro Dragon",
-      level: 5,
-      maxLevel: 5,
+      level: 6,
+      maxLevel: 6,
       village: "home",
     },
     {
@@ -2787,7 +2787,7 @@ export const profile = {
     {
       name: "Super Witch",
       level: 1,
-      maxLevel: 1,
+      maxLevel: 2,
       village: "home",
     },
     {
@@ -2829,13 +2829,13 @@ export const profile = {
     {
       name: "Super Wizard",
       level: 1,
-      maxLevel: 2,
+      maxLevel: 3,
       village: "home",
     },
     {
       name: "Super Minion",
       level: 1,
-      maxLevel: 3,
+      maxLevel: 4,
       village: "home",
     },
     {
@@ -2848,6 +2848,12 @@ export const profile = {
       name: "Flame Flinger",
       level: 4,
       maxLevel: 4,
+      village: "home",
+    },
+    {
+      name: "Electro Titan",
+      level: 3,
+      maxLevel: 3,
       village: "home",
     },
     {
@@ -2879,19 +2885,19 @@ export const profile = {
     {
       name: "Barbarian King",
       level: 80,
-      maxLevel: 80,
+      maxLevel: 85,
       village: "home",
     },
     {
       name: "Archer Queen",
-      level: 80,
-      maxLevel: 80,
+      level: 83,
+      maxLevel: 85,
       village: "home",
     },
     {
       name: "Grand Warden",
       level: 55,
-      maxLevel: 55,
+      maxLevel: 60,
       village: "home",
     },
     {
@@ -2903,7 +2909,7 @@ export const profile = {
     {
       name: "Royal Champion",
       level: 30,
-      maxLevel: 30,
+      maxLevel: 35,
       village: "home",
     },
   ],
@@ -2911,13 +2917,13 @@ export const profile = {
     {
       name: "Lightning Spell",
       level: 9,
-      maxLevel: 9,
+      maxLevel: 10,
       village: "home",
     },
     {
       name: "Healing Spell",
-      level: 8,
-      maxLevel: 8,
+      level: 9,
+      maxLevel: 9,
       village: "home",
     },
     {
@@ -2929,7 +2935,7 @@ export const profile = {
     {
       name: "Jump Spell",
       level: 4,
-      maxLevel: 4,
+      maxLevel: 5,
       village: "home",
     },
     {
@@ -2940,8 +2946,8 @@ export const profile = {
     },
     {
       name: "Poison Spell",
-      level: 8,
-      maxLevel: 8,
+      level: 9,
+      maxLevel: 9,
       village: "home",
     },
     {
@@ -2971,7 +2977,7 @@ export const profile = {
     {
       name: "Bat Spell",
       level: 5,
-      maxLevel: 5,
+      maxLevel: 6,
       village: "home",
     },
     {
@@ -2983,8 +2989,8 @@ export const profile = {
   ],
   pets: null,
   townHallWeaponLevel: 5,
-  yonghaScoreRank: 7,
-  donationRank: 21,
+  yonghaScoreRank: 3,
+  donationRank: 26,
 };
 
 export const accountInfo = [
