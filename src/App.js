@@ -13,6 +13,7 @@ import {
   About,
 } from "./pages";
 import useLocalStorage from "./hooks/useLocalstorage";
+import { ScrollToTop } from "./utils/scrollToTop";
 import GlobalStyle from "./styles/global";
 import { darkTheme, lightTheme } from "./styles/theme";
 
@@ -44,6 +45,7 @@ const App = () => {
   return (
     <Router>
       <ThemeProvider theme={colorScheme === "dark" ? darkTheme : lightTheme}>
+        <ScrollToTop />
         <GlobalStyle />
         <Header
           onOpen={() => setSidebarVisible(true)}
