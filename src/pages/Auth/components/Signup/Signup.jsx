@@ -4,7 +4,7 @@ import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
 import { Input, Button, AutoComplete, ErrorText } from "../../../../components";
 import { Reference } from "../index";
-import { members } from "../../../../assets/dummyData";
+import { userInfo } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";
 
@@ -24,7 +24,7 @@ const Signup = () => {
 
   const findUser = () => {
     const value = inputRef.current.value.toLowerCase();
-    return members.find(
+    return userInfo.find(
       (member) =>
         member.name.toLowerCase() === value ||
         member.tag.toLowerCase() === value
@@ -57,7 +57,7 @@ const Signup = () => {
   } = useSearch({
     inputRef,
     listRef,
-    data: members,
+    data: userInfo,
     onSubmit: handleSearch,
     filterOption,
     getInnerText,

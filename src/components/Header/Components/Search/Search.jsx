@@ -4,7 +4,7 @@ import * as S from "./Search.style";
 import Common from "../../../../styles/common";
 import { Input, Icon, AutoComplete } from "../../../index";
 import useSearch from "../../../../hooks/useSearch";
-import { members } from "../../../../assets/dummyData";
+import { userInfo } from "../../../../assets/dummyData";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Search = () => {
 
   const findUser = () => {
     const value = inputRef.current.value.toLowerCase();
-    return members.find(
+    return userInfo.find(
       (member) =>
         member.name.toLowerCase() === value ||
         member.tag.toLowerCase() === value
@@ -47,7 +47,7 @@ const Search = () => {
   } = useSearch({
     inputRef,
     listRef,
-    data: members,
+    data: userInfo,
     onSubmit: handleSubmitSearch,
     filterOption,
     getInnerText,
@@ -55,7 +55,7 @@ const Search = () => {
 
   const handleClickItem = (item) => {
     resetAutoComplete();
-    inputRef.current.value = item.name;
+    inputRef.current.value = "";
     navigate(`/profile/${item.tag.substr(1)}`);
   };
 
