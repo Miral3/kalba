@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { standardCategoryItems, standardTableColumns } from "../../assets/data";
 import { Category, Table } from "../../components";
@@ -18,21 +18,21 @@ const StandardTable = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const res = { ...formula };
-    setStandardData(res);
-    setTableData(res.heroes);
-    setLoading(false);
+  useLayoutEffect(() => {
+    const fetch = async () => {
+      const res = { ...formula };
+      setStandardData(res);
+      setTableData(res[category]);
+      setLoading(false);
+    };
+    fetch();
   }, []);
 
   useEffect(() => {
-    if (tableData.length === 0) return;
+    if (loading) return;
     setTableData(standardData[category]);
   }, [category]);
 
-  if (loading) {
-    return;
-  }
   return (
     <S.Section>
       <S.Container>
@@ -41,6 +41,7 @@ const StandardTable = () => {
           columns={standardTableColumns}
           data={tableData}
           version="standard"
+          loading={loading}
         />
       </S.Container>
     </S.Section>

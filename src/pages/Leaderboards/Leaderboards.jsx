@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   rankingCategoryItems,
@@ -22,15 +22,18 @@ const Leaderboards = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const res = [...userInfo];
-    setTableData(res);
+  useLayoutEffect(() => {
     setTableColumns(donationsRankingTableColumns);
-    setLoading(false);
+    const fetch = async () => {
+      const res = [...userInfo];
+      setTableData(res);
+      setLoading(false);
+    };
+    fetch();
   }, []);
 
   useEffect(() => {
-    if (tableData.length === 0) return;
+    if (loading) return;
 
     if (category === "donations") {
       const nextTableData = tableData.sort(
@@ -47,14 +50,11 @@ const Leaderboards = () => {
     }
   }, [category]);
 
-  if (loading) {
-    return;
-  }
   return (
     <S.Section>
       <S.Container>
         <Category items={rankingCategoryItems} />
-        <Table columns={tableColumns} data={tableData} />
+        <Table columns={tableColumns} data={tableData} loading={loading} />
       </S.Container>
     </S.Section>
   );

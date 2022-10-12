@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   editableStandardCategoryItems,
@@ -15,7 +15,6 @@ const EditableStandardTable = () => {
   const [tableData, setTableData] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [submitFormVisible, setSubmitFormVisible] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
   const navigate = useNavigate();
   const { category } = useParams();
 
@@ -76,12 +75,15 @@ const EditableStandardTable = () => {
   const handleSaveTableData = () => {
     const standardDataObj = {};
     standardDataObj[category] = tableData;
-    setStandardData((prev) => ({
-      ...prev,
+    const nextStandardData = {
+      ...standardData,
       ...standardDataObj,
-    }));
+    };
+    setStandardData({ ...nextStandardData });
     setEditMode(false);
-    setIsInitialized(true);
+    /**
+     * @Todo nextStandardData 서버에 저장
+     */
   };
 
   useEffect(() => {
@@ -92,32 +94,21 @@ const EditableStandardTable = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const res = { ...formula };
-    setStandardData(res);
-    setTableData(res[category]);
-    setLoading(false);
+  useLayoutEffect(() => {
+    const fetch = async () => {
+      const res = { ...formula };
+      setStandardData(res);
+      setTableData(res[category]);
+      setLoading(false);
+    };
+    fetch();
   }, []);
 
   useEffect(() => {
-    if (loading && tableData.length === 0) return;
+    if (loading) return;
     setTableData(standardData[category]);
     setEditMode(false);
   }, [category]);
-
-  useEffect(() => {
-    if (!isInitialized) return;
-    const fetchData = async () => {
-      /**
-       * @Todo tableData가 변할때 마다 formula 업데이트
-       */
-    };
-    fetchData();
-  }, [tableData]);
-
-  if (loading) {
-    return;
-  }
 
   return (
     <S.Container>
@@ -135,6 +126,7 @@ const EditableStandardTable = () => {
         data={tableData}
         version="editableStandard"
         editMode={editMode}
+        loading={loading}
         handleInputTableData={handleInputTableData}
         handleDeleteTableData={handleDeleteTableData}
       />

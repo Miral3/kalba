@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { managementTableColumns } from "../../../../assets/data";
 import { Table } from "../../../../components";
 import { accountInfo } from "../../../../assets/dummyData";
@@ -8,42 +7,31 @@ import * as S from "./Management.style";
 const Management = () => {
   const [loading, setLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   const handleChangeState = (tag, type, e) => {
     const { checked } = e.target;
-    setTableData(
-      tableData.map((row) =>
-        tag === row.tag
-          ? {
-              ...row,
-              [type]: checked,
-            }
-          : row
-      )
+    // eslint-disable-next-line no-unused-vars
+    const nextTableData = tableData.map((row) =>
+      tag === row.tag
+        ? {
+            ...row,
+            [type]: checked,
+          }
+        : row
     );
-    setIsInitialized(true);
+    /**
+     * @Todo nextTableData 서버에 저장
+     */
   };
 
-  useEffect(() => {
-    const res = [...accountInfo];
-    setTableData(res);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    if (!isInitialized) return;
-    const fetchData = async () => {
-      /**
-       * @Todo tableData가 변할때 마다 account info 업데이트
-       */
+  useLayoutEffect(() => {
+    const fetch = () => {
+      const res = [...accountInfo];
+      setTableData(res);
+      setLoading(false);
     };
-    fetchData();
-  }, [tableData]);
-
-  if (loading) {
-    return;
-  }
+    fetch();
+  }, []);
 
   return (
     <S.Container>
@@ -51,6 +39,7 @@ const Management = () => {
         version="management"
         columns={managementTableColumns}
         data={tableData}
+        loading={loading}
         handleChangeState={handleChangeState}
       />
     </S.Container>

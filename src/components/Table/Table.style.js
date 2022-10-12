@@ -25,6 +25,11 @@ export const Tbody = styled.tbody`
   }
 `;
 
+export const SkeletonTbody = styled.tbody`
+  background-color: ${({ theme }) => theme.bg.tbody};
+  color: ${({ theme }) => theme.text.tbody};
+`;
+
 export const Tr = styled.tr`
   border: ${({ theme }) => theme.border.tr};
 `;
@@ -69,6 +74,13 @@ export const Td = styled.td`
     text-align: ${({ version }) =>
       version === "leaderboard" ? "left" : "center"};
   }
+`;
+
+export const SkeletonTd = styled.td`
+  height: 40px;
+  padding: 0 8px;
+  vertical-align: middle;
+  font-size: ${Common.fontSize.b[2]};
 `;
 
 export const Link = styled(NavLink)`

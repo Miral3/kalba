@@ -21,6 +21,7 @@ export const lightTheme = {
     modal: Common.colors.white[0],
     description: Common.colors.gray[8],
     disabledBtn: Common.colors.gray[4],
+    skeleton: Common.colors.gray[3],
   },
   border: {
     tr: `1px solid ${Common.colors.gray[3]}`,
@@ -31,6 +32,14 @@ export const lightTheme = {
   hover: {
     tbody: Common.colors.gray[1],
     categoryItem: Common.colors.gray[4],
+  },
+  gradient: {
+    skeleton: `linear-gradient(
+      90deg,
+      #dfe3e8 0px,
+      #efefef 40px,
+      #dfe3e8 80px
+    )`,
   },
 };
 
@@ -55,6 +64,7 @@ export const darkTheme = {
     modal: Common.colors.black[5],
     description: Common.colors.gray[10],
     disabledBtn: Common.colors.gray[10],
+    skeleton: Common.colors.black[5],
   },
   border: {
     tr: `1px solid ${Common.colors.black[1]}`,
@@ -65,5 +75,13 @@ export const darkTheme = {
   hover: {
     tbody: "#282830",
     categoryItem: Common.colors.indigo[4],
+  },
+  gradient: {
+    skeleton: `linear-gradient(
+      90deg,
+      #222222 0px,
+      rgba(34, 34, 34, 0.3) 40px,
+      #222222 80px
+    )`,
   },
 };
