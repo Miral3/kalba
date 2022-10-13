@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { PropTypes } from "prop-types";
 import { translateRole } from "../../utils/translate";
 import { Text, Button, Skeleton } from "..";
@@ -28,140 +28,149 @@ const defaultProps = {
   handleChangeState: () => {},
 };
 
-const Table = ({
-  children,
-  data,
-  columns,
-  version,
-  sticky,
-  editMode,
-  loading,
-  handleInputTableData,
-  handleDeleteTableData,
-  handleChangeState,
-  ...styles
-}) => {
-  return (
-    <S.Table {...styles}>
-      {children}
-      <S.Thead sticky={sticky}>
-        <S.Tr>
-          {columns.map((column) => (
-            <S.Th key={column.id} version={version}>
-              {column.header}
-            </S.Th>
-          ))}
-          {editMode && <S.Th version={version}>삭제</S.Th>}
-        </S.Tr>
-      </S.Thead>
-      {loading ? (
-        <Skeleton.Table columns={10} rows={columns.length} version={version} />
-      ) : (
-        <S.Tbody version={version}>
-          {data.map((row) => (
-            <S.Tr key={row.index}>
-              {columns.map((column) => {
-                if (version === "leaderboard") {
-                  if (column.accessor === "name") {
-                    return (
-                      <S.Td key={column.id} version={version}>
-                        <S.Link to={`/profile/${row.tag.substr(1)}`}>
-                          <S.Trophy src={row.league.iconTiny} alt="trophy" />
-                          <Text size="13px" weight="bold">
-                            {row[column.accessor]}
-                          </Text>
-                        </S.Link>
-                      </S.Td>
-                    );
-                  }
-                  if (column.accessor === "role") {
-                    return (
-                      <S.Td key={column.id} version={version}>
-                        {translateRole(row[column.accessor])}
-                      </S.Td>
-                    );
-                  }
-                  return (
-                    <S.Td key={column.id} version={version}>
-                      {row[column.accessor]}
-                    </S.Td>
-                  );
-                }
-                if (version === "management") {
-                  if (column.accessor === "nickname") {
+const Table = forwardRef(
+  (
+    {
+      children,
+      data,
+      columns,
+      version,
+      sticky,
+      editMode,
+      loading,
+      handleInputTableData,
+      handleDeleteTableData,
+      handleChangeState,
+      ...styles
+    },
+    ref
+  ) => {
+    return (
+      <S.Table ref={ref} {...styles}>
+        {children}
+        <S.Thead sticky={sticky}>
+          <S.Tr>
+            {columns.map((column) => (
+              <S.Th key={column.id} version={version}>
+                {column.header}
+              </S.Th>
+            ))}
+            {editMode && <S.Th version={version}>삭제</S.Th>}
+          </S.Tr>
+        </S.Thead>
+        {loading ? (
+          <Skeleton.Table
+            columns={10}
+            rows={columns.length}
+            version={version}
+          />
+        ) : (
+          <S.Tbody version={version}>
+            {data.map((row) => (
+              <S.Tr key={row.index}>
+                {columns.map((column) => {
+                  if (version === "leaderboard") {
+                    if (column.accessor === "name") {
+                      return (
+                        <S.Td key={column.id} version={version}>
+                          <S.Link to={`/profile/${row.tag.substr(1)}`}>
+                            <S.Trophy src={row.league.iconTiny} alt="trophy" />
+                            <Text size="13px" weight="bold">
+                              {row[column.accessor]}
+                            </Text>
+                          </S.Link>
+                        </S.Td>
+                      );
+                    }
+                    if (column.accessor === "role") {
+                      return (
+                        <S.Td key={column.id} version={version}>
+                          {translateRole(row[column.accessor])}
+                        </S.Td>
+                      );
+                    }
                     return (
                       <S.Td key={column.id} version={version}>
                         {row[column.accessor]}
                       </S.Td>
                     );
                   }
-                  if (column.accessor === "signupState") {
+                  if (version === "management") {
+                    if (column.accessor === "nickname") {
+                      return (
+                        <S.Td key={column.id} version={version}>
+                          {row[column.accessor]}
+                        </S.Td>
+                      );
+                    }
+                    if (column.accessor === "signupState") {
+                      return (
+                        <S.Td key={column.id} version={version}>
+                          {row[column.accessor] ? "O" : "X"}
+                        </S.Td>
+                      );
+                    }
                     return (
                       <S.Td key={column.id} version={version}>
-                        {row[column.accessor] ? "O" : "X"}
+                        <input
+                          type="checkbox"
+                          value={row[column.accessor]}
+                          onChange={(e) =>
+                            handleChangeState(row.tag, column.accessor, e)
+                          }
+                        />
+                      </S.Td>
+                    );
+                  }
+                  if (version === "editableStandard") {
+                    if (column.accessor === "value") {
+                      return (
+                        <S.Td key={column.id} version={version}>
+                          {Math.round((row.maxScore / row.maxLevel) * 1000) /
+                            1000}
+                        </S.Td>
+                      );
+                    }
+                    return (
+                      <S.Td
+                        key={column.id}
+                        id={row.index}
+                        name={column.accessor}
+                        version={version}
+                        contentEditable={editMode}
+                        suppressContentEditableWarning
+                        handleInputTableData={(e) => handleInputTableData(e)}
+                      >
+                        {row[column.accessor]}
                       </S.Td>
                     );
                   }
                   return (
                     <S.Td key={column.id} version={version}>
-                      <input
-                        type="checkbox"
-                        value={row[column.accessor]}
-                        onChange={(e) =>
-                          handleChangeState(row.tag, column.accessor, e)
-                        }
-                      />
-                    </S.Td>
-                  );
-                }
-                if (version === "editableStandard") {
-                  if (column.accessor === "value") {
-                    return (
-                      <S.Td key={column.id} version={version}>
-                        {Math.round((row.maxScore / row.maxLevel) * 1000) /
-                          1000}
-                      </S.Td>
-                    );
-                  }
-                  return (
-                    <S.Td
-                      key={column.id}
-                      id={row.index}
-                      name={column.accessor}
-                      version={version}
-                      contentEditable={editMode}
-                      suppressContentEditableWarning
-                      handleInputTableData={(e) => handleInputTableData(e)}
-                    >
                       {row[column.accessor]}
                     </S.Td>
                   );
-                }
-                return (
-                  <S.Td key={column.id} version={version}>
-                    {row[column.accessor]}
+                })}
+                {editMode && (
+                  <S.Td version={version}>
+                    <Button
+                      hover
+                      onClick={() => handleDeleteTableData(row.index)}
+                    >
+                      <S.Delete className="material-symbols-outlined">
+                        delete
+                      </S.Delete>
+                    </Button>
                   </S.Td>
-                );
-              })}
-              {editMode && (
-                <S.Td version={version}>
-                  <Button
-                    hover
-                    onClick={() => handleDeleteTableData(row.index)}
-                  >
-                    <S.Delete className="material-symbols-outlined">
-                      delete
-                    </S.Delete>
-                  </Button>
-                </S.Td>
-              )}
-            </S.Tr>
-          ))}
-        </S.Tbody>
-      )}
-    </S.Table>
-  );
-};
+                )}
+              </S.Tr>
+            ))}
+          </S.Tbody>
+        )}
+      </S.Table>
+    );
+  }
+);
 
 Table.propTypes = propTypes;
 Table.defaultProps = defaultProps;

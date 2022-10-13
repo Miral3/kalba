@@ -1,20 +1,33 @@
-import React, { useState, useLayoutEffect, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import * as XLSX from "xlsx";
+import { Button, Category, Table } from "../../components";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
   attackPowerRankingTableColumns,
 } from "../../assets/data";
-import { Category, Table } from "../../components";
 import { userInfo } from "../../assets/dummyData";
 import * as S from "./Leaderboards.style";
 
 const Leaderboards = () => {
+  const tableRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [tableData, setTableData] = useState([]);
   const [tableColumns, setTableColumns] = useState([]);
   const navigate = useNavigate();
   const { category } = useParams();
+
+  const handleClickExtractTableToXLSX = () => {
+    const target = tableRef.current;
+
+    if (!target) return;
+    const wb = XLSX.utils.table_to_book(target, {
+      sheet: "ranking list",
+      raw: true,
+    });
+    XLSX.writeFile(wb, "ranking_list.xlsx");
+  };
 
   useEffect(() => {
     if (!rankingCategoryItems.find((item) => item.value === category)) {
@@ -54,7 +67,17 @@ const Leaderboards = () => {
     <S.Section>
       <S.Container>
         <Category items={rankingCategoryItems} />
-        <Table columns={tableColumns} data={tableData} loading={loading} />
+        <Table
+          ref={tableRef}
+          columns={tableColumns}
+          data={tableData}
+          loading={loading}
+        />
+        <S.ButtonWrapper>
+          <Button version="download" onClick={handleClickExtractTableToXLSX}>
+            엑셀 다운로드
+          </Button>
+        </S.ButtonWrapper>
       </S.Container>
     </S.Section>
   );

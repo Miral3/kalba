@@ -53,7 +53,44 @@ const ReferenceButton = css`
   }
 `;
 
-const DownloadButton = css``;
+const DownloadButton = css`
+  width: 200px;
+  height: 60px;
+  background-color: ${Common.colors.green[0]};
+  color: ${Common.colors.white[0]};
+  line-height: 60px;
+  font-size: ${Common.fontSize.h[1]};
+  transition: 8 00ms ease all;
+  outline: none;
+  text-align: center;
+
+  &:hover {
+    background: #fff;
+    color: ${Common.colors.green[0]};
+  }
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: ${Common.colors.green[0]};
+    transition: 400ms ease all;
+  }
+  &:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+  &:hover:before,
+  &:hover:after {
+    width: 100%;
+    transition: 800ms ease all;
+  }
+`;
 
 const Hover = css`
   &::before {
