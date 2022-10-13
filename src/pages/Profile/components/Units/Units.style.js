@@ -81,7 +81,6 @@ export const UnitItem = styled.li`
   position: relative;
   width: 40px;
   height: 40px;
-  background-color: ${Common.colors.gray[6]};
   border: 2px solid ${Common.colors.purple[4]};
   border-radius: 5px;
 `;
@@ -89,6 +88,10 @@ export const UnitItem = styled.li`
 export const Unit = styled.img`
   width: 100%;
   height: 100%;
+  background-color: ${Common.colors.gray[6]};
+  -webkit-filter: ${({ isExist }) =>
+    isExist ? "grayscale(0%)" : "grayscale(100%)"};
+  filter: ${({ isExist }) => (isExist ? "none" : "gray")};
 `;
 
 export const Level = styled(Text)`
