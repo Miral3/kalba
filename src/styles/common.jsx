@@ -22,6 +22,7 @@ const Common = {
     purple: ["#6a7497", "#42376c", "#38385A", "#212032", "#49485f"],
     blue: ["#297fb9", "#4b7bec"],
     yellow: ["#e5c133"],
+    green: ["#1aab8a"],
   },
   gradient: [
     "linear-gradient(0deg,#6d779a,#8c96ae)",
