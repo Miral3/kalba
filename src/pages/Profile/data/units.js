@@ -42,6 +42,26 @@ const petsInfo = [
     className: "unicorn",
     src: "Unicorn.png",
   },
+  {
+    name: "Frosty",
+    className: "frosty",
+    src: "Frosty.png",
+  },
+  {
+    name: "Diggy",
+    className: "diggy",
+    src: "Diggy.png",
+  },
+  {
+    name: "Poison Lizard",
+    className: "poisonLizard",
+    src: "Poison_Lizard.png",
+  },
+  {
+    name: "Phoenix",
+    className: "phoenix",
+    src: "Phoenix.png",
+  },
 ];
 
 const troopsInfo = [
@@ -119,6 +139,11 @@ const troopsInfo = [
     name: "Dragon Rider",
     className: "dragonRider",
     src: "Dragon_Rider.png",
+  },
+  {
+    name: "Electro Titan",
+    className: "electroTitan",
+    src: "Electro_Titan.png",
   },
   {
     name: "Minion",
@@ -204,6 +229,11 @@ const spellsInfo = [
     src: "Invisibility_Spell.png",
   },
   {
+    name: "Recall Spell",
+    className: "recallSpell",
+    src: "Recall_Spell.png",
+  },
+  {
     name: "Poison Spell",
     className: "poison",
     src: "Poison_Spell.png",
@@ -260,6 +290,11 @@ const siegeMachinesInfo = [
     name: "Flame Flinger",
     className: "flameFlinger",
     src: "Flame_Flinger.png",
+  },
+  {
+    name: "Battle_Drill",
+    className: "battleDrill",
+    src: "Battle_Drill.png",
   },
 ];
 
