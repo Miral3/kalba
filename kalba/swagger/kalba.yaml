@@ -1,0 +1,921 @@
+openapi: 3.0.0
+info:
+  title: (old) kalba
+  description:
+    <h4>URL</h4>
+    <ul>
+      <li>prod - http://kalba.kr:8080</li>
+      <li>local - http://localhost:8080</li>
+    </ul>
+  version: 3.0.0
+servers:
+  - url: http://kalba.kr:8080
+    description: prod server
+  - url: http://localhost:8080
+    description: local server
+
+tags:
+  - name: Account
+    description: 계정 관련 API
+  - name: Clan
+    description: 클랜 관련 API
+  - name: Quiz
+    description: 퀴즈 관련 API
+
+paths:
+  ## Account
+  /account/register:
+    post:
+      tags:
+        - Account
+      summary: 회원가입
+      description: |
+        회원가입
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nickname:
+                  type: string
+                  required: true
+                  description: 닉네임
+                tag:
+                  type: string
+                  required: true
+                  description: 태그
+                name:
+                  type: string
+                  required: true
+                  description: 계정 이름
+                password:
+                  type: string
+                  required: true
+                  description: 비밀번호
+      responses:
+        201:
+          $ref: '#/components/responses/CommonResponse'
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /account/login:
+    post:
+      tags:
+        - Account
+      summary: 로그인
+      description: |
+        로그인
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  required: true
+                  description: 계정이름
+                password:
+                  type: string
+                  required: true
+                  description: 비밀번호
+      responses:
+        200:
+          description: 정상 로그인
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: 로그인 토큰
+        400:
+          $ref: '#/components/responses/ClientError'
+        401:
+          $ref: '#/components/responses/AuthorizedError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /account/login/name:
+    post:
+      tags:
+        - Account
+      summary: 유저 이름 조회
+      description: |
+        토큰으로 유저 이름 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  required: true
+                  description: 토큰
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: 유저 이름
+  /account/login/tag:
+    post:
+      tags:
+        - Account
+      summary: 유저 태그 조회
+      description: |
+        유저 이름으로 태그 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 유저 이름
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tag:
+                    type: string
+                    description: 유저 태그
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /account/info:
+    post:
+      tags:
+        - Account
+      summary: 유저 정보 조회
+      description: |
+        유저 정보 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 유저 이름
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: 유저 이름
+                  tag:
+                    type: string
+                    description: 유저 태그
+                  nickname:
+                    type: string
+                    description: 유저 닉네임
+                  role:
+                    type: string
+                    description: 유저 권한
+                  attackState:
+                    type: string
+                    description: attackState
+                  warningState:
+                    type: string
+                    description: warningState
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /account/info/all:
+    get:
+      tags:
+        - Account
+      summary: 전체 유저 정보 조회
+      description: |
+        전체 유저 정보 조회
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    name:
+                      type: string
+                      description: 유저 이름
+                    tag:
+                      type: string
+                      description: 유저 태그
+                    nickname:
+                      type: string
+                      description: 유저 닉네임
+                    role:
+                      type: string
+                      description: 유저 권한
+                    attackState:
+                      type: string
+                      description: attackState
+                    warningState:
+                      type: string
+                      description: warningState
+  /account/admin:
+    get:
+      tags:
+        - Account
+      summary: 어드민 확인
+      description: |
+        토큰으로 유저 이름 조회
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isAdmin:
+                    type: boolean
+                    description: 어드민 여부
+
+  ## Clan
+  /coc/clan/info:
+    post:
+      tags:
+        - Clan
+      summary: 클랜 정보 조회
+      description: |
+        클랜 태그로 정보 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 클랜 태그
+
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tag:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  description:
+                    type: string
+                  location:
+                    type: object
+                  badgeUrls:
+                    type: object
+                  clanLevel:
+                    type: integer
+                  clanPoints:
+                    type: integer
+                  clanVersusPoints:
+                    type: integer
+                  requiredTrophies:
+                    type: integer
+                  warFrequency:
+                    type: string
+                  warWinStreak:
+                    type: integer
+                  warWins:
+                    type: integer
+                  isWarLogPublic:
+                    type: boolean
+                  warLeague:
+                    type: object
+                  members:
+                    type: integer
+                  memberList:
+                    type: object
+                  labels:
+                    type: object
+                  chatLanguage:
+                    type: object
+                  requiredVersusTrophies:
+                    type: integer
+                  requiredTownhallLevel:
+                    type: integer
+  /coc/clan/rank:
+    post:
+      tags:
+        - Clan
+      summary: 클랜 랭킹 조회
+      description: |
+        클랜 태그로 정보 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 클랜 태그
+
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  league:
+                    type: object
+                  name:
+                    type: string
+                  tag:
+                    type: string
+                  role:
+                    type: string
+                  trophies:
+                    type: integer
+                  townHallLevel:
+                    type: integer
+                  donations:
+                    type: integer
+                  yonghaScore:
+                    type: integer
+                  yonghaScoreRank:
+                    type: integer
+                  donationRank:
+                    type: integer
+  /coc/clan/force/update:
+    post:
+      tags:
+        - Clan
+      summary: 랭킹 정보 강제 갱신
+      description: |
+        랭킹 정보 강제 갱신
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 클랜 태그
+      responses:
+        200:
+          $ref: '#/components/responses/CommonResponse'
+  /coc/clan/member/name:
+    post:
+      tags:
+        - Clan
+      summary: 유저 이름 조회
+      description: |
+        태그로 유저 이름 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 토큰
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /coc/clan/member/tag:
+    post:
+      tags:
+        - Clan
+      summary: 유저 태그 조회
+      description: |
+        유저 이름으로 태그 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 유저 이름
+      responses:
+        200:
+          description: 정상 처리
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tag:
+                    type: string
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /coc/clan/member/statistic/name:
+    post:
+      tags:
+        - Clan
+      summary: 클랜원 상세 정보 조회
+      description: |
+        클랜원 이름으로 상세 정보 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 클랜원명
+      responses:
+        200:
+          $ref: '#/components/responses/Statistic'
+  /coc/clan/member/statistic/tag:
+    post:
+      tags:
+        - Clan
+      summary: 클랜원 상세 정보 조회
+      description: |
+        클랜원 태그로 상세 정보 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 클랜원명
+      responses:
+        200:
+          $ref: '#/components/responses/Statistic'
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /coc/clan/formula:
+    get:
+      tags:
+        - Clan
+      summary: 커스텀 랭킹 공식 데이터 조회
+      description: |
+        커스텀 랭킹 공식 데이터 조회
+      responses:
+        200:
+          description: 커스텀 랭킹 공식 데이터
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  heroes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  pets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  units:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  spells:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  siegeMachines:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - Clan
+      summary: 커스텀 랭킹 공식 데이터 수정
+      description: |
+        커스텀 랭킹 공식 데이터 수정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                heroes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                pets:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                spells:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                siegeMachines:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+      responses:
+        200:
+          $ref: '#/components/responses/CommonResponse'
+  /coc/clan/member/state:
+    post:
+      tags:
+        - Clan
+      summary: 커스텀 랭킹 공식 데이터 조회
+      description: |
+        커스텀 랭킹 공식 데이터 조회
+      responses:
+        200:
+          description: 커스텀 랭킹 공식 데이터
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  heroes:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  pets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  units:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  spells:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+                  siegeMachines:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FormulaData'
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+    put:
+      tags:
+        - Clan
+      summary: 커스텀 랭킹 공식 데이터 수정
+      description: |
+        커스텀 랭킹 공식 데이터 수정
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                heroes:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                pets:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                spells:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+                siegeMachines:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FormulaData'
+      responses:
+        200:
+          $ref: '#/components/responses/CommonResponse'
+  /coc/clan/member/badge:
+    post:
+      tags:
+        - Clan
+      summary: 클랜원 뱃지 아이콘 이미지 url 조회
+      description: |
+        클랜원 뱃지 아이콘 이미지 링크 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: string
+                  required: true
+                  description: 클랜원명
+      responses:
+        200:
+          description: 뱃지 icon medium size url
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  badge:
+                    type: string
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /quiz/pass:
+    post:
+      tags:
+        - Quiz
+      summary: 퀴즈 커트라인 이상 점수를 받은 유저 db 저장
+      description: |
+        퀴즈 커트라인 이상 점수를 받은 유저 db 저장
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 클랜원명
+                score:
+                  type: integer
+                  required: true
+                  description: 점수
+      responses:
+        201:
+          $ref: '#/components/responses/CommonResponse'
+  /quiz/state:
+    post:
+      tags:
+        - Quiz
+      summary: 클랜원 퀴즈 통과 상태 조회
+      description: |
+        클랜원 퀴즈 통과 상태 조회
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  required: true
+                  description: 클랜원명
+      responses:
+        200:
+          $ref: '#/components/responses/CommonResponse'
+  /quiz/mark:
+    post:
+      tags:
+        - Quiz
+      summary: 클랜원 퀴즈 채점
+      description: |
+        클랜원 퀴즈 채점
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sheet:
+                  type: array
+                  items:
+                    items:
+                      type: integer
+      responses:
+        200:
+          description: 채점 결과
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: integer
+                  wrongAnswerList:
+                    type: array
+                    items:
+                      type: integer
+        400:
+          $ref: '#/components/responses/ClientError'
+        500:
+          $ref: '#/components/responses/ServerError'
+  /quiz/member/state:
+    get:
+      tags:
+        - Quiz
+      summary: 클랜원들의 퀴즈 풀이 상태 전체 조회
+      description: |
+        클랜원들의 퀴즈 풀이 상태 전체 조회
+      responses:
+        200:
+          description: 조회 결과
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: 클랜원명
+                    score:
+                      type: integer
+                      description: 점수
+components:
+  parameters:
+    header-app-transaction:
+      in: header
+      name: app-transaction
+      description: request 고유 ID (UUID)
+      required: false
+      schema:
+        type: string
+  schemas:
+    FormulaData:
+      properties:
+        english:
+          type: string
+          description: coc official name
+        index:
+          type: integer
+        korean:
+          type: string
+          description: 한국어 이름
+        value:
+          type: number
+          format: double
+        maxScore:
+          type: integer
+        maxLevel:
+          type: integer
+  responses:
+    CommonResponse:
+      description: Common Response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    AuthorizedError:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    ClientError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    Statistic:
+      description: 클랜원 상세 정보
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tag:
+                type: string
+              name:
+                type: string
+              role:
+                type: string
+              expLevel:
+                type: integer
+              trophies:
+                type: integer
+              versusTrophies:
+                type: integer
+              clanRank:
+                type: integer
+              previousClanRank:
+                type: integer
+              donations:
+                type: integer
+              donationsReceived:
+                type: integer
+              league:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  iconTiny:
+                    type: string
+                  iconSmall:
+                    type: string
+                  iconMedium:
+                    type: string
+              yonghaScore:
+                type: integer
+              townHallLevel:
+                type: integer
+              labels:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    smallIcon:
+                      type: string
+                    mediumIcon:
+                      type: string
+              bestTrophies:
+                type: integer
+              warStars:
+                type: integer
+              troops:
+                type: object
+              heroes:
+                type: object
+              spells:
+                type: object
+              pets:
+                type: object
+              townHallWeaponLevel:
+                type: integer
+              yonghaScoreRank:
+                type: integer
+              donationRank:
+                type: integer

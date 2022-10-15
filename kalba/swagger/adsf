@@ -1,0 +1,1621 @@
+{
+  "took" : 21,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 5,
+    "successful" : 5,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 89,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396643",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396643,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387536,
+          "regiDate" : "2022-10-04 21:32:42",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 1
+        },
+        "sort" : [
+          1
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396639",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396639,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387730,
+          "regiDate" : "2022-10-04 21:31:57",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 2
+        },
+        "sort" : [
+          2
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396632",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396632,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548537,
+          "regiDate" : "2022-10-04 21:31:12",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 3
+        },
+        "sort" : [
+          3
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396626",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396626,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388014,
+          "regiDate" : "2022-10-04 21:30:27",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 4
+        },
+        "sort" : [
+          4
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396619",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396619,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617481,
+          "regiDate" : "2022-10-04 21:29:42",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 5
+        },
+        "sort" : [
+          5
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396571",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396571,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 82881151,
+          "regiDate" : "2022-10-04 21:28:57",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 6
+        },
+        "sort" : [
+          6
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396564",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396564,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90568559,
+          "regiDate" : "2022-10-04 21:28:13",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 7
+        },
+        "sort" : [
+          7
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396517",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396517,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-04 21:27:27",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 8
+        },
+        "sort" : [
+          8
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396504",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396504,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617499,
+          "regiDate" : "2022-10-04 21:26:42",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 9
+        },
+        "sort" : [
+          9
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396493",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396493,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387877,
+          "regiDate" : "2022-10-04 21:25:58",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 10
+        },
+        "sort" : [
+          10
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396489",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396489,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388136,
+          "regiDate" : "2022-10-04 21:25:13",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 11
+        },
+        "sort" : [
+          11
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396477",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396477,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-04 21:24:29",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 12
+        },
+        "sort" : [
+          12
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396470",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396470,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617488,
+          "regiDate" : "2022-10-04 21:23:44",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 13
+        },
+        "sort" : [
+          13
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396442",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396442,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-04 21:22:58",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 14
+        },
+        "sort" : [
+          14
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396437",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396437,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-04 21:22:14",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 15
+        },
+        "sort" : [
+          15
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396432",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396432,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548584,
+          "regiDate" : "2022-10-04 21:21:29",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 16
+        },
+        "sort" : [
+          16
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396409",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396409,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548614,
+          "regiDate" : "2022-10-04 21:20:43",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 17
+        },
+        "sort" : [
+          17
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396403",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396403,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-04 21:19:58",
+          "modifiedDate" : "2022-10-04 21:32:42",
+          "sequence" : 18
+        },
+        "sort" : [
+          18
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379404",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379404,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-03 18:45:37",
+          "modifiedDate" : "2022-10-03 18:59:05",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379573",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379573,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548584,
+          "regiDate" : "2022-10-03 19:01:20",
+          "modifiedDate" : "2022-10-03 19:14:48",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379542",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379542,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387420,
+          "regiDate" : "2022-10-03 18:59:05",
+          "modifiedDate" : "2022-10-03 19:12:33",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379666",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379666,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617481,
+          "regiDate" : "2022-10-03 19:09:34",
+          "modifiedDate" : "2022-10-03 19:23:02",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379640",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379640,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617499,
+          "regiDate" : "2022-10-03 19:06:34",
+          "modifiedDate" : "2022-10-03 19:20:02",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380008",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380008,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-03 19:42:29",
+          "modifiedDate" : "2022-10-03 19:55:58",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379746",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379746,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-03 19:17:03",
+          "modifiedDate" : "2022-10-03 19:30:31",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379756",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379756,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-03 19:18:33",
+          "modifiedDate" : "2022-10-03 19:32:01",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379795",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379795,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617499,
+          "regiDate" : "2022-10-03 19:20:47",
+          "modifiedDate" : "2022-10-03 19:34:15",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379928",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379928,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617499,
+          "regiDate" : "2022-10-03 19:35:01",
+          "modifiedDate" : "2022-10-03 19:48:29",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380029",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380029,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-03 19:45:29",
+          "modifiedDate" : "2022-10-03 19:58:57",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380609",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380609,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 20:32:38",
+          "modifiedDate" : "2022-10-03 20:46:06",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80382358",
+        "_score" : null,
+        "_source" : {
+          "id" : 80382358,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-03 22:06:56",
+          "modifiedDate" : "2022-10-03 22:20:23",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379255",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379255,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548614,
+          "regiDate" : "2022-10-03 18:32:09",
+          "modifiedDate" : "2022-10-03 18:45:37",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379244",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379244,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387536,
+          "regiDate" : "2022-10-03 18:29:54",
+          "modifiedDate" : "2022-10-03 18:43:22",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379436",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379436,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548584,
+          "regiDate" : "2022-10-03 18:47:07",
+          "modifiedDate" : "2022-10-03 19:00:35",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379426",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379426,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548614,
+          "regiDate" : "2022-10-03 18:46:22",
+          "modifiedDate" : "2022-10-03 18:59:50",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379306",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379306,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90568559,
+          "regiDate" : "2022-10-03 18:39:38",
+          "modifiedDate" : "2022-10-03 18:53:06",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379288",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379288,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388136,
+          "regiDate" : "2022-10-03 18:36:39",
+          "modifiedDate" : "2022-10-03 18:50:06",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379455",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379455,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-03 18:50:06",
+          "modifiedDate" : "2022-10-03 19:03:35",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379611",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379611,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-03 19:02:50",
+          "modifiedDate" : "2022-10-03 19:16:18",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379644",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379644,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 19:07:19",
+          "modifiedDate" : "2022-10-03 19:20:47",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379743",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379743,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-03 19:16:18",
+          "modifiedDate" : "2022-10-03 19:29:46",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379751",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379751,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617488,
+          "regiDate" : "2022-10-03 19:17:49",
+          "modifiedDate" : "2022-10-03 19:31:16",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379900",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379900,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-03 19:31:16",
+          "modifiedDate" : "2022-10-03 19:44:44",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379887",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379887,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-03 19:28:16",
+          "modifiedDate" : "2022-10-03 19:41:44",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379813",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379813,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617481,
+          "regiDate" : "2022-10-03 19:23:47",
+          "modifiedDate" : "2022-10-03 19:37:15",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379263",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379263,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-03 18:33:39",
+          "modifiedDate" : "2022-10-03 18:47:07",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379282",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379282,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-03 18:35:53",
+          "modifiedDate" : "2022-10-03 18:49:22",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379481",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379481,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90568559,
+          "regiDate" : "2022-10-03 18:53:51",
+          "modifiedDate" : "2022-10-03 19:07:19",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379530",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379530,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387730,
+          "regiDate" : "2022-10-03 18:57:36",
+          "modifiedDate" : "2022-10-03 19:11:03",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379632",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379632,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388136,
+          "regiDate" : "2022-10-03 19:05:05",
+          "modifiedDate" : "2022-10-03 19:18:33",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379661",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379661,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 82881151,
+          "regiDate" : "2022-10-03 19:08:49",
+          "modifiedDate" : "2022-10-03 19:22:17",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379937",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379937,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 19:35:45",
+          "modifiedDate" : "2022-10-03 19:49:13",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379922",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379922,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387877,
+          "regiDate" : "2022-10-03 19:34:15",
+          "modifiedDate" : "2022-10-03 19:47:44",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379941",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379941,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90568559,
+          "regiDate" : "2022-10-03 19:36:30",
+          "modifiedDate" : "2022-10-03 19:49:58",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379949",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379949,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 82881151,
+          "regiDate" : "2022-10-03 19:37:16",
+          "modifiedDate" : "2022-10-03 19:50:43",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379959",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379959,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548537,
+          "regiDate" : "2022-10-03 19:39:30",
+          "modifiedDate" : "2022-10-03 19:52:58",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380178",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380178,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-03 19:58:57",
+          "modifiedDate" : "2022-10-03 20:12:25",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380219",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380219,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 20:04:12",
+          "modifiedDate" : "2022-10-03 20:17:39",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379321",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379321,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617481,
+          "regiDate" : "2022-10-03 18:41:08",
+          "modifiedDate" : "2022-10-03 18:54:36",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379474",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379474,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 18:53:06",
+          "modifiedDate" : "2022-10-03 19:06:34",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379525",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379525,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548537,
+          "regiDate" : "2022-10-03 18:56:51",
+          "modifiedDate" : "2022-10-03 19:10:19",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379560",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379560,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-03 18:59:50",
+          "modifiedDate" : "2022-10-03 19:13:18",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379268",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379268,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387169,
+          "regiDate" : "2022-10-03 18:34:24",
+          "modifiedDate" : "2022-10-03 18:47:51",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379275",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379275,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617488,
+          "regiDate" : "2022-10-03 18:35:09",
+          "modifiedDate" : "2022-10-03 18:48:37",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379537",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379537,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387536,
+          "regiDate" : "2022-10-03 18:58:20",
+          "modifiedDate" : "2022-10-03 19:11:48",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379521",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379521,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388014,
+          "regiDate" : "2022-10-03 18:56:06",
+          "modifiedDate" : "2022-10-03 19:09:34",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379702",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379702,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387420,
+          "regiDate" : "2022-10-03 19:13:18",
+          "modifiedDate" : "2022-10-03 19:26:46",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379627",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379627,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-03 19:04:20",
+          "modifiedDate" : "2022-10-03 19:17:48",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379680",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379680,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387730,
+          "regiDate" : "2022-10-03 19:11:49",
+          "modifiedDate" : "2022-10-03 19:25:16",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379739",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379739,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548584,
+          "regiDate" : "2022-10-03 19:15:33",
+          "modifiedDate" : "2022-10-03 19:29:01",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379981",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379981,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387420,
+          "regiDate" : "2022-10-03 19:41:44",
+          "modifiedDate" : "2022-10-03 19:55:12",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379768",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379768,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388136,
+          "regiDate" : "2022-10-03 19:19:18",
+          "modifiedDate" : "2022-10-03 19:32:46",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379962",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379962,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387730,
+          "regiDate" : "2022-10-03 19:40:15",
+          "modifiedDate" : "2022-10-03 19:53:43",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379955",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379955,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388014,
+          "regiDate" : "2022-10-03 19:38:45",
+          "modifiedDate" : "2022-10-03 19:52:13",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380117",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380117,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387730,
+          "regiDate" : "2022-10-03 19:54:28",
+          "modifiedDate" : "2022-10-03 20:07:56",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380032",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380032,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617488,
+          "regiDate" : "2022-10-03 19:46:14",
+          "modifiedDate" : "2022-10-03 19:59:42",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380200",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380200,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388136,
+          "regiDate" : "2022-10-03 20:01:57",
+          "modifiedDate" : "2022-10-03 20:15:25",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380318",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380318,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617475,
+          "regiDate" : "2022-10-03 20:10:56",
+          "modifiedDate" : "2022-10-03 20:24:24",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80381660",
+        "_score" : null,
+        "_source" : {
+          "id" : 80381660,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 82881151,
+          "regiDate" : "2022-10-03 21:31:00",
+          "modifiedDate" : "2022-10-03 21:44:28",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379310",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379310,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 82881151,
+          "regiDate" : "2022-10-03 18:40:23",
+          "modifiedDate" : "2022-10-03 18:53:51",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379470",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379470,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90617499,
+          "regiDate" : "2022-10-03 18:52:21",
+          "modifiedDate" : "2022-10-03 19:05:49",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379803",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379803,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 85445543,
+          "regiDate" : "2022-10-03 19:21:32",
+          "modifiedDate" : "2022-10-03 19:35:00",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379791",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379791,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387877,
+          "regiDate" : "2022-10-03 19:20:02",
+          "modifiedDate" : "2022-10-03 19:33:31",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379727",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379727,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90548614,
+          "regiDate" : "2022-10-03 19:14:48",
+          "modifiedDate" : "2022-10-03 19:28:16",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80379896",
+        "_score" : null,
+        "_source" : {
+          "id" : 80379896,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387815,
+          "regiDate" : "2022-10-03 19:30:31",
+          "modifiedDate" : "2022-10-03 19:43:59",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380195",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380195,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90593462,
+          "regiDate" : "2022-10-03 20:01:12",
+          "modifiedDate" : "2022-10-03 20:14:40",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380445",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380445,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90388014,
+          "regiDate" : "2022-10-03 20:21:24",
+          "modifiedDate" : "2022-10-03 20:34:52",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80380394",
+        "_score" : null,
+        "_source" : {
+          "id" : 80380394,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387877,
+          "regiDate" : "2022-10-03 20:16:55",
+          "modifiedDate" : "2022-10-03 20:30:23",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      },
+      {
+        "_index" : "best_goods-2022-09-28-13-33-26",
+        "_type" : "_doc",
+        "_id" : "80396397",
+        "_score" : null,
+        "_source" : {
+          "id" : 80396397,
+          "userId" : "mamon314",
+          "wsIdx" : 15693,
+          "wgIdx" : 90387420,
+          "regiDate" : "2022-10-04 21:19:13",
+          "modifiedDate" : "2022-10-04 21:32:41",
+          "sequence" : 19
+        },
+        "sort" : [
+          19
+        ]
+      }
+    ]
+  }
+}
