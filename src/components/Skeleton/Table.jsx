@@ -21,8 +21,8 @@ const Table = ({ columns, rows, version }) => {
       {Array.from(Array(columns), (column, index) => (
         <S.Tr key={index}>
           {Array.from(Array(rows), (row, idx) => (
-            <S.SkeletonTd version={version} skeleton>
-              <Box width="100%" height="18px" key={idx} />
+            <S.SkeletonTd key={idx} version={version} skeleton>
+              <Box width="100%" height="18px" />
             </S.SkeletonTd>
           ))}
         </S.Tr>
