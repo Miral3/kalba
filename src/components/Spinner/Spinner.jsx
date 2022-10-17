@@ -3,7 +3,7 @@ import React from "react";
 const Spinner = () => {
   return (
     <div>
-      <img src="/icons/spinner.svg" alt="github" />
+      <img src="/icons/spinner.svg" alt="spinner" />
     </div>
   );
 };
