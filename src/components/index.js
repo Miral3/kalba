@@ -11,3 +11,4 @@ export { default as AutoComplete } from "./AutoComplete";
 export { default as Sidebar } from "./Sidebar";
 export { default as ErrorText } from "./ErrorText";
 export { default as Skeleton } from "./Skeleton";
+export { default as Spinner } from "./Spinner";
