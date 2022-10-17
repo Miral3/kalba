@@ -2,14 +2,27 @@ package kr.kalba.presentation.dto
 
 class FormulaDto {
     class Request(
+        val heroes: List<Data>,
+        val pets: List<Data>,
+        val siegeMachines: List<Data>,
+        val spells: List<Data>,
+        val units: List<Data>
     )
 
     class Response(
-        val token: String,
-        val message: String
-    ) {
-        companion object {
-            fun of(token: String, message: String): Response = Response(token, message)
-        }
-    }
+        val heroes: List<Data>,
+        val pets: List<Data>,
+        val siegeMachines: List<Data>,
+        val spells: List<Data>,
+        val units: List<Data>
+    )
+
+    class Data(
+        val english: String,
+        val index: Int,
+        val korean: String,
+        val maxLevel: Int,
+        val maxScore: Int,
+        val value: Double
+    )
 }
