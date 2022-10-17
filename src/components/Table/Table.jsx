@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { PropTypes } from "prop-types";
 import { translateRole } from "../../utils/translate";
-import { Text, Button, Skeleton } from "..";
+import { Text, Button } from "..";
 import * as S from "./Table.style";
 
 const propTypes = {
@@ -11,7 +11,6 @@ const propTypes = {
   version: PropTypes.string,
   sticky: PropTypes.bool,
   editMode: PropTypes.bool,
-  loading: PropTypes.bool,
   handleInputTableData: PropTypes.func,
   handleDeleteTableData: PropTypes.func,
   handleChangeState: PropTypes.func,
@@ -22,7 +21,6 @@ const defaultProps = {
   version: "leaderboard",
   sticky: true,
   editMode: false,
-  loading: false,
   handleInputTableData: () => {},
   handleDeleteTableData: () => {},
   handleChangeState: () => {},
@@ -37,7 +35,6 @@ const Table = forwardRef(
       version,
       sticky,
       editMode,
-      loading,
       handleInputTableData,
       handleDeleteTableData,
       handleChangeState,
@@ -58,90 +55,28 @@ const Table = forwardRef(
             {editMode && <S.Th version={version}>삭제</S.Th>}
           </S.Tr>
         </S.Thead>
-        {loading ? (
-          <Skeleton.Table
-            columns={10}
-            rows={columns.length}
-            version={version}
-          />
-        ) : (
-          <S.Tbody version={version}>
-            {data.map((row) => (
-              <S.Tr key={row.tag}>
-                {columns.map((column) => {
-                  if (version === "leaderboard") {
-                    if (column.accessor === "name") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          <S.Link to={`/profile/${row.tag.substr(1)}`}>
-                            <S.Trophy src={row.league.iconTiny} alt="trophy" />
-                            <Text size="13px" weight="bold">
-                              {row[column.accessor]}
-                            </Text>
-                          </S.Link>
-                        </S.Td>
-                      );
-                    }
-                    if (column.accessor === "role") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          {translateRole(row[column.accessor])}
-                        </S.Td>
-                      );
-                    }
+
+        <S.Tbody version={version}>
+          {data.map((row) => (
+            <S.Tr key={row.tag}>
+              {columns.map((column) => {
+                if (version === "leaderboard") {
+                  if (column.accessor === "name") {
                     return (
                       <S.Td key={column.id} version={version}>
-                        {row[column.accessor]}
+                        <S.Link to={`/profile/${row.tag.substr(1)}`}>
+                          <S.Trophy src={row.league.iconTiny} alt="trophy" />
+                          <Text size="13px" weight="bold">
+                            {row[column.accessor]}
+                          </Text>
+                        </S.Link>
                       </S.Td>
                     );
                   }
-                  if (version === "management") {
-                    if (column.accessor === "nickname") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          {row[column.accessor]}
-                        </S.Td>
-                      );
-                    }
-                    if (column.accessor === "signupState") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          {row[column.accessor] ? "O" : "X"}
-                        </S.Td>
-                      );
-                    }
+                  if (column.accessor === "role") {
                     return (
                       <S.Td key={column.id} version={version}>
-                        <input
-                          type="checkbox"
-                          value={row[column.accessor]}
-                          onChange={(e) =>
-                            handleChangeState(row.tag, column.accessor, e)
-                          }
-                        />
-                      </S.Td>
-                    );
-                  }
-                  if (version === "editableStandard") {
-                    if (column.accessor === "value") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          {Math.round((row.maxScore / row.maxLevel) * 1000) /
-                            1000}
-                        </S.Td>
-                      );
-                    }
-                    return (
-                      <S.Td
-                        key={column.id}
-                        id={row.index}
-                        name={column.accessor}
-                        version={version}
-                        contentEditable={editMode}
-                        suppressContentEditableWarning
-                        handleInputTableData={(e) => handleInputTableData(e)}
-                      >
-                        {row[column.accessor]}
+                        {translateRole(row[column.accessor])}
                       </S.Td>
                     );
                   }
@@ -150,23 +85,78 @@ const Table = forwardRef(
                       {row[column.accessor]}
                     </S.Td>
                   );
-                })}
-                {editMode && (
-                  <S.Td version={version}>
-                    <Button
-                      hover
-                      onClick={() => handleDeleteTableData(row.index)}
+                }
+                if (version === "management") {
+                  if (column.accessor === "nickname") {
+                    return (
+                      <S.Td key={column.id} version={version}>
+                        {row[column.accessor]}
+                      </S.Td>
+                    );
+                  }
+                  if (column.accessor === "signupState") {
+                    return (
+                      <S.Td key={column.id} version={version}>
+                        {row[column.accessor] ? "O" : "X"}
+                      </S.Td>
+                    );
+                  }
+                  return (
+                    <S.Td key={column.id} version={version}>
+                      <input
+                        type="checkbox"
+                        value={row[column.accessor]}
+                        onChange={(e) =>
+                          handleChangeState(row.tag, column.accessor, e)
+                        }
+                      />
+                    </S.Td>
+                  );
+                }
+                if (version === "editableStandard") {
+                  if (column.accessor === "value") {
+                    return (
+                      <S.Td key={column.id} version={version}>
+                        {Math.round((row.maxScore / row.maxLevel) * 1000) /
+                          1000}
+                      </S.Td>
+                    );
+                  }
+                  return (
+                    <S.Td
+                      key={column.id}
+                      id={row.index}
+                      name={column.accessor}
+                      version={version}
+                      contentEditable={editMode}
+                      suppressContentEditableWarning
+                      handleInputTableData={(e) => handleInputTableData(e)}
                     >
-                      <S.Delete className="material-symbols-outlined">
-                        delete
-                      </S.Delete>
-                    </Button>
+                      {row[column.accessor]}
+                    </S.Td>
+                  );
+                }
+                return (
+                  <S.Td key={column.id} version={version}>
+                    {row[column.accessor]}
                   </S.Td>
-                )}
-              </S.Tr>
-            ))}
-          </S.Tbody>
-        )}
+                );
+              })}
+              {editMode && (
+                <S.Td version={version}>
+                  <Button
+                    hover
+                    onClick={() => handleDeleteTableData(row.index)}
+                  >
+                    <S.Delete className="material-symbols-outlined">
+                      delete
+                    </S.Delete>
+                  </Button>
+                </S.Td>
+              )}
+            </S.Tr>
+          ))}
+        </S.Tbody>
       </S.Table>
     );
   }

@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
-import { Button, Category, Table } from "../../components";
+import { Button, Category, Spinner, Table } from "../../components";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
@@ -67,12 +67,11 @@ const Leaderboards = () => {
     <S.Section>
       <S.Container>
         <Category items={rankingCategoryItems} />
-        <Table
-          ref={tableRef}
-          columns={tableColumns}
-          data={tableData}
-          loading={loading}
-        />
+        {loading ? (
+          <Spinner.Box />
+        ) : (
+          <Table ref={tableRef} columns={tableColumns} data={tableData} />
+        )}
         <S.ButtonWrapper>
           <Button version="download" onClick={handleClickExtractTableToXLSX}>
             엑셀 다운로드

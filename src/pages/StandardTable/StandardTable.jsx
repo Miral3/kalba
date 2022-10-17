@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { standardCategoryItems, standardTableColumns } from "../../assets/data";
-import { Category, Table } from "../../components";
+import { Category, Spinner, Table } from "../../components";
 import { formula } from "../../assets/dummyData";
 import * as S from "./StandardTable.style";
 
@@ -37,12 +37,15 @@ const StandardTable = () => {
     <S.Section>
       <S.Container>
         <Category items={standardCategoryItems} />
-        <Table
-          columns={standardTableColumns}
-          data={tableData}
-          version="standard"
-          loading={loading}
-        />
+        {loading ? (
+          <Spinner.Box />
+        ) : (
+          <Table
+            columns={standardTableColumns}
+            data={tableData}
+            version="standard"
+          />
+        )}
       </S.Container>
     </S.Section>
   );

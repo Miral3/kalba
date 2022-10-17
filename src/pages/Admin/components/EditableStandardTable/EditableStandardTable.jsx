@@ -4,7 +4,7 @@ import {
   editableStandardCategoryItems,
   standardTableColumns,
 } from "../../../../assets/data";
-import { Category, Table } from "../../../../components";
+import { Category, Spinner, Table } from "../../../../components";
 import { SubmitForm } from "../index";
 import { formula } from "../../../../assets/dummyData";
 import * as S from "./EditableStandardTable.style";
@@ -121,15 +121,18 @@ const EditableStandardTable = () => {
         />
       )}
       <Category items={editableStandardCategoryItems} />
-      <Table
-        columns={standardTableColumns}
-        data={tableData}
-        version="editableStandard"
-        editMode={editMode}
-        loading={loading}
-        handleInputTableData={handleInputTableData}
-        handleDeleteTableData={handleDeleteTableData}
-      />
+      {loading ? (
+        <Spinner.Box />
+      ) : (
+        <Table
+          columns={standardTableColumns}
+          data={tableData}
+          version="editableStandard"
+          editMode={editMode}
+          handleInputTableData={handleInputTableData}
+          handleDeleteTableData={handleDeleteTableData}
+        />
+      )}
       <S.Actions>
         {!editMode && (
           <S.StyledButton onClick={() => handleClickEditMode(true)}>

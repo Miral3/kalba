@@ -10,15 +10,14 @@ const propTypes = {
   columns: PropTypes.instanceOf(Array).isRequired,
   title: PropTypes.string.isRequired,
   timer: PropTypes.string.isRequired,
-  loading: PropTypes.bool.isRequired,
 };
 
-const Top10Table = ({ data, columns, title, timer, loading }) => {
+const Top10Table = ({ data, columns, title, timer }) => {
   const type = title.includes("지원") ? "donations" : "score";
 
   return (
     <S.Container>
-      <Table columns={columns} data={data} sticky={false} loading={loading}>
+      <Table columns={columns} data={data} sticky={false}>
         <S.Caption>
           <S.CaptionContainer>
             <Text

@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect } from "react";
 import { managementTableColumns } from "../../../../assets/data";
-import { Table } from "../../../../components";
+import { Spinner, Table } from "../../../../components";
 import { accountInfo } from "../../../../assets/dummyData";
 import * as S from "./Management.style";
 
@@ -35,13 +35,16 @@ const Management = () => {
 
   return (
     <S.Container>
-      <Table
-        version="management"
-        columns={managementTableColumns}
-        data={tableData}
-        loading={loading}
-        handleChangeState={handleChangeState}
-      />
+      {loading ? (
+        <Spinner.Box />
+      ) : (
+        <Table
+          version="management"
+          columns={managementTableColumns}
+          data={tableData}
+          handleChangeState={handleChangeState}
+        />
+      )}
     </S.Container>
   );
 };
