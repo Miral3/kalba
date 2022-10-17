@@ -85,17 +85,17 @@ export const editableStandardCategoryItems = [
 export const adminSidebarItems = [
   {
     id: 1,
-    name: "관리",
-    value: "management",
-    url: "/admin/management",
-    icon: "manage_accounts",
-  },
-  {
-    id: 2,
     name: "기준표",
     value: "standard",
     url: "/admin/standardTable/heroes",
     icon: "table",
+  },
+  {
+    id: 2,
+    name: "관리",
+    value: "management",
+    url: "/admin/management",
+    icon: "manage_accounts",
   },
 ];
 
@@ -136,7 +136,7 @@ export const adminNavigationItems = [
   {
     id: 4,
     name: "관리자 페이지",
-    url: "/admin/management",
+    url: "/admin/standardTable/heroes",
   },
 ];
 
