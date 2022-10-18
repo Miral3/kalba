@@ -2,11 +2,11 @@ package kr.kalba.presentation.dto
 
 class MemberNameDto {
     class Request(
-        val tag: String
+        val name: String
     )
 
     class Response(
-        val name: String
+        val tag: String
     ) {
         companion object {
             fun of(name: String): Response = Response(name)

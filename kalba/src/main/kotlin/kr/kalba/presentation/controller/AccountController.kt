@@ -27,7 +27,7 @@ class AccountController {
     }
 
     @GetMapping("/info")
-    fun userInfo(@RequestParam request: UserInfoDto.Request): ResponseEntity<UserInfoDto.Response> {
+    fun userInfo(@RequestParam name: UserInfoDto.Request): ResponseEntity<UserInfoDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             UserInfoDto.Response
                 .of("미랄", "#123", "용하", "어드민", true, true)

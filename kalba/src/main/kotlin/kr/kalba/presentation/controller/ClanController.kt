@@ -84,7 +84,7 @@ class ClanController {
 
     @ResponseBody
     @GetMapping("/rank")
-    fun memberStatisticRank(@RequestParam request: ClanRankDto.Request): ResponseEntity<ClanRankDto.Response> {
+    fun memberStatisticRank(@RequestParam tag: ClanRankDto.Request): ResponseEntity<ClanRankDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             ClanRankDto.Response(
                 listOf(
