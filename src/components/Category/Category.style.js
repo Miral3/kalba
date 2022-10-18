@@ -14,8 +14,11 @@ export const Nav = styled.nav`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
   padding: 4px 10px;
+
+  ${Common.mediaQuery.mobile} {
+    gap: 8px;
+  }
 `;
 
 export const Link = styled(NavLink)`
