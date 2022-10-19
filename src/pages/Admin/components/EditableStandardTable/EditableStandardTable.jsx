@@ -67,6 +67,13 @@ const EditableStandardTable = () => {
     }
   };
 
+  const handleReorderTableData = (sourceIdx, destinationIdx) => {
+    const nextTableData = [...tableData];
+    const [reorderedRow] = nextTableData.splice(sourceIdx, 1);
+    nextTableData.splice(destinationIdx, 0, reorderedRow);
+    setTableData(nextTableData);
+  };
+
   const handleCancelEdit = () => {
     setEditMode(false);
     setTableData([...standardData[category]]);
@@ -131,6 +138,7 @@ const EditableStandardTable = () => {
           editMode={editMode}
           handleInputTableData={handleInputTableData}
           handleDeleteTableData={handleDeleteTableData}
+          handleReorderTableData={handleReorderTableData}
         />
       )}
       <S.Actions>
