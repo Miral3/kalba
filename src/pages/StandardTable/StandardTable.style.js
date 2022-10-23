@@ -22,3 +22,8 @@ export const Container = styled.div`
     width: 720px;
   }
 `;
+
+export const ButtonWrapper = styled.div`
+  align-self: center;
+  padding-top: 14px;
+`;
