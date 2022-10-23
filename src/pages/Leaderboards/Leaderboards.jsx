@@ -74,7 +74,7 @@ const Leaderboards = () => {
         )}
         <S.ButtonWrapper>
           <Button version="download" onClick={handleClickExtractTableToXLSX}>
-            엑셀 다운로드
+            Download XLSX
           </Button>
         </S.ButtonWrapper>
       </S.Container>
