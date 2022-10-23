@@ -66,14 +66,16 @@ export const LogoBlock = styled.div`
 
 export const AuthWrapper = styled.div`
   position: absolute;
-  top: ${({ isLoggedIn }) => (isLoggedIn ? "14px" : "18px")};
+  top: ${({ isLoggedIn }) => (isLoggedIn ? "14px" : "15px")};
   right: 24px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 24px;
 
-  ${Common.mediaQuery.mobile} {
-    ${({ isLoggedIn }) => (isLoggedIn ? "16px" : "24px")};
+  ${Common.mediaQuery.tablet} {
+    top: 7px;
+    right: 10px;
   }
 `;
 
@@ -88,6 +90,7 @@ export const Mode = styled(Icon)`
 `;
 
 export const Profile = styled(Icon)`
+  padding-left: 17.74px;
   font-size: ${Common.fontSize.l[2]};
   color: ${Common.colors.white[1]};
 
@@ -97,7 +100,7 @@ export const Profile = styled(Icon)`
 `;
 
 export const LoginLink = styled(NavLink)`
-  padding: 8px;
+  padding: 10px 8px;
   border: 0;
   border-radius: 4px;
   background-color: ${Common.colors.indigo[1]};
