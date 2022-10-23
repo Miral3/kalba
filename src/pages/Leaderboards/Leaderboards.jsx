@@ -24,7 +24,6 @@ const Leaderboards = () => {
     if (!target) return;
     const wb = XLSX.utils.table_to_book(target, {
       sheet: "ranking list",
-      raw: true,
     });
     XLSX.writeFile(wb, "ranking_list.xlsx");
   };
