@@ -97,7 +97,10 @@ const Table = forwardRef(
                         </S.Td>
                       );
                     }
-                    if (column.accessor === "role") {
+                    if (
+                      column.accessor === "role" ||
+                      column.accessor === "expectedRole"
+                    ) {
                       return (
                         <S.Td key={column.id} version={version}>
                           {translateRole(row[column.accessor])}

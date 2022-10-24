@@ -6,8 +6,10 @@ export const translateRole = (role) => {
       return "공대";
     case "admin":
       return "장로";
-    default:
+    case "member":
       return "멤버";
+    default:
+      return role;
   }
 };
 

@@ -20,26 +20,26 @@ export function expectedRole(role, idx, donations, tag, count) {
     if (role === "member") {
       if (count.adminCnt > 0) {
         count.adminCnt -= 1;
-        return "장로";
+        return "admin";
       }
     } else if (role === "admin") {
       if (count.coLeaderCnt > 0) {
         count.coLeaderCnt -= 1;
-        return "공대";
+        return "coLeader";
       }
       if (count.adminCnt > 0) {
         count.adminCnt -= 1;
-        return "장로";
+        return "admin";
       }
-      return "멤버";
+      return "member";
     } else if (role === "coLeader") {
       if (count.coLeaderCnt > 0) {
         count.coLeaderCnt -= 1;
-        return "공대";
+        return "coLeader";
       }
       if (count.adminCnt > 0) {
         count.adminCnt -= 1;
-        return "장로";
+        return "admin";
       }
     } else if (role === "leader") {
       count.cutLine += 1;
@@ -48,6 +48,6 @@ export function expectedRole(role, idx, donations, tag, count) {
   } else if (role === "leader") {
     return "-";
   } else {
-    return "멤버";
+    return "member";
   }
 }
