@@ -64,6 +64,32 @@ export const Th = styled.th`
   }
 `;
 
+export const SortWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+
+  &:hover span {
+    color: ${({ theme }) => theme.text.thead};
+  }
+`;
+
+export const Arrow = styled.span`
+  display: none;
+  padding-bottom: 3px;
+  font-size: 18px;
+  color: ${({ active, sortDir, theme }) =>
+    active && sortDir !== "none" ? theme.text.thead : "transparent"};
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1), visibility 0s;
+  transform: ${({ active, sortDir }) =>
+    active && sortDir === "descending" ? "rotate(-180deg)" : "rotate(0)"};
+
+  ${Common.mediaQuery.tabletS} {
+    display: block;
+  }
+`;
+
 export const Td = styled.td`
   height: 40px;
   vertical-align: middle;

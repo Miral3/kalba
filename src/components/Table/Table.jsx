@@ -1,5 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import { PropTypes } from "prop-types";
+import useSort from "../../hooks/useSort";
 import { translateRole } from "../../utils/translate";
 import { Text } from "..";
 import EditableTbody from "./EditableTbody";
@@ -47,16 +48,40 @@ const Table = forwardRef(
     ref
   ) => {
     const [deleteMode, setDeleteMode] = useState(true);
+    const { sortedData, sortDir, attr, handleSort } = useSort({ data });
+
     return (
       <S.Table ref={ref} {...styles}>
         {children}
         <S.Thead sticky={sticky}>
           <S.Tr>
-            {columns.map((column) => (
-              <S.Th key={column.id} version={version}>
-                {column.header}
-              </S.Th>
-            ))}
+            {columns.map((column) =>
+              column.accessor === "role" ||
+              column.accessor === "expectedRole" ? (
+                <S.Th
+                  key={column.id}
+                  version={version}
+                  name={column.accessor}
+                  active
+                  onClick={(e) => handleSort(e)}
+                >
+                  <S.SortWrapper>
+                    {column.header}
+                    <S.Arrow
+                      className="material-symbols-outlined"
+                      active={attr === column.accessor}
+                      sortDir={sortDir}
+                    >
+                      arrow_upward
+                    </S.Arrow>
+                  </S.SortWrapper>
+                </S.Th>
+              ) : (
+                <S.Th key={column.id} version={version}>
+                  {column.header}
+                </S.Th>
+              )
+            )}
             {editMode && (
               <S.Th
                 active
@@ -81,7 +106,7 @@ const Table = forwardRef(
           />
         ) : (
           <S.Tbody version={version}>
-            {data.map((row) => (
+            {sortedData.map((row) => (
               <S.Tr key={row.tag || row.index}>
                 {columns.map((column) => {
                   if (version === "leaderboard") {
