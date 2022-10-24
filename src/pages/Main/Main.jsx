@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useLayoutEffect } from "react";
 import axios from "axios";
+import { expectedRole } from "../../utils/expectedRole";
 import { Spinner } from "../../components";
 import Top10Table from "./components/Top10Table/Top10Table";
 import {
@@ -13,6 +14,12 @@ const Main = () => {
   const [loading, setLoading] = useState(true);
   const [top10DonationRank, setTop10DonationRank] = useState([]);
   const [top10PowerRank, setTop10PowerRank] = useState([]);
+  const count = {
+    cutLine: 13,
+    coLeaderCnt: 5,
+    adminCnt: 8,
+  };
+
   // const { isLoading, data } = useRankData({});
 
   // if (!isLoading) {
@@ -24,12 +31,25 @@ const Main = () => {
         const { data } = await axios.post("/coc/clan/rank", {
           tag: "%232Y2Y9YCUU",
         });
-        setTop10DonationRank([...data].slice(0, 10));
-        setTop10PowerRank(
-          [...data]
-            .sort((a, b) => a.yonghaScoreRank - b.yonghaScoreRank)
-            .slice(0, 10)
-        );
+        const donationRankData = [...data]
+          .map((val, idx) => ({
+            ...val,
+            expectedRole: expectedRole(
+              val.role,
+              idx,
+              val.donations,
+              val.tag,
+              count
+            ),
+          }))
+          .sort((a, b) => a.donationRank - b.donationRank)
+          .slice(0, 10);
+        const powerRankData = [...data]
+          .sort((a, b) => a.yonghaScoreRank - b.yonghaScoreRank)
+          .slice(0, 10);
+
+        setTop10DonationRank(donationRankData);
+        setTop10PowerRank(powerRankData);
         setLoading(false);
       } catch (e) {
         console.log(e);

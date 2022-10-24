@@ -1,6 +1,7 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
+import { expectedRole } from "../../utils/expectedRole";
 import { Button, Category, Spinner, Table } from "../../components";
 import {
   rankingCategoryItems,
@@ -17,6 +18,11 @@ const Leaderboards = () => {
   const [tableColumns, setTableColumns] = useState([]);
   const navigate = useNavigate();
   const { category } = useParams();
+  const count = {
+    cutLine: 13,
+    coLeaderCnt: 5,
+    adminCnt: 8,
+  };
 
   const handleClickExtractTableToXLSX = () => {
     const target = tableRef.current;
@@ -37,7 +43,19 @@ const Leaderboards = () => {
   useLayoutEffect(() => {
     setTableColumns(donationsRankingTableColumns);
     const fetch = async () => {
-      const res = [...userInfo];
+      const res = [...userInfo]
+        .map((val, idx) => ({
+          ...val,
+          expectedRole: expectedRole(
+            val.role,
+            idx,
+            val.donations,
+            val.tag,
+            count
+          ),
+        }))
+        .sort((a, b) => a.donationRank - b.donationRank);
+
       setTableData(res);
       setLoading(false);
     };

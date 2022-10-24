@@ -164,7 +164,7 @@ export const donationsRankingTableColumns = [
   {
     id: 5,
     header: "예상직책",
-    accessor: "role",
+    accessor: "expectedRole",
   },
 ];
 
