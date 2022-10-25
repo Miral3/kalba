@@ -41,20 +41,24 @@ const Leaderboards = () => {
   }, []);
 
   useLayoutEffect(() => {
-    setTableColumns(donationsRankingTableColumns);
     const fetch = async () => {
-      const res = [...userInfo]
-        .map((val, idx) => ({
-          ...val,
-          expectedRole: expectedRole(
-            val.role,
-            idx,
-            val.donations,
-            val.tag,
-            count
-          ),
-        }))
-        .sort((a, b) => a.donationRank - b.donationRank);
+      const res = [...userInfo].map((val, idx) => ({
+        ...val,
+        expectedRole: expectedRole(
+          val.role,
+          idx,
+          val.donations,
+          val.tag,
+          count
+        ),
+      }));
+      if (category === "donations") {
+        setTableColumns(donationsRankingTableColumns);
+        res.sort((a, b) => a.donationRank - b.donationRank);
+      } else if (category === "score") {
+        setTableColumns(attackPowerRankingTableColumns);
+        res.sort((a, b) => a.yonghaScoreRank - b.yonghaScoreRank);
+      }
 
       setTableData(res);
       setLoading(false);
