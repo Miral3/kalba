@@ -20,12 +20,24 @@ const roleToNum = (role) => {
   }
 };
 
+const expectedRoleToRole = (val, attr) => {
+  return val[attr] === "-" ? val.role : val[attr];
+};
+
 const ascending = (data, attr) => {
-  return data.sort((a, b) => roleToNum(a[attr]) - roleToNum(b[attr]));
+  return data.sort(
+    (a, b) =>
+      roleToNum(expectedRoleToRole(a, attr)) -
+      roleToNum(expectedRoleToRole(b, attr))
+  );
 };
 
 const descending = (data, attr) => {
-  return data.sort((a, b) => roleToNum(b[attr]) - roleToNum(a[attr]));
+  return data.sort(
+    (a, b) =>
+      roleToNum(expectedRoleToRole(b, attr)) -
+      roleToNum(expectedRoleToRole(a, attr))
+  );
 };
 
 const sortData = ({ data }) => {
