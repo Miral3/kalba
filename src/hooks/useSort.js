@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const roleToNum = (role) => {
   switch (role) {
@@ -40,10 +41,15 @@ const descending = (data, attr) => {
   );
 };
 
+const origin = (data) => {
+  return data.sort((a, b) => a.donationRank - b.donationRank);
+};
+
 const sortData = ({ data }) => {
-  const [sortedData, setSortedData] = useState([...data]);
+  const [sortedData, setSortedData] = useState(data);
   const [sortDir, setSortDir] = useState("none");
   const [attr, setAttr] = useState(null);
+  const { category } = useParams();
 
   const handleSort = (e) => {
     const { currentTarget } = e;
@@ -62,7 +68,7 @@ const sortData = ({ data }) => {
           setSortDir("descending");
           break;
         case "descending":
-          setSortedData([...data]);
+          setSortedData(origin(sortedData));
           setSortDir("none");
           break;
         default:
@@ -71,6 +77,11 @@ const sortData = ({ data }) => {
     }
     setAttr(name);
   };
+
+  useEffect(() => {
+    setSortedData(data);
+    setSortDir("none");
+  }, [category]);
 
   return { sortedData, sortDir, attr, handleSort };
 };
