@@ -20,7 +20,11 @@ const Reference = ({ modalVisible, setModalVisible }) => {
       <S.Card>
         <S.Container>
           <S.Logo>Kalba</S.Logo>
-          <Button hover onClick={() => setModalVisible(false)}>
+          <Button
+            hover
+            onClick={() => setModalVisible(false)}
+            style={{ height: 24 }}
+          >
             <S.Close className="material-symbols-outlined">close</S.Close>
           </Button>
         </S.Container>
