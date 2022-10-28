@@ -8,6 +8,7 @@ export const Card = styled.div`
   height: calc(100vh - 32px);
   background-color: ${({ theme }) => theme.bg.modal};
   padding: 10px 8px 16px 8px;
+  overflow: auto;
 
   ${Common.mediaQuery.tabletS} {
     width: 500px;
@@ -36,10 +37,11 @@ export const Close = styled.span`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding-top: 30px;
+  padding: 30px 0;
 
   ${Common.mediaQuery.tabletS} {
     padding-top: 40px;
+    padding-bottom: 0;
   }
 `;
 
