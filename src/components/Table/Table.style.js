@@ -13,6 +13,7 @@ export const Thead = styled.thead`
   top: 0;
   background-color: ${({ theme }) => theme.bg.thead};
   color: ${({ theme }) => theme.text.thead};
+  z-index: 1;
 `;
 
 export const Tbody = styled.tbody`
