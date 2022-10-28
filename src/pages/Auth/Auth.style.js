@@ -8,10 +8,6 @@ export const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-
-  ${Common.mediaQuery.tablet} {
-    align-items: center;
-  }
 `;
 
 export const Card = styled.div`
@@ -20,15 +16,17 @@ export const Card = styled.div`
   background-color: ${({ theme }) => theme.bg.modal};
   padding: 0 24px;
 
+  @media (max-height: 388px) {
+    height: 100%;
+  }
   ${Common.mediaQuery.tablet} {
     width: 500px;
-    padding-top: 48px;
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
   }
 `;
 
 export const Logo = styled.h1`
-  padding: 32px 0;
+  padding-top: 48px;
   text-align: center;
   font-size: ${Common.fontSize.h[0]};
   font-weight: bold;
@@ -43,6 +41,7 @@ export const Logo = styled.h1`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  padding: 32px 0;
 `;
 
 export const Label = styled(Text)`
