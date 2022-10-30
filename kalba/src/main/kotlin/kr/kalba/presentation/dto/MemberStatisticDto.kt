@@ -1,5 +1,9 @@
 package kr.kalba.presentation.dto
 
+import kr.kalba.presentation.dto.meta.CommonMeta
+import kr.kalba.domain.mongo.League
+import kr.kalba.domain.mongo.Statistic
+
 class MemberStatisticDto {
     class NameRequest(
         val name: String
@@ -10,63 +14,90 @@ class MemberStatisticDto {
     )
 
     class Response(
-        val bestTrophies: Int,
-        val clanRank: Int,
-        val donationRank: Int,
-        val donations: Int,
-        val donationsReceived: Int,
-        val expLevel: Int,
-        val heroes: List<Hero>,
-        val labels: List<Label>,
-        val league: List<League>,
-        val name: String,
-        val previousClanRank: Int,
-        val role: String,
-        val spells: List<Spell>,
         val tag: String,
-        val townHallLevel: Int,
-        val townHallWeaponLevel: Int,
-        val troops: List<Troop>,
+        val name: String,
+        val role: String,
+        val expLevel: Int,
+        val league: League?,
         val trophies: Int,
         val versusTrophies: Int,
+        val clanRank: Int,
+        val previousClanRank: Int,
+        val donations: Int,
+        val donationsReceived: Int,
+
+        val score: Int,
+        val townHallLevel: Int,
+        val labels: List<Statistic.PlayerLabel>,
+        val bestTrophies: Int,
         val warStars: Int,
-        val yonghaScore: Int,
-        val yonghaScoreRank: Int,
-    )
+        val troops: List<Statistic.Resource>,
+        val heroes: List<Statistic.Resource>,
+        val spells: List<Statistic.Resource>,
+        val townHallWeaponLevel: Int
+    ) : CommonMeta() {
+        companion object {
+            fun of(statistic: Statistic): Response {
+                return Response(
+                    tag = statistic.tag,
+                    name = statistic.name,
+                    role = statistic.role,
+                    expLevel = statistic.expLevel,
+                    league = statistic.league,
+                    trophies = statistic.trophies,
+                    versusTrophies = statistic.versusTrophies,
+                    clanRank = statistic.clanRank,
+                    previousClanRank = statistic.previousClanRank,
+                    donations = statistic.donations,
+                    donationsReceived = statistic.donationsReceived,
 
-    class Hero(
-        val level: Int,
-        val maxLevel: Int,
-        val name: String,
-        val village: String
-    )
+                    score = statistic.score,
+                    townHallLevel = statistic.townHallLevel,
+                    labels = statistic.labels,
+                    bestTrophies = statistic.bestTrophies,
+                    warStars = statistic.warStars,
+                    troops = statistic.troops,
+                    heroes = statistic.heroes,
+                    spells = statistic.spells,
+                    townHallWeaponLevel = statistic.townHallWeaponLevel
+                )
+            }
+        }
+    }
 
-    class Label(
-        val id: Int,
-        val mediumIcon: String,
-        val name: String,
-        val smallIcon: String
-    )
-
-    class League(
-        val id: Int,
-        val name: String,
-        val iconTiny: String,
-        val iconSmall: String,
-        val iconMedium: String
-    )
-
-    class Spell(
-        val level: Int,
-        val maxLevel: Int,
-        val name: String,
-        val village: String
-    )
-
-    class Troop(
-        val level: Int,
-        val maxLevel: Int,
-        val name: String,
-        val village: String
-    )
+//    class Hero(
+//        val level: Int,
+//        val maxLevel: Int,
+//        val name: String,
+//        val village: String
+//    )
+//
+//    class Label(
+//        val id: Int,
+//        val mediumIcon: String,
+//        val name: String,
+//        val smallIcon: String
+//    )
+//
+//    class League(
+//        val id: Int,
+//        val name: String,
+//        val iconTiny: String,
+//        val iconSmall: String,
+//        val iconMedium: String
+//    )
+//
+//    class Spell(
+//        val level: Int,
+//        val maxLevel: Int,
+//        val name: String,
+//        val village: String
+//    )
+//
+//    class Troop(
+//        val level: Int,
+//        val maxLevel: Int,
+//        val name: String,
+//        val village: String
+//    )
 }

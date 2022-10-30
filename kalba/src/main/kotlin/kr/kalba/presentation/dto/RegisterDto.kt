@@ -1,18 +1,26 @@
 package kr.kalba.presentation.dto
 
+import kr.kalba.domain.mongo.Account
+
 class RegisterDto {
     class Request(
-        val nickName: String,
+        val accountName: String,
+        val cocName: String,
         val tag: String,
-        val name: String,
         val password: String
     )
 
     class Response(
-        val message: String
+        val accountName: String,
+        val cocName: String,
+        val tag: String
     ) {
-        companion object{
-            fun of(message: String): Response = Response(message)
+        companion object {
+            fun of(account: Account): Response = Response(
+                accountName = account.accountName,
+                cocName = account.cocName,
+                tag = account.tag
+            )
         }
     }
 }

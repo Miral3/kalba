@@ -1,84 +1,68 @@
 package kr.kalba.presentation.dto
 
+import kr.kalba.presentation.dto.meta.CommonMeta
+import kr.kalba.domain.mongo.Clan
+
 class ClanInfoDto {
     class Request(
         val tag: String
     )
 
     class Response(
+        val warLeague: Any,
+        val memberList: List<Clan.ClanMember>,
         val tag: String,
-        val name: String,
-        val type: String,
-        val description: String,
-        val location: Location,
-        val badgeUrls: BadgeUrls,
         val clanLevel: Int,
-        val clanPoints: Int,
-        val clanVersusPoints: Int,
-        val requiredTrophies: Int,
-        val warFrequency: String,
         val warWinStreak: Int,
         val warWins: Int,
-        val warLogPublic: Boolean,
-        val warLeague: WarLeague,
-        val members: Int,
-        val memberList: List<Member>,
-        val labels: List<Label>,
-        val chatLanguage: ChatLanguage,
+        val warTies: Int,
+        val warLosses: Int,
+        val clanPoints: Int,
+        val chatLanguage: Any,
+        val isWarLogPublic: Boolean,
+        val warFrequency: Any,
+        val clanVersusPoints: Int,
+        val requiredTrophies: Int,
         val requiredVersusTrophies: Int,
-        val requiredTownhallLevel: Int
-    )
-
-    class Label(
-        val id: Int,
+        val requiredTownhallLevel: Int,
+        val labels: List<Any>,
         val name: String,
-        val smallIcon: String,
-        val mediumIcon: String
-    )
-
-    class Location(
-        val countryCode: String,
-        val id: Long,
-        val isCountry: Boolean,
-        val name: String
-    )
-
-    class League(
-        val id: Int,
-        val name: String,
-        val iconTiny: String,
-        val iconSmall: String,
-        val iconMedium: String
-    )
-
-    class Member(
-        val clanRank: Int,
-        val donations: Int,
-        val donationsReceived: Int,
-        val expLevel: Int,
-        val league: League,
-        val name: String,
-        val previousClanRank: Int,
-        val role: String,
-        val tag: String,
-        val trophies: Int,
-        val versusTrophies: Int
-    )
-
-    class BadgeUrls(
-        val large: String,
-        val medium: String,
-        val small: String
-    )
-
-    class WarLeague(
-        val id: Long,
-        val name: String
-    )
-
-    class ChatLanguage(
-        val id: Long,
-        val languageCode: String,
-        val name: String
-    )
+        val location: Any,
+        val type: Any,
+        val members: Int,
+        val description: String,
+        val clanCapital: Any,
+        val badgeUrls: Any,
+    ) : CommonMeta() {
+        companion object {
+            fun of(clan: Clan): Response {
+                return Response(
+                    warLeague = clan.warLeague,
+                    memberList = clan.memberList,
+                    tag = clan.tag,
+                    clanLevel = clan.clanLevel,
+                    warWinStreak = clan.warWinStreak,
+                    warWins = clan.warWins,
+                    warTies = clan.warTies,
+                    warLosses = clan.warLosses,
+                    clanPoints = clan.clanPoints,
+                    chatLanguage = clan.chatLanguage,
+                    isWarLogPublic = clan.isWarLogPublic,
+                    warFrequency = clan.warFrequency,
+                    clanVersusPoints = clan.clanVersusPoints,
+                    requiredTrophies = clan.requiredTrophies,
+                    requiredVersusTrophies = clan.requiredVersusTrophies,
+                    requiredTownhallLevel = clan.requiredTownhallLevel,
+                    labels = clan.labels,
+                    name = clan.name,
+                    location = clan.location,
+                    type = clan.type,
+                    members = clan.members,
+                    description = clan.description,
+                    clanCapital = clan.clanCapital,
+                    badgeUrls = clan.badgeUrls
+                )
+            }
+        }
+    }
 }

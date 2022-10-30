@@ -1,27 +1,29 @@
 package kr.kalba.presentation.dto
 
+import kr.kalba.domain.mongo.Account
+
 class UserInfoDto {
     class Request(
         val name: String
     )
 
     class Response(
-        val name: String,
+        val accountName: String,
         val tag: String,
-        val nickName: String,
+        val cocName: String,
         val role: String,
         val attackState: Boolean,
         val warningState: Boolean
     ) {
         companion object {
-            fun of(
-                name: String,
-                tag: String,
-                nickName: String,
-                role: String,
-                attackState: Boolean,
-                warningState: Boolean
-            ): Response = Response(name, tag, nickName, role, attackState, warningState)
+            fun of(account: Account): Response = Response(
+                accountName = account.accountName,
+                tag = account.tag,
+                cocName = account.cocName,
+                role = account.role,
+                attackState = account.attackState,
+                warningState = account.warningState
+            )
         }
     }
 

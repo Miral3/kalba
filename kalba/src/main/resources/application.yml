@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: kalba
+  jwt:
+    secret: potiondev
+
+coc:
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImI4YjgzNGIyLWRkNmMtNDBjNS1hOGJiLWYyMGFiZjFmYzQ4YSIsImlhdCI6MTY2NzAyNzEwOCwic3ViIjoiZGV2ZWxvcGVyL2M0MWNmYzkyLTNmMzktYThiMC0xM2UxLTkwMmRjNjE4NWRkNSIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjEyMi4zOC40Mi42OSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.p9fPduxndvya613oL0rSb7yATYER9biXaMm1606sKX8f6U1C4xYwwrrhcMkrAnTRzOwLsUS3LtyMtbOxUKWu-w

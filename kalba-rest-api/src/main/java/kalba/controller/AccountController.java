@@ -1,6 +1,7 @@
 package kalba.controller;
 
 import kalba.models.account.*;
+import kalba.repository.JpaAccountRepository;
 import kalba.service.AccountService;
 import kalba.service.JwtUserDetailsService;
 import kalba.util.JwtTokenUtil;
@@ -30,6 +31,8 @@ public class AccountController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
     private final JwtUserDetailsService userDetailsService;
+
+    private final JpaAccountRepository jpaAccountRepository;
 
     @PostMapping("/register")
     public ResponseEntity<Map<Object, Object>> register(@RequestBody RegisterForm registerForm) {
@@ -94,8 +97,8 @@ public class AccountController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> isAdmin() {
-        return ResponseEntity.ok(Map.of("isAdmin", true));
+        return ResponseEntity.ok(Map.of("isAdmin", jpaAccountRepository.findById()));
     }
 }

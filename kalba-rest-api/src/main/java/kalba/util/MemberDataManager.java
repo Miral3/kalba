@@ -48,6 +48,7 @@ public class MemberDataManager {
         }
     }
 
+    // 5분에 한번 실행했던 부분
     public boolean updateClanInfo(String clanCode) {
         if (LOADING_MAP.get(clanCode).get()) {
             return false;

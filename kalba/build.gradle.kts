@@ -15,9 +15,12 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation(kotlin("stdlib"))
     implementation("org.springframework.boot:spring-boot-starter-web")
-
-//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    implementation("org.apache.httpcomponents:httpclient")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
+    implementation("javax.xml.bind:jaxb-api")
 }

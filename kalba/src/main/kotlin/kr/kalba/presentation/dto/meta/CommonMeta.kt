@@ -1,4 +1,4 @@
-package com.dealicious.tiquitaca.indexer.presentation.dto.meta
+package kr.kalba.presentation.dto.meta
 
 open class CommonMeta {
 

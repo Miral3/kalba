@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <webroots />
+        <sourceRoots />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 1.8" allPlatforms="JVM [1.8]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xallow-no-source-files -java-parameters" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="classpath">
+              <args>
+                <arg>$MODULE_DIR$/../../build/classes/kotlin/main</arg>
+                <arg>$MODULE_DIR$/../../build/resources/main</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.6.10/1cbe9c92c12a94eea200d23c2bbaedaf3daf5132/kotlin-reflect-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.10/b8af3fe6f1ca88526914929add63cf5e7c5049af/kotlin-stdlib-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-web/2.6.2/685b236afc0144a52383cd2c52731dd016f9badd/spring-boot-starter-web-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-mongodb/2.6.2/cbb1a325e5a35faa92d5ccce398a7f86d980f664/spring-boot-starter-data-mongodb-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.13/e5f6cae5ca7ecaac1ec2827a9e2d65ae2869cada/httpclient-4.5.13.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-security/2.6.2/43ee0478a25124223e4bc0300d94239f96086253/spring-boot-starter-security-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.jsonwebtoken/jjwt/0.9.1/54d2abfc3e63a28824d35bf600d6a5d627da681a/jjwt-0.9.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.xml.bind/jaxb-api/2.3.1/8531ad5ac454cc2deb9d4d32c40c4d7451939b5d/jaxb-api-2.3.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.10/c118700e3a33c8a0d9adc920e9dec0831171925/kotlin-stdlib-common-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-json/2.6.2/c0d457ff259c487521706fd2efac75d61595d527/spring-boot-starter-json-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter/2.6.2/c36f1f6886cdbedc5347fdea62b97b44b053b0ba/spring-boot-starter-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-tomcat/2.6.2/81bc9a57c0df9787e122c3b2a66e5a1ac0e139a5/spring-boot-starter-tomcat-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/5.3.14/beb6dc57abf6685878b824d8ab0af39ebd1cfbae/spring-webmvc-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-web/5.6.1/7c2a899cfa8c986170721fedf356a73f73ddcb23/spring-security-web-5.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/5.3.14/801d96f3914ace2e347ee3f6d29e21073e4f50ed/spring-web-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-sync/4.4.0/8cf71eda642db02ee59ef9ff1e3856d6c8f853e3/mongodb-driver-sync-4.4.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-mongodb/3.3.0/8aeeb39bac0314b09b8237fa5da03bcc364551fa/spring-data-mongodb-3.3.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.15/7f2e0c573eaa7a74bac2e89b359e1f73d92a0a1d/httpcore-4.4.15.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.15/49d94806b6e3dc933dacbd8acb0fdbab8ebd1e5d/commons-codec-1.15.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-config/5.6.1/9dad5eb59d37caddfa90752e034541ecd0ca9632/spring-security-config-5.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-autoconfigure/2.6.2/7c91bce101d3f796cccbc1a6744c1ea389fff73f/spring-boot-autoconfigure-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot/2.6.2/bbf59f411320da665411692359ff511315d0ff91/spring-boot-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-core/5.6.1/f8d2fc6d172264946f909d1b61ce8a18b50d655f/spring-security-core-5.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/5.3.14/ce6042492f042131f602bdc83fcb412b142bdac5/spring-context-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/5.3.14/f049146a55991e89c0f04b9624f1f69e1763d80f/spring-aop-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.1/1ece5a87b59701328215e0083448b4d451857cbd/jackson-datatype-jsr310-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.module/jackson-module-parameter-names/2.13.1/cbeec2259213c555ef451a2e05f35ed1dbfbf799/jackson-module-parameter-names-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.13.1/1cbcbe4623113e6af92ccaa89884a345270f1a87/jackson-annotations-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.13.1/51ae921a2ed1e06ca8876f12f32f265e83c0b2b8/jackson-core-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.datatype/jackson-datatype-jdk8/2.13.1/8ecfa9bcd714269fdf22c33f9fd00d0643bd0e21/jackson-datatype-jdk8-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.13.1/698b2d2b15d9a1b7aae025f1d9f576842285e7f6/jackson-databind-2.13.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.activation/javax.activation-api/1.2.0/85262acf3ca9816f9537ca47d5adeabaead7cb16/javax.activation-api-1.2.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-logging/2.6.2/58d4896c606b6ff07b9bd8e46c87eac5a51255de/spring-boot-starter-logging-2.6.2.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/jakarta.annotation/jakarta.annotation-api/1.3.5/59eb84ee0d616332ff44aba065f3888cf002cd2d/jakarta.annotation-api-1.3.5.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/5.3.14/3d80a1e051f071e9cd42fc99698bf9022862b5c/spring-tx-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-commons/2.6.0/5a9afaa6e0a4cd74183a794f467c9b4a546b4cbe/spring-data-commons-2.6.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/5.3.14/24cc27af89edc1581a57bb15bc160d2353f40a0e/spring-beans-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/5.3.14/5cd4c568522b7084afac5d2ac6cb945b797b3f16/spring-expression-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/5.3.14/d87ad19f9d8b9a3f1a143db5a2be34c61751aaa2/spring-core-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.yaml/snakeyaml/1.29/6d0cdafb2010f1297e574656551d7145240f6e25/snakeyaml-1.29.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-websocket/9.0.56/d84be683a5d47e820d077db1d511181c7db9e4e9/tomcat-embed-websocket-9.0.56.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/9.0.56/7c8e0008564c644beec976ab115e2670bb4d7003/tomcat-embed-core-9.0.56.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-el/9.0.56/8e4f28f714693ad4e158e61f41371d4e4c6b4e23/tomcat-embed-el-9.0.56.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/4.4.0/e64a4cec513ad880c7945fb96b34871b875e1e48/mongodb-driver-core-4.4.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/4.4.0/963019c8b3e7366a6d880c2de5705c66864dc8b9/bson-4.4.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.2.9/7d495522b08a9a66084bf417e70eedf95ef706bc/logback-classic-1.2.9.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-to-slf4j/2.17.0/e50b82411b9ce9c204c938509f914b2bb887168b/log4j-to-slf4j-2.17.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/jul-to-slf4j/1.7.32/8a055c04ab44e8e8326901cadf89080721348bdb/jul-to-slf4j-1.7.32.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.32/cdcff33940d9f2de763bc41ea05a0be5941176c3/slf4j-api-1.7.32.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jcl/5.3.14/ffcf745ed5ba32930771378316fd08e97986bec2/spring-jcl-5.3.14.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.security/spring-security-crypto/5.6.1/b9dc3cc09643c0451a35bdc9327e80c4f5dfd354/spring-security-crypto-5.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.2.9/cdaca0cf922c5791a8efa0063ec714ca974affe3/logback-core-1.2.9.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.17.0/bbd791e9c8c9421e45337c4fe0a10851c086e36c/log4j-api-2.17.0.jar</arg>
+              </args>
+            </stringArg>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../build/classes/kotlin/test" />
+            <stringArg name="jvmTarget" arg="1.8" />
+            <stringArg name="moduleName" arg="kalba-api" />
+            <stringArg name="apiVersion" arg="1.6" />
+            <stringArg name="languageVersion" arg="1.6" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="friendPaths">
+              <args>
+                <arg>$MODULE_DIR$/../../build/classes/java/main</arg>
+                <arg>$MODULE_DIR$/../../build/classes/kotlin/main</arg>
+                <arg>$MODULE_DIR$/../../build/libs/kalba-api-2.0-plain.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.6.10/dbe683647dcb04cda92fe4423acb741a2f144a69/kotlin-scripting-jvm-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.6.10/b3b71fd93878f2b4f19d099ac6430c67549a1c77/kotlin-scripting-common-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.6.10/b8af3fe6f1ca88526914929add63cf5e7c5049af/kotlin-stdlib-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.6.10/2c8ba59185f5857a29833856d5e03e03755731a7/kotlin-gradle-plugin-api-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-model/1.6.10/e90218f795c40554e4994b3b81e73fa41209e2f5/kotlin-gradle-plugin-model-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.6.10/c118700e3a33c8a0d9adc920e9dec0831171925/kotlin-stdlib-common-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-native-utils/1.6.10/dd39b79ad4d789c066cc5a62d8dde7a21f1d3ef8/kotlin-native-utils-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-project-model/1.6.10/1c821660ccd0c89a669fd6cd7cda70afe388c2e5/kotlin-project-model-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.6.10/d0a7ff2e2500ef497ed0214ae40ad3c8387a6164/kotlin-script-runtime-1.6.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-util-io/1.6.10/e8557b2856d4fa4d49f0a5af9b5cbf85a009ca7c/kotlin-util-io-1.6.10.jar</arg>
+                <arg>$KOTLIN_BUNDLED$/lib/noarg-compiler-plugin.jar</arg>
+                <arg>$KOTLIN_BUNDLED$/lib/allopen-compiler-plugin.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions">
+              <args>
+                <arg>plugin:org.jetbrains.kotlin.noarg:annotation=javax.persistence.Entity</arg>
+                <arg>plugin:org.jetbrains.kotlin.noarg:annotation=javax.persistence.Embeddable</arg>
+                <arg>plugin:org.jetbrains.kotlin.noarg:annotation=javax.persistence.MappedSuperclass</arg>
+                <arg>plugin:org.jetbrains.kotlin.noarg:invokeInitializers=false</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.stereotype.Component</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.transaction.annotation.Transactional</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.scheduling.annotation.Async</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.cache.annotation.Cacheable</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.boot.test.context.SpringBootTest</arg>
+                <arg>plugin:org.jetbrains.kotlin.allopen:annotation=org.springframework.validation.annotation.Validated</arg>
+              </args>
+            </arrayArg>
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+</module>

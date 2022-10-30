@@ -1,11 +1,16 @@
 package kr.kalba.presentation.dto
 
 class CheckAdminDto {
+
+    class Request(
+        val token: String
+    )
+
     class Response(
-        val isAdmin: Boolean
+        val admin: Boolean
     ) {
         companion object {
-            fun of(isAdmin: Boolean): Response = Response(isAdmin)
+            fun of(admin: Boolean): Response = Response(admin)
         }
     }
 }
