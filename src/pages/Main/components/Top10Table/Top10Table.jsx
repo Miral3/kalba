@@ -17,7 +17,7 @@ const Top10Table = ({ data, columns, title, timer }) => {
 
   return (
     <S.Container>
-      <Table columns={columns} data={data} sticky={false}>
+      <Table columns={columns} data={data} sticky={false} sort>
         <S.Caption>
           <S.CaptionContainer>
             <Text

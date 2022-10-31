@@ -13,6 +13,7 @@ const propTypes = {
   version: PropTypes.string,
   sticky: PropTypes.bool,
   editMode: PropTypes.bool,
+  sort: PropTypes.bool,
   handleInputTableData: PropTypes.func,
   handleDeleteTableData: PropTypes.func,
   handleChangeState: PropTypes.func,
@@ -24,6 +25,7 @@ const defaultProps = {
   version: "leaderboard",
   sticky: true,
   editMode: false,
+  sort: false,
   handleInputTableData: () => {},
   handleDeleteTableData: () => {},
   handleChangeState: () => {},
@@ -39,6 +41,7 @@ const Table = forwardRef(
       version,
       sticky,
       editMode,
+      sort,
       handleInputTableData,
       handleDeleteTableData,
       handleChangeState,
@@ -49,6 +52,7 @@ const Table = forwardRef(
   ) => {
     const [deleteMode, setDeleteMode] = useState(true);
     const { sortedData, sortDir, attr, handleSort } = useSort({ data });
+    const tableData = sort ? sortedData : data;
 
     return (
       <S.Table ref={ref} {...styles}>
@@ -106,7 +110,7 @@ const Table = forwardRef(
           />
         ) : (
           <S.Tbody version={version}>
-            {sortedData.map((row) => (
+            {tableData.map((row) => (
               <S.Tr key={row.tag || row.index}>
                 {columns.map((column) => {
                   if (version === "leaderboard") {

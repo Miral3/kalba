@@ -91,7 +91,7 @@ const Leaderboards = () => {
         {loading ? (
           <Spinner.Box />
         ) : (
-          <Table ref={tableRef} columns={tableColumns} data={tableData} />
+          <Table ref={tableRef} columns={tableColumns} data={tableData} sort />
         )}
         <S.ButtonWrapper>
           <Button version="download" onClick={handleClickExtractTableToXLSX}>
