@@ -111,7 +111,7 @@ const Table = forwardRef(
         ) : (
           <S.Tbody version={version}>
             {tableData.map((row) => (
-              <S.Tr key={row.tag || row.index}>
+              <S.Tr key={row.tag || row.name}>
                 {columns.map((column) => {
                   if (version === "leaderboard") {
                     if (column.accessor === "name") {
