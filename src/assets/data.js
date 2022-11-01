@@ -168,7 +168,7 @@ export const donationsRankingTableColumns = [
   },
 ];
 
-export const attackPowerRankingTableColumns = [
+export const scoreRankingTableColumns = [
   {
     id: 1,
     header: "순위",

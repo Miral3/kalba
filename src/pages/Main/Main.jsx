@@ -4,7 +4,7 @@ import { Spinner } from "../../components";
 import Top10Table from "./components/Top10Table/Top10Table";
 import {
   donationsRankingTableColumns,
-  attackPowerRankingTableColumns,
+  scoreRankingTableColumns,
 } from "../../assets/data";
 import * as S from "./Main.style";
 
@@ -28,7 +28,7 @@ const Main = () => {
               timer="승강전: 22일 5시간 후"
             />
             <Top10Table
-              columns={attackPowerRankingTableColumns}
+              columns={scoreRankingTableColumns}
               data={data.top10PowerRank}
               title="공격력 TOP 10"
               timer="리그전: 22일 5시간 후"
