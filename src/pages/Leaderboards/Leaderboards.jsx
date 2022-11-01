@@ -6,7 +6,7 @@ import { Button, Category, Spinner, Table } from "../../components";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
-  attackPowerRankingTableColumns,
+  scoreRankingTableColumns,
 } from "../../assets/data";
 import * as S from "./Leaderboards.style";
 
@@ -15,6 +15,10 @@ const Leaderboards = () => {
   const { isLoading, data } = useRankData({});
   const navigate = useNavigate();
   const { category } = useParams();
+  const tableColumns = {
+    donations: donationsRankingTableColumns,
+    score: scoreRankingTableColumns,
+  };
 
   const handleClickExtractTableToXLSX = () => {
     const target = tableRef.current;
@@ -32,23 +36,20 @@ const Leaderboards = () => {
     }
   }, []);
 
-  const leaderboardsTable = () => {
-    if (isLoading) return;
-    const nextData =
-      category === "donations" ? data.donationRank : data.powerRank;
-    const nextColumns =
-      category === "donations"
-        ? donationsRankingTableColumns
-        : attackPowerRankingTableColumns;
-
-    return <Table ref={tableRef} columns={nextColumns} data={nextData} sort />;
-  };
-
   return (
     <S.Section>
       <S.Container>
         <Category items={rankingCategoryItems} />
-        {isLoading ? <Spinner.Box /> : leaderboardsTable()}
+        {isLoading ? (
+          <Spinner.Box />
+        ) : (
+          <Table
+            ref={tableRef}
+            columns={tableColumns[category]}
+            data={data[category]}
+            sort
+          />
+        )}
         <S.ButtonWrapper>
           <Button version="download" onClick={handleClickExtractTableToXLSX}>
             Download XLSX

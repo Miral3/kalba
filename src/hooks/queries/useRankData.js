@@ -13,10 +13,14 @@ export const useRankData = ({ options }) => {
 
   return useQuery([queryKeys.RANK_DATA], () => axios.get(`${url.RANK}`), {
     select({ data }) {
-      const powerRank = [...data.sortedByScoreList].map((val, idx) => ({
-        ...val,
-        attackPowerRank: idx + 1,
-      }));
+      const type = {
+        donations: [],
+        score: [],
+        top10: {
+          donations: [],
+          score: [],
+        },
+      };
       const donationRank = [...data.sortedByDonationList].map((val, idx) => ({
         ...val,
         donationRank: idx + 1,
@@ -28,15 +32,19 @@ export const useRankData = ({ options }) => {
           count
         ),
       }));
-      const top10PowerRank = [...powerRank].slice(0, 10);
+      const scoreRank = [...data.sortedByScoreList].map((val, idx) => ({
+        ...val,
+        scoreRank: idx + 1,
+      }));
       const top10DonationRank = [...donationRank].slice(0, 10);
+      const top10ScoreRank = [...scoreRank].slice(0, 10);
 
-      return {
-        powerRank,
-        donationRank,
-        top10PowerRank,
-        top10DonationRank,
-      };
+      type.donations = donationRank;
+      type.score = scoreRank;
+      type.top10.donations = top10DonationRank;
+      type.top10.score = top10ScoreRank;
+
+      return type;
     },
     cacheTime: 60000,
     staleTime: 60000,
