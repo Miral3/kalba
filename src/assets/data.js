@@ -172,7 +172,7 @@ export const attackPowerRankingTableColumns = [
   {
     id: 1,
     header: "순위",
-    accessor: "yonghaScoreRank",
+    accessor: "attackPowerRank",
   },
   {
     id: 2,
@@ -192,7 +192,7 @@ export const attackPowerRankingTableColumns = [
   {
     id: 5,
     header: "공격력",
-    accessor: "yonghaScore",
+    accessor: "score",
   },
 ];
 
