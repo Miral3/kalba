@@ -1,7 +1,8 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { NavLink } from "react-router-dom";
-import { Table, Text, Button } from "../../../../components";
+import { useRankUpdate } from "../../../../hooks/queries/useRankData";
+import { Table, Text, Button, Spinner } from "../../../../components";
 import * as S from "./Top10Table.style";
 import Common from "../../../../styles/common";
 
@@ -13,6 +14,7 @@ const propTypes = {
 };
 
 const Top10Table = ({ data, columns, title, timer }) => {
+  const { mutate, isLoading } = useRankUpdate({});
   const type = title.includes("지원") ? "donations" : "score";
 
   return (
@@ -36,7 +38,11 @@ const Top10Table = ({ data, columns, title, timer }) => {
                 {timer}
               </Text>
               <S.ActionContainer>
-                <Button>갱신</Button>
+                {isLoading ? (
+                  <Spinner.Base size="19.5px" />
+                ) : (
+                  <Button onClick={() => mutate()}>갱신</Button>
+                )}
                 <NavLink to={`/leaderboards/${type}`}>더보기</NavLink>
               </S.ActionContainer>
             </div>
