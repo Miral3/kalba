@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Spinner from "./Spinner";
+import Base from "./Base";
 import * as S from "./Box.style";
 
 const propTypes = {
@@ -16,7 +16,7 @@ const defaultProps = {
 const Box = ({ width, height }) => {
   return (
     <S.Container width={width} height={height}>
-      <Spinner />
+      <Base />
     </S.Container>
   );
 };
