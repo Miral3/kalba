@@ -1,29 +1,31 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import * as xlsx from "xlsx";
 import { useNavigate, useParams } from "react-router-dom";
+import { useFormulaData } from "../../hooks/queries/useFormulaData";
 import { standardCategoryItems, standardTableColumns } from "../../assets/data";
 import { Category, Spinner, Table, Button } from "../../components";
-import { formula } from "../../assets/dummyData";
 import * as S from "./StandardTable.style";
 
 const StandardTable = () => {
-  const [loading, setLoading] = useState(true);
-  const [standardData, setStandardData] = useState({});
-  const [tableData, setTableData] = useState([]);
   const navigate = useNavigate();
   const { category } = useParams();
+  const { isLoading, data } = useFormulaData({});
 
   const handleClickExtractJSONToXLSX = () => {
     const wb = xlsx.utils.book_new();
-    Object.keys(standardData).forEach((key, idx) => {
-      const ws = xlsx.utils.json_to_sheet(standardData[key]);
+    Object.keys(data).forEach((key, idx) => {
+      const ws = xlsx.utils.json_to_sheet(data[key]);
+      const hidden = [0, 5];
+      const cols = ["종류", "비례 점수", "최대 점수", "최대 레벨"];
 
       ws["!cols"] = [];
-      ws["!cols"][0] = { hidden: true };
-      ws["!cols"][1] = { hidden: true };
 
-      ["종류", "최대 점수", "최대 레벨", "비례 점수"].forEach((x, idx) => {
-        const cellAdd = xlsx.utils.encode_cell({ c: idx + 2, r: 0 });
+      hidden.forEach((idx) => {
+        ws["!cols"][idx] = { hidden: true };
+      });
+
+      cols.forEach((x, idx) => {
+        const cellAdd = xlsx.utils.encode_cell({ c: idx + 1, r: 0 });
         ws[cellAdd].v = x;
       });
 
@@ -38,31 +40,16 @@ const StandardTable = () => {
     }
   }, []);
 
-  useLayoutEffect(() => {
-    const fetch = async () => {
-      const res = { ...formula };
-      setStandardData(res);
-      setTableData(res[category]);
-      setLoading(false);
-    };
-    fetch();
-  }, []);
-
-  useEffect(() => {
-    if (loading) return;
-    setTableData(standardData[category]);
-  }, [category]);
-
   return (
     <S.Section>
       <S.Container>
         <Category items={standardCategoryItems} />
-        {loading ? (
+        {isLoading ? (
           <Spinner.Box />
         ) : (
           <Table
             columns={standardTableColumns}
-            data={tableData}
+            data={data[category]}
             version="standard"
           />
         )}
