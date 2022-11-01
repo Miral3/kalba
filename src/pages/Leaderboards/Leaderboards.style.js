@@ -11,7 +11,7 @@ export const Section = styled.section`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16.5px;
   width: 100%;
 
   ${Common.mediaQuery.tabletS} {
