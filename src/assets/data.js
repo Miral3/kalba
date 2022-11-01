@@ -172,7 +172,7 @@ export const scoreRankingTableColumns = [
   {
     id: 1,
     header: "순위",
-    accessor: "attackPowerRank",
+    accessor: "scoreRank",
   },
   {
     id: 2,
