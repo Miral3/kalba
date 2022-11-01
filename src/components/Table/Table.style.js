@@ -45,19 +45,16 @@ export const Th = styled.th`
   cursor: ${({ active }) => active && "pointer"};
 
   &:nth-of-type(1) {
-    width: ${({ version }) => (version === "leaderboard" ? "auto" : "35%")};
-    padding-left: ${({ version }) =>
-      version === "leaderboard" ? "12px" : "0"};
+    width: ${({ version }) => (version === "leaderboard" ? "8%" : "35%")};
   }
   &:nth-of-type(2) {
+    width: ${({ version }) => (version === "leaderboard" ? "40%" : "auto")};
     padding-left: ${({ version }) =>
-      version === "leaderboard" ? "16px" : "0"};
-  }
-  &:nth-of-type(1),
-  &:nth-of-type(2) {
+      version === "leaderboard" ? "32px" : "0"};
     text-align: ${({ version }) =>
       version === "leaderboard" ? "left" : "center"};
   }
+
   &:nth-of-type(3),
   &:nth-of-type(4),
   &:nth-of-type(5) {
@@ -96,12 +93,9 @@ export const Td = styled.td`
   vertical-align: middle;
   font-size: ${Common.fontSize.b[2]};
 
-  &:nth-of-type(1) {
-    padding-left: ${({ version }) =>
-      version === "leaderboard" ? "20px" : "0"};
-  }
-  &:nth-of-type(1),
   &:nth-of-type(2) {
+    padding-left: ${({ version }) =>
+      version === "leaderboard" ? "24px" : "0"};
     text-align: ${({ version }) =>
       version === "leaderboard" ? "left" : "center"};
   }
