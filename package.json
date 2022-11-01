@@ -2,7 +2,7 @@
   "name": "kalba",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://kalba.kr:8080/",
+  "proxy": "http://v2.kalba.kr:8484/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -15,6 +15,7 @@
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.6",
