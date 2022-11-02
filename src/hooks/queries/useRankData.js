@@ -54,17 +54,13 @@ export const useRankData = ({ options }) => {
 
 export const useRankUpdate = ({ options }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    [queryKeys.RANK_UPDATE],
-    () => axios.put(`${url.RANK_UPDATE}`),
-    {
-      onSuccess() {
-        queryClient.invalidateQueries(queryKeys.RANK_DATA);
-      },
-      onError(err) {
-        console.log(err);
-      },
-      ...options,
-    }
-  );
+  return useMutation(() => axios.put(`${url.RANK_UPDATE}`), {
+    onSuccess() {
+      queryClient.invalidateQueries(queryKeys.RANK_DATA);
+    },
+    onError(err) {
+      console.log(err);
+    },
+    ...options,
+  });
 };
