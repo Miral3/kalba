@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
 import { Input, Button, ErrorText } from "../../../../components";
@@ -8,13 +8,11 @@ import * as S from "../../Auth.style";
 
 const Login = () => {
   const { mutate } = useLogin({});
-  const navigate = useNavigate();
   const initialValues = {
     accountName: "",
     password: "",
   };
   const login = async () => {
-    navigate(`/`);
     mutate({ ...values });
   };
   const {
