@@ -83,7 +83,7 @@ const EditableTbody = ({
                         {deleteMode ? (
                           <Button
                             hover
-                            onClick={() => handleDeleteTableData(index)}
+                            onClick={() => handleDeleteTableData(row.name)}
                           >
                             <S.Active className="material-symbols-outlined">
                               delete
