@@ -43,14 +43,14 @@ const EditableTbody = ({
           >
             {data.map((row, index) => (
               <Draggable
-                key={row.index}
-                draggableId={row.index.toString()}
+                key={row.name}
+                draggableId={row.name}
                 index={index}
                 isDragDisabled={isDragDisabled}
               >
                 {(provided, snapshot) => (
                   <S.Tr
-                    key={row.index}
+                    key={row.name}
                     ref={provided.innerRef}
                     isDragging={snapshot.isDragging}
                     {...provided.draggableProps}
@@ -67,12 +67,12 @@ const EditableTbody = ({
                       return (
                         <S.Td
                           key={column.id}
-                          id={row.index}
+                          id={index}
                           name={column.accessor}
                           version={version}
                           contentEditable={editMode}
                           suppressContentEditableWarning
-                          handleInputTableData={(e) => handleInputTableData(e)}
+                          onInput={(e) => handleInputTableData(e)}
                         >
                           {row[column.accessor]}
                         </S.Td>
@@ -83,7 +83,7 @@ const EditableTbody = ({
                         {deleteMode ? (
                           <Button
                             hover
-                            onClick={() => handleDeleteTableData(row.index)}
+                            onClick={() => handleDeleteTableData(index)}
                           >
                             <S.Active className="material-symbols-outlined">
                               delete
