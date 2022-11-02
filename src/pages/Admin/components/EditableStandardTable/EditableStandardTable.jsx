@@ -14,12 +14,23 @@ const EditableStandardTable = () => {
   const [standardData, setStandardData] = useState({});
   const [tableData, setTableData] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [deleteMode, setDeleteMode] = useState(true);
+  const [isDragDisabled, setIsDragDisabled] = useState(true);
   const [submitFormVisible, setSubmitFormVisible] = useState(false);
   const navigate = useNavigate();
   const { category } = useParams();
 
   const handleClickEditMode = (state) => {
     setEditMode(state);
+  };
+
+  const handleClickDeleteMode = (state) => {
+    if (editMode && !state) {
+      setIsDragDisabled(false);
+    } else {
+      setIsDragDisabled(true);
+    }
+    setDeleteMode(state);
   };
 
   const handleInputTableData = (e) => {
@@ -76,6 +87,8 @@ const EditableStandardTable = () => {
 
   const handleCancelEdit = () => {
     setEditMode(false);
+    setDeleteMode(true);
+    setIsDragDisabled(true);
     setTableData([...standardData[category]]);
   };
 
@@ -136,6 +149,9 @@ const EditableStandardTable = () => {
           data={tableData}
           version="editableStandard"
           editMode={editMode}
+          deleteMode={deleteMode}
+          isDragDisabled={isDragDisabled}
+          handleClickDeleteMode={handleClickDeleteMode}
           handleInputTableData={handleInputTableData}
           handleDeleteTableData={handleDeleteTableData}
           handleReorderTableData={handleReorderTableData}

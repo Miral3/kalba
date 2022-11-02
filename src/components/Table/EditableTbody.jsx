@@ -10,6 +10,7 @@ const propTypes = {
   version: PropTypes.string.isRequired,
   editMode: PropTypes.bool.isRequired,
   deleteMode: PropTypes.bool.isRequired,
+  isDragDisabled: PropTypes.bool.isRequired,
   handleInputTableData: PropTypes.func.isRequired,
   handleDeleteTableData: PropTypes.func.isRequired,
   handleReorderTableData: PropTypes.func.isRequired,
@@ -21,6 +22,7 @@ const EditableTbody = ({
   version,
   editMode,
   deleteMode,
+  isDragDisabled,
   handleInputTableData,
   handleDeleteTableData,
   handleReorderTableData,
@@ -44,7 +46,7 @@ const EditableTbody = ({
                 key={row.index}
                 draggableId={row.index.toString()}
                 index={index}
-                isDragDisabled={!editMode}
+                isDragDisabled={isDragDisabled}
               >
                 {(provided, snapshot) => (
                   <S.Tr

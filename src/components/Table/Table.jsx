@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { PropTypes } from "prop-types";
 import useSort from "../../hooks/useSort";
 import { translateRole } from "../../utils/translate";
@@ -13,7 +13,10 @@ const propTypes = {
   version: PropTypes.string,
   sticky: PropTypes.bool,
   editMode: PropTypes.bool,
+  deleteMode: PropTypes.bool,
   sort: PropTypes.bool,
+  isDragDisabled: PropTypes.bool,
+  handleClickDeleteMode: PropTypes.func,
   handleInputTableData: PropTypes.func,
   handleDeleteTableData: PropTypes.func,
   handleChangeState: PropTypes.func,
@@ -25,7 +28,10 @@ const defaultProps = {
   version: "leaderboard",
   sticky: true,
   editMode: false,
+  deleteMode: true,
   sort: false,
+  isDragDisabled: true,
+  handleClickDeleteMode: () => {},
   handleInputTableData: () => {},
   handleDeleteTableData: () => {},
   handleChangeState: () => {},
@@ -41,7 +47,10 @@ const Table = forwardRef(
       version,
       sticky,
       editMode,
+      deleteMode,
       sort,
+      isDragDisabled,
+      handleClickDeleteMode,
       handleInputTableData,
       handleDeleteTableData,
       handleChangeState,
@@ -50,7 +59,6 @@ const Table = forwardRef(
     },
     ref
   ) => {
-    const [deleteMode, setDeleteMode] = useState(true);
     const { sortedData, sortDir, attr, handleSort } = useSort({ data });
     const tableData = sort ? sortedData : data;
 
@@ -90,7 +98,7 @@ const Table = forwardRef(
               <S.Th
                 active
                 version={version}
-                onClick={() => setDeleteMode(!deleteMode)}
+                onClick={() => handleClickDeleteMode(!deleteMode)}
               >
                 {deleteMode ? "삭제" : "이동"}
               </S.Th>
@@ -104,6 +112,7 @@ const Table = forwardRef(
             version={version}
             editMode={editMode}
             deleteMode={deleteMode}
+            isDragDisabled={isDragDisabled}
             handleInputTableData={handleInputTableData}
             handleDeleteTableData={handleDeleteTableData}
             handleReorderTableData={handleReorderTableData}
