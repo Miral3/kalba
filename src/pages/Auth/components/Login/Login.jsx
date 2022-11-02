@@ -1,17 +1,21 @@
+/* eslint-disable no-use-before-define */
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
 import { Input, Button, ErrorText } from "../../../../components";
 import * as S from "../../Auth.style";
 
 const Login = () => {
+  const { mutate } = useLogin({});
   const navigate = useNavigate();
   const initialValues = {
-    name: "",
+    accountName: "",
     password: "",
   };
   const login = async () => {
     navigate(`/`);
+    mutate({ ...values });
   };
   const {
     values,
@@ -36,11 +40,11 @@ const Login = () => {
       </S.Logo>
       <S.Form onSubmit={handleSubmit}>
         <S.Label>로그인</S.Label>
-        <S.InputWrapper isFilled={values.name}>
-          <Input version="auth" name="name" onChange={handleChange} />
+        <S.InputWrapper isFilled={values.accountName}>
+          <Input version="auth" name="accountName" onChange={handleChange} />
           <S.InputLabel>아이디</S.InputLabel>
         </S.InputWrapper>
-        {errors.name && <ErrorText value={errors.name} />}
+        {errors.accountName && <ErrorText value={errors.accountName} />}
         <S.InputWrapper isFilled={values.password}>
           <Input
             version="auth"
