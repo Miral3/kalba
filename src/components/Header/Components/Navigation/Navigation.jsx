@@ -12,26 +12,31 @@ const Navigation = () => {
   const location = useLocation();
   const isAdmin = useRecoilValue(adminState);
   const [active, setActive] = useState(0);
-  const [items, setItems] = useState(
-    isAdmin ? adminNavigationItems : defaultNavigationItems
-  );
+  const [items, setItems] = useState([]);
 
   const handleClickItem = (idx) => {
     setActive(idx);
   };
 
-  useEffect(() => {
+  const checkActiveItem = (navItems) => {
     const { pathname } = location;
-    const visitedIdx = items.findIndex((item) =>
+    const visitedIdx = navItems.findIndex((item) =>
       item.url.includes(pathname.split("/")[1])
     );
     setActive(visitedIdx);
-  }, [location]);
+  };
 
   useEffect(() => {
     const nextItems = isAdmin ? adminNavigationItems : defaultNavigationItems;
     setItems(nextItems);
+    checkActiveItem(nextItems);
   }, [isAdmin]);
+
+  useEffect(() => {
+    if (items.length) {
+      checkActiveItem(items);
+    }
+  }, [location]);
 
   return (
     <S.Navigation>
