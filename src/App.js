@@ -55,7 +55,7 @@ const App = () => {
       try {
         // const res = await checkToken(token);
         const isAdmin = await checkAdmin(token);
-        setIsAdmin(isAdmin);
+        setIsAdmin(isAdmin.data.admin);
       } catch (err) {
         console.log(err);
       }
