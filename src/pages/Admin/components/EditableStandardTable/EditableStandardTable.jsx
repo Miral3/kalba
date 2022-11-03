@@ -1,17 +1,20 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  useFormulaData,
+  useFormulaDataUpdate,
+} from "../../../../hooks/queries/useFormulaData";
 import {
   editableStandardCategoryItems,
   standardTableColumns,
 } from "../../../../assets/data";
 import { Category, Spinner, Table } from "../../../../components";
 import { SubmitForm } from "../index";
-import { formula } from "../../../../assets/dummyData";
 import * as S from "./EditableStandardTable.style";
 
 const EditableStandardTable = () => {
-  const [loading, setLoading] = useState(true);
-  const [standardData, setStandardData] = useState({});
+  const { isLoading, data } = useFormulaData({});
+  const { mutate } = useFormulaDataUpdate({});
   const [tableData, setTableData] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(true);
@@ -34,24 +37,33 @@ const EditableStandardTable = () => {
   };
 
   const handleInputTableData = (e) => {
+    if (e.nativeEvent.isComposing) {
+      return;
+    }
+
     const { currentTarget } = e;
     const name = currentTarget.getAttribute("name");
     const { id, textContent } = currentTarget;
+
+    let content = "";
+    if (name === "korean") {
+      content = textContent;
+    } else if (!textContent) {
+      content = 0;
+    } else {
+      content = parseInt(textContent, 10);
+    }
 
     setTableData((prev) =>
       prev.map((row, index) => {
         if (index === parseInt(id, 10)) {
           return {
             ...prev[id],
-            [name]: name === "korean" ? textContent : parseInt(textContent, 10),
+            [name]: content,
             value:
               name === "maxLevel"
-                ? Math.round(
-                    (prev[id].maxScore / parseInt(textContent, 10)) * 1000
-                  ) / 1000
-                : Math.round(
-                    (parseInt(textContent, 10) / prev[id].maxLevel) * 1000
-                  ) / 1000,
+                ? Math.round((prev[id].maxScore / content) * 1000) / 1000
+                : Math.round((content / prev[id].maxLevel) * 1000) / 1000,
           };
         }
         return row;
@@ -72,9 +84,9 @@ const EditableStandardTable = () => {
     });
   };
 
-  const handleDeleteTableData = (index) => {
+  const handleDeleteTableData = (name) => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      setTableData((prev) => prev.filter((row) => row.index !== index));
+      setTableData((prev) => prev.filter((row) => row.name !== name));
     }
   };
 
@@ -89,21 +101,15 @@ const EditableStandardTable = () => {
     setEditMode(false);
     setDeleteMode(true);
     setIsDragDisabled(true);
-    setTableData([...standardData[category]]);
+    setTableData(data[category]);
   };
 
   const handleSaveTableData = () => {
-    const standardDataObj = {};
-    standardDataObj[category] = tableData;
-    const nextStandardData = {
-      ...standardData,
-      ...standardDataObj,
-    };
-    setStandardData({ ...nextStandardData });
-    setEditMode(false);
-    /**
-     * @Todo nextStandardData 서버에 저장
-     */
+    const type =
+      category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
+
+    mutate({ list: tableData, type });
+    handleCancelEdit();
   };
 
   useEffect(() => {
@@ -114,20 +120,15 @@ const EditableStandardTable = () => {
     }
   }, []);
 
-  useLayoutEffect(() => {
-    const fetch = async () => {
-      const res = { ...formula };
-      setStandardData(res);
-      setTableData(res[category]);
-      setLoading(false);
-    };
-    fetch();
-  }, []);
+  useEffect(() => {
+    if (!isLoading) {
+      setTableData(data[category]);
+    }
+  }, [isLoading, data]);
 
   useEffect(() => {
-    if (loading) return;
-    setTableData(standardData[category]);
-    setEditMode(false);
+    if (isLoading) return;
+    handleCancelEdit();
   }, [category]);
 
   return (
@@ -141,7 +142,7 @@ const EditableStandardTable = () => {
         />
       )}
       <Category items={editableStandardCategoryItems} />
-      {loading ? (
+      {isLoading ? (
         <Spinner.Box />
       ) : (
         <Table
