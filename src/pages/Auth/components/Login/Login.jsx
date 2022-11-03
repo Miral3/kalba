@@ -1,19 +1,27 @@
 /* eslint-disable no-use-before-define */
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { checkAdmin } from "../../../../api/account";
 import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
 import { Input, Button, ErrorText } from "../../../../components";
 import * as S from "../../Auth.style";
 
 const Login = () => {
-  const { mutate } = useLogin({});
+  const { mutateAsync } = useLogin({});
   const initialValues = {
     accountName: "",
     password: "",
   };
   const login = async () => {
-    mutate({ ...values });
+    try {
+      const res = await mutateAsync({ ...values });
+      const { token } = res.data;
+      const isAdmin = await checkAdmin(token);
+      console.log(isAdmin);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const {
     values,
