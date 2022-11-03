@@ -13,6 +13,7 @@ export const useFormulaData = ({ options }) => {
         spells: [],
         heroes: [],
         pets: [],
+        origin: data,
       };
 
       formula.map((val) => type[val.type].push(val));
@@ -25,19 +26,15 @@ export const useFormulaData = ({ options }) => {
   });
 };
 
-export const useRankUpdate = ({ options }) => {
+export const useFormulaDataUpdate = ({ options }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    [queryKeys.RANK_UPDATE],
-    () => axios.put(`${url.RANK_UPDATE}`),
-    {
-      onSuccess() {
-        queryClient.invalidateQueries(queryKeys.RANK_DATA);
-      },
-      onError(err) {
-        console.log(err);
-      },
-      ...options,
-    }
-  );
+  return useMutation((newFormula) => axios.put(`${url.FORMULA}`, newFormula), {
+    onSuccess() {
+      queryClient.invalidateQueries(queryKeys.FORMULA_DATA);
+    },
+    onError(err) {
+      console.log(err);
+    },
+    ...options,
+  });
 };
