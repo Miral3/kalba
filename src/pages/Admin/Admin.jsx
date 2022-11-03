@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useRecoilValue } from "recoil";
+import { adminState } from "../../recoil/authentication";
 import { Sidebar } from "../../components";
 import { EditableStandardTable, Management } from "./components";
 import { adminSidebarItems } from "../../assets/data";
@@ -15,7 +17,7 @@ const propTypes = {
 const Admin = ({ onClose, visible }) => {
   const navigate = useNavigate();
   const { type } = useParams();
-  const isAdmin = true;
+  const isAdmin = useRecoilValue(adminState);
 
   useEffect(() => {
     if (!["management", "standardTable"].find((item) => item === type)) {
