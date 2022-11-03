@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { adminState } from "../../../../recoil/authentication";
 import {
   defaultNavigationItems,
   adminNavigationItems,
@@ -8,10 +10,7 @@ import * as S from "./Navigation.style";
 
 const Navigation = () => {
   const location = useLocation();
-  /**
-   * @Todo recoil로 받아오기
-   */
-  const isAdmin = true;
+  const isAdmin = useRecoilValue(adminState);
   const [active, setActive] = useState(0);
   const [items, setItems] = useState(
     isAdmin ? adminNavigationItems : defaultNavigationItems
