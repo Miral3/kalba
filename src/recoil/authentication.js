@@ -1,21 +1,13 @@
 import { atom, selector } from "recoil";
-import { checkAdmin } from "../api/account";
 
 export const jwtToken = atom({
   key: "jwtToken",
-  default: JSON.parse(localStorage.getItem("token")),
+  default: localStorage.getItem("token"),
 });
 
 export const loginStatus = atom({
   key: "LoginStatus",
   default: false,
-});
-
-export const tokenState = selector({
-  key: "tokenState",
-  get: ({ get }) => {
-    return !!get(jwtToken);
-  },
 });
 
 export const adminState = atom({
@@ -30,6 +22,8 @@ export const loginProcess = selector({
   },
   set: ({ set }, newValue) => {
     set(jwtToken, newValue);
+    set(loginStatus, true);
+    localStorage.setItem("token", newValue);
   },
 });
 
@@ -42,27 +36,6 @@ export const logoutProcess = selector({
     set(jwtToken, "");
     set(loginStatus, false);
     set(adminState, false);
-  },
-});
-
-export const isUserAuthenticated = selector({
-  key: "isUserAuthenticated",
-  get: async ({ get }) => {
-    const token = get(jwtToken);
-    if (token) {
-      const res = await checkAdmin(token);
-      if (res && res.data) {
-        return {
-          isTokenValid: true,
-          isAdmin: res.data.admin,
-          userData: null,
-        };
-      }
-    }
-    return {
-      isTokenValid: false,
-      isAdmin: false,
-      userData: null,
-    };
+    localStorage.removeItem("token");
   },
 });

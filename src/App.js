@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import {
-  useSetRecoilState,
-  useRecoilState,
-  useRecoilValue,
-  useRecoilValueLoadable,
-} from "recoil";
-import {
-  adminState,
-  loginStatus,
-  tokenState,
-  isUserAuthenticated,
-} from "./recoil/authentication";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import { adminState, jwtToken, loginStatus } from "./recoil/authentication";
+import { checkAdmin } from "./api/account";
 import { Header, Footer } from "./components";
 import {
   Main,
@@ -44,12 +35,10 @@ const App = () => {
     "theme",
     getPreferredColorScheme()
   );
+  const token = useRecoilValue(jwtToken);
+  const setisLoggedIn = useSetRecoilState(loginStatus);
   const setIsAdmin = useSetRecoilState(adminState);
-  const [isLogined, setIsLogined] = useRecoilState(loginStatus);
-  const TokenExist = useRecoilValue(tokenState);
-  const {
-    contents: { isTokenValid, isAdmin, userData },
-  } = useRecoilValueLoadable(isUserAuthenticated);
+  const [isLoading, setIsLoading] = useState(true);
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const hadleClickDarkMode = () => {
@@ -61,60 +50,78 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (!isLogined && TokenExist) {
-      if (isTokenValid) {
-        setIsLogined(true);
-        setIsAdmin(isAdmin);
+    setIsLoading(true);
+    const fetch = async () => {
+      try {
+        if (token) {
+          const res = await checkAdmin(token);
+          if (res.status === 200) {
+            setisLoggedIn(true);
+            setIsAdmin(res.data.admin);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+        localStorage.removeItem("token");
       }
-    }
-  }, [isLogined, TokenExist, isTokenValid, userData]);
+      setIsLoading(false);
+    };
+    fetch();
+  }, []);
 
   return (
     <Router>
       <ThemeProvider theme={colorScheme === "dark" ? darkTheme : lightTheme}>
-        <ScrollToTop />
-        <GlobalStyle />
-        <Header
-          onOpen={() => setSidebarVisible(true)}
-          isDark={colorScheme === "dark"}
-          hadleClickDarkMode={hadleClickDarkMode}
-        />
-        <main>
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/leaderboards/:category" element={<Leaderboards />} />
-            <Route
-              path="/standardTable/:category"
-              element={<StandardTable />}
+        {!isLoading && (
+          <>
+            <ScrollToTop />
+            <GlobalStyle />
+            <Header
+              onOpen={() => setSidebarVisible(true)}
+              isDark={colorScheme === "dark"}
+              hadleClickDarkMode={hadleClickDarkMode}
             />
-            <Route path="/auth/:category" element={<Auth />} />
-            <Route path="/profile/:tag" element={<Profile />} />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/admin/:type"
-              element={
-                <Admin
-                  onClose={() => setSidebarVisible(false)}
-                  visible={sidebarVisible}
+            <main>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route
+                  path="/leaderboards/:category"
+                  element={<Leaderboards />}
                 />
-              }
-            >
-              <Route
-                path="/admin/:type:category"
-                element={
-                  <Admin
-                    onClose={() => setSidebarVisible(false)}
-                    visible={sidebarVisible}
-                  />
-                }
-              >
-                /
-              </Route>
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
+                <Route
+                  path="/standardTable/:category"
+                  element={<StandardTable />}
+                />
+                <Route path="/auth/:category" element={<Auth />} />
+                <Route path="/profile/:tag" element={<Profile />} />
+                <Route path="/about" element={<About />} />
+                <Route
+                  path="/admin/:type"
+                  element={
+                    <Admin
+                      onClose={() => setSidebarVisible(false)}
+                      visible={sidebarVisible}
+                    />
+                  }
+                >
+                  <Route
+                    path="/admin/:type:category"
+                    element={
+                      <Admin
+                        onClose={() => setSidebarVisible(false)}
+                        visible={sidebarVisible}
+                      />
+                    }
+                  >
+                    /
+                  </Route>
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </>
+        )}
       </ThemeProvider>
     </Router>
   );
