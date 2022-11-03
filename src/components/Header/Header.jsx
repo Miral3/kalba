@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useRecoilValue } from "recoil";
+import { loginStatus } from "../../recoil/authentication";
 import * as S from "./Header.style";
 import Common from "../../styles/common";
 import { Text, Button } from "../index";
@@ -19,10 +21,7 @@ const Header = ({ onOpen, isDark, hadleClickDarkMode }) => {
   const profileButtonRef = useRef(null);
   const accountInfoRef = useRef(null);
   const [accountInfoVisible, setAccountInfoVisible] = useState(false);
-  /**
-   * @Todo recoil 사용하여 로그인 여부 받아오기
-   */
-  const isLoggedIn = false;
+  const isLoggedIn = useRecoilValue(loginStatus);
 
   const handleClickProfile = () => {
     setAccountInfoVisible(!accountInfoVisible);
