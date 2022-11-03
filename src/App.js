@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
-import { useSetRecoilState } from "recoil";
-import { adminState } from "./recoil/authentication";
-import { checkAdmin } from "./api/account";
+import {
+  useSetRecoilState,
+  useRecoilState,
+  useRecoilValue,
+  useRecoilValueLoadable,
+} from "recoil";
+import {
+  adminState,
+  loginStatus,
+  tokenState,
+  isUserAuthenticated,
+} from "./recoil/authentication";
 import { Header, Footer } from "./components";
 import {
   Main,
@@ -31,12 +40,16 @@ const getPreferredColorScheme = () => {
 };
 
 const App = () => {
-  const [token] = useLocalStorage("token", false);
   const [colorScheme, setColorScheme] = useLocalStorage(
     "theme",
     getPreferredColorScheme()
   );
   const setIsAdmin = useSetRecoilState(adminState);
+  const [isLogined, setIsLogined] = useRecoilState(loginStatus);
+  const TokenExist = useRecoilValue(tokenState);
+  const {
+    contents: { isTokenValid, isAdmin, userData },
+  } = useRecoilValueLoadable(isUserAuthenticated);
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const hadleClickDarkMode = () => {
@@ -48,20 +61,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    /**
-     * @Todo 유효한 token 인지 검증
-     */
-    const fetch = async () => {
-      try {
-        // const res = await checkToken(token);
-        const isAdmin = await checkAdmin(token);
-        setIsAdmin(isAdmin.data.admin);
-      } catch (err) {
-        console.log(err);
+    if (!isLogined && TokenExist) {
+      if (isTokenValid) {
+        setIsLogined(true);
+        setIsAdmin(isAdmin);
       }
-    };
-    fetch();
-  }, []);
+    }
+  }, [isLogined, TokenExist, isTokenValid, userData]);
 
   return (
     <Router>
