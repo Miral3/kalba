@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define */
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { adminState } from "../../../../recoil/authentication";
 import { checkAdmin } from "../../../../api/account";
 import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
@@ -9,6 +11,7 @@ import * as S from "../../Auth.style";
 
 const Login = () => {
   const { mutateAsync } = useLogin({});
+  const setIsAdmin = useSetRecoilState(adminState);
   const initialValues = {
     accountName: "",
     password: "",
@@ -18,7 +21,7 @@ const Login = () => {
       const res = await mutateAsync({ ...values });
       const { token } = res.data;
       const isAdmin = await checkAdmin(token);
-      console.log(isAdmin);
+      setIsAdmin(isAdmin.data.admin);
     } catch (err) {
       console.log(err);
     }
