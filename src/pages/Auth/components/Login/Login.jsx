@@ -2,7 +2,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import { adminState } from "../../../../recoil/authentication";
+import { adminState, loginProcess } from "../../../../recoil/authentication";
 import { checkAdmin } from "../../../../api/account";
 import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
@@ -12,20 +12,24 @@ import * as S from "../../Auth.style";
 const Login = () => {
   const { mutateAsync } = useLogin({});
   const setIsAdmin = useSetRecoilState(adminState);
+  const setLogin = useSetRecoilState(loginProcess);
   const initialValues = {
     accountName: "",
     password: "",
   };
+
   const login = async () => {
     try {
       const res = await mutateAsync({ ...values });
       const { token } = res.data;
       const isAdmin = await checkAdmin(token);
       setIsAdmin(isAdmin.data.admin);
+      setLogin(token);
     } catch (err) {
       console.log(err);
     }
   };
+
   const {
     values,
     errors,
