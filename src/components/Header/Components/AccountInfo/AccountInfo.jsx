@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { logoutProcess } from "../../../../recoil/authentication";
 import { Text, Button, Icon } from "../../../index";
 import { copyText } from "../../../../utils/copy";
 import Common from "../../../../styles/common";
@@ -23,11 +25,12 @@ const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
   const nickname = "Miral";
   const role = "공대";
   const yongaScore = 1275;
-
+  const setLogout = useSetRecoilState(logoutProcess);
   /**
    * @Todo recoil의 로그인 상태 변경 추가
    */
   const handleClickLogoutButton = () => {
+    setLogout();
     setVisible(false);
   };
 
