@@ -1,41 +1,38 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useProfile } from "../../hooks/queries/useProfile";
 import { Skeleton } from "../../components";
 import { Info, Rank, Units } from "./components";
-import { profile } from "../../assets/dummyData";
 import * as S from "./Profile.style";
 
 const Profile = () => {
-  // eslint-disable-next-line no-unused-vars
   const { tag } = useParams();
   const [loading, setLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState({});
+  const result = useProfile({ tag });
+  const isLoading = result.some((result) => result.isLoading);
+  const isError = result.some((result) => result.isError);
+  const [profile, setProfile] = useState({});
 
-  /**
-   * @Todo 칼 없는 바바리안 클랜에 존재하는 유저인지 체크
-   */
-  // const isExist = false;
-  // if (!isExist) {
-  //   return (
-  //     <S.Main>
-  //       <S.Section>
-  //         <S.StyledText>
-  //           칼 없는 바바리안에 존재하지 않는 사용자 입니다. 닉네임, 태그를 확인
-  //           후 다시 검색해주세요.
-  //         </S.StyledText>
-  //       </S.Section>
-  //     </S.Main>
-  //   );
-  // }
-
-  useLayoutEffect(() => {
-    const fetch = async () => {
-      setUserInfo(profile);
+  useEffect(() => {
+    if (isError) return;
+    setLoading(true);
+    if (!isLoading) {
+      const [{ data: clanInfo }, { data: userInfo }] = result;
+      setProfile({ ...clanInfo, ...userInfo });
       setLoading(false);
-    };
-    fetch();
-  }, []);
+    }
+  }, [isLoading]);
 
+  if (isError) {
+    return (
+      <S.Section>
+        <S.StyledText>
+          칼 없는 바바리안에 존재하지 않는 사용자 입니다. 닉네임, 태그를 확인 후
+          다시 검색해주세요.
+        </S.StyledText>
+      </S.Section>
+    );
+  }
   if (loading) {
     return (
       <S.Section>
@@ -50,9 +47,9 @@ const Profile = () => {
   return (
     <S.Section>
       <S.Container>
-        <Info data={userInfo} />
-        <Rank data={userInfo} />
-        <Units data={userInfo} />
+        <Info data={profile} />
+        <Rank data={profile} />
+        <Units data={profile} />
       </S.Container>
     </S.Section>
   );
