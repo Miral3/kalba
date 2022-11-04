@@ -23,7 +23,7 @@ const Rank = ({ data }) => {
             <S.Type>공격력</S.Type>
             <S.ScoreBlock>
               <S.Trophy small src="/img/coc/coc_Trophy.png" alt="trophy" />
-              <S.Score>{data.yonghaScore}</S.Score>
+              <S.Score>{data.score}</S.Score>
             </S.ScoreBlock>
           </div>
         </S.Content>
