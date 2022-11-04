@@ -23,7 +23,8 @@ const useSearch = ({
     setActiveItem(-1);
   };
 
-  const handleSelect = () => {
+  const handleSelect = (e) => {
+    e.preventDefault();
     onSubmit();
     resetAutoComplete();
   };
@@ -69,9 +70,6 @@ const useSearch = ({
         innerText = getInnerText(node, idx);
         inputRef.current.value = innerText;
         node.scrollTo({ top: itemHeight * idx });
-        break;
-      case "Enter":
-        handleSelect();
         break;
       case "Escape":
         resetAutoComplete();

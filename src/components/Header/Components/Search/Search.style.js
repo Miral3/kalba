@@ -11,7 +11,7 @@ export const Container = styled.div`
     margin: 0;
   }
 `;
-export const Search = styled.div`
+export const Form = styled.form`
   display: flex;
   height: 32px;
   border-radius: 4px;
@@ -21,8 +21,6 @@ export const Search = styled.div`
 
 export const InputWrapper = styled.div`
   flex: 1;
-  /* display: flex;
-  align-items: center; */
 `;
 
 export const StyledButton = styled(Button)`

@@ -26,10 +26,11 @@ const Search = () => {
   };
 
   const handleSubmitSearch = () => {
+    const value = inputRef.current.value.toLowerCase();
     const searchedUser = findUser();
     inputRef.current.value = "";
     if (!searchedUser) {
-      alert("존재하지 않는 멤버 입니다. 이름 혹은 태그를 다시 확인해주세요");
+      navigate(`/profile/${value}`);
       return;
     }
     navigate(`/profile/${searchedUser.tag.substr(1)}`);
@@ -61,7 +62,7 @@ const Search = () => {
 
   return (
     <S.Container ref={containerRef}>
-      <S.Search>
+      <S.Form onSubmit={handleSelect}>
         <S.InputWrapper>
           <Input
             ref={inputRef}
@@ -70,12 +71,12 @@ const Search = () => {
             onKeyDown={(e) => handleKeyDown(e)}
           />
         </S.InputWrapper>
-        <S.StyledButton onClick={handleSelect}>
+        <S.StyledButton type="submit" onClick={handleSelect}>
           <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
             search
           </Icon>
         </S.StyledButton>
-      </S.Search>
+      </S.Form>
       <AutoComplete
         ref={listRef}
         data={autoCompleteData}
