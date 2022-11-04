@@ -16,7 +16,7 @@ export const useProfile = ({ tag }) => {
       },
     },
     {
-      queryKey: [queryKeys.PROFILE],
+      queryKey: [queryKeys.PROFILE, tag],
       queryFn: () => axios.get(`${url.PROFILE}?tag=%23${tag}`),
       select({ data }) {
         return data;
