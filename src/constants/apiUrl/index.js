@@ -7,7 +7,7 @@ export const LOGIN = "/account/login";
 export const ADMIN = "/account/admin";
 
 // clan
-export const INFO = "/coc/clan/info";
+export const CLAN_INFO = "/coc/clan/info";
 export const RANK = "/coc/clan/rank";
 export const RANK_UPDATE = "/coc/clan/update";
 export const FORMULA = "/coc/clan/formula";
