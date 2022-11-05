@@ -1,18 +1,25 @@
 /* eslint-disable no-param-reassign */
 import { useState } from "react";
+import { useSearchClanMember } from "./queries/useSearchClanMember";
+import useDebounce from "./useDebounce";
 import useClickAway from "./useClickAway";
 
 const useSearch = ({
   inputRef,
   listRef,
-  data,
-  onSubmit,
+  onSearch,
   filterOption,
   getInnerText,
 }) => {
-  const [autoCompleteData, setAutoCompleteData] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const debouncedValue = useDebounce(inputValue, 500);
+  const { isLoading, data } = useSearchClanMember({
+    keyword: debouncedValue,
+    filterOption,
+  });
+  const [autoCompleteVisible, setAutoCompleteVisible] = useState(true);
   const [activeItem, setActiveItem] = useState(-1);
-  const [autoCompleteVisible, setAutoCompleteVisible] = useState(false);
+
   const containerRef = useClickAway(() => {
     setAutoCompleteVisible(false);
   });
@@ -23,32 +30,38 @@ const useSearch = ({
     setActiveItem(-1);
   };
 
-  const handleSelect = (e) => {
-    e.preventDefault();
-    onSubmit();
+  const handleChangeInput = (e) => {
+    const { value } = e.target;
+    if (!value) {
+      setAutoCompleteVisible(false);
+    }
+    if (!autoCompleteVisible) {
+      setAutoCompleteVisible(true);
+    }
+    setInputValue(value);
+  };
+
+  const handleSearch = () => {
+    if (!data) {
+      return;
+    }
+    if (activeItem === -1) {
+      setActiveItem(0);
+      inputRef.current.value = data[0].tag;
+      return;
+    }
+    onSearch(data[activeItem]);
     resetAutoComplete();
   };
 
-  const handleFilter = () => {
-    const keyword = inputRef.current.value;
-    const filteredData = data.filter((item) => {
-      return filterOption.some(
-        (key) => item[key]?.toLowerCase().indexOf(keyword.toLowerCase()) >= 0
-      );
-    });
-
-    if (!keyword) {
-      setAutoCompleteData([]);
-      resetAutoComplete();
-      return;
-    }
-
+  const handleFocusInput = () => {
     setAutoCompleteVisible(true);
-    setAutoCompleteData(filteredData);
   };
 
   const handleKeyDown = (e) => {
     const node = listRef.current;
+    if (!node) return;
+
     const { length } = node.children;
     if (e.nativeEvent.isComposing || !length) {
       return;
@@ -58,18 +71,21 @@ const useSearch = ({
     let innerText = "";
     switch (e.key) {
       case "ArrowUp":
-        idx = activeItem - 1 < 0 ? autoCompleteData.length - 1 : activeItem - 1;
+        idx = activeItem - 1 < 0 ? data.length - 1 : activeItem - 1;
         setActiveItem(idx);
         innerText = getInnerText(node, idx);
         inputRef.current.value = innerText;
         node.scrollTo({ top: itemHeight * idx });
         break;
       case "ArrowDown":
-        idx = activeItem + 1 > autoCompleteData.length - 1 ? 0 : activeItem + 1;
+        idx = activeItem + 1 > data.length - 1 ? 0 : activeItem + 1;
         setActiveItem(idx);
         innerText = getInnerText(node, idx);
         inputRef.current.value = innerText;
         node.scrollTo({ top: itemHeight * idx });
+        break;
+      case "Enter":
+        handleSearch();
         break;
       case "Escape":
         resetAutoComplete();
@@ -81,14 +97,16 @@ const useSearch = ({
   };
 
   return {
-    autoCompleteData,
+    data,
+    isLoading,
     activeItem,
     autoCompleteVisible,
-    handleSelect,
-    handleFilter,
-    handleKeyDown,
-    resetAutoComplete,
     containerRef,
+    setAutoCompleteVisible,
+    handleChangeInput,
+    handleSearch,
+    handleKeyDown,
+    handleFocusInput,
   };
 };
 
