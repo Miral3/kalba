@@ -4,7 +4,6 @@ import * as S from "./Search.style";
 import Common from "../../../../styles/common";
 import { Input, Icon, AutoComplete } from "../../../index";
 import useSearch from "../../../../hooks/useSearch";
-import { userInfo } from "../../../../assets/dummyData";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -16,74 +15,64 @@ const Search = () => {
     return node.children[idx].children[0].innerText;
   };
 
-  const findUser = () => {
-    const value = inputRef.current.value.toLowerCase();
-    return userInfo.find(
-      (member) =>
-        member.name.toLowerCase() === value ||
-        member.tag.toLowerCase() === value
-    );
-  };
-
-  const handleSubmitSearch = () => {
-    const value = inputRef.current.value.toLowerCase();
-    const searchedUser = findUser();
+  const handleSubmitSearch = (searchedUser) => {
     inputRef.current.value = "";
-    if (!searchedUser) {
-      navigate(`/profile/${value}`);
-      return;
-    }
     navigate(`/profile/${searchedUser.tag.substr(1)}`);
   };
 
   const {
-    autoCompleteData,
+    data,
+    isLoading,
     activeItem,
     autoCompleteVisible,
-    handleSelect,
-    handleFilter,
-    handleKeyDown,
-    resetAutoComplete,
     containerRef,
+    setAutoCompleteVisible,
+    handleChangeInput,
+    handleSearch,
+    handleKeyDown,
+    handleFocusInput,
   } = useSearch({
     inputRef,
     listRef,
-    data: userInfo,
-    onSubmit: handleSubmitSearch,
+    onSearch: handleSubmitSearch,
     filterOption,
     getInnerText,
   });
 
-  const handleClickItem = (item) => {
-    resetAutoComplete();
+  const handleClickAutoCompleteItem = (item) => {
     inputRef.current.value = "";
+    setAutoCompleteVisible(false);
     navigate(`/profile/${item.tag.substr(1)}`);
   };
 
   return (
     <S.Container ref={containerRef}>
-      <S.Form onSubmit={handleSelect}>
+      <S.Search>
         <S.InputWrapper>
           <Input
             ref={inputRef}
             placeholder="이름, 태그번호 검색"
-            onChange={handleFilter}
+            onChange={handleChangeInput}
             onKeyDown={(e) => handleKeyDown(e)}
+            onFocus={handleFocusInput}
           />
         </S.InputWrapper>
-        <S.StyledButton type="submit" onClick={handleSelect}>
+        <S.StyledButton onClick={handleSearch}>
           <Icon size={Common.fontSize.b[0]} color={Common.colors.red[2]}>
             search
           </Icon>
         </S.StyledButton>
-      </S.Form>
-      <AutoComplete
-        ref={listRef}
-        data={autoCompleteData}
-        active={activeItem}
-        visible={autoCompleteVisible}
-        onClick={handleClickItem}
-      />
+      </S.Search>
+      {data && (
+        <AutoComplete
+          ref={listRef}
+          isLoading={isLoading}
+          data={data}
+          active={activeItem}
+          visible={autoCompleteVisible}
+          onClick={handleClickAutoCompleteItem}
+        />
+      )}
     </S.Container>
   );
 };
