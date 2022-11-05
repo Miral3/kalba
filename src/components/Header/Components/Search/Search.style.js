@@ -11,7 +11,7 @@ export const Container = styled.div`
     margin: 0;
   }
 `;
-export const Form = styled.form`
+export const Search = styled.div`
   display: flex;
   height: 32px;
   border-radius: 4px;
