@@ -11,6 +11,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
   onKeyDown: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 const defaultProps = {
@@ -22,6 +23,7 @@ const defaultProps = {
   disabled: false,
   onChange: () => {},
   onKeyDown: () => {},
+  onFocus: () => {},
 };
 
 const Input = forwardRef(
@@ -35,6 +37,7 @@ const Input = forwardRef(
       disabled,
       onChange,
       onKeyDown,
+      onFocus,
     },
     ref
   ) => {
@@ -49,6 +52,7 @@ const Input = forwardRef(
         disabled={disabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        onFocus={onFocus}
       />
     );
   }
