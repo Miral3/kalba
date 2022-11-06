@@ -1,9 +1,10 @@
 package kr.kalba.presentation.controller
 
-import kr.kalba.presentation.dto.meta.CommonMeta
 import kr.kalba.application.ClanService
 import kr.kalba.application.FormulaService
+import kr.kalba.domain.FormulaType
 import kr.kalba.presentation.dto.*
+import kr.kalba.presentation.dto.meta.CommonMeta
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -25,16 +26,18 @@ class ClanController(
     @ResponseBody
     @GetMapping("/rank")
     fun memberStatisticRank(): ResponseEntity<ClanRankDto.Response> {
+        val allMemberStatistics = clanService.getAllMemberStatistic().map { ClanRankDto.Data.of(it) }
         return ResponseEntity.status(HttpStatus.OK).body(
             ClanRankDto.Response(
-                clanService.getAllMemberStatistic().map { ClanRankDto.Data.of(it) }
+                sortedByScoreList = allMemberStatistics.sortedBy { it.score }.reversed(),
+                sortedByDonationList = allMemberStatistics.sortedBy { it.donations }.reversed()
             )
         )
     }
 
     @ResponseBody
     @PutMapping("/update")
-    fun forceUpdateClanInfo(@RequestBody tag: UpdateDto.Request): ResponseEntity<UpdateDto.Response>? {
+    fun forceUpdateClanInfo(): ResponseEntity<UpdateDto.Response>? {
         clanService.updateClanInfo()
         return ResponseEntity.status(HttpStatus.OK).body(UpdateDto.Response("갱신 요청을 보냈습니다."))
     }
@@ -56,7 +59,6 @@ class ClanController(
             MemberTagDto.Response.of(
                 clanService.getMemberStatisticByTag(tag.tag).name
             )
-//            MemberTagDto.Response.of("용하")
         )
     }
 
@@ -78,10 +80,10 @@ class ClanController(
 
     @ResponseBody
     @GetMapping("/formula")
-    fun scoreFormula(): ResponseEntity<FormulaReadDto.Response> {
+    fun scoreFormula(@RequestParam type: FormulaType?): ResponseEntity<FormulaReadDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             FormulaReadDto.Response(
-                formula = formulaService.getFormula().map { FormulaReadDto.Data.of(it) }
+                formula = formulaService.getFormulaByType(type).map { FormulaReadDto.Data.of(it) }
             )
         )
     }
@@ -89,12 +91,7 @@ class ClanController(
     @ResponseBody
     @PutMapping("/formula")
     fun updateScoreFormula(@RequestBody request: FormulaUpdateDto.Request): ResponseEntity<*> {
-        return ResponseEntity.status(HttpStatus.OK).body(CommonMeta())
-    }
-
-    @ResponseBody
-    @DeleteMapping("/formula")
-    fun deleteScoreFormula(@RequestBody request: FormulaUpdateDto.Request): ResponseEntity<*> {
+        formulaService.updateFormula(request.list, request.type)
         return ResponseEntity.status(HttpStatus.OK).body(CommonMeta())
     }
 }

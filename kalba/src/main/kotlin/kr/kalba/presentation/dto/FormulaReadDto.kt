@@ -5,6 +5,7 @@ import kr.kalba.domain.mongo.Formula
 
 class FormulaReadDto {
 
+
     class Response(
         val formula: List<Data>
     ) : CommonMeta()

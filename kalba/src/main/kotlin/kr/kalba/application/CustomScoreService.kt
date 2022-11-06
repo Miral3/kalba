@@ -33,7 +33,6 @@ class CustomScoreService(
                 score += it.level * formula[it.name]!!.value
             }
         }
-        println(playerData.tag)
         return score.roundToInt()
     }
 }

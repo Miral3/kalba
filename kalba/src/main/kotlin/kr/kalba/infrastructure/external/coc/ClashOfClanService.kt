@@ -1,7 +1,11 @@
 package kr.kalba.infrastructure.external.coc
 
+import kr.kalba.infrastructure.constant.Errors
+import kr.kalba.infrastructure.exception.CommonException
 import kr.kalba.infrastructure.external.coc.dto.ClanData
 import kr.kalba.infrastructure.external.coc.dto.PlayerData
+import kr.kalba.infrastructure.external.coc.dto.VerifyTokenRequest
+import kr.kalba.infrastructure.external.coc.dto.VerifyTokenResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -44,14 +48,10 @@ class ClashOfClanService(
             if (res.statusCode.value() == 200) {
                 return res.body!!
             }
-        } catch (e: HttpClientErrorException) {
-            e.printStackTrace()
-        } catch (e: HttpServerErrorException) {
-            e.printStackTrace()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        throw Exception()
+        throw CommonException(Errors.COC_API_CLAN)
     }
 
     fun getUserInfo(userTag: String): PlayerData {
@@ -73,14 +73,32 @@ class ClashOfClanService(
             if (res.statusCode.value() == 200) {
                 return res.body!!
             }
-        } catch (e: HttpClientErrorException) {
-            e.printStackTrace()
-        } catch (e: HttpServerErrorException) {
-            e.printStackTrace()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        throw Exception()
+        throw CommonException(Errors.COC_API_PLAYER)
+    }
+
+    fun verifyToken(tag: String, cocToken: String): VerifyTokenResponse {
+        try {
+            val factory = HttpComponentsClientHttpRequestFactory()
+            factory.setConnectTimeout(5000)
+            factory.setReadTimeout(5000)
+            val restTemplate = RestTemplate(factory)
+            val header = HttpHeaders()
+            header.setBearerAuth(token)
+            header.add("Accept", "*/*")
+            header.contentType = MediaType.APPLICATION_JSON
+            val url = URI.create("https://api.clashofclans.com/v1/players/${this.encodeUTF8(tag)}/verifytoken")
+            val entity = HttpEntity<Any>(VerifyTokenRequest(cocToken), header)
+            val res = restTemplate.postForEntity(url, entity, VerifyTokenResponse::class.java)
+            if (res.statusCode.value() == 200) {
+                return res.body!!
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        throw CommonException(Errors.COC_API_VERITY_USER_TOKEN)
     }
 
     fun encodeUTF8(userTag: String?): String {

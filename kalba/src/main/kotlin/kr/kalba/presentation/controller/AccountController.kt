@@ -1,10 +1,7 @@
 package kr.kalba.presentation.controller
 
 import kr.kalba.application.AccountService
-import kr.kalba.presentation.dto.CheckAdminDto
-import kr.kalba.presentation.dto.LoginDto
-import kr.kalba.presentation.dto.RegisterDto
-import kr.kalba.presentation.dto.UserInfoDto
+import kr.kalba.presentation.dto.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -52,11 +49,19 @@ class AccountController(
     }
 
     @GetMapping("/admin")
-    fun checkAdmin(request: CheckAdminDto.Request): ResponseEntity<CheckAdminDto.Response> {
+    fun checkAdmin(token: CheckAdminDto.Request): ResponseEntity<CheckAdminDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             CheckAdminDto.Response.of(
-                accountService.isAdmin(request.token)
+                accountService.isAdmin(token.token)
             )
+        )
+    }
+
+    @PostMapping("/verify/token")
+    fun verifyToken(@RequestBody request: VerifyTokenDto.Request):  ResponseEntity<VerifyTokenDto.Response> {
+        val response = accountService.verifyToken(request.tag, request.token)
+        return ResponseEntity.status(HttpStatus.OK).body(
+            VerifyTokenDto.Response(response.status)
         )
     }
 }

@@ -6,7 +6,8 @@ import kr.kalba.domain.mongo.Statistic
 
 class ClanRankDto {
     class Response(
-        val list: List<Data>
+        val sortedByScoreList: List<Data>,
+        val sortedByDonationList: List<Data>
     )
 
     class Data(

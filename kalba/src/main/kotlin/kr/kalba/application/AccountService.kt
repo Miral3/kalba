@@ -1,6 +1,10 @@
 package kr.kalba.application
 
 import kr.kalba.domain.mongo.Account
+import kr.kalba.infrastructure.constant.Errors
+import kr.kalba.infrastructure.exception.CommonException
+import kr.kalba.infrastructure.external.coc.ClashOfClanService
+import kr.kalba.infrastructure.external.coc.dto.VerifyTokenResponse
 import kr.kalba.infrastructure.external.security.JwtTokenUtil
 import kr.kalba.infrastructure.external.security.JwtUserDetailsService
 import kr.kalba.infrastructure.repository.AccountRepository
@@ -21,16 +25,21 @@ class AccountService(
     val passwordEncoder: PasswordEncoder,
     val authenticationManager: AuthenticationManager,
     val jwtUserDetailsService: JwtUserDetailsService,
-    val jwtTokenUtil: JwtTokenUtil
+    val jwtTokenUtil: JwtTokenUtil,
+    val clashOfClanService: ClashOfClanService
 ) {
     fun register(registerDto: RegisterDto.Request): Account {
         if (validateDuplicateName(registerDto)) {
-            throw Exception()
+            throw CommonException(Errors.REGISTER_DUPLICATE_NAME)
         } else if (validateDuplicateTag(registerDto)) {
-            throw Exception()
+            throw CommonException(Errors.REGISTER_DUPLICATE_TAG)
         }
         val encryptedPassword = passwordEncoder.encode(registerDto.password)
         return accountRepository.save(Account.of(registerDto, encryptedPassword))
+    }
+
+    fun verifyToken(tag: String, token: String): VerifyTokenResponse {
+        return clashOfClanService.verifyToken(tag, token)
     }
 
     private fun validateDuplicateName(registerDto: RegisterDto.Request): Boolean {
@@ -50,9 +59,9 @@ class AccountService(
                 )
             )
         } catch (e: DisabledException) {
-            throw Exception()
+            throw CommonException(Errors.LOGIN_DISABLE_USER)
         } catch (e: BadCredentialsException) {
-            throw Exception()
+            throw CommonException(Errors.LOGIN_INVALID_PASSWORD)
         }
         val userDetails = jwtUserDetailsService.loadUserByUsername(loginDto.accountName)
         return jwtTokenUtil.generateToken(userDetails)

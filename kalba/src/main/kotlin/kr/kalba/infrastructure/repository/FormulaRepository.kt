@@ -5,4 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface FormulaRepository : MongoRepository<Formula, String>
+interface FormulaRepository : MongoRepository<Formula, String>{
+    fun findByType(type: String): List<Formula>
+}
