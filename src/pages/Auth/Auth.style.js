@@ -94,6 +94,7 @@ export const StyledButton = styled(Button)`
   top: 10px;
   z-index: 4;
   text-align: center;
+  pointer-events: ${({ isVerification }) => (isVerification ? "none" : "auto")};
   cursor: pointer;
 
   &:hover::after {

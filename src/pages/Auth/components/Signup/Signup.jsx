@@ -130,7 +130,10 @@ const Signup = () => {
             onFocus={handleFocusInput}
           />
           <S.InputLabel>태그번호</S.InputLabel>
-          <S.StyledButton onClick={handleSearch}>
+          <S.StyledButton
+            onClick={handleSearch}
+            isVerification={isVerification}
+          >
             <S.Search className="material-symbols-outlined">search</S.Search>
           </S.StyledButton>
           {data && (
