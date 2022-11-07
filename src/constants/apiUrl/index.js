@@ -5,6 +5,7 @@ export const BASE_URL = "http://kalba.kr:8080";
 export const REGISTER = "/account/register";
 export const LOGIN = "/account/login";
 export const ADMIN = "/account/admin";
+export const VERIFY = "/account/verify/token";
 
 // clan
 export const CLAN_INFO = "/coc/clan/info";
