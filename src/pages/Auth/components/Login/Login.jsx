@@ -6,7 +6,7 @@ import { adminState, loginProcess } from "../../../../recoil/authentication";
 import { checkAdmin } from "../../../../api/account";
 import { useLogin } from "../../../../hooks/queries/useAuth";
 import useForm from "../../../../hooks/useForm";
-import { Input, Button, ErrorText } from "../../../../components";
+import { Input, Button, ErrorText, Spinner } from "../../../../components";
 import * as S from "../../Auth.style";
 
 const Login = () => {
@@ -68,13 +68,19 @@ const Login = () => {
           <S.InputLabel>비밀번호</S.InputLabel>
         </S.InputWrapper>
         {errors.password && <ErrorText value={errors.password} />}
-        <Button
-          type="submit"
-          version="login"
-          disabled={checkEmptyValue() || isLoading}
-        >
-          로그인
-        </Button>
+        {isLoading ? (
+          <Button version="loading">
+            <Spinner.Base size="36px" />
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            version="login"
+            disabled={checkEmptyValue() || isLoading}
+          >
+            로그인
+          </Button>
+        )}
         <S.Link>
           <NavLink to="/auth/signup">회원가입</NavLink>
         </S.Link>
