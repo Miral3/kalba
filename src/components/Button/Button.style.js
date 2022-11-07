@@ -40,6 +40,16 @@ const LoginButton = ({ theme }) => css`
   }
 `;
 
+const LoadingButton = ({ theme }) => css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  margin-top: 16px;
+  background-color: ${theme.bg.disabledBtn};
+  cursor: default;
+`;
+
 const ReferenceButton = css`
   padding: 4px 6px;
   margin-left: 4px;
@@ -131,6 +141,8 @@ export const Button = styled.button`
         return ReferenceButton;
       case "download":
         return DownloadButton;
+      case "loading":
+        return LoadingButton;
       default:
         break;
     }
