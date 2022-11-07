@@ -37,14 +37,14 @@ class ClanController(
 
     @ResponseBody
     @PutMapping("/update")
-    fun forceUpdateClanInfo(): ResponseEntity<UpdateDto.Response>? {
+    fun forceUpdateClanInfo(): ResponseEntity<UpdateDto.Response> {
         clanService.updateClanInfo()
         return ResponseEntity.status(HttpStatus.OK).body(UpdateDto.Response("갱신 요청을 보냈습니다."))
     }
 
     @ResponseBody
     @GetMapping("/member/tag")
-    fun getTagByName(@RequestParam name: MemberNameDto.Request): ResponseEntity<MemberNameDto.Response>? {
+    fun getTagByName(@RequestParam name: MemberNameDto.Request): ResponseEntity<MemberNameDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             MemberNameDto.Response.of(
                 clanService.getMemberStatisticByName(name.name).tag
@@ -54,7 +54,7 @@ class ClanController(
 
     @ResponseBody
     @GetMapping("/member/name")
-    fun getTagByTag(@RequestParam tag: MemberTagDto.Request): ResponseEntity<MemberTagDto.Response>? {
+    fun getTagByTag(@RequestParam tag: MemberTagDto.Request): ResponseEntity<MemberTagDto.Response> {
         return ResponseEntity.status(HttpStatus.OK).body(
             MemberTagDto.Response.of(
                 clanService.getMemberStatisticByTag(tag.tag).name
