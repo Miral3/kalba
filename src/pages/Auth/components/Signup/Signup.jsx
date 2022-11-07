@@ -1,14 +1,22 @@
+/* eslint-disable no-use-before-define */
 import React, { useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
-import { Input, Button, AutoComplete, ErrorText } from "../../../../components";
+import {
+  Input,
+  Button,
+  AutoComplete,
+  ErrorText,
+  Spinner,
+} from "../../../../components";
 import { Reference } from "../index";
 import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";
+import { useSignup } from "../../../../hooks/queries/useAuth";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const { mutateAsync } = useSignup({});
   const [verificationVisible, setVerificationVisible] = useState(false);
   const [referenceVisible, setReferenceVisible] = useState(false);
   const [verificationData, setVerificationData] = useState({});
@@ -64,8 +72,18 @@ const Signup = () => {
   };
 
   const signup = async () => {
-    alert("회원가입이 완료되었습니다. 로그인을 진행해주세요.");
-    navigate(`/auth/login`);
+    try {
+      const { name, password } = values;
+      const info = {
+        accountName: name,
+        cocName: verificationData.name,
+        tag: verificationData.tag,
+        password,
+      };
+      await mutateAsync({ ...info });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const {
@@ -178,18 +196,24 @@ const Signup = () => {
           <S.InputLabel>비밀번호 확인</S.InputLabel>
         </S.InputWrapper>
         {errors.passwordConfirm && <ErrorText value={errors.passwordConfirm} />}
-        <Button
-          type="submit"
-          version="login"
-          disabled={
-            checkEmptyValue() ||
-            isLoading ||
-            Object.keys(errors).length !== 0 ||
-            !isVerification
-          }
-        >
-          회원가입
-        </Button>
+        {isLoading ? (
+          <Button version="loading">
+            <Spinner.Base size="36px" />
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            version="login"
+            disabled={
+              checkEmptyValue() ||
+              isLoading ||
+              Object.keys(errors).length !== 0 ||
+              !isVerification
+            }
+          >
+            회원가입
+          </Button>
+        )}
         <S.Link>
           <NavLink to="/auth/login">로그인</NavLink>
         </S.Link>
