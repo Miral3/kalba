@@ -7,10 +7,16 @@ class VerifyTokenDto {
     )
 
     class Response(
-        val status: String
+        val status: Boolean
     ) {
         companion object {
-            fun of(status: String): Response = Response(status)
+            fun of(status: String): Response {
+                return if (status == "ok") {
+                    Response(true)
+                } else {
+                    Response(false)
+                }
+            }
         }
     }
 }

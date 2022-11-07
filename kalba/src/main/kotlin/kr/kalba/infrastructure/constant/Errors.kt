@@ -17,4 +17,6 @@ enum class Errors(
     COC_API_CLAN(30, "clan 조회 api 호출에 실패하였습니다."),
     COC_API_PLAYER(31, "player 조회 api 호출에 실패하였습니다."),
     COC_API_VERITY_USER_TOKEN(32, "token 검증 api 호출에 실패하였습니다."),
+
+    MONGO_MEMBER_STATISTIC_LOAD(40, "멤버의 상세 정보 로딩을 실패하였습니다.")
 }

@@ -61,7 +61,7 @@ class AccountController(
     fun verifyToken(@RequestBody request: VerifyTokenDto.Request):  ResponseEntity<VerifyTokenDto.Response> {
         val response = accountService.verifyToken(request.tag, request.token)
         return ResponseEntity.status(HttpStatus.OK).body(
-            VerifyTokenDto.Response(response.status)
+            VerifyTokenDto.Response.of(response.status)
         )
     }
 }
