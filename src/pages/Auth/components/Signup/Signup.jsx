@@ -4,7 +4,6 @@ import useForm from "../../../../hooks/useForm";
 import useSearch from "../../../../hooks/useSearch";
 import { Input, Button, AutoComplete, ErrorText } from "../../../../components";
 import { Reference } from "../index";
-import { userInfo } from "../../../../assets/dummyData";
 import * as S from "../../Auth.style";
 import Verification from "../Verification/Verification";
 
@@ -22,52 +21,39 @@ const Signup = () => {
     return node.children[idx].children[1].innerText.substring(3);
   };
 
-  const findUser = () => {
-    const value = inputRef.current.value.toLowerCase();
-    return userInfo.find(
-      (member) =>
-        member.name.toLowerCase() === value ||
-        member.tag.toLowerCase() === value
-    );
-  };
-
-  const handleSearch = () => {
-    const searchedUser = findUser();
-    if (!searchedUser) {
-      alert("존재하지 않는 멤버 입니다. 이름 혹은 태그를 다시 확인해주세요");
-      return;
-    }
+  const handleSubmitSearch = (searchedUser) => {
+    inputRef.current.value = searchedUser.tag;
     setVerificationData({
       name: searchedUser.name,
       tag: searchedUser.tag,
     });
     setVerificationVisible(true);
-    inputRef.current.value = searchedUser.tag;
   };
 
   const {
-    autoCompleteData,
+    data,
+    isLoading: isAutoCompleteLoading,
     activeItem,
     autoCompleteVisible,
-    handleSelect,
-    handleFilter,
-    handleKeyDown,
-    resetAutoComplete,
     containerRef,
+    setAutoCompleteVisible,
+    handleChangeInput,
+    handleSearch,
+    handleKeyDown,
+    handleFocusInput,
   } = useSearch({
     inputRef,
     listRef,
-    data: userInfo,
-    onSubmit: handleSearch,
+    onSearch: handleSubmitSearch,
     filterOption,
     getInnerText,
   });
 
   const handleClickItem = (item) => {
-    resetAutoComplete();
+    inputRef.current.value = item.tag;
+    setAutoCompleteVisible(false);
     setVerificationData({ name: item.name, tag: item.tag });
     setVerificationVisible(true);
-    inputRef.current.value = item.tag;
   };
 
   const initialValues = {
@@ -138,26 +124,25 @@ const Signup = () => {
             disabled={isVerification}
             onChange={(e) => {
               handleChange(e);
-              handleFilter();
+              handleChangeInput(e);
             }}
             onKeyDown={(e) => handleKeyDown(e)}
+            onFocus={handleFocusInput}
           />
           <S.InputLabel>태그번호</S.InputLabel>
-          <S.IconWrapper>
-            <S.Search
-              className="material-symbols-outlined"
-              onClick={handleSelect}
-            >
-              search
-            </S.Search>
-          </S.IconWrapper>
-          <AutoComplete
-            ref={listRef}
-            data={autoCompleteData}
-            active={activeItem}
-            visible={autoCompleteVisible}
-            onClick={handleClickItem}
-          />
+          <S.StyledButton onClick={handleSearch}>
+            <S.Search className="material-symbols-outlined">search</S.Search>
+          </S.StyledButton>
+          {data && (
+            <AutoComplete
+              ref={listRef}
+              isLoading={isAutoCompleteLoading}
+              data={data}
+              active={activeItem}
+              visible={autoCompleteVisible}
+              onClick={handleClickItem}
+            />
+          )}
         </S.InputWrapper>
         {!values.tag && (
           <S.Description>닉네임 혹은 태그번호로 검색하세요.</S.Description>
