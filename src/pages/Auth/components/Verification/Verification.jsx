@@ -1,9 +1,18 @@
+/* eslint-disable no-use-before-define */
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Button, Icon, Input, Modal, ErrorText } from "../../../../components";
+import {
+  Button,
+  Icon,
+  Input,
+  Modal,
+  ErrorText,
+  Spinner,
+} from "../../../../components";
 import useForm from "../../../../hooks/useForm";
 import * as S from "./Verification.style";
 import Common from "../../../../styles/common";
+import { useVerifyToken } from "../../../../hooks/queries/useAuth";
 
 const propTypes = {
   data: PropTypes.instanceOf(Object).isRequired,
@@ -20,16 +29,24 @@ const Verification = ({
   setReferenceVisible,
   setIsVerification,
 }) => {
+  const { mutateAsync } = useVerifyToken({});
   const { name, tag } = data;
   const initialValues = {
     token: "",
   };
   const onSubmit = async () => {
-    // 인증 성공
-    setModalVisible(false);
-    setIsVerification(true);
-    // 인증 실패
-    // alert("인증에 실패하셨습니다. 다시 시도해주세요.");
+    try {
+      const res = await mutateAsync({ tag, ...values });
+      const { status } = res.data;
+      if (status === "ok") {
+        setModalVisible(false);
+        setIsVerification(true);
+      } else {
+        alert("인증에 실패했습니다. 다시 한번 확인해주세요.");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   const {
     values,
@@ -100,15 +117,23 @@ const Verification = ({
             <S.InputLabel>API 토큰</S.InputLabel>
           </S.InputWrapper>
           {errors.token && <ErrorText value={errors.token} />}
-          <Button
-            type="submit"
-            version="login"
-            disabled={
-              checkEmptyValue() || isLoading || Object.keys(errors).length !== 0
-            }
-          >
-            인증하기
-          </Button>
+          {isLoading ? (
+            <Button version="loading">
+              <Spinner.Base size="36px" />
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              version="login"
+              disabled={
+                checkEmptyValue() ||
+                isLoading ||
+                Object.keys(errors).length !== 0
+              }
+            >
+              인증하기
+            </Button>
+          )}
         </S.Form>
       </S.Card>
     </Modal>
