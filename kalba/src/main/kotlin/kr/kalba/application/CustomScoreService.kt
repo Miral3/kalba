@@ -35,4 +35,8 @@ class CustomScoreService(
         }
         return score.roundToInt()
     }
+
+    fun test(tags: List<String>){
+        clashOfClanService.zzz(tags)
+    }
 }

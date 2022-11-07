@@ -6,24 +6,27 @@ import kr.kalba.infrastructure.external.coc.dto.ClanData
 import kr.kalba.infrastructure.external.coc.dto.PlayerData
 import kr.kalba.infrastructure.external.coc.dto.VerifyTokenRequest
 import kr.kalba.infrastructure.external.coc.dto.VerifyTokenResponse
+import kr.kalba.infrastructure.repository.StatisticRepository
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod
-import org.springframework.http.MediaType
+import org.springframework.http.*
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Service
-import org.springframework.web.client.HttpClientErrorException
-import org.springframework.web.client.HttpServerErrorException
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.util.DefaultUriBuilderFactory
+import reactor.core.publisher.Flux
+import reactor.core.publisher.Mono
+import reactor.core.scheduler.Schedulers
 import java.net.URI
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
+
 @Service
 class ClashOfClanService(
     @Value("\${coc.token}")
-    val token: String
+    val token: String,
+    val statisticRepository: StatisticRepository
 ) {
     fun test() {
         println(token)
@@ -76,7 +79,21 @@ class ClashOfClanService(
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        throw CommonException(Errors.COC_API_PLAYER)
+        return PlayerData.of(
+            statisticRepository.findById(userTag)
+                .orElseThrow { CommonException(Errors.MONGO_MEMBER_STATISTIC_LOAD) }
+        )
+    }
+
+    fun zzz(tags: List<String>) {
+        val list = Flux.fromIterable(tags)
+            .parallel()
+            .runOn(Schedulers.boundedElastic())
+            .flatMap { Mono.just(getUserInfo(it)) }
+            .sequential()
+            .collectList()
+            .block()
+        println()
     }
 
     fun verifyToken(tag: String, cocToken: String): VerifyTokenResponse {
