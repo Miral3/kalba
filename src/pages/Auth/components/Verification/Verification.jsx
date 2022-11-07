@@ -38,7 +38,7 @@ const Verification = ({
     try {
       const res = await mutateAsync({ tag, ...values });
       const { status } = res.data;
-      if (status === "ok") {
+      if (status) {
         setModalVisible(false);
         setIsVerification(true);
       } else {
