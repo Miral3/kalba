@@ -20,6 +20,21 @@ export const useLogin = ({ options }) => {
   });
 };
 
+export const useSignup = ({ options }) => {
+  const navigate = useNavigate();
+  return useMutation((info) => axios.post(`${url.REGISTER}`, info), {
+    onSuccess() {
+      alert("회원가입이 완료되었습니다. 로그인을 진행해주세요.");
+      navigate(`/auth/login`);
+    },
+    onError(err) {
+      const errMsg = err.response.data.resultMsg;
+      alert(errMsg);
+    },
+    ...options,
+  });
+};
+
 export const useVerifyToken = ({ options }) => {
   return useMutation((info) => axios.post(`${url.VERIFY}`, info), {
     onSuccess() {},
