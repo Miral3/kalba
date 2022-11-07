@@ -25,10 +25,11 @@ class FormulaService(
             formulaRepository.findAll()
         } else {
             formulaRepository.findByType(type!!.type)
-        }.associateBy { it.name }
+        }
 
         val updateTarget = list.map { Formula.of(it) }
-        val deleteTarget = updateTarget.filterNot { beforeFormulas.containsKey(it.name) }
+        val updateTargetMap = updateTarget.associateBy { it.name }
+        val deleteTarget = beforeFormulas.filterNot { updateTargetMap.containsKey(it.name) }
 
         formulaRepository.deleteAll(deleteTarget)
         formulaRepository.saveAll(updateTarget)
