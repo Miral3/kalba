@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Text } from "../../components";
+import { Text, Button } from "../../components";
 import Common from "../../styles/common";
 
 export const Container = styled.div`
@@ -87,7 +87,7 @@ export const InputLabel = styled.label`
   font-weight: 500;
 `;
 
-export const IconWrapper = styled.div`
+export const StyledButton = styled(Button)`
   width: 64px;
   position: absolute;
   right: 0;
