@@ -42,7 +42,8 @@ const useSearch = ({
   };
 
   const handleSearch = () => {
-    if (!data) {
+    if (!data || !data.length) {
+      alert("존재하지 않는 멤버 입니다. 이름 혹은 태그를 다시 확인해주세요");
       return;
     }
     if (activeItem === -1) {
