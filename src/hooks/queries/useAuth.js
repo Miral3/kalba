@@ -19,3 +19,13 @@ export const useLogin = ({ options }) => {
     ...options,
   });
 };
+
+export const useVerifyToken = ({ options }) => {
+  return useMutation((info) => axios.post(`${url.VERIFY}`, info), {
+    onSuccess() {},
+    onError(err) {
+      console.log(err);
+    },
+    ...options,
+  });
+};
