@@ -292,7 +292,7 @@ const siegeMachinesInfo = [
     src: "Flame_Flinger.png",
   },
   {
-    name: "Battle_Drill",
+    name: "Battle Drill",
     className: "battleDrill",
     src: "Battle_Drill.png",
   },
