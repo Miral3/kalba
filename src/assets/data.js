@@ -232,12 +232,7 @@ export const managementTableColumns = [
   },
   {
     id: 3,
-    header: "미공",
-    accessor: "attackState",
-  },
-  {
-    id: 4,
-    header: "경고",
-    accessor: "warningState",
+    header: "톡방",
+    accessor: "openChatState",
   },
 ];
