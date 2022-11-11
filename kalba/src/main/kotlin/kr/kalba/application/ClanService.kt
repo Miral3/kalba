@@ -1,9 +1,11 @@
 package kr.kalba.application
 
 import kr.kalba.domain.mongo.Clan
+import kr.kalba.domain.mongo.MemberOpenChatState
 import kr.kalba.domain.mongo.Statistic
 import kr.kalba.infrastructure.external.coc.ClashOfClanService
 import kr.kalba.infrastructure.repository.ClanRepository
+import kr.kalba.infrastructure.repository.MemberOpenChatStateRepository
 import kr.kalba.infrastructure.repository.StatisticRepository
 import org.springframework.stereotype.Service
 
@@ -12,16 +14,15 @@ class ClanService(
     private val clashOfClanService: ClashOfClanService,
     private val clanRepository: ClanRepository,
     private val customScoreService: CustomScoreService,
-    private val statisticRepository: StatisticRepository
+    private val statisticRepository: StatisticRepository,
+    private val memberOpenChatStateRepository: MemberOpenChatStateRepository
 ) {
 
     fun updateClanInfo() {
         val clan = Clan.of(clashOfClanService.getClanInfo())
         clanRepository.save(clan)
 
-        clan.memberList.forEach {
-            customScoreService.updateMemberInfo(it)
-        }
+        customScoreService.test(clan.memberList)
 
         val newClanMember = clan.memberList.map { it.tag }.toSet()
         val existStatistics = statisticRepository.findAll().filterNot { newClanMember.contains(it.tag) }
@@ -42,5 +43,13 @@ class ClanService(
 
     fun getAllMemberStatistic(): List<Statistic> {
         return statisticRepository.findAll()
+    }
+
+    fun getMemberStateAll(): List<MemberOpenChatState> {
+        return memberOpenChatStateRepository.findAll()
+    }
+
+    fun updateMemberState(memberStates: List<MemberOpenChatState>) {
+        memberOpenChatStateRepository.saveAll(memberStates)
     }
 }

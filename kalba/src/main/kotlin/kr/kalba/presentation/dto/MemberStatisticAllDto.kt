@@ -1,19 +1,12 @@
 package kr.kalba.presentation.dto
 
-import kr.kalba.presentation.dto.meta.CommonMeta
 import kr.kalba.domain.mongo.League
+import kr.kalba.domain.mongo.OpenChatStateType
 import kr.kalba.domain.mongo.Statistic
 
-class MemberStatisticDto {
-    class NameRequest(
-        val name: String
-    )
+class MemberStatisticAllDto {
 
-    class TagRequest(
-        val tag: String
-    )
-
-    class Response(
+    class Data(
         val tag: String,
         val name: String,
         val role: String,
@@ -37,11 +30,13 @@ class MemberStatisticDto {
         val townHallWeaponLevel: Int,
 
         val donationRank: Int,
-        val scoreRank: Int
+        val scoreRank: Int,
+
+        val openChatStateType: OpenChatStateType
     ) {
         companion object {
-            fun of(statistic: Statistic): Response {
-                return Response(
+            fun of(statistic: Statistic, openChatStateType: OpenChatStateType): Data {
+                return Data(
                     tag = statistic.tag,
                     name = statistic.name,
                     role = statistic.role,
@@ -65,45 +60,11 @@ class MemberStatisticDto {
                     townHallWeaponLevel = statistic.townHallWeaponLevel,
 
                     donationRank = statistic.donationRank,
-                    scoreRank = statistic.scoreRank
+                    scoreRank = statistic.scoreRank,
+
+                    openChatStateType = openChatStateType
                 )
             }
         }
     }
-
-//    class Hero(
-//        val level: Int,
-//        val maxLevel: Int,
-//        val name: String,
-//        val village: String
-//    )
-//
-//    class Label(
-//        val id: Int,
-//        val mediumIcon: String,
-//        val name: String,
-//        val smallIcon: String
-//    )
-//
-//    class League(
-//        val id: Int,
-//        val name: String,
-//        val iconTiny: String,
-//        val iconSmall: String,
-//        val iconMedium: String
-//    )
-//
-//    class Spell(
-//        val level: Int,
-//        val maxLevel: Int,
-//        val name: String,
-//        val village: String
-//    )
-//
-//    class Troop(
-//        val level: Int,
-//        val maxLevel: Int,
-//        val name: String,
-//        val village: String
-//    )
 }

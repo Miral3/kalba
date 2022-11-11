@@ -1,6 +1,7 @@
 package kr.kalba.application
 
 import kr.kalba.domain.mongo.Account
+import kr.kalba.domain.mongo.MemberOpenChatState
 import kr.kalba.infrastructure.constant.Errors
 import kr.kalba.infrastructure.exception.CommonException
 import kr.kalba.infrastructure.external.coc.ClashOfClanService
@@ -8,6 +9,7 @@ import kr.kalba.infrastructure.external.coc.dto.VerifyTokenResponse
 import kr.kalba.infrastructure.external.security.JwtTokenUtil
 import kr.kalba.infrastructure.external.security.JwtUserDetailsService
 import kr.kalba.infrastructure.repository.AccountRepository
+import kr.kalba.infrastructure.repository.MemberOpenChatStateRepository
 import kr.kalba.presentation.dto.LoginDto
 import kr.kalba.presentation.dto.RegisterDto
 import org.springframework.security.authentication.AuthenticationManager

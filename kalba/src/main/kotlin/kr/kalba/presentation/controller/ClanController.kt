@@ -3,10 +3,12 @@ package kr.kalba.presentation.controller
 import kr.kalba.application.ClanService
 import kr.kalba.application.FormulaService
 import kr.kalba.domain.FormulaType
+import kr.kalba.domain.mongo.OpenChatStateType
 import kr.kalba.presentation.dto.*
 import kr.kalba.presentation.dto.meta.CommonMeta
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.util.ObjectUtils
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -93,5 +95,31 @@ class ClanController(
     fun updateScoreFormula(@RequestBody request: FormulaUpdateDto.Request): ResponseEntity<*> {
         formulaService.updateFormula(request.list, request.type)
         return ResponseEntity.status(HttpStatus.OK).body(CommonMeta())
+    }
+
+    @ResponseBody
+    @GetMapping("/member/statistic/all")
+    fun statisticAll(): ResponseEntity<List<MemberStatisticAllDto.Data>> {
+        val memberOpenChatStateMap = clanService.getMemberStateAll().associateBy { it.tag }
+        return ResponseEntity.status(HttpStatus.OK).body(
+            clanService.getAllMemberStatistic().map {
+                MemberStatisticAllDto.Data.of(
+                    it,
+                    if (ObjectUtils.isEmpty(memberOpenChatStateMap[it.tag])) {
+                        OpenChatStateType.NOT_MEMBER
+                    } else {
+                        memberOpenChatStateMap[it.tag]!!.openChatState
+                    }
+                )
+            }
+        )
+    }
+
+    @ResponseBody
+    @GetMapping("/profile/tag")
+    fun profile(@RequestParam tag: ProfileDto.Request): ResponseEntity<ProfileDto.Response> {
+        return ResponseEntity.status(HttpStatus.OK).body(
+            ProfileDto.Response.of(clanService.getMemberStatisticByTag(tag.tag))
+        )
     }
 }

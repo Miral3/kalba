@@ -27,7 +27,10 @@ class Statistic(
     val troops: List<Resource>,
     val heroes: List<Resource>,
     val spells: List<Resource>,
-    val townHallWeaponLevel: Int
+    val townHallWeaponLevel: Int,
+
+    var donationRank: Int,
+    var scoreRank: Int
 ) {
     companion object {
         fun of(member: Clan.ClanMember, score: Int, playerData: PlayerData): Statistic {
@@ -53,7 +56,9 @@ class Statistic(
                 troops = playerData.troops.map { Resource.of(it) },
                 heroes = playerData.heroes.map { Resource.of(it) },
                 spells = playerData.spells.map { Resource.of(it) },
-                townHallWeaponLevel = playerData.townHallWeaponLevel
+                townHallWeaponLevel = playerData.townHallWeaponLevel,
+                donationRank = 0,
+                scoreRank = 0
             )
         }
     }

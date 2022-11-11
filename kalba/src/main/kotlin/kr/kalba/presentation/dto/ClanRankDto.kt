@@ -19,7 +19,9 @@ class ClanRankDto {
         val townHallLevel: Int,
         val donations: Int,
         val score: Int,
-    ) : CommonMeta() {
+        val donationRank: Int,
+        val scoreRank: Int
+    ) {
         companion object {
             fun of(statistic: Statistic): Data {
                 return Data(
@@ -30,7 +32,9 @@ class ClanRankDto {
                     trophies = statistic.trophies,
                     townHallLevel = statistic.townHallLevel,
                     donations = statistic.donations,
-                    score = statistic.score
+                    score = statistic.score,
+                    donationRank = statistic.donationRank,
+                    scoreRank = statistic.scoreRank
                 )
             }
         }

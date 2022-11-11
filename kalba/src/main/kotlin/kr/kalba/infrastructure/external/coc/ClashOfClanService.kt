@@ -12,8 +12,6 @@ import org.springframework.http.*
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
-import org.springframework.web.reactive.function.client.WebClient
-import org.springframework.web.util.DefaultUriBuilderFactory
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
@@ -76,6 +74,7 @@ class ClashOfClanService(
             if (res.statusCode.value() == 200) {
                 return res.body!!
             }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -85,15 +84,14 @@ class ClashOfClanService(
         )
     }
 
-    fun zzz(tags: List<String>) {
-        val list = Flux.fromIterable(tags)
+    fun getUserInfoBulk(tags: List<String>): List<PlayerData> {
+        return Flux.fromIterable(tags)
             .parallel()
             .runOn(Schedulers.boundedElastic())
             .flatMap { Mono.just(getUserInfo(it)) }
             .sequential()
             .collectList()
-            .block()
-        println()
+            .block()!!
     }
 
     fun verifyToken(tag: String, cocToken: String): VerifyTokenResponse {
