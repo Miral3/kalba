@@ -223,7 +223,7 @@ export const managementTableColumns = [
   {
     id: 1,
     header: "이름",
-    accessor: "nickname",
+    accessor: "name",
   },
   {
     id: 2,
@@ -233,6 +233,6 @@ export const managementTableColumns = [
   {
     id: 3,
     header: "톡방",
-    accessor: "openChatState",
+    accessor: "openChatStateType",
   },
 ];
