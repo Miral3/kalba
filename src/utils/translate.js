@@ -40,6 +40,16 @@ export const translateLeague = (league) => {
   }
 };
 
+export const translateOpenChatState = (state) => {
+  const translateMap = {
+    NOT_MEMBER: "X",
+    MEMBER: "O",
+    SUB_LEADER: "부방장",
+    LEADER: "방장",
+  };
+  return translateMap[state];
+};
+
 export const translateLeagueScore = (leagueScore) => {
   const SRC_END_POINT = "/img/coc/coc_League";
   switch (Math.round(leagueScore / 100)) {
