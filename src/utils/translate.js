@@ -1,43 +1,28 @@
 export const translateRole = (role) => {
-  switch (role) {
-    case "leader":
-      return "대표";
-    case "coLeader":
-      return "공대";
-    case "admin":
-      return "장로";
-    case "member":
-      return "멤버";
-    default:
-      return role;
-  }
+  const translateMap = {
+    leader: "대표",
+    coLeader: "공대",
+    admin: "장로",
+    member: "멤버",
+  };
+  return translateMap[role] ?? "존재하지 않는 직책";
 };
 
 export const translateLeague = (league) => {
   const name = league.split(" ")[0];
   const number = league.split(" ")[2];
-  switch (name) {
-    case "Unranked":
-      return "랭크되지 않음";
-    case "Bronze":
-      return `브론즈 리그 ${number}`;
-    case "Silver":
-      return `실버 리그 ${number}`;
-    case "Gold":
-      return `골드 리그 ${number}`;
-    case "Crystal":
-      return `크리스털 리그 ${number}`;
-    case "Master":
-      return `마스터 리그 ${number}`;
-    case "Champion":
-      return `챔피언 리그 ${number}`;
-    case "Titan":
-      return `타이탄 리그 ${number}`;
-    case "Legend":
-      return "전설 리그";
-    default:
-      break;
-  }
+  const translateMap = {
+    Unranked: "랭크되지 않음",
+    Bronze: `브론즈 리그 ${number}`,
+    Silver: `실버 리그 ${number}`,
+    Gold: `골드 리그 ${number}`,
+    Crystal: `크리스털 리그 ${number}`,
+    Master: `마스터 리그 ${number}`,
+    Champion: `챔피언 리그 ${number}`,
+    Titan: `타이탄 리그 ${number}`,
+    Legend: "전설 리그",
+  };
+  return translateMap[name] ?? "존재하지 않는 리그";
 };
 
 export const translateOpenChatState = (state) => {
@@ -47,7 +32,7 @@ export const translateOpenChatState = (state) => {
     SUB_LEADER: "부방장",
     LEADER: "방장",
   };
-  return translateMap[state];
+  return translateMap[state] ?? "존재하지 않는 상태";
 };
 
 export const translateLeagueScore = (leagueScore) => {
