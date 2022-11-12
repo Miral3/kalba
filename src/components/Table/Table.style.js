@@ -93,6 +93,7 @@ export const Td = styled.td`
   vertical-align: middle;
   font-size: ${Common.fontSize.b[2]};
 
+  cursor: ${({ clickEvent }) => clickEvent && "pointer"};
   &:nth-of-type(2) {
     padding-left: ${({ version }) =>
       version === "leaderboard" ? "24px" : "0"};
