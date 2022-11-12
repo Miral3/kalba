@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { PropTypes } from "prop-types";
 import useSort from "../../hooks/useSort";
-import { translateRole } from "../../utils/translate";
+import { translateRole, translateOpenChatState } from "../../utils/translate";
 import { Text } from "..";
 import EditableTbody from "./EditableTbody";
 import * as S from "./Table.style";
@@ -19,7 +19,7 @@ const propTypes = {
   handleClickDeleteMode: PropTypes.func,
   handleInputTableData: PropTypes.func,
   handleDeleteTableData: PropTypes.func,
-  handleChangeState: PropTypes.func,
+  handleChangeOpenChatState: PropTypes.func,
   handleReorderTableData: PropTypes.func,
 };
 
@@ -34,7 +34,7 @@ const defaultProps = {
   handleClickDeleteMode: () => {},
   handleInputTableData: () => {},
   handleDeleteTableData: () => {},
-  handleChangeState: () => {},
+  handleChangeOpenChatState: () => {},
   handleReorderTableData: () => {},
 };
 
@@ -53,7 +53,7 @@ const Table = forwardRef(
       handleClickDeleteMode,
       handleInputTableData,
       handleDeleteTableData,
-      handleChangeState,
+      handleChangeOpenChatState,
       handleReorderTableData,
       ...styles
     },
@@ -152,13 +152,6 @@ const Table = forwardRef(
                     );
                   }
                   if (version === "management") {
-                    if (column.accessor === "nickname") {
-                      return (
-                        <S.Td key={column.id} version={version}>
-                          {row[column.accessor]}
-                        </S.Td>
-                      );
-                    }
                     if (column.accessor === "signupState") {
                       return (
                         <S.Td key={column.id} version={version}>
@@ -166,15 +159,26 @@ const Table = forwardRef(
                         </S.Td>
                       );
                     }
+                    if (column.accessor === "openChatStateType") {
+                      return (
+                        <S.Td
+                          clickEvent
+                          key={column.id}
+                          version={version}
+                          onClick={() =>
+                            handleChangeOpenChatState(
+                              row[column.accessor],
+                              row.tag
+                            )
+                          }
+                        >
+                          {translateOpenChatState(row[column.accessor])}
+                        </S.Td>
+                      );
+                    }
                     return (
                       <S.Td key={column.id} version={version}>
-                        <input
-                          type="checkbox"
-                          value={row[column.accessor]}
-                          onChange={(e) =>
-                            handleChangeState(row.tag, column.accessor, e)
-                          }
-                        />
+                        {row[column.accessor]}
                       </S.Td>
                     );
                   }
