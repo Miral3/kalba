@@ -1,48 +1,51 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useClanMember } from "../../../../hooks/queries/useClanMember";
 import { managementTableColumns } from "../../../../assets/data";
 import { Spinner, Table } from "../../../../components";
-import { accountInfo } from "../../../../assets/dummyData";
 import * as S from "./Management.style";
 
 const Management = () => {
-  const [loading, setLoading] = useState(true);
+  const { isLoading, data } = useClanMember({});
   const [tableData, setTableData] = useState([]);
+  const openChatState = ["NOT_MEMBER", "MEMBER", "SUB_LEADER"];
+  // const openChatState = ["X", "O", "부방장"];
 
-  const handleChangeState = (tag, type, e) => {
-    const { checked } = e.target;
-    // eslint-disable-next-line no-unused-vars
+  const handleChangeOpenChatState = (state, tag) => {
+    if (state === "LEADER") {
+      return;
+    }
+    const idx = openChatState.findIndex((val) => val === state);
+    const nextState = openChatState[(idx + 1) % openChatState.length];
     const nextTableData = tableData.map((row) =>
       tag === row.tag
         ? {
             ...row,
-            [type]: checked,
+            openChatStateType: nextState,
           }
         : row
     );
+    setTableData(nextTableData);
     /**
      * @Todo nextTableData 서버에 저장
      */
   };
 
-  useLayoutEffect(() => {
-    const fetch = () => {
-      const res = [...accountInfo];
-      setTableData(res);
-      setLoading(false);
-    };
-    fetch();
-  }, []);
+  useEffect(() => {
+    if (!isLoading) {
+      setTableData(data);
+    }
+  }, [isLoading, data]);
 
   return (
     <S.Container>
-      {loading ? (
+      {isLoading ? (
         <Spinner.Box />
       ) : (
         <Table
           version="management"
           columns={managementTableColumns}
           data={tableData}
-          handleChangeState={handleChangeState}
+          handleChangeOpenChatState={handleChangeOpenChatState}
         />
       )}
     </S.Container>
