@@ -5,7 +5,7 @@ export const translateRole = (role) => {
     admin: "장로",
     member: "멤버",
   };
-  return translateMap[role] ?? "존재하지 않는 직책";
+  return translateMap[role] ?? role;
 };
 
 export const translateLeague = (league) => {
