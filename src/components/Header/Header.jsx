@@ -85,9 +85,11 @@ const Header = ({ onOpen, isDark, hadleClickDarkMode }) => {
           {isLoggedIn ? (
             <>
               <Button onClick={handleClickProfile} ref={profileButtonRef}>
-                <S.Profile className="material-symbols-outlined">
-                  account_circle
-                </S.Profile>
+                <S.ProfileWrapper>
+                  <S.Profile className="material-symbols-outlined">
+                    person
+                  </S.Profile>
+                </S.ProfileWrapper>
               </Button>
               <AccountInfo
                 visible={accountInfoVisible}

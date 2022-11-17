@@ -89,14 +89,21 @@ export const Mode = styled(Icon)`
   }
 `;
 
-export const Profile = styled(Icon)`
-  padding-left: 17.74px;
-  font-size: ${Common.fontSize.l[2]};
-  color: ${Common.colors.white[1]};
+export const ProfileWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 17.74px;
+  border-radius: 50%;
+  background-color: ${Common.colors.white[1]};
+`;
 
-  ${Common.mediaQuery.mobile} {
-    font-size: ${Common.fontSize.t[0]};
-  }
+export const Profile = styled(Icon)`
+  color: ${Common.colors.indigo[0]};
+  font-size: ${Common.fontSize.t[1]};
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 `;
 
 export const LoginLink = styled(NavLink)`
