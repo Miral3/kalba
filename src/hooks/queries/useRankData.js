@@ -23,7 +23,6 @@ export const useRankData = ({ options }) => {
       };
       const donationRank = [...data.sortedByDonationList].map((val, idx) => ({
         ...val,
-        donationRank: idx + 1,
         expectedRole: expectedRole(
           val.role,
           idx,
@@ -32,10 +31,7 @@ export const useRankData = ({ options }) => {
           count
         ),
       }));
-      const scoreRank = [...data.sortedByScoreList].map((val, idx) => ({
-        ...val,
-        scoreRank: idx + 1,
-      }));
+      const scoreRank = [...data.sortedByScoreList];
       const top10DonationRank = [...donationRank].slice(0, 10);
       const top10ScoreRank = [...scoreRank].slice(0, 10);
 
