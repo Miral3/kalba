@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { useRankData } from "../../hooks/queries/useRankData";
@@ -15,10 +15,7 @@ const Leaderboards = () => {
   const { isLoading, data } = useRankData({});
   const navigate = useNavigate();
   const { category } = useParams();
-  const tableColumns = {
-    donations: donationsRankingTableColumns,
-    score: scoreRankingTableColumns,
-  };
+  const [tableColumns, setTableColumns] = useState([]);
 
   const handleClickExtractTableToXLSX = () => {
     const target = tableRef.current;
@@ -29,6 +26,14 @@ const Leaderboards = () => {
     });
     XLSX.writeFile(wb, "ranking_list.xlsx");
   };
+
+  useEffect(() => {
+    const columns = {
+      donations: donationsRankingTableColumns,
+      score: scoreRankingTableColumns,
+    };
+    setTableColumns(columns[category]);
+  }, [category]);
 
   useEffect(() => {
     if (!rankingCategoryItems.find((item) => item.value === category)) {
@@ -45,7 +50,7 @@ const Leaderboards = () => {
         ) : (
           <Table
             ref={tableRef}
-            columns={tableColumns[category]}
+            columns={tableColumns}
             data={data[category]}
             sort
           />
