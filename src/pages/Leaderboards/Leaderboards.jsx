@@ -15,7 +15,11 @@ const Leaderboards = () => {
   const { isLoading, data } = useRankData({});
   const navigate = useNavigate();
   const { category } = useParams();
-  const [tableColumns, setTableColumns] = useState([]);
+  const columns = {
+    donations: donationsRankingTableColumns,
+    score: scoreRankingTableColumns,
+  };
+  const [tableColumns, setTableColumns] = useState(columns[category]);
 
   const handleClickExtractTableToXLSX = () => {
     const target = tableRef.current;
@@ -28,10 +32,6 @@ const Leaderboards = () => {
   };
 
   useEffect(() => {
-    const columns = {
-      donations: donationsRankingTableColumns,
-      score: scoreRankingTableColumns,
-    };
     setTableColumns(columns[category]);
   }, [category]);
 
