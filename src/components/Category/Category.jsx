@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as S from "./Category.style";
@@ -11,7 +11,7 @@ const Category = ({ items }) => {
   const location = useLocation();
   const [active, setActive] = useState(0);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { pathname } = location;
     const visitedIdx = items.findIndex((item) => pathname === item.url);
     setActive(visitedIdx);
