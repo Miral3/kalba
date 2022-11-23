@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { logoutProcess } from "../../../../recoil/authentication";
 import { Text, Button, Icon } from "../../../index";
@@ -14,6 +14,10 @@ const propTypes = {
 };
 
 const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
+  // eslint-disable-next-line no-unused-vars
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { pathname } = location;
   /**
    * @Todo 유저 태그로 갖고오기
    */
@@ -32,6 +36,9 @@ const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
   const handleClickLogoutButton = () => {
     setLogout();
     setVisible(false);
+    if (pathname.includes("admin")) {
+      navigate("/");
+    }
   };
 
   return (
