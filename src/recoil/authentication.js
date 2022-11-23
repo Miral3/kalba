@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 export const jwtToken = atom({
   key: "jwtToken",
-  default: localStorage.getItem("token"),
+  default: JSON.parse(localStorage.getItem("token")),
 });
 
 export const loginStatus = atom({
@@ -23,7 +23,7 @@ export const loginProcess = selector({
   set: ({ set }, newValue) => {
     set(jwtToken, newValue);
     set(loginStatus, true);
-    localStorage.setItem("token", newValue);
+    localStorage.setItem("token", JSON.stringify(newValue));
   },
 });
 
