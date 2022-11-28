@@ -2,25 +2,28 @@
     <h1>Kalba</h1>
 
 ```
-  "모바일 게임 클래시 오브 클랜에서 칼 없는 바바리안 클랜원들에게 데이터 제공" 프로젝트
+  모바일 게임 "클래시 오브 클랜"에서 "칼 없는 바바리안" 클랜원들에게 데이터 제공 프로젝트
   (2021.04.04 - )
 ```
+
+<div align="left">
 
 [⚔️ 칼바 홈페이지](http://kalba.kr/)
 <br>
 [⚔️ 칼바 노션](https://faint-octagon-403.notion.site/Kalba-f58e2c3beb93452fb13e0866b1785b52)
 
 </div>
+</div>
 
 <br><br><br>
 
 # ⚔️ 목차
 
-1. [⚔️ 프로젝트 소개](#-프로젝트-소개)
-2. [⚔️ 프로젝트 화면](#-프로젝트-화면)
-3. [🖥 사용 기술](#-사용-기술)
-4. [👍 Convention](#-convention)
-5. [🤼‍♀️ 팀 소개](#%EF%B8%8F-팀-소개)
+1. [⚔️ 프로젝트 소개](#-⚔️-프로젝트-소개)
+2. [⚔️ 프로젝트 화면](#-⚔️-프로젝트-화면)
+3. [📚 사용 기술](#-📚-사용-기술)
+4. [👍 Convention](#-👍-Convention)
+5. [🤼‍♀️ 팀 소개](#-🤼‍♀️-팀-소개)
 
 <br><br><br>
 
@@ -99,31 +102,53 @@ emotion 라이브러리를 사용하여 다크모드를 구현하였습니다. �
 
 # 📚 사용 기술
 
-## 1️⃣ Web
+## Frontend
 
-### 📃 Languages / Libraries
+### Language
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
+### Libraries
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)<br>
 ![Recoil](https://img.shields.io/badge/Recoil-white?style=for-the-badge&logo=react&logoColor=black)
+![React-query](https://img.shields.io/badge/React_Query-FF4154?style=for-the-badge&logo=react-query&logoColor=white)
 ![React-router-dom](https://img.shields.io/badge/React_Router_Dom-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![axios](https://img.shields.io/badge/Axios-3668FF?style=for-the-badge&logo=react&logoColor=white)<br>
-![Emotion](https://img.shields.io/badge/Emotion-%237F5AB6?style=for-the-badge&logo=react&logoColor=white)<br>
+![axios](https://img.shields.io/badge/Axios-3668FF?style=for-the-badge&logo=react&logoColor=white)
+![Emotion](https://img.shields.io/badge/Emotion-%237F5AB6?style=for-the-badge&logo=react&logoColor=white)
 
-### 🛠 Tools
+### Communication
 
 ![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
-### 🧐 Linters
+## Backend
 
-![Eslint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
-![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+### Language
 
-### 🧐 Deploy
+![Kotlin](https://img.shields.io/badge/kotlin-7F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
 
+### FrameWork
+
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F.svg?style=for-the-badge&logo=spring-boot&logoColor=white)
+
+### DataBase
+
+![Mongo DB](https://img.shields.io/badge/Mongo_DB-47A248.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+### Test
+
+![JUnit](https://img.shields.io/badge/JUNIT5-25A162.svg?style=for-the-badge&logo=junit5&logoColor=white)
+
+### Infra
+
+![AWS EC2](https://img.shields.io/badge/AWS_EC2-FF9900.svg?style=for-the-badge&logo=amazon-ec2&logoColor=white)
+![RDS(MySQL)](<https://img.shields.io/badge/RDS(MYSQL)-527FFF.svg?style=for-the-badge&logo=amazon-rds&logoColor=white>)
+![AWS S3](https://img.shields.io/badge/AWS_S3-569A31.svg?style=for-the-badge&logo=amazon-s3&logoColor=white)
+
+### CI/CD
+
+![Docker](https://img.shields.io/badge/DOCKER-2496ED.svg?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub-Actions](https://img.shields.io/badge/GitHub_Actions-2088FF.svg?style=for-the-badge&logo=github-actions&logoColor=white)
 <br><br><br>
 
 # 👍 Convention
@@ -156,7 +181,7 @@ Design: 스타일(CSS) 수정
 
 | [유용상](https://github.com/Miral3)                                              | [김종운](https://github.com/potionk)                                             |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| <img src="https://avatars.githubusercontent.com/u/59829606?v=4" width="100px" /> | <img src="https://avatars.githubusercontent.com/u/48196324?v=4" width="100px" /> |
+| <img src="https://avatars.githubusercontent.com/u/59829606?v=4" width="150px" /> | <img src="https://avatars.githubusercontent.com/u/48196324?v=4" width="150px" /> |
 | frontend Developer                                                               | backend Developer                                                                |
 
 <br><br>
