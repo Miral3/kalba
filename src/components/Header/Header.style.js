@@ -72,11 +72,6 @@ export const AuthWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-
-  ${Common.mediaQuery.tablet} {
-    top: 7px;
-    right: 10px;
-  }
 `;
 
 export const Mode = styled(Icon)`
