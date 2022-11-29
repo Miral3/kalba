@@ -1,6 +1,7 @@
 package kr.kalba.presentation.controller
 
 import kr.kalba.application.AccountService
+import kr.kalba.application.ClanService
 import kr.kalba.presentation.dto.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/account")
 class AccountController(
-    val accountService: AccountService
+    val accountService: AccountService,
+    val clanService: ClanService
 ) {
 
     @PostMapping("/register")
@@ -62,6 +64,15 @@ class AccountController(
         val response = accountService.verifyToken(request.tag, request.token)
         return ResponseEntity.status(HttpStatus.OK).body(
             VerifyTokenDto.Response.of(response.status)
+        )
+    }
+
+    @ResponseBody
+    @GetMapping("/profile/tag")
+    fun profile(@RequestParam token: ProfileDto.TokenRequest): ResponseEntity<ProfileDto.Response> {
+        val tag = accountService.tokenToAccountName(token.token)
+        return ResponseEntity.status(HttpStatus.OK).body(
+            ProfileDto.Response.of(clanService.getMemberStatisticByTag(tag))
         )
     }
 }

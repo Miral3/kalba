@@ -8,6 +8,10 @@ class ProfileDto {
         val tag: String
     )
 
+    class TokenRequest(
+        val token: String
+    )
+
     class Response(
         val tag: String,
         val name: String,

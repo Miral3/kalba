@@ -44,6 +44,12 @@ class AccountService(
         return clashOfClanService.verifyToken(tag, token)
     }
 
+    fun tokenToAccountName(token: String): String {
+        val accountName = jwtTokenUtil.getAllClaimsFromToken(token).get("sub")
+        val account = accountRepository.findByAccountName(accountName.toString())
+        return account!!.tag
+    }
+
     private fun validateDuplicateName(registerDto: RegisterDto.Request): Boolean {
         return !ObjectUtils.isEmpty(accountRepository.findByAccountName(registerDto.accountName))
     }
