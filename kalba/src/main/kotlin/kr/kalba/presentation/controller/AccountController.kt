@@ -70,7 +70,7 @@ class AccountController(
     @ResponseBody
     @GetMapping("/profile/tag")
     fun profile(@RequestParam token: ProfileDto.TokenRequest): ResponseEntity<ProfileDto.Response> {
-        val tag = accountService.tokenToAccountName(token.token)
+        val tag = accountService.getUserTag(token.token)
         return ResponseEntity.status(HttpStatus.OK).body(
             ProfileDto.Response.of(clanService.getMemberStatisticByTag(tag))
         )
