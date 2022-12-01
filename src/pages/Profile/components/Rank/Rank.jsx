@@ -7,7 +7,6 @@ const propTypes = {
 };
 
 const Rank = ({ data }) => {
-  console.log(data);
   return (
     <S.Container>
       <S.Header>전체 통계</S.Header>
