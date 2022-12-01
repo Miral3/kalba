@@ -6,6 +6,7 @@ export const REGISTER = "/account/register";
 export const LOGIN = "/account/login";
 export const ADMIN = "/account/admin";
 export const VERIFY = "/account/verify/token";
+export const MINI_PROFILE = "/account/profile/tag";
 
 // clan
 export const CLAN_INFO = "/coc/clan/info";
