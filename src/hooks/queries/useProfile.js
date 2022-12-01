@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQueries } from "react-query";
+import { useQuery, useQueries } from "react-query";
 import * as url from "../../constants/apiUrl";
 import * as queryKeys from "../../constants/queryKeys";
 
@@ -27,4 +27,19 @@ export const useProfile = ({ tag }) => {
       staleTime: 0,
     },
   ]);
+};
+
+export const useMiniProfile = ({ token }) => {
+  return useQuery(
+    [queryKeys.CLAN_INFO, token],
+    () => axios.get(`${url.MINI_PROFILE}?token=${token}`),
+    {
+      select({ data }) {
+        return data;
+      },
+      retry: false,
+      cacheTime: 60000,
+      staleTime: 60000,
+    }
+  );
 };
