@@ -158,7 +158,7 @@ export const CurrentLeague = styled.div`
   text-align: center;
 
   ${Common.mediaQuery.mobileS} {
-    width: 180px;
+    width: 160px;
   }
 `;
 
