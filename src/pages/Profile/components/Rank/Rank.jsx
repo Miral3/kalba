@@ -7,6 +7,7 @@ const propTypes = {
 };
 
 const Rank = ({ data }) => {
+  console.log(data);
   return (
     <S.Container>
       <S.Header>전체 통계</S.Header>
@@ -17,7 +18,7 @@ const Rank = ({ data }) => {
               src="https://api-assets.clashofclans.com/leagues/288/R2zmhyqQ0_lKcDR5EyghXCxgyC9mm_mVMIjAbmGoZtw.png"
               alt="leagueBadge"
             />
-            <S.Rank>#{data.yonghaScoreRank}</S.Rank>
+            <S.Rank>#{data.scoreRank}</S.Rank>
           </S.RankWrapper>
           <div>
             <S.Type>공격력</S.Type>
