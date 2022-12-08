@@ -7,6 +7,7 @@ import * as S from "./SubmitForm.style";
 
 const propTypes = {
   nextIndex: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
   modalVisible: PropTypes.bool.isRequired,
   setModalVisible: PropTypes.func.isRequired,
   handleAddTableData: PropTypes.func.isRequired,
@@ -14,16 +15,18 @@ const propTypes = {
 
 const SubmitForm = ({
   nextIndex,
+  type,
   modalVisible,
   setModalVisible,
   handleAddTableData,
 }) => {
   const initialValues = {
-    index: nextIndex,
-    english: "",
+    order: nextIndex,
+    name: "",
     korean: "",
     maxScore: 0,
     maxLevel: 0,
+    type,
   };
 
   const onSubmit = async () => {
@@ -45,12 +48,12 @@ const SubmitForm = ({
   } = useForm({
     initialValues,
     onSubmit,
-    validate: ({ english, maxScore, maxLevel }) => {
+    validate: ({ name, maxScore, maxLevel }) => {
       const newErrors = {};
       const englishReg = /^[a-zA-Z.\s]+$/;
       const numberReg = /^[0-9]+$/;
-      if (english && !englishReg.test(english))
-        newErrors.english =
+      if (name && !englishReg.test(name))
+        newErrors.name =
           "영소/대문자, 특수기호(.), 띄어쓰기 조합만 가능합니다.";
       if (maxScore && !numberReg.test(maxScore))
         newErrors.maxScore = "0보다 큰 숫자만 가능합니다.";
@@ -88,11 +91,11 @@ const SubmitForm = ({
               </S.Anchor>
             </S.Description>
           </S.Content>
-          <S.InputWrapper isFilled={values.english}>
-            <Input version="auth" name="english" onChange={handleChange} />
+          <S.InputWrapper isFilled={values.name}>
+            <Input version="auth" name="name" onChange={handleChange} />
             <S.InputLabel>영어 이름</S.InputLabel>
           </S.InputWrapper>
-          {errors.english && <ErrorText value={errors.english} />}
+          {errors.name && <ErrorText value={errors.name} />}
           <S.InputWrapper isFilled={values.korean}>
             <Input version="auth" name="korean" onChange={handleChange} />
             <S.InputLabel>한글 이름</S.InputLabel>
