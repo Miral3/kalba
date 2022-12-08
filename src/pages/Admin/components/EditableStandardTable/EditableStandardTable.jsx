@@ -110,10 +110,14 @@ const EditableStandardTable = () => {
     );
   };
 
-  const handleCancelEdit = () => {
+  const setInit = () => {
     setEditMode(false);
     setDeleteMode(true);
     setIsDragDisabled(true);
+  };
+
+  const handleCancelEdit = () => {
+    setInit();
     setTableData(data);
   };
 
@@ -122,7 +126,7 @@ const EditableStandardTable = () => {
       category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
 
     mutate({ list: tableData, type });
-    handleCancelEdit();
+    setInit();
   };
 
   useEffect(() => {
@@ -139,16 +143,12 @@ const EditableStandardTable = () => {
     }
   }, [isLoading, data]);
 
-  useEffect(() => {
-    if (isLoading) return;
-    handleCancelEdit();
-  }, [category]);
-
   return (
     <S.Container>
       {submitFormVisible && (
         <SubmitForm
-          nextIndex={tableData.length + 1}
+          nextIndex={tableData.length}
+          type={category}
           modalVisible={submitFormVisible}
           setModalVisible={setSubmitFormVisible}
           handleAddTableData={handleAddTableData}
