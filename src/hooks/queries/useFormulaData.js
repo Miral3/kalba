@@ -18,6 +18,31 @@ export const useFormulaData = ({ options, type }) => {
   );
 };
 
+export const useFormulaDataToObject = () => {
+  return useQuery(
+    [queryKeys.FORMULA_DATA, "Object"],
+    () => axios.get(`${url.FORMULA}`),
+    {
+      select({ data }) {
+        const { formula } = data;
+        const type = {
+          heroes: [],
+          pets: [],
+          units: [],
+          spells: [],
+          siegeMachines: [],
+        };
+
+        formula.map((val) => type[val.type].push(val));
+
+        return type;
+      },
+      cacheTime: 60000,
+      staleTime: 60000,
+    }
+  );
+};
+
 export const useFormulaDataUpdate = ({ options }) => {
   const queryClient = useQueryClient();
   return useMutation((newFormula) => axios.put(`${url.FORMULA}`, newFormula), {
