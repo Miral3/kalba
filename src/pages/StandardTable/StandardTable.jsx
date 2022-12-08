@@ -9,7 +9,9 @@ import * as S from "./StandardTable.style";
 const StandardTable = () => {
   const navigate = useNavigate();
   const { category } = useParams();
-  const { isLoading, data } = useFormulaData({});
+  const type =
+    category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
+  const { isLoading, data } = useFormulaData({ type });
 
   const handleClickExtractJSONToXLSX = () => {
     const wb = xlsx.utils.book_new();
@@ -49,7 +51,7 @@ const StandardTable = () => {
         ) : (
           <Table
             columns={standardTableColumns}
-            data={data[category]}
+            data={data}
             version="standard"
           />
         )}

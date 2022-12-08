@@ -3,27 +3,19 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import * as url from "../../constants/apiUrl";
 import * as queryKeys from "../../constants/queryKeys";
 
-export const useFormulaData = ({ options }) => {
-  return useQuery([queryKeys.FORMULA_DATA], () => axios.get(`${url.FORMULA}`), {
-    select({ data }) {
-      const { formula } = data;
-      const type = {
-        units: [],
-        siegeMachines: [],
-        spells: [],
-        heroes: [],
-        pets: [],
-        origin: data,
-      };
-
-      formula.map((val) => type[val.type].push(val));
-
-      return type;
-    },
-    cacheTime: 60000,
-    staleTime: 60000,
-    ...options,
-  });
+export const useFormulaData = ({ options, type }) => {
+  return useQuery(
+    [queryKeys.FORMULA_DATA, type],
+    () => axios.get(`${url.FORMULA}?type=${type}`),
+    {
+      select({ data }) {
+        return data.formula;
+      },
+      cacheTime: 60000,
+      staleTime: 60000,
+      ...options,
+    }
+  );
 };
 
 export const useFormulaDataUpdate = ({ options }) => {

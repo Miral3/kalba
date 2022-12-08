@@ -13,15 +13,17 @@ import { SubmitForm } from "../index";
 import * as S from "./EditableStandardTable.style";
 
 const EditableStandardTable = () => {
-  const { isLoading, data } = useFormulaData({});
+  const navigate = useNavigate();
+  const { category } = useParams();
+  const type =
+    category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
+  const { isLoading, data } = useFormulaData({ type });
   const { mutate } = useFormulaDataUpdate({});
   const [tableData, setTableData] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(true);
   const [isDragDisabled, setIsDragDisabled] = useState(true);
   const [submitFormVisible, setSubmitFormVisible] = useState(false);
-  const navigate = useNavigate();
-  const { category } = useParams();
 
   const handleClickEditMode = (state) => {
     setEditMode(state);
@@ -95,13 +97,24 @@ const EditableStandardTable = () => {
     const [reorderedRow] = nextTableData.splice(sourceIdx, 1);
     nextTableData.splice(destinationIdx, 0, reorderedRow);
     setTableData(nextTableData);
+    setTableData((prev) =>
+      prev.map((row, index) => {
+        if (index === sourceIdx || index === destinationIdx) {
+          return {
+            ...prev[index],
+            order: index,
+          };
+        }
+        return row;
+      })
+    );
   };
 
   const handleCancelEdit = () => {
     setEditMode(false);
     setDeleteMode(true);
     setIsDragDisabled(true);
-    setTableData(data[category]);
+    setTableData(data);
   };
 
   const handleSaveTableData = () => {
@@ -122,7 +135,7 @@ const EditableStandardTable = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      setTableData(data[category]);
+      setTableData(data);
     }
   }, [isLoading, data]);
 
