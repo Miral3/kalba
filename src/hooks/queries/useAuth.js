@@ -29,7 +29,7 @@ export const useSignup = ({ options }) => {
     },
     onError(err) {
       const errMsg = err.response.data.resultMsg;
-      alert(errMsg);
+      console.log(errMsg);
     },
     ...options,
   });
