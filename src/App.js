@@ -62,6 +62,7 @@ const App = () => {
         }
       } catch (error) {
         console.error(error);
+        alert("토큰값이 올바르지 않습니다. 다시 로그인을 해주세요.");
         localStorage.removeItem("token");
       }
       setIsLoading(false);
