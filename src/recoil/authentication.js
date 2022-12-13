@@ -2,7 +2,9 @@ import { atom, selector } from "recoil";
 
 export const jwtToken = atom({
   key: "jwtToken",
-  default: JSON.parse(localStorage.getItem("token")),
+  default: /^"\S*"$/.test(localStorage.getItem("token"))
+    ? JSON.parse(localStorage.getItem("token"))
+    : null,
 });
 
 export const loginStatus = atom({
