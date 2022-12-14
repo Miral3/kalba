@@ -52,7 +52,7 @@ const Leaderboards = () => {
             ref={tableRef}
             columns={tableColumns}
             data={data[category]}
-            sort
+            sort={category === "donations"}
           />
         )}
         <S.ButtonWrapper>

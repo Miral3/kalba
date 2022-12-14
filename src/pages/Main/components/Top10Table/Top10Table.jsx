@@ -19,7 +19,12 @@ const Top10Table = ({ data, columns, title, timer }) => {
 
   return (
     <S.Container>
-      <Table columns={columns} data={data} sticky={false} sort>
+      <Table
+        columns={columns}
+        data={data}
+        sticky={false}
+        sort={type === "donations"}
+      >
         <S.Caption>
           <S.CaptionContainer>
             <Text
