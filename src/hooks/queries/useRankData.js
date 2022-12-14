@@ -51,7 +51,7 @@ export const useRankData = ({ options }) => {
 export const useRankUpdate = ({ options }) => {
   const queryClient = useQueryClient();
   return useMutation(async () => axios.put(`${url.RANK_UPDATE}`), {
-    onSuccess: () => {
+    onSuccess() {
       queryClient.invalidateQueries([queryKeys.RANK_DATA]);
       queryClient.invalidateQueries([queryKeys.PROFILE]);
     },
