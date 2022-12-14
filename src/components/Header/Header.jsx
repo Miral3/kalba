@@ -44,6 +44,12 @@ const Header = ({ onOpen, isDark, hadleClickDarkMode }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (accountInfoVisible) {
+      setAccountInfoVisible(false);
+    }
+  }, [location]);
+
   if (pathname.includes("auth")) {
     return;
   }
