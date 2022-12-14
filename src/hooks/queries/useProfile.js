@@ -21,17 +21,13 @@ export const useProfile = ({ tag }) => {
       select({ data }) {
         return data;
       },
-      retry: false,
-      refetchOnWindowFocus: false,
-      cacheTime: 0,
-      staleTime: 0,
     },
   ]);
 };
 
 export const useMiniProfile = ({ token }) => {
   return useQuery(
-    [queryKeys.CLAN_INFO, token],
+    [queryKeys.PROFILE, token],
     () => axios.get(`${url.MINI_PROFILE}?token=${token}`),
     {
       select({ data }) {
