@@ -79,7 +79,7 @@ const sortData = ({ data }) => {
   };
 
   useEffect(() => {
-    setSortedData(data);
+    setSortedData(origin(sortedData));
     setSortDir("none");
   }, [category]);
 
