@@ -14,4 +14,4 @@ export const RANK = "/coc/clan/rank";
 export const RANK_UPDATE = "/coc/clan/update";
 export const FORMULA = "/coc/clan/formula";
 export const PROFILE = "/coc/clan/member/statistic/tag";
-export const CLAN_MEMBER = "/coc/clan/member/statistic/all";
+export const CLAN_MEMBER = "/coc/clan/member/state";
