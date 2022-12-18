@@ -55,3 +55,17 @@ export const useFormulaDataUpdate = ({ options }) => {
     ...options,
   });
 };
+
+export const useScoreUpdate = ({ options }) => {
+  const queryClient = useQueryClient();
+  return useMutation(async () => axios.post(`${url.SCORE_UPDATE}`), {
+    onSuccess() {
+      queryClient.invalidateQueries([queryKeys.RANK_DATA]);
+      queryClient.invalidateQueries([queryKeys.PROFILE]);
+    },
+    onError(err) {
+      console.log(err);
+    },
+    ...options,
+  });
+};
