@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useSetRecoilState } from "recoil";
+import { updateLoading } from "../../recoil/score";
 import { expectedRole } from "../../utils/expectedRole";
 import * as url from "../../constants/apiUrl";
 import * as queryKeys from "../../constants/queryKeys";
@@ -50,12 +52,18 @@ export const useRankData = ({ options }) => {
 
 export const useRankUpdate = ({ options }) => {
   const queryClient = useQueryClient();
+  const setUpdateLoading = useSetRecoilState(updateLoading);
   return useMutation(async () => axios.put(`${url.RANK_UPDATE}`), {
+    onMutate() {
+      setUpdateLoading(true);
+    },
     onSuccess() {
+      setUpdateLoading(false);
       queryClient.invalidateQueries([queryKeys.RANK_DATA]);
       queryClient.invalidateQueries([queryKeys.PROFILE]);
     },
     onError(err) {
+      alert("갱신 요청이 처리 중입니다.");
       console.log(err);
     },
     ...options,
