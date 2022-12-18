@@ -20,7 +20,6 @@ const Top10Table = ({ data, columns, handleUpdateRankData, title, timer }) => {
   const type = title.includes("지원") ? "donations" : "score";
   const isLoading = useRecoilValue(updateLoading);
 
-  // useEffect(() => {}, [isLoading]);
   return (
     <S.Container>
       <Table

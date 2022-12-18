@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 const Base = styled.div`
   display: inline-block;
   border-radius: 4px;
-  /* background-color: ${({ theme }) => theme.bg.skeleton}; */
   background-image: ${({ theme }) => theme.gradient.skeleton};
   background-size: 200% 100%;
   background-position: 0 center;
