@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useFormulaData,
   useFormulaDataUpdate,
+  useScoreUpdate,
 } from "../../../../hooks/queries/useFormulaData";
 import {
   editableStandardCategoryItems,
@@ -18,7 +19,8 @@ const EditableStandardTable = () => {
   const type =
     category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
   const { isLoading, data } = useFormulaData({ type });
-  const { mutate } = useFormulaDataUpdate({});
+  const formulaDataUpdateMutation = useFormulaDataUpdate({});
+  const scoreUpdateMutation = useScoreUpdate({});
   const [tableData, setTableData] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(true);
@@ -125,7 +127,8 @@ const EditableStandardTable = () => {
     const type =
       category === "siegeMachines" ? "SIEGE_MACHINES" : category.toUpperCase();
 
-    mutate({ list: tableData, type });
+    formulaDataUpdateMutation.mutate({ list: tableData, type });
+    scoreUpdateMutation.mutate();
     setInit();
   };
 
