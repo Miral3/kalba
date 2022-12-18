@@ -21,8 +21,10 @@ export const useClanMemberUpdate = ({ options }) => {
   return useMutation((newState) => axios.post(`${url.CLAN_MEMBER}`, newState), {
     onSuccess() {
       queryClient.invalidateQueries(queryKeys.CLAN_MEMBER);
+      alert("저장이 완료되었습니다.");
     },
     onError(err) {
+      alert("에러가 발생했습니다.");
       console.log(err);
     },
     ...options,
