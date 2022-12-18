@@ -1,9 +1,9 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useEffect } from "react";
+import React from "react";
 import { PropTypes } from "prop-types";
 import { NavLink } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { updateLoading } from "../../../../recoil/score";
+import Count from "../Count/Count";
 import { Table, Text, Button, Spinner } from "../../../../components";
 import * as S from "./Top10Table.style";
 import Common from "../../../../styles/common";
@@ -13,10 +13,9 @@ const propTypes = {
   columns: PropTypes.instanceOf(Array).isRequired,
   handleUpdateRankData: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  timer: PropTypes.string.isRequired,
 };
 
-const Top10Table = ({ data, columns, handleUpdateRankData, title, timer }) => {
+const Top10Table = ({ data, columns, handleUpdateRankData, title }) => {
   const type = title.includes("지원") ? "donations" : "score";
   const isLoading = useRecoilValue(updateLoading);
 
@@ -38,13 +37,7 @@ const Top10Table = ({ data, columns, handleUpdateRankData, title, timer }) => {
               {title}
             </Text>
             <div>
-              <Text
-                size={Common.fontSize.b[1]}
-                color={Common.colors.white[0]}
-                weight="bold"
-              >
-                {timer}
-              </Text>
+              <Count type={type} />
               <S.ActionContainer>
                 {isLoading ? (
                   <Spinner.Base size="19.5px" />
