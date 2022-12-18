@@ -1,7 +1,9 @@
-import React from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect } from "react";
 import { PropTypes } from "prop-types";
 import { NavLink } from "react-router-dom";
-import { useRankUpdate } from "../../../../hooks/queries/useRankData";
+import { useRecoilValue } from "recoil";
+import { updateLoading } from "../../../../recoil/score";
 import { Table, Text, Button, Spinner } from "../../../../components";
 import * as S from "./Top10Table.style";
 import Common from "../../../../styles/common";
@@ -9,14 +11,16 @@ import Common from "../../../../styles/common";
 const propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
   columns: PropTypes.instanceOf(Array).isRequired,
+  handleUpdateRankData: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   timer: PropTypes.string.isRequired,
 };
 
-const Top10Table = ({ data, columns, title, timer }) => {
-  const { mutate, isLoading } = useRankUpdate({});
+const Top10Table = ({ data, columns, handleUpdateRankData, title, timer }) => {
   const type = title.includes("지원") ? "donations" : "score";
+  const isLoading = useRecoilValue(updateLoading);
 
+  // useEffect(() => {}, [isLoading]);
   return (
     <S.Container>
       <Table
@@ -46,7 +50,7 @@ const Top10Table = ({ data, columns, title, timer }) => {
                 {isLoading ? (
                   <Spinner.Base size="19.5px" />
                 ) : (
-                  <Button onClick={() => mutate()}>갱신</Button>
+                  <Button onClick={() => handleUpdateRankData()}>갱신</Button>
                 )}
                 <NavLink to={`/leaderboards/${type}`}>더보기</NavLink>
               </S.ActionContainer>
