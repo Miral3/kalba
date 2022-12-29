@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as XLSX from "xlsx";
+import * as xlsx from "xlsx";
 import { useRankData } from "../../hooks/queries/useRankData";
 import { Button, Category, Spinner, Table } from "../../components";
+import { translateRole } from "../../utils/translate";
 import {
   rankingCategoryItems,
   donationsRankingTableColumns,
@@ -11,7 +12,6 @@ import {
 import * as S from "./Leaderboards.style";
 
 const Leaderboards = () => {
-  const tableRef = useRef(null);
   const { isLoading, data } = useRankData({});
   const navigate = useNavigate();
   const { category } = useParams();
@@ -21,13 +21,39 @@ const Leaderboards = () => {
   };
 
   const handleClickExtractTableToXLSX = () => {
-    const target = tableRef.current;
+    if (!data || !category) {
+      return;
+    }
+    const translateData =
+      category === "donations"
+        ? data[category].map((value) => {
+            return {
+              ...value,
+              role: translateRole(value.role),
+              expectedRole: translateRole(value.expectedRole),
+            };
+          })
+        : data[category];
+    const wb = xlsx.utils.book_new();
+    const header = columns[category].map((data) => data.accessor);
+    const ws = xlsx.utils.json_to_sheet(translateData, { header });
+    const hidden =
+      category === "donations" ? [5, 6, 7, 8, 9, 10] : [5, 6, 7, 8, 9];
+    const cols = columns[category].map((data) => data.header);
 
-    if (!target) return;
-    const wb = XLSX.utils.table_to_book(target, {
-      sheet: "ranking list",
+    ws["!cols"] = [];
+
+    hidden.forEach((idx) => {
+      ws["!cols"][idx] = { hidden: true };
     });
-    XLSX.writeFile(wb, "ranking_list.xlsx");
+
+    cols.forEach((x, idx) => {
+      const cellAdd = xlsx.utils.encode_cell({ c: idx, r: 0 });
+      ws[cellAdd].v = x;
+    });
+
+    xlsx.utils.book_append_sheet(wb, ws, category);
+    xlsx.writeFile(wb, "ranking_list.xlsx");
   };
 
   useEffect(() => {
@@ -44,7 +70,6 @@ const Leaderboards = () => {
           <Spinner.Box />
         ) : (
           <Table
-            ref={tableRef}
             columns={columns[category]}
             data={data[category]}
             sort={category === "donations"}
