@@ -8,45 +8,54 @@ export const prettierTime = (time) => {
   }일 ${time.getUTCHours()}시간 후`;
 };
 
-export const getNextPromotionDate = (next) => {
-  const time = new Date();
-  time.setMonth(time.getMonth() + next);
-  time.setDate(1);
-  time.setDate(time.getDate() - 1);
-  while (time.getDay() !== 1) {
-    time.setDate(time.getDate() - 1);
-  }
-  time.setDate(time.getDate() - 1);
-  time.setHours(22);
-  time.setMinutes(0);
-  time.setSeconds(0);
-  time.setMilliseconds(0);
-  return time;
-};
-
-export const getNextLeagueDate = (next) => {
-  const time = new Date();
-  time.setMonth(time.getMonth() + next);
-  time.setDate(2);
-  time.setHours(22);
-  time.setMinutes(0);
-  time.setSeconds(0);
-  time.setMilliseconds(0);
-  return time;
+const dateInfo = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const date = now.getDate();
+  const hour = now.getHours();
+  const nextMonth = (month + 1) % 12;
+  const nextYear = nextMonth === 0 ? year + 1 : year;
+  return [year, month, date, hour, nextMonth, nextYear];
 };
 
 export const getPromotionDate = () => {
-  const next = getNextPromotionDate(1);
-  if (next < new Date()) {
-    return getNextPromotionDate(2);
+  const [year, month, date, hour, nextMonth, nextYear] = dateInfo();
+  const penultimateDate = new Date(year, month + 1, -1).getDate();
+  /*
+    case1: 이번달 두번째 마지막 날 오후 10시가 지나지 않았다면
+    이번 달 두번째 마지막 날  오후 10시
+  */
+  let next = new Date(year, month, penultimateDate, 22, 0);
+  if (date >= penultimateDate) {
+    if (date === penultimateDate && hour < 22) {
+      return next;
+    }
+    /* 
+      case2: 이번달 두번째 마지막 날 오후 10시가 지났다면
+      다음 달 두번째 마지막 날 오후 10시
+    */
+    next = new Date(nextYear, nextMonth, penultimateDate, 22, 0);
   }
   return next;
 };
 
 export const getLeagueDate = () => {
-  const next = getNextLeagueDate(0);
-  if (next < new Date()) {
-    return getNextLeagueDate(1);
+  const [year, month, date, hour, nextMonth, nextYear] = dateInfo();
+  /* 
+    case1: 이번달 2일 오후 10시가 지나지 않았다면
+    이번 달 2일 오후 10시
+  */
+  let next = new Date(year, month, 2, 22, 0);
+  if (date >= 2) {
+    if (date === 2 && hour < 22) {
+      return next;
+    }
+    /* 
+      case2: 이번달 2일 오후 10시가 지났다면
+      다음 달 2일 오후 10시
+    */
+    next = new Date(nextYear, nextMonth, 2, 22, 0);
   }
   return next;
 };
