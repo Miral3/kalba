@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import { PropTypes } from "prop-types";
-import useSort from "../../hooks/useSort";
 import { translateRole, translateOpenChatState } from "../../utils/translate";
 import { Text } from "..";
 import EditableTbody from "./EditableTbody";
@@ -11,6 +10,8 @@ const propTypes = {
   data: PropTypes.instanceOf(Array).isRequired,
   columns: PropTypes.instanceOf(Array).isRequired,
   version: PropTypes.string,
+  sortDir: PropTypes.string,
+  attr: PropTypes.string,
   sticky: PropTypes.bool,
   editMode: PropTypes.bool,
   deleteMode: PropTypes.bool,
@@ -21,11 +22,14 @@ const propTypes = {
   handleDeleteTableData: PropTypes.func,
   handleChangeOpenChatState: PropTypes.func,
   handleReorderTableData: PropTypes.func,
+  handleSort: PropTypes.func,
 };
 
 const defaultProps = {
   children: null,
   version: "leaderboard",
+  sortDir: null,
+  attr: null,
   sticky: true,
   editMode: false,
   deleteMode: true,
@@ -36,6 +40,7 @@ const defaultProps = {
   handleDeleteTableData: () => {},
   handleChangeOpenChatState: () => {},
   handleReorderTableData: () => {},
+  handleSort: () => {},
 };
 
 const Table = forwardRef(
@@ -45,6 +50,8 @@ const Table = forwardRef(
       data,
       columns,
       version,
+      sortDir,
+      attr,
       sticky,
       editMode,
       deleteMode,
@@ -55,21 +62,20 @@ const Table = forwardRef(
       handleDeleteTableData,
       handleChangeOpenChatState,
       handleReorderTableData,
+      handleSort,
       ...styles
     },
     ref
   ) => {
-    const { sortedData, sortDir, attr, handleSort } = useSort({ data });
-    const tableData = sort ? sortedData : data;
-
     return (
       <S.Table ref={ref} {...styles}>
         {children}
         <S.Thead sticky={sticky}>
           <S.Tr>
             {columns.map((column) =>
-              column.accessor === "role" ||
-              column.accessor === "expectedRole" ? (
+              sort &&
+              (column.accessor === "role" ||
+                column.accessor === "expectedRole") ? (
                 <S.Th
                   key={column.id}
                   version={version}
@@ -119,7 +125,7 @@ const Table = forwardRef(
           />
         ) : (
           <S.Tbody version={version}>
-            {tableData.map((row) => (
+            {data.map((row) => (
               <S.Tr key={row.tag || row.name}>
                 {columns.map((column) => {
                   if (version === "leaderboard") {

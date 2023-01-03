@@ -21,12 +21,7 @@ const Top10Table = ({ data, columns, handleUpdateRankData, title }) => {
 
   return (
     <S.Container>
-      <Table
-        columns={columns}
-        data={data}
-        sticky={false}
-        sort={type === "donations"}
-      >
+      <Table columns={columns} data={data} sticky={false}>
         <S.Caption>
           <S.CaptionContainer>
             <Text
