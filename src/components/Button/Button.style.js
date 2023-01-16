@@ -61,6 +61,9 @@ const ReferenceButton = css`
   &:hover {
     background-color: ${Common.colors.gray[4]};
   }
+  ${Common.mediaQuery.tabletS} {
+    margin-left: 0;
+  }
 `;
 
 const DownloadButton = css`
