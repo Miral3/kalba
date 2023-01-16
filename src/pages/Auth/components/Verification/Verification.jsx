@@ -72,18 +72,13 @@ const Verification = ({
       key="verification"
       visible={modalVisible}
       onClose={() => setModalVisible(false)}
-      style={{ borderRadius: 8 }}
     >
       <S.Card>
         <S.Container>
           <S.Logo>Kalba</S.Logo>
-          <Button
-            hover
-            onClick={() => setModalVisible(false)}
-            style={{ height: 24 }}
-          >
+          <S.StyledButton hover onClick={() => setModalVisible(false)}>
             <S.Close className="material-symbols-outlined">close</S.Close>
-          </Button>
+          </S.StyledButton>
         </S.Container>
         <S.Form onSubmit={handleSubmit}>
           <S.Header>본인인증</S.Header>

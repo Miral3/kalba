@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Text } from "..";
+import { Icon, Text } from "..";
 import Common from "../../styles/common";
 
 export const ErrorText = styled(Text)`
@@ -8,4 +8,8 @@ export const ErrorText = styled(Text)`
   gap: 4px;
   color: ${Common.colors.red[0]};
   font-weight: 500;
+`;
+
+export const StyledIcon = styled(Icon)`
+  display: inline;
 `;

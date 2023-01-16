@@ -1,6 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
-import { Button, Modal, Text } from "../../../../components";
+import { Modal, Text } from "../../../../components";
 import * as S from "./Reference.style";
 
 const propTypes = {
@@ -15,18 +15,13 @@ const Reference = ({ modalVisible, setModalVisible }) => {
       visible={modalVisible}
       onClose={() => setModalVisible(false)}
       zIndex={202}
-      style={{ borderRadius: 8 }}
     >
       <S.Card>
         <S.Container>
           <S.Logo>Kalba</S.Logo>
-          <Button
-            hover
-            onClick={() => setModalVisible(false)}
-            style={{ height: 24 }}
-          >
+          <S.StyledButton hover onClick={() => setModalVisible(false)}>
             <S.Close className="material-symbols-outlined">close</S.Close>
-          </Button>
+          </S.StyledButton>
         </S.Container>
         <S.Content>
           <S.Image alt="apiToken" src="/img/apiToken/apiToken1.jpeg" />

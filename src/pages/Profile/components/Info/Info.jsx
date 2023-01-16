@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Icon } from "../../../../components";
+import { Icon } from "../../../../components";
 import {
   translateRole,
   translateLeagueScore,
@@ -27,11 +27,7 @@ const Info = ({ data }) => {
             <S.UserName>{data.name}</S.UserName>
             <S.TagWrapper>
               <S.Tag>{data.tag}</S.Tag>
-              <Button
-                onClick={() => copyText(data.tag)}
-                hover
-                style={{ width: 15, height: 15, marginTop: 2 }}
-              >
+              <S.StyledButton onClick={() => copyText(data.tag)} hover>
                 <Icon
                   size={Common.fontSize.h[2]}
                   weight="bold"
@@ -39,7 +35,7 @@ const Info = ({ data }) => {
                 >
                   file_copy
                 </Icon>
-              </Button>
+              </S.StyledButton>
             </S.TagWrapper>
             <S.Role>{translateRole(data.role)}</S.Role>
           </S.Info>

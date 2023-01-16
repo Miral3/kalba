@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Text } from "../../../../components";
+import { Text, Button } from "../../../../components";
 import Common from "../../../../styles/common";
 
 export const Container = styled.div`
@@ -80,6 +80,12 @@ export const Tag = styled(Text)`
   line-height: 20px;
   font-size: 10px;
   color: ${Common.colors.gray[4]};
+`;
+
+export const StyledButton = styled(Button)`
+  width: 15px;
+  height: 15px;
+  margin-top: 2px;
 `;
 
 export const Role = styled(Text)`

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
+import Button from "../../../Button";
 
 export const Container = styled.div`
   position: absolute;
@@ -39,6 +40,10 @@ export const TagContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-bottom: 3px;
 `;
 
 export const ButtonContainer = styled.div`

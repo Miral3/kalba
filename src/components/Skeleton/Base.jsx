@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 
 const Base = styled.div`
   display: inline-block;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   border-radius: 4px;
   background-image: ${({ theme }) => theme.gradient.skeleton};
   background-size: 200% 100%;

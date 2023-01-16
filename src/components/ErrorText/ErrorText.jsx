@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "..";
+// import { Icon } from "..";
 import Common from "../../styles/common";
 import * as S from "./ErrorText.style";
 
@@ -11,13 +11,13 @@ const propTypes = {
 const ErrorText = ({ value }) => {
   return (
     <S.ErrorText>
-      <Icon
+      <S.StyledIcon
+        className="material-symbols-outlined"
         size={Common.fontSize.h[1]}
         color={Common.colors.red[0]}
-        style={{ display: "inline" }}
       >
         Error
-      </Icon>
+      </S.StyledIcon>
       {value}
     </S.ErrorText>
   );

@@ -12,7 +12,7 @@ const defaultProps = {
   height: 255,
 };
 
-const Box = ({ width, height }) => <Base style={{ width, height }} />;
+const Box = ({ width, height }) => <Base width={width} height={height} />;
 
 Box.propTypes = propTypes;
 Box.defaultProps = defaultProps;

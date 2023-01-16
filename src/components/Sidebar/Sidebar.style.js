@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
-import { Text, Icon } from "../index";
+import { Text, Icon, Button } from "../index";
 
 export const BackgroundDim = styled.div`
   position: fixed;
@@ -33,6 +33,10 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   margin: 16px 24px;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-right: 24px;
 `;
 
 export const Logo = styled(NavLink)`

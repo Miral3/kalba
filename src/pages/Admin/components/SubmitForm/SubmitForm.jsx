@@ -68,7 +68,6 @@ const SubmitForm = ({
       key="verification"
       visible={modalVisible}
       onClose={() => setModalVisible(false)}
-      style={{ borderRadius: 8 }}
     >
       <S.Card>
         <S.Container>

@@ -59,13 +59,9 @@ const Header = ({ onOpen, isDark, hadleClickDarkMode }) => {
       <S.LogoInsertContainer isAdminPage={isAdminPage}>
         <S.LogoContainer>
           {isAdminPage && (
-            <Button
-              onClick={() => onOpen()}
-              hover
-              style={{ marginRight: "24px" }}
-            >
+            <S.StyledButton onClick={() => onOpen()} hover>
               <S.Menu className="material-symbols-outlined">menu</S.Menu>
-            </Button>
+            </S.StyledButton>
           )}
           <NavLink to="/">
             <S.Logo>Kalba</S.Logo>

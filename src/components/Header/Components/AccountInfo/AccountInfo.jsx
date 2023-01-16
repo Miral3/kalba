@@ -43,13 +43,9 @@ const AccountInfo = forwardRef(({ visible, setVisible }, ref) => {
           </Text>
           <S.TagContainer>
             <Text>{data.tag}</Text>
-            <Button
-              onClick={() => copyText(data.tag)}
-              hover
-              style={{ marginBottom: "3px" }}
-            >
+            <S.StyledButton onClick={() => copyText(data.tag)} hover>
               <Icon size={Common.fontSize.h[2]}>file_copy</Icon>
-            </Button>
+            </S.StyledButton>
           </S.TagContainer>
         </S.UserInfoContainer>
       )}

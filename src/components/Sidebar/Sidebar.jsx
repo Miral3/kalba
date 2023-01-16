@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Button } from "../index";
 import * as S from "./Sidebar.style";
 
 const propTypes = {
@@ -36,13 +35,9 @@ const Sidebar = ({ items, onClose, visible, ...style }) => {
       <S.BackgroundDim visible={visible} onClick={(e) => handleClickDim(e)} />
       <S.Container visible={visible} ref={ref} {...style}>
         <S.Header>
-          <Button
-            onClick={() => onClose()}
-            hover
-            style={{ marginRight: "24px" }}
-          >
+          <S.StyledButton onClick={() => onClose()} hover>
             <S.Menu className="material-symbols-outlined">menu</S.Menu>
-          </Button>
+          </S.StyledButton>
           <S.Logo to="/">Kalba</S.Logo>
         </S.Header>
         <S.Nav>

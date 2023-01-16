@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { NavLink } from "react-router-dom";
 import Common from "../../styles/common";
 import { Text, Icon } from "../index";
+import Button from "../Button/Button";
 
 export const Header = styled.header`
   position: relative;
@@ -31,6 +32,10 @@ export const LogoContainer = styled.div`
   align-items: center;
   height: auto;
   margin: 16px 24px;
+`;
+
+export const StyledButton = styled(Button)`
+  margin-right: 24px;
 `;
 
 export const Menu = styled(Icon)`

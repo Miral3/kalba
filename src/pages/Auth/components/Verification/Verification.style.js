@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Text } from "../../../../components";
+import { Button, Text } from "../../../../components";
 import Common from "../../../../styles/common";
 
 export const Card = styled.div`
@@ -27,6 +27,10 @@ export const Logo = styled.h1`
   font-weight: bold;
   font-family: "supercell+NotoSansKR";
   color: ${({ theme }) => theme.text.logo};
+`;
+
+export const StyledButton = styled(Button)`
+  height: 24px;
 `;
 
 export const Close = styled.span`

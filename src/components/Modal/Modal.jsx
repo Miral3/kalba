@@ -13,7 +13,7 @@ const defaultProps = {
   zIndex: 200,
 };
 
-const Modal = ({ children, onClose, visible, zIndex, ...style }) => {
+const Modal = ({ children, onClose, visible, zIndex }) => {
   const ref = useRef(null);
 
   const handleClickDim = (e) => {
@@ -31,9 +31,7 @@ const Modal = ({ children, onClose, visible, zIndex, ...style }) => {
       zIndex={zIndex}
       onClick={(e) => handleClickDim(e)}
     >
-      <S.ModalContainer ref={ref} {...style}>
-        {children}
-      </S.ModalContainer>
+      <S.ModalContainer ref={ref}>{children}</S.ModalContainer>
     </S.BackgroundDim>
   );
 };
