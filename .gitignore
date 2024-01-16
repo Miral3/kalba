@@ -36,3 +36,6 @@ MANIFEST.MF
 
 # WebStorm
 .idea/*
+
+# GitHub Setting
+.github/
